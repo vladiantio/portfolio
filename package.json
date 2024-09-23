@@ -13,7 +13,6 @@
     "@astrojs/check": "0.9.2",
     "@astrojs/preact": "^3.5.2",
     "@astrojs/tailwind": "5.1.0",
-    "@fontsource-variable/dosis": "5.0.21",
     "@fontsource-variable/rubik": "^5.0.23",
     "@heroicons/react": "^2.1.5",
     "@midudev/tailwind-animations": "^0.1.0",
