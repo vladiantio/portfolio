@@ -1,0 +1,24 @@
+---
+// import FixedBackground from '~/components/FixedBackground.astro';
+import Layout from '~/layouts/Layout.astro';
+import Footer from '~/components/Footer.astro';
+import Navbar from '~/components/Navbar.astro';
+import Timeline from '~/components/main/Timeline.astro';
+// import AboutMe from '~/components/main/AboutMe.astro';
+import Skills from '~/components/main/Skills.astro';
+import Hero from '~/components/main/Hero.astro';
+// import Projects from '~/components/main/Projects.astro';
+---
+
+<Layout title="vladiantio">
+	<!-- <FixedBackground /> -->
+	<Navbar />
+	<main class="flex-grow animate-fade-in animate-duration-300">
+		<Hero />
+		<!-- <AboutMe /> -->
+		<Timeline />
+		<!-- <Projects /> -->
+		<Skills />
+	</main>
+	<Footer />
+</Layout>

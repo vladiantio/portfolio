@@ -1,0 +1,43 @@
+---
+import '~/styles/global.css';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Llegó para revolucionar la industria inmobiliaria. Se trata de una innovadora plataforma con la que podrás convertirte en inversionista inmobiliario" />
+		<meta name="keywords" content="portfolio, porfolio, portafolio, software engineering" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+		<script>
+			import { loadColorTheme, loadColorScheme } from "~/utils/theme";
+			loadColorScheme();
+			loadColorTheme();
+
+			document.addEventListener('click', ({ target }) => {
+				const details = [...document.querySelectorAll('details.dropdown')];
+				if (!details.some(f => f.contains(target as Node))) {
+					details.forEach(f => f.removeAttribute('open'));
+				} else {
+					details.forEach(f => !f.contains(target as Node) ? f.removeAttribute('open') : '');
+				}
+			});
+		</script>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#09f" />
+		<title>{title}</title>
+	</head>
+	<body class="bg-noise">
+		<div class="max-w-screen-lg mx-auto px-5">
+			<slot />
+		</div>
+	</body>
+</html>

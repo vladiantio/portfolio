@@ -1,0 +1,19 @@
+---
+import { skills } from '~/resume.json'
+---
+<section>
+  <h2>Habilidades</h2>
+  
+  <div>
+    {skills.map(item => (
+      <div class="mb-5">
+        <h3 class="mb-2">{item.name}</h3>
+        <div class="flex flex-wrap items-center gap-3">
+          {item.keywords.map(keyword => (
+            <span class="px-3 py-1 rounded-lg bg-soft">{keyword}</span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

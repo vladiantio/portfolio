@@ -1,0 +1,16 @@
+---
+import { basics } from '~/resume.json'
+import ExternalLink from '../ExternalLink.astro'
+import { DocumentTextIcon } from '@heroicons/react/24/solid'
+import SocialLinks from '../SocialLinks.astro'
+---
+<section class="mt-8">
+  <p>Bienvenid@, soy</p>
+  <h1 class="my-2">Vladimir Antonio Figueroa Carvajal</h1>
+  <p class="font-bold text-2xl my-2"><span class="bg-gradient-primary text-bg">@{basics.name}</span></p>
+  <p>{basics.summary}</p>
+  <div class="flex gap-8 mt-4">
+    <ExternalLink href="/CV-2024.pdf" class="transition hover:text-primary font-bold inline-flex items-center gap-1" title="Curriculum Vitae"><DocumentTextIcon class="size-6" /> CV</ExternalLink>
+    <SocialLinks />
+  </div>
+</section>

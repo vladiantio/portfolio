@@ -1,0 +1,43 @@
+---
+import { work, education } from '~/resume.json'
+import ExternalLink from '~/components/ExternalLink.astro'
+import { formatMonth } from '~/utils/date'
+import { parseMD } from '~/utils/md';
+---
+<section>
+  <h2>Experiencia</h2>
+  <ol class="relative border-s-2 border-soft ms-2">
+    {work.map(item => (
+      <li class="mb-10 ms-6">
+        <div class="absolute w-4 h-4 rounded-full mt-1 -start-2 bg-gradient-primary ring-8 ring-background"></div>
+        <span class="-ms-2 px-2 py-1 bg-soft rounded-lg">{formatMonth(item.startDate)} - {item.endDate.length > 0 ? formatMonth(item.endDate) : 'presente'}</span>
+        <h3 class="mt-1 mb-2 text-black dark:text-white">
+          {item.url ? <ExternalLink class="link !font-semibold mr-3" href={item.url}>{item.name}</ExternalLink> : <span class="font-semibold mr-3">{item.name}</span>}<span>·</span><span class="ml-3">{item.position}</span>
+        </h3>
+        {/* <p>{item.position}</p> */}
+        {/* <p class="mt-1 mb-4 text-muted">{item.summary}</p> */}
+        <ul class="list-disc ms-4">
+          {item.highlights.map(highlight => (
+            <li><Fragment set:html={parseMD(highlight)} /></li>
+          ))}
+        </ul>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<section>
+  <h2>Educación</h2>
+  <ol class="relative border-s-2 border-soft ms-2">
+    {education.map(item => (
+      <li class="mb-10 ms-6">
+        <div class="absolute w-4 h-4 rounded-full mt-1 -start-2 bg-gradient-primary ring-8 ring-background"></div>
+        <span class="-ms-2 px-2 py-1 bg-soft rounded-lg">{formatMonth(item.startDate)} - {item.endDate.length > 0 ? formatMonth(item.endDate) : 'presente'}</span>
+        <h3 class="mt-1 text-black dark:text-white">
+          {item.url ? <ExternalLink class="link" href={item.url}><b>{item.institution}</b></ExternalLink> : <b>{item.institution}</b>}
+        </h3>
+        <p>{item.area}</p>
+      </li>
+    ))}
+  </ol>
+</section>

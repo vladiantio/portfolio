@@ -1,0 +1,15 @@
+---
+import { projects } from '~/resume.json'
+---
+<section>
+  <h2>Proyectos</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {projects.map(item => (
+      <div class="bg-soft rounded-xl p-4 shadow">
+        <h3>{item.name}</h3>
+        <p>{item.description}</p>
+      </div>
+    ))}
+  </div>
+</section>

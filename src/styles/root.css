@@ -1,0 +1,28 @@
+:root {
+  --font-sans: 'Rubik Variable';
+
+  --hue-primary: 210;
+  --hue-secondary: calc(var(--hue-primary) - 20);
+  --hue-accent: calc(var(--hue-primary) + 20);
+  --intensity: 1;
+
+  --color-body: 0, 0%, 0%;
+  --color-background: var(--hue-primary), calc(40% * var(--intensity)), 96%;
+  --color-soft: var(--hue-primary), calc(36% * var(--intensity)), 90%;
+  --color-foreground: var(--hue-primary), calc(84% * var(--intensity)), 5%;
+  --color-muted: var(--hue-primary), calc(20% * var(--intensity)), 48%;
+  --color-primary: var(--hue-primary), calc(100% * var(--intensity)), 42%;
+  --color-secondary: var(--hue-secondary), calc(100% * var(--intensity)), 42%;
+  --color-accent: var(--hue-accent), calc(100% * var(--intensity)), 42%;
+}
+
+html.dark {
+  --color-body: 0, 0%, 100%;
+  --color-background: var(--hue-primary), calc(40% * var(--intensity)), 10%;
+  --color-soft: var(--hue-primary), calc(36% * var(--intensity)), 18%;
+  --color-foreground: var(--hue-primary), calc(40% * var(--intensity)), 98%;
+  --color-muted: var(--hue-primary), calc(20% * var(--intensity)), 64%;
+  --color-primary: var(--hue-primary), calc(100% * var(--intensity)), 68%;
+  --color-secondary: var(--hue-secondary), calc(100% * var(--intensity)), 68%;
+  --color-accent: var(--hue-accent), calc(100% * var(--intensity)), 68%;
+}
