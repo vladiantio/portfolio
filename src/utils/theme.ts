@@ -10,45 +10,25 @@ export function loadColorScheme(): ColorScheme {
   }
 }
 
-function setColorHue(hue: number) {
-  document.documentElement.style.setProperty('--hue-primary', hue.toString());
-}
-
-function setColorIntensity(intensity: number) {
-  document.documentElement.style.setProperty('--intensity', intensity.toString());
+function setColor(value: string) {
+  document.documentElement.style.setProperty('--color-hex', value);
 }
 
 export function loadColorTheme() {
-  if ('huePrimary' in localStorage) {
-    setColorHue(localStorage.huePrimary);
-  }
-  if ('colorIntensity' in localStorage) {
-    setColorIntensity(localStorage.colorIntensity);
+  if ('color' in localStorage) {
+    setColor(localStorage.color);
   }
 }
 
-export function getColorHue() {
-  if ('huePrimary' in localStorage) {
-    return localStorage.huePrimary as number;
+export function getColor() {
+  if ('color' in localStorage) {
+    return localStorage.color;
   } else {
-    return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hue-primary'));
+    return getComputedStyle(document.documentElement).getPropertyValue('--color-hex');
   }
 }
 
-export function getColorIntensity() {
-  if ('colorIntensity' in localStorage) {
-    return localStorage.colorIntensity as number;
-  } else {
-    return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--intensity'));
-  }
-}
-
-export function saveColorHue(hue: number) {
-  setColorHue(hue);
-  localStorage.setItem('huePrimary', hue.toString());
-}
-
-export function saveColorIntensity(intensity: number) {
-  setColorIntensity(intensity);
-  localStorage.setItem('colorIntensity', intensity.toString());
+export function saveColor(value: string) {
+  setColor(value);
+  localStorage.setItem('color', value);
 }

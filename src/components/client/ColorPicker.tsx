@@ -1,73 +1,47 @@
-import {
-  getColorHue,
-  getColorIntensity,
-  saveColorHue,
-  saveColorIntensity
-} from "~/utils/theme";
+import { getColor, saveColor } from "~/utils/theme";
 import { useEffect, useState } from "preact/hooks";
-import { hexToRgb, rgbToHsl } from "~/utils/rgb";
 
 function ColorPicker() {
-  const [hue, setHue] = useState<number>();
-  const [percentIntensity, setPercentIntensity] = useState<number>();
+  const [currentColor, setCurrentColor] = useState<string>();
 
   const colors = [
-    { name: 'Azul', hue: 210, intensity: 100 },
-    { name: 'Índigo', hue: 240, intensity: 100 },
-    { name: 'Rojo', hue: 0, intensity: 90 },
-    { name: 'Naranja', hue: 30, intensity: 100 },
-    { name: 'Verde', hue: 120, intensity: 60 },
-    { name: 'Gris', hue: 0, intensity: 0 },
+    { name: 'Azul', value: '#0088ef' },
+    { name: 'Índigo', value: '#5d7af3' },
+    { name: 'Rojo', value: '#df4d42' },
+    { name: 'Naranja', value: '#d26200' },
+    { name: 'Verde', value: '#32a029' },
+    { name: 'Gris', value: '#868686' },
   ]
 
   const handleChangeColor = (value: string) => {
-    const rgb = hexToRgb(value);
-    const hex = rgbToHsl(rgb[0], rgb[1], rgb[2]);
-    setHue(hex[0]);
-    setPercentIntensity(hex[1] * 100);
-    saveColorHue(hex[0]);
-    saveColorIntensity(hex[1]);
-  };
-
-  const handleChangeHue = (value: string) => {
-    const n = parseInt(value);
-    setHue(n);
-    saveColorHue(n);
-  };
-
-  const handleChangeIntensity = (value: string) => {
-    const n = parseInt(value);
-    setPercentIntensity(n);
-    saveColorIntensity(n / 100);
+    setCurrentColor(value);
+    saveColor(value);
   };
 
   useEffect(() => {
-    setHue(getColorHue());
-    setPercentIntensity(getColorIntensity() * 100);
+    setCurrentColor(getColor());
   }, []);
+
+  const isOtherColor = !colors.some(color => color.value == currentColor);
 
   return (
     <div>
       <div className="flex gap-4 m-3">
         {colors.map(color => {
-          const isActive = hue == color.hue && percentIntensity == color.intensity;
+          const isActive = currentColor == color.value;
           return (
             <button
               type="button"
               className={`size-4 rounded-full transition ${isActive ? 'ring-4 ring-primary ring-opacity-25' : ''}`}
               title={color.name}
               style={{
-                '--color':  `${color.hue}, calc(100% * ${color.intensity / 100}), 60%`,
-                backgroundColor: `hsl(var(--color))`,
+                backgroundColor: `oklch(from ${color.value} 62% c h)`, 
               }}
-              onClick={() => {
-                handleChangeHue(color.hue.toString());
-                handleChangeIntensity(color.intensity.toString());
-              }}
+              onClick={() => handleChangeColor(color.value)}
             ></button>
           );
         })}
-        <label className="size-4 rounded-full transition" role="button" title="Seleccionar un color">
+        <label className={`size-4 rounded-full transition ${isOtherColor ? 'ring-4 ring-primary ring-opacity-25' : ''}`} role="button" title="Seleccionar un color">
           <input type="color" className="sr-only bottom-0 left-0" onInput={ev => handleChangeColor(ev.currentTarget.value)} />
           <svg className="size-4 rounded-full" fill="none" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="m10 0-0.5 0.5v9.5h1.207l6.3633-6.3633v-0.70703c-1.8105-1.8106-4.3105-2.9297-7.0703-2.9297z" fill="url(#h)"/><path d="m17.07 2.9297-7.0703 7.0703 0.5 0.5h8.998l0.5-0.5c0-2.5586-0.9746-5.1191-2.9277-7.0703z" fill="url(#g)"/><path d="m20 10h-10v0.707l6.3633 6.3633h0.707c1.8106-1.8105 2.9297-4.3105 2.9297-7.0703z" fill="url(#f)"/><path d="m17.07 17.07-7.0703-7.0703-0.5 0.5v8.998l0.5 0.5c2.5586 0 5.1191-0.9746 7.0703-2.9277z" fill="url(#e)"/><path d="m10 20v-10h-0.707l-6.3633 6.3633v0.707c1.8105 1.8106 4.3105 2.9297 7.0703 2.9297z" fill="url(#d)"/><path d="m2.9297 17.07 7.0703-7.0703-0.5-0.5h-8.998l-0.5 0.5c0 2.5586 0.97461 5.1191 2.9277 7.0703z" fill="url(#c)"/><path d="M 0,10 H 10 V 9.293 L 3.63672,2.92969 H 2.92969 C 1.11914,4.74023 0,7.24023 0,10 Z" fill="url(#b)"/><path d="m2.9297 2.9297 7.0703 7.0703v-9.998c-2.5586 0-5.1191 0.97461-7.0703 2.9277z" fill="url(#a)"/><defs><linearGradient id="h" x1="8.379" x2="15.442" y1="1.559" y2="8.621" gradientTransform="translate(-2,-2)" gradientUnits="userSpaceOnUse"><stop stop-color="#F44F5A" offset="0"/><stop stop-color="#EE3D4A" offset=".443"/><stop stop-color="#E52030" offset="1"/></linearGradient><linearGradient id="g" x1="17.001" x2="17" y1=".0537" y2="23.883" gradientTransform="translate(-2,-2)" gradientUnits="userSpaceOnUse"><stop stop-color="#FED100" offset="0"/><stop stop-color="#E36001" offset="1"/></linearGradient><linearGradient id="f" x1="20.535" x2="15.182" y1="10.535" y2="15.888" gradientTransform="translate(-2,-2)" gradientUnits="userSpaceOnUse"><stop stop-color="#FFD747" offset="0"/><stop stop-color="#FFD645" offset=".482"/><stop stop-color="#F5BC00" offset="1"/></linearGradient><linearGradient id="e" x1="19.071" x2="11.5" y1="16.999" y2="17" gradientTransform="translate(-2,-2)" gradientUnits="userSpaceOnUse"><stop stop-color="#33C481" offset="0"/><stop stop-color="#21A366" offset="1"/></linearGradient><linearGradient id="d" x1="13.465" x2="8.1115" y1="20.535" y2="15.182" gradientTransform="translate(-2,-2)" gradientUnits="userSpaceOnUse"><stop stop-color="#28AFEA" offset="0"/><stop stop-color="#0B88DA" offset="1"/></linearGradient><linearGradient id="c" x1="7.0012" x2="7.0013" y1="20.154" y2="12.584" gradientTransform="translate(-2,-2)" gradientUnits="userSpaceOnUse"><stop stop-color="#427FDB" offset=".002"/><stop stop-color="#2668CB" offset=".397"/><stop stop-color="#1358BF" offset=".763"/><stop stop-color="#0C52BB" offset="1"/></linearGradient><linearGradient id="b" x1="3.465" x2="8.8185" y1="13.465" y2="8.1115" gradientTransform="translate(-2,-2)" gradientUnits="userSpaceOnUse"><stop stop-color="#A235D4" offset="0"/><stop stop-color="#A033D1" offset=".441"/><stop stop-color="#982CC9" offset=".702"/><stop stop-color="#8B21BB" offset=".915"/><stop stop-color="#831BB3" offset="1"/></linearGradient><linearGradient id="a" x1="4.9281" x2="24.264" y1="7.0007" y2="7" gradientTransform="translate(-2,-2)" gradientUnits="userSpaceOnUse"><stop stop-color="#E83C67" offset="0"/><stop stop-color="#C5214A" offset=".423"/><stop stop-color="#B01038" offset=".773"/><stop stop-color="#A80A31" offset="1"/></linearGradient></defs></svg>
         </label>

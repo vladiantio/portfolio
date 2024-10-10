@@ -8,13 +8,11 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				body: 'hsla(var(--color-body), <alpha-value>)',
-				background: 'hsla(var(--color-background), <alpha-value>)',
-				soft: 'hsla(var(--color-soft), <alpha-value>)',
-				muted: 'hsla(var(--color-muted), <alpha-value>)',
-				primary: 'hsla(var(--color-primary), <alpha-value>)',
-				secondary: 'hsla(var(--color-secondary), <alpha-value>)',
-				accent: 'hsla(var(--color-accent), <alpha-value>)',
+				body: 'oklch(var(--color-body) / <alpha-value>)',
+				background: 'oklch(var(--color-background) / <alpha-value>)',
+				soft: 'oklch(var(--color-soft) / <alpha-value>)',
+				muted: 'oklch(var(--color-muted) / <alpha-value>)',
+				primary: 'oklch(var(--color-primary) / <alpha-value>)',
 			},
 			fontFamily: {
 				sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],

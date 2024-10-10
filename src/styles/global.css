@@ -6,8 +6,8 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: hsl(var(--color-background));
-  color: hsl(var(--color-foreground));
+  background-color: oklch(var(--color-background));
+  color: oklch(var(--color-foreground));
   min-height: 100dvh;
   height: auto;
   display: flex;
@@ -36,7 +36,7 @@ h2 {
   margin-bottom: 1rem;
   font-size: 1.5rem;
   line-height: 1;
-  color: hsl(var(--color-primary));
+  color: oklch(var(--color-primary));
 }
 
 p {
@@ -52,31 +52,36 @@ p {
 
 .dropdown-content {
   position: absolute;
-}
 
-.dropdown-end .dropdown-content {
-  inset-inline-end: 0;
+  .dropdown-end & {
+    inset-inline-end: 0;
+  }
 }
 
 @tailwind utilities;
 
 .link {
-  color: hsl(var(--color-body));
+  color: oklch(var(--color-body));
   font-weight: 500;
   border-bottom-width: 2px;
-  border-color: hsl(var(--color-muted));
+  border-color: oklch(var(--color-muted));
   transition-property: border;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   outline: 0;
-}
-.link:hover, .link:focus {
-  border-bottom-width: 4px;
-  border-color: hsl(var(--color-primary));
+
+  &:hover, &:focus {
+    border-bottom-width: 4px;
+    border-color: oklch(var(--color-primary));
+  }
 }
 
 .bg-gradient-primary {
-  background-image: linear-gradient(to right, hsl(var(--color-secondary)), hsl(var(--color-accent)));
+  background-image: linear-gradient(
+    to right,
+    oklch(from var(--color-hex) 75% c h),
+    oklch(from var(--color-hex) 50% c h)
+  );
 }
 
 .text-bg {
@@ -84,15 +89,25 @@ p {
   color: transparent;
 }
 
-html.dark body.bg-noise {
-  position: relative;
-}
+html.dark {
+  body.bg-noise {
+    position: relative;
 
-html.dark body.bg-noise:after {
-  background-image: url(/img/noise.webp);
-  background-repeat: repeat;
-  position: absolute;
-  pointer-events: none;
-  inset: 0;
-  content: '';
+    &:after {
+      background-image: url(/img/noise.webp);
+      background-repeat: repeat;
+      position: absolute;
+      pointer-events: none;
+      inset: 0;
+      content: '';
+    }
+  }
+
+  .bg-gradient-primary {
+    background-image: linear-gradient(
+      to right,
+      oklch(from var(--color-hex) 95% c h),
+      oklch(from var(--color-hex) 60% c h)
+    );
+  }
 }
