@@ -79,8 +79,8 @@ p {
 .bg-gradient-primary {
   background-image: linear-gradient(
     to right,
-    oklch(from var(--color-hex) 75% c h),
-    oklch(from var(--color-hex) 50% c h)
+    oklch(from var(--color-hex) 78% c h),
+    oklch(from var(--color-hex) 54% c h)
   );
 }
 
@@ -106,8 +106,8 @@ html.dark {
   .bg-gradient-primary {
     background-image: linear-gradient(
       to right,
-      oklch(from var(--color-hex) 95% c h),
-      oklch(from var(--color-hex) 60% c h)
+      oklch(from var(--color-hex) 88% c h),
+      oklch(from var(--color-hex) 64% c h)
     );
   }
 }
