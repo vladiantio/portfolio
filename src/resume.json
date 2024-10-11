@@ -36,7 +36,7 @@
       "endDate": "2024-06-30",
       "summary": "",
       "highlights": [
-        "Continué desarrollando, mantuviendo y desplegando varios proyectos web de LecarosGroup.",
+        "Continué desarrollando, manteniendo y desplegando varios proyectos web de Lecaros Group.",
         "Desarrollé e implementé una plataforma para brokers y embajadores en **Portal Inversionista**, y se han registrado **más de 40 brokers y más de 5 embajadores**.",
         "Desarrollé e implementé un webscraping que obtiene propiedades disponibles de varias inmobiliarias."
       ]
@@ -49,7 +49,7 @@
       "endDate": "2022-10-01",
       "summary": "",
       "highlights": [
-        "Uno de los clientes más demandados de **G5** fue **LecarosGroup**.",
+        "Uno de los clientes más demandados de **G5** fue **Lecaros Group**.",
         "Desarrollé, mantuve y desplegué varios proyectos relacionados con la intranet de **LecarosGroup** y sus dos sitios web: [Portal Inversionista](https://www.portalinversionista.com) y [Portal Arriendo](https://www.portalarriendo.com)",
         "Mejoré la eficiencia de las consultas SQL reduciendo el tiempo de respuesta.",
         "Desarrollé e implementé una ficha de asesoramiento en **Portal Inversionista**.",
@@ -135,8 +135,7 @@
         "Bootstrap",
         "jQuery",
         "TailwindCSS",
-        "React",
-        "Astro"
+        "React"
       ]
     },
     {
@@ -148,8 +147,8 @@
         "Git",
         "Microsoft SQL Server",
         "MySQL",
-        "Microsoft Azure",
         "Azure DevOps",
+        "Azure Virtual Machines",
         "Linux",
         "GitHub",
         "Trello",
@@ -161,11 +160,11 @@
   "languages": [
     {
       "language": "Español",
-      "fluency": ""
+      "fluency": "Nativo"
     },
     {
       "language": "Inglés",
-      "fluency": ""
+      "fluency": "Principiante"
     }
   ],
   "interests": [
@@ -190,7 +189,7 @@
       "endDate": "",
       "description": "Un clon mejorado del generador de contraseñas de LastPass",
       "highlights": [],
-      "url": "https://vlantio.github.io/passgen"
+      "url": "https://vladiantio.github.io/passgen"
     },
     {
       "name": "Portal Inversionista",
@@ -198,7 +197,7 @@
       "endDate": "",
       "description": "",
       "highlights": [],
-      "url": "https://vlantio.github.io/passgen"
+      "url": "https://portalinversionista.com"
     },
     {
       "name": "Portal Arriendo",
@@ -206,7 +205,7 @@
       "endDate": "",
       "description": "",
       "highlights": [],
-      "url": "https://vlantio.github.io/passgen"
+      "url": "https://portalarriendo.com"
     }
   ]
 }
