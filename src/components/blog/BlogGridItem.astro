@@ -1,0 +1,21 @@
+---
+import type { Post } from '~/types/Post';
+import { formatShortDate } from '~/utils/date';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { slug, title, description, readingTime, publishedAt } = post;
+const publishedAtDate = new Date(publishedAt);
+---
+
+<div class="rounded-2xl overflow-hidden p-4 border border-soft shadow">
+  <a href={`/blog/${slug}`}><h2 class="m-0">{title}</h2></a>  
+  <p class="mt-1 line-clamp-3">{description}</p>
+  <div class="flex items-center gap-2 font-medium text-sm mt-4">
+    <time class="px-2 py-1 bg-soft rounded-lg" datetime={publishedAtDate.toISOString()}>{formatShortDate(publishedAtDate)}</time>
+    <span class="px-2 py-1 bg-soft rounded-lg">{readingTime}</span>
+  </div>
+</div>

@@ -1,0 +1,143 @@
+---
+import type { Post } from "~/types/Post";
+import { formatShortDate } from "~/utils/date";
+import { marked } from "marked";
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+
+const { title, description, content, readingTime, publishedAt } = post;
+const publishedAtDate = new Date(publishedAt);
+---
+
+<div class="container mx-auto">
+  <div class="mb-4">
+    <div class="flex items-center gap-2 font-medium text-sm">
+      <time class="px-2 py-1 bg-soft rounded-lg" datetime={publishedAtDate.toISOString()}>{formatShortDate(publishedAtDate)}</time>
+      <span class="px-2 py-1 bg-soft rounded-lg">{readingTime}</span>
+    </div>
+    <h1 class="text-primary text-4xl leading-tight mt-2 font-bold">
+      {title}
+    </h1>
+  </div>
+  <h2 class="mt-4 mb-8 text-xl font-normal text-pretty">{description}</h2>
+  <hr />
+  <article class="mt-8 mb-4">
+    <div class="rich-text" set:html={marked.parse(content)}  />
+  </article>
+</div>
+
+<style is:global>
+  /*******************************************
+  Rich Text Styles
+  *******************************************/
+  article .rich-text {
+    /* Headers */
+    h1 {
+      @apply text-4xl font-bold mb-8;
+    }
+
+    h2 {
+      @apply text-3xl font-bold mb-8;
+    }
+
+    h3 {
+      @apply text-2xl font-bold mb-6;
+    }
+
+    h4 {
+      @apply text-xl font-bold mb-4;
+    }
+
+    h5 {
+      @apply text-lg font-bold mb-4;
+    }
+
+    h6 {
+      @apply text-base font-bold mb-4;
+    }
+
+    /* Horizontal rules */
+    hr {
+      @apply my-8;
+    }
+
+    a {
+      @apply underline text-xl leading-relaxed;
+    }
+
+    /* Typographic replacements */
+    p {
+      @apply mb-8 text-xl leading-relaxed;
+    }
+
+    /* Emphasis */
+    strong {
+      @apply font-bold text-xl leading-relaxed;
+    }
+
+    em {
+      @apply italic text-xl leading-relaxed;
+    }
+
+    del {
+      @apply line-through text-xl leading-relaxed;
+    }
+
+    /* Blockquotes */
+    blockquote {
+      @apply border-l-4 border-soft pl-4 py-2 mb-4;
+    }
+
+    /* Lists */
+    ul {
+      @apply list-disc pl-4 mb-4;
+    }
+
+    ol {
+      @apply list-decimal pl-4 mb-4;
+    }
+
+    li {
+      @apply mb-2;
+
+      & > ul {
+        @apply list-disc pl-4 mb-2;
+      }
+
+      & > ol {
+        @apply list-decimal pl-4 mb-2;
+      }
+    }
+
+    /* Code blocks */
+    pre {
+      @apply font-mono rounded p-4 my-6;
+    }
+
+    code {
+      @apply font-mono rounded px-2 py-1;
+    }
+
+    /* Tables */
+    table {
+      @apply w-full border-collapse my-6;
+    }
+
+    th {
+      @apply text-left py-2 px-4 font-semibold border-b;
+    }
+
+    td {
+      @apply py-2 px-4 border-b;
+    }
+
+    /* Images */
+    img {
+      @apply w-full object-cover rounded-xl my-6;
+    }
+  }
+</style>

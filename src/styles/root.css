@@ -4,18 +4,18 @@
   --color-hex: #3fa0fa;
 
   --color-body: 0% 0 0;
-  --color-background: from var(--color-hex) 96% calc(c * 0.038) h;
-  --color-soft: from var(--color-hex) 92% calc(c * 0.094) h;
-  --color-foreground: from var(--color-hex) 15% calc(c * 0.158) h;
-  --color-muted: from var(--color-hex) 66% calc(c * 0.262) h;
-  --color-primary: from var(--color-hex) 66% c h;
+  --color-background: from var(--color-hex) 98% calc(c * 0.12) h;
+  --color-soft: from var(--color-hex) 92% calc(c * 0.16) h;
+  --color-foreground: from var(--color-hex) 15% calc(c * 0.16) h;
+  --color-muted: from var(--color-hex) 62% calc(c * 0.16) h;
+  --color-primary: from var(--color-hex) 62% c h;
 }
 
 html.dark {
   --color-body: 100% 0 0;
   --color-background: from var(--color-hex) 20% calc(c * 0.142) h;
-  --color-soft: from var(--color-hex) 30% calc(c * 0.202) h;
-  --color-foreground: from var(--color-hex) 98% calc(c * 0.016) h;
-  --color-muted: from var(--color-hex) 76% calc(c * 0.262) h;
+  --color-soft: from var(--color-hex) 30% calc(c * 0.16) h;
+  --color-foreground: from var(--color-hex) 98% calc(c * 0.02) h;
+  --color-muted: from var(--color-hex) 76% calc(c * 0.16) h;
   --color-primary: from var(--color-hex) 76% c h;
 }

@@ -1,0 +1,21 @@
+---
+import Layout from "~/layouts/Layout.astro";
+import SingleBlogItem from "~/components/blog/SingleBlogItem.astro";
+import { getPosts } from "~/services/blog";
+
+export async function getStaticPaths() {
+  const posts = await getPosts('es');
+  return posts.data.map((post) => {
+    return {
+      params: { slug: post.slug },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+---
+
+<Layout title={post.title} description={post.description}>
+  <SingleBlogItem post={post} />
+</Layout>

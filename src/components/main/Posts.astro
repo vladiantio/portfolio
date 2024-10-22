@@ -1,0 +1,12 @@
+---
+import BlogGrid from "~/components/blog/BlogGrid.astro";
+import { getPosts } from "~/services/blog";
+
+const posts = await getPosts('es');
+---
+{posts.data && posts.data.length > 0 && (
+  <section>
+    <h2 class="text-primary">Publicaciones</h2>
+    <BlogGrid posts={posts} />
+  </section>
+)}

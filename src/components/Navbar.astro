@@ -2,17 +2,12 @@
 import ThemeSelector from "./client/ThemeSelector";
 ---
 
-<nav class="fixed top-0 left-0 w-full z-10">
-  <div class="flex items-center justify-end p-4 gap-4">
-    <!-- <div class="hidden w-full md:block md:w-auto">
-      <div
-        class="font-medium flex flex-col p-4 md:px-6 md:py-2 md:rounded-2xl md:shadow-md mt-4 md:flex-row md:gap-8 md:mt-0 bg-soft"
-      >
-        <a href="#" class="block py-2 px-3 text-neutral-900 rounded hover:bg-neutral-100 md:hover:bg-transparent md:border-0 md:hover:text-primary md:p-0 dark:text-white md:dark:hover:text-primary dark:hover:bg-soft dark:hover:text-white md:dark:hover:bg-transparent">Experiencia</a>
-        <a href="#" class="block py-2 px-3 text-white bg-soft rounded md:bg-transparent md:text-primary md:p-0 dark:text-white md:dark:text-primary">Proyectos</a>
-      </div>
-    </div> -->
-    <div class="p-1 rounded-2xl shadow-md bg-soft">
+<nav class="sticky top-0 z-10 py-4 bg-background bg-opacity-75 backdrop-blur">
+  <div class="max-w-screen-lg mx-auto px-5 flex items-center justify-between gap-4">
+    <a href="/" title="@vladiantio">
+      <img alt="Logo" src="/favicon.svg" class="size-10 rounded-full shadow" />
+    </a>
+    <div class="p-1 rounded-full bg-background border border-soft shadow">
       <ThemeSelector client:load />
     </div>
   </div>

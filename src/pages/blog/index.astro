@@ -1,0 +1,12 @@
+---
+import Layout from "~/layouts/Layout.astro";
+import BlogGrid from "~/components/blog/BlogGrid.astro";
+import { getPosts } from "~/services/blog";
+
+const posts = await getPosts('es');
+---
+
+<Layout title="@vladiantio · Blog" description="Últimas publicaciones de @vladiantio">
+  <h1 class="text-primary mb-3">Últimas publicaciones</h1>
+  <BlogGrid posts={posts} />
+</Layout>

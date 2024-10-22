@@ -1,0 +1,18 @@
+---
+import type { PostResponse } from "~/types/Post";
+import BlogGridItem from "./BlogGridItem.astro";
+
+interface Props {
+  posts: PostResponse;
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="grid grid-cols-1 gap-4">
+  {
+    posts.data && posts.data.length > 0
+      ? posts.data.map((post) => <BlogGridItem post={post} />)
+      : "No posts founds"
+  }
+</div>

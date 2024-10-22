@@ -1,8 +1,4 @@
-import {
-  SunIcon,
-  MoonIcon,
-  ComputerDesktopIcon,
-} from '@heroicons/react/24/outline';
+import { Sun, Moon, SunMoon } from 'lucide-preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
 import type { ColorScheme } from '~/types/Theme';
 import { loadColorScheme } from '~/utils/theme';
@@ -32,18 +28,18 @@ function ThemeSelector() {
 
   return (
     <details ref={ref} className="dropdown dropdown-end">
-      <summary tabIndex={0} role="button" title="Tema" className="inline-block align-middle select-none rounded-xl p-2 hover:bg-primary hover:bg-opacity-10">{
+      <summary tabIndex={0} role="button" title="Tema" className="inline-block align-middle select-none rounded-full p-2 transition hover:bg-primary hover:bg-opacity-10">{
         currentColorScheme == 'light' ?
-          <SunIcon className="size-5" stroke-width="3" /> :
+          <Sun className="size-5" /> :
         currentColorScheme == 'dark' ?
-          <MoonIcon className="size-5" stroke-width="3" /> :
+          <Moon className="size-5" /> :
         <div className="size-5"></div>
       }</summary>
-      <div tabIndex={0} className="dropdown-content backdrop-blur bg-soft bg-opacity-75 rounded-xl z-10 w-68 p-1 shadow -me-2 mt-6">
-        <ul className="flex gap-1 text-sm">
-          <li><button type="button" onClick={() => changeColorScheme('light')} className={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] hover:bg-primary hover:bg-opacity-10 ${colorScheme == 'light' ? 'text-primary' : ''}`}><SunIcon className="size-6" stroke-width="2" /><span>Claro</span></button></li>
-          <li><button type="button" onClick={() => changeColorScheme('dark')} className={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] hover:bg-primary hover:bg-opacity-10 ${colorScheme == 'dark' ? 'text-primary' : ''}`}><MoonIcon className="size-6" stroke-width="2" /><span>Oscuro</span></button></li>
-          <li><button type="button" onClick={() => changeColorScheme('system')} className={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] hover:bg-primary hover:bg-opacity-10 ${colorScheme == 'system' ? 'text-primary' : ''}`}><ComputerDesktopIcon className="size-6" stroke-width="2" /><span>Sistema</span></button></li>
+      <div tabIndex={0} className="dropdown-content border border-soft bg-background rounded-xl z-10 w-68 p-1 shadow -me-2 mt-6">
+        <ul className="grid grid-cols-3 gap-1 text-sm">
+          <li><button type="button" onClick={() => changeColorScheme('light')} className={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] ${colorScheme == 'light' ? 'bg-primary bg-opacity-10 text-primary' : ''} hover:bg-primary hover:bg-opacity-10`}><Sun className="size-6" /><span>Claro</span></button></li>
+          <li><button type="button" onClick={() => changeColorScheme('dark')} className={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] ${colorScheme == 'dark' ? 'bg-primary bg-opacity-10 text-primary' : ''} hover:bg-primary hover:bg-opacity-10`}><Moon className="size-6" /><span>Oscuro</span></button></li>
+          <li><button type="button" onClick={() => changeColorScheme('system')} className={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] ${colorScheme == 'system' ? 'bg-primary bg-opacity-10 text-primary' : ''} hover:bg-primary hover:bg-opacity-10`}><SunMoon className="size-6" /><span>Sistema</span></button></li>
         </ul>
         <ColorPicker />
       </div>

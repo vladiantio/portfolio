@@ -1,3 +1,5 @@
+const locale = 'es-CL';
+
 export function parseDate(date?: Date | number | string) {
   if (!date)
     return undefined;
@@ -11,11 +13,23 @@ export function parseDate(date?: Date | number | string) {
     return date;
 }
 
+export function formatDate(date?: Date | number | string) {
+  if (!date) return '';
+  date = parseDate(date);
+
+  return Intl.DateTimeFormat(locale, { year: "numeric", month: "long", day: "numeric" }).format(date);
+}
+
+export function formatShortDate(date?: Date | number | string) {
+  if (!date) return '';
+  date = parseDate(date);
+
+  return Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric" }).format(date);
+}
+
 export function formatMonth(date?: Date | number | string) {
   if (!date) return '';
   date = parseDate(date);
 
-  const formatter = Intl.DateTimeFormat('es-CL', { year: "numeric", month: "long" });
-
-  return formatter.format(date);
+  return Intl.DateTimeFormat(locale, { year: "numeric", month: "long" }).format(date);
 }
