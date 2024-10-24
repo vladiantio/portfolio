@@ -1,4 +1,4 @@
-import { getColor, saveColor } from "~/utils/theme";
+import { loadColorTheme, saveColor } from "~/utils/theme";
 import { useEffect, useState } from "preact/hooks";
 
 const colors = [
@@ -19,7 +19,7 @@ function ColorPicker() {
   };
 
   useEffect(() => {
-    setCurrentColor(getColor());
+    setCurrentColor(loadColorTheme());
   }, []);
 
   const isOtherColor = !colors.some(color => color.value == currentColor);

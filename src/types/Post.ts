@@ -5,7 +5,6 @@ export interface PostResponse {
 
 export interface Post {
   id:            number;
-  documentId:    string;
   title:         string;
   slug:          string;
   content:       string;
@@ -17,17 +16,27 @@ export interface Post {
   publishedAt:   Date;
   locale:        string | null;
   tags:          Tag[];
+  image:         Media | null;
 }
 
 export interface Tag {
   id:          number;
-  documentId:  string;
   name:        string;
   slug:        string;
   createdAt:   Date;
   updatedAt:   Date;
   publishedAt: Date;
   locale:      string | null;
+}
+
+export interface Media {
+  id:              number;
+  name:            string;
+  alternativeText: string;
+  width:           number;
+  height:          number;
+  mime:            string;
+  url:             string;
 }
 
 export interface Meta {

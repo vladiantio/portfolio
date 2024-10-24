@@ -7,15 +7,21 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { slug, title, description, readingTime, publishedAt } = post;
+const { id, slug, title, description, readingTime, publishedAt, tags, image } = post;
 const publishedAtDate = new Date(publishedAt);
 ---
 
-<div class="rounded-2xl overflow-hidden p-4 border border-soft shadow">
-  <a href={`/blog/${slug}`}><h2 class="m-0">{title}</h2></a>  
-  <p class="mt-1 line-clamp-3">{description}</p>
-  <div class="flex items-center gap-2 font-medium text-sm mt-4">
-    <time class="px-2 py-1 bg-soft rounded-lg" datetime={publishedAtDate.toISOString()}>{formatShortDate(publishedAtDate)}</time>
-    <span class="px-2 py-1 bg-soft rounded-lg">{readingTime}</span>
+<div class="rounded-2xl overflow-hidden border border-soft shadow flex items-center gap-4">
+  <div class="p-4">
+    <h2 class="text-base m-0" transition:name={`t-${id}`}><a href={`/blog/${slug}`}>{title}</a></h2>  
+    <p class="mt-1 line-clamp-1" transition:name={`d-${id}`}>{description}</p>
+    <div class="flex flex-wrap items-center gap-2 font-medium text-sm mt-2" transition:name={`m-${id}`}>
+      <time class="px-2 py-1 bg-soft rounded-lg" title="Fecha de publicación" datetime={publishedAtDate.toISOString()}>{formatShortDate(publishedAtDate)}</time>
+      <span class="px-2 py-1 bg-soft rounded-lg" title="Tiempo de lectura">{readingTime}</span>
+      {tags.map(tag => <span class="px-2 py-1 bg-soft rounded-lg">{tag.name}</span>)}
+    </div>
   </div>
+  {image && (
+    <img alt={image.alternativeText} class="w-28 md:w-56 h-full object-cover" src={image.url} loading="lazy" transition:name={`i-${id}`} />
+  )}
 </div>

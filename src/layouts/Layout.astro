@@ -1,4 +1,6 @@
 ---
+import { map } from 'astro/zod';
+import { ViewTransitions } from 'astro:transitions';
 import Footer from '~/components/Footer.astro';
 import GTM from '~/components/GTM.astro';
 import GTMNoScript from '~/components/GTMNoScript.astro';
@@ -7,11 +9,21 @@ import Navbar from '~/components/Navbar.astro';
 import '~/styles/global.css';
 
 interface Props {
-	title: string;
+	title?: string | null;
 	description: string;
+	type?: 'article' | 'website';
+	image?: string | null;
+	publishedTime?: Date | null;
+	modifiedTime?: Date | null;
+	tags?: string[] | null;
 }
 
-const { title, description } = Astro.props;
+const { title, description, type, image, publishedTime, modifiedTime, tags } = Astro.props;
+
+const metaImage = image || '/banner.png';
+
+const siteName = '@vladiantio';
+const author = 'Vladimir Figueroa';
 ---
 
 <!doctype html>
@@ -19,11 +31,38 @@ const { title, description } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+		<title>{title ? `${title} · ${siteName}` : siteName}</title>
+		<meta name="description" content={description} />
+		<meta name="author" content={author} />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="theme-color" content="#09f" />
-		<title>{title}</title>
+		<meta name="theme-color" content="#3fa0fa" />
+
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="alternate" href="/rss.xml" type="application/rss+xml" title="RSS" />
+		<link rel="canonical" href={Astro.site} />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+
+		<meta property="og:type" content={type ?? 'website'} />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:image" content={new URL(metaImage, Astro.url)} />
+		<meta property="og:site_name" content={siteName} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		{modifiedTime && <meta property="og:updated_time" content={new Date(modifiedTime).getTime().toString()} />}
+
+		{publishedTime && <meta property="article:published_time" content={new Date(publishedTime).toISOString()} />}
+		{modifiedTime && <meta property="article:modified_time" content={new Date(modifiedTime).toISOString()} />}
+		{tags && tags.map(tag => <meta property="article:tag" content={tag} />)}
+
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={Astro.url} />
+		<meta property="twitter:image" content={new URL(metaImage, Astro.url)} />
+		<meta property="twitter:site" content={siteName} />
+		<meta property="twitter:creator" content={siteName} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+
 		<GTM />
 		<script>
 			import { loadColorTheme, loadColorScheme } from "~/utils/theme";
@@ -39,15 +78,15 @@ const { title, description } = Astro.props;
 				}
 			});
 		</script>
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="sitemap" href="/sitemap-index.xml" />
+
+		<ViewTransitions />
 	</head>
 	<body>
 		<GTMNoScript />
-		<Navbar />
-		<Main>
-			<slot />
-		</Main>
-		<Footer />
+		<div class="wrapper">
+			<Navbar />
+			<Main><slot /></Main>
+			<Footer />
+		</div>
 	</body>
 </html>

@@ -8,10 +8,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: oklch(var(--color-background));
   color: oklch(var(--color-foreground));
-  min-height: 100dvh;
-  height: auto;
-  display: flex;
-  flex-direction: column;
 }
 
 h1, h2, h3, h4 {
@@ -38,13 +34,22 @@ h2 {
   line-height: 1.5;
 }
 
+a {
+  color: oklch(var(--color-primary));
+  transition-property: color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  &:hover {
+    color: oklch(var(--color-primary-hover));
+  }
+}
+
 p {
   text-wrap: pretty;
 }
 
 hr {
   border-color: oklch(var(--color-soft));
-  border-width: 2px;
 }
 
 @tailwind components;
@@ -64,11 +69,17 @@ hr {
 
 @tailwind utilities;
 
+.wrapper {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto;
+}
+
 .link {
   color: oklch(var(--color-body));
-  font-weight: 500;
   border-bottom-width: 2px;
   border-color: oklch(var(--color-muted));
+  text-decoration: none !important;
   transition-property: border;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
@@ -77,6 +88,25 @@ hr {
   &:hover, &:focus {
     border-bottom-width: 4px;
     border-color: oklch(var(--color-primary));
+  }
+}
+
+.external-link {
+  &:after {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIwLjg3NWVtIiBoZWlnaHQ9IjAuODc1ZW0iIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTcgN2gxMHYxMCIvPjxwYXRoIGQ9Ik03IDE3IDE3IDciLz48L3N2Zz4=');
+    background-repeat: no-repeat;
+    content: '';
+    display: inline-block;
+    margin-left: 0.25em;
+    height: 1em;
+    width: 0.875em;
+    opacity: 0.6;
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+  &:hover:after {
+    opacity: 1;
   }
 }
 
@@ -100,5 +130,9 @@ html.dark {
       oklch(from var(--color-hex) 86% c h),
       oklch(from var(--color-hex) 66% c h)
     );
+  }
+
+  .external-link:after {
+    filter: invert();
   }
 }

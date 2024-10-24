@@ -9,6 +9,7 @@
   --color-foreground: from var(--color-hex) 15% calc(c * 0.16) h;
   --color-muted: from var(--color-hex) 62% calc(c * 0.16) h;
   --color-primary: from var(--color-hex) 62% c h;
+  --color-primary-hover: from var(--color-hex) 52% c h;
 }
 
 html.dark {
@@ -18,4 +19,5 @@ html.dark {
   --color-foreground: from var(--color-hex) 98% calc(c * 0.02) h;
   --color-muted: from var(--color-hex) 76% calc(c * 0.16) h;
   --color-primary: from var(--color-hex) 76% c h;
+  --color-primary-hover: from var(--color-hex) 86% c h;
 }
