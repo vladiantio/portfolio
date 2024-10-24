@@ -32,7 +32,6 @@ export const getPosts = async (locale: string = 'en') => {
   const url = `${STRAPI_URL}/api/posts?${query}`;
 
   posts = await fetch(url).then(res => res.json()) as PostResponse;
-  console.log(posts.data);
 
   console.log(`Fetched ${posts.data.length} posts.`);
 

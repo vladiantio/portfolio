@@ -1,7 +1,6 @@
 import type { ColorScheme } from "~/types/Theme";
 
 export function loadColorScheme(): ColorScheme {
-  console.log('loaded')
   if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.add('dark')
     return 'dark';

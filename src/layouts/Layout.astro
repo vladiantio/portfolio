@@ -1,11 +1,11 @@
 ---
-import { map } from 'astro/zod';
 import { ViewTransitions } from 'astro:transitions';
 import Footer from '~/components/Footer.astro';
 import GTM from '~/components/GTM.astro';
 import GTMNoScript from '~/components/GTMNoScript.astro';
 import Main from '~/components/Main.astro';
 import Navbar from '~/components/Navbar.astro';
+import ThemeLoader from '~/components/ThemeLoader.astro';
 import '~/styles/global.css';
 
 interface Props {
@@ -33,16 +33,21 @@ const author = 'Vladimir Figueroa';
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 		<title>{title ? `${title} · ${siteName}` : siteName}</title>
+
+		<ThemeLoader />
+		<GTM />
+
+		{/* Page Metadata */}
 		<meta name="description" content={description} />
 		<meta name="author" content={author} />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#3fa0fa" />
-
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 		<link rel="alternate" href="/rss.xml" type="application/rss+xml" title="RSS" />
 		<link rel="canonical" href={Astro.site} />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 
+		{/* OpenGraph Tags */}
 		<meta property="og:type" content={type ?? 'website'} />
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:image" content={new URL(metaImage, Astro.url)} />
@@ -55,6 +60,7 @@ const author = 'Vladimir Figueroa';
 		{modifiedTime && <meta property="article:modified_time" content={new Date(modifiedTime).toISOString()} />}
 		{tags && tags.map(tag => <meta property="article:tag" content={tag} />)}
 
+		{/* Twitter Tags */}
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content={Astro.url} />
 		<meta property="twitter:image" content={new URL(metaImage, Astro.url)} />
@@ -63,21 +69,12 @@ const author = 'Vladimir Figueroa';
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
 
-		<GTM />
-		<script>
-			import { loadColorTheme, loadColorScheme } from "~/utils/theme";
-			loadColorScheme();
-			loadColorTheme();
-
-			document.addEventListener('click', ({ target }) => {
-				const details = [...document.querySelectorAll('details.dropdown')];
-				if (!details.some(f => f.contains(target as Node))) {
-					details.forEach(f => f.removeAttribute('open'));
-				} else {
-					details.forEach(f => !f.contains(target as Node) ? f.removeAttribute('open') : '');
-				}
-			});
-		</script>
+		{/*
+			Robots meta tag for Google Search.
+			Enables a large image preview in Google search results, most pertinently in Chrome’s “Discover” view on mobile.
+			See: https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag#max-image-preview
+		*/}
+		<meta name="robots" content="max-image-preview:large" />
 
 		<ViewTransitions />
 	</head>

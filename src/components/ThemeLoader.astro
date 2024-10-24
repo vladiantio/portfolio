@@ -1,0 +1,10 @@
+<script is:inline>
+if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+if ('color' in localStorage) document.documentElement.style.setProperty('--color-hex', localStorage.color);
+
+document.addEventListener('click', ({ target }) => {
+  const details = [...document.querySelectorAll('details.dropdown')];
+  if (!details.some(f => f.contains(target))) details.forEach(f => f.removeAttribute('open'));
+  else details.forEach(f => !f.contains(target) ? f.removeAttribute('open') : '');
+});
+</script>
