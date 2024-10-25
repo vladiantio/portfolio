@@ -2,6 +2,7 @@
 import Layout from "~/layouts/Layout.astro";
 import SingleBlogItem from "~/components/blog/SingleBlogItem.astro";
 import { getPosts } from "~/services/blog";
+import '~/styles/blog.css';
 
 export async function getStaticPaths() {
   const posts = await getPosts('es');

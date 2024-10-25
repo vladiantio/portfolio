@@ -35,7 +35,7 @@ const icons = new Map([
 ---
 <div class="flex flex-wrap items-center gap-8">
   {basics.profiles.map(item => (
-    <ExternalLink class="text-body" href={item.url} title={item.network}>
+    <ExternalLink href={item.url} title={item.network}>
       <Fragment class:list="size-6" set:html={icons.get(item.network.toLowerCase())} />
     </ExternalLink>
   ))}
