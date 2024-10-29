@@ -11,7 +11,7 @@ const { id, slug, title, description, readingTime, publishedAt, tags, image } = 
 const publishedAtDate = new Date(publishedAt);
 ---
 
-<div class="rounded-2xl overflow-hidden border border-soft shadow flex items-center gap-4">
+<div class="rounded-2xl overflow-hidden border border-soft shadow grid [grid-template-columns:auto_1fr] gap-4">
   <div class="p-4">
     <h2 class="text-base m-0" transition:name={`t-${id}`}><a href={`/blog/${slug}`}>{title}</a></h2>  
     <p class="mt-1 line-clamp-1" transition:name={`d-${id}`}>{description}</p>
@@ -22,6 +22,6 @@ const publishedAtDate = new Date(publishedAt);
     </div>
   </div>
   {image && (
-    <a href={`/blog/${slug}`} class="h-full"><img alt={image.alternativeText} class="w-28 md:w-56 h-full object-cover" src={image.url} loading="lazy" transition:name={`i-${id}`} /></a>
+    <a href={`/blog/${slug}`} class="w-28 md:w-56 h-full"><img alt={image.alternativeText} class="size-full object-cover" src={image.url} loading="lazy" transition:name={`i-${id}`} /></a>
   )}
 </div>

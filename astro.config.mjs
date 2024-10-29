@@ -14,7 +14,5 @@ export default defineConfig({
   ],
   server: { port: 4680 },
   output: 'static',
-  adapter: vercel({
-    webAnalytics: { enabled: true }
-  }),
+  adapter: vercel(),
 });

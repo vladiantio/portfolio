@@ -2,7 +2,6 @@
 import { ViewTransitions } from 'astro:transitions';
 import Footer from '~/components/Footer.astro';
 import GTM from '~/components/GTM.astro';
-import GTMNoScript from '~/components/GTMNoScript.astro';
 import Main from '~/components/Main.astro';
 import Navbar from '~/components/Navbar.astro';
 import ThemeLoader from '~/components/ThemeLoader.astro';
@@ -10,7 +9,8 @@ import '~/styles/global.css';
 
 interface Props {
 	title?: string | null;
-	description: string;
+	lang?: string | null;
+	description?: string | null;
 	type?: 'article' | 'website';
 	image?: string | null;
 	publishedTime?: Date | null;
@@ -18,7 +18,7 @@ interface Props {
 	tags?: string[] | null;
 }
 
-const { title, description, type, image, publishedTime, modifiedTime, tags } = Astro.props;
+const { title, lang, description, type, image, publishedTime, modifiedTime, tags } = Astro.props;
 
 const metaImage = image || '/banner.png';
 
@@ -27,7 +27,7 @@ const author = 'Vladimir Figueroa';
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang ?? 'es'}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,22 +38,22 @@ const author = 'Vladimir Figueroa';
 		<GTM />
 
 		{/* Page Metadata */}
-		<meta name="description" content={description} />
+		{description && <meta name="description" content={description} />}
 		<meta name="author" content={author} />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#3fa0fa" />
-		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-		<link rel="alternate" href="/rss.xml" type="application/rss+xml" title="RSS" />
-		<link rel="canonical" href={Astro.site} />
-		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+		<link href="/rss.xml" rel="alternate" type="application/rss+xml" title="RSS" />
+		<link href={Astro.site} rel="canonical" />
+		<link href="/sitemap-index.xml" rel="sitemap" />
 
 		{/* OpenGraph Tags */}
 		<meta property="og:type" content={type ?? 'website'} />
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:image" content={new URL(metaImage, Astro.url)} />
 		<meta property="og:site_name" content={siteName} />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
+		<meta property="og:title" content={title ?? siteName} />
+		{description && <meta property="og:description" content={description} />}
 		{modifiedTime && <meta property="og:updated_time" content={new Date(modifiedTime).getTime().toString()} />}
 
 		{publishedTime && <meta property="article:published_time" content={new Date(publishedTime).toISOString()} />}
@@ -66,8 +66,8 @@ const author = 'Vladimir Figueroa';
 		<meta property="twitter:image" content={new URL(metaImage, Astro.url)} />
 		<meta property="twitter:site" content={siteName} />
 		<meta property="twitter:creator" content={siteName} />
-		<meta property="twitter:title" content={title} />
-		<meta property="twitter:description" content={description} />
+		<meta property="twitter:title" content={title ?? siteName} />
+		{description && <meta property="twitter:description" content={description} />}
 
 		{/*
 			Robots meta tag for Google Search.
@@ -79,7 +79,6 @@ const author = 'Vladimir Figueroa';
 		<ViewTransitions />
 	</head>
 	<body>
-		<GTMNoScript />
 		<div class="wrapper">
 			<Navbar />
 			<Main><slot /></Main>
