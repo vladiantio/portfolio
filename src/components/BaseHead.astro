@@ -1,0 +1,88 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import GTM from "./GTM.astro";
+import ThemeLoader from "./ThemeLoader.astro";
+
+export interface Props {
+	title?: string | null;
+	lang?: string | null;
+	description?: string | null;
+	type?: 'article' | 'website';
+	image?: string | null;
+	publishedTime?: Date | null;
+	modifiedTime?: Date | null;
+	tags?: string[] | null;
+}
+
+/**
+ * Enforce some standard canonical URL formatting across the site.
+ */
+function formatCanonicalURL(url: string | URL) {
+	const path = url.toString();
+	const hasQueryParams = path.includes('?');
+	// If there are query params, make sure the URL has no trailing slash
+	if (hasQueryParams) {
+		path.replace(/\/?$/, '');
+	}
+	// otherwise, canonical URL always has a trailing slash
+	return path.replace(/\/?$/, hasQueryParams ? '' : '/');
+}
+
+const { title, description, type, image, publishedTime, modifiedTime, tags } = Astro.props;
+
+const metaImage = image || '/banner.png';
+
+const siteName = '@vladiantio';
+const author = 'Vladimir Figueroa';
+
+const canonicalURL = new URL(Astro.request.url, Astro.site);
+---
+
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+<title>{title ? `${title} · ${siteName}` : siteName}</title>
+
+<ThemeLoader />
+<GTM />
+
+{/* Page Metadata */}
+{description && <meta name="description" content={description} />}
+<meta name="author" content={author} />
+<meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#3fa0fa" />
+<link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+<link href="/rss.xml" rel="alternate" type="application/rss+xml" title="RSS" />
+<link href={formatCanonicalURL(canonicalURL)} rel="canonical" />
+<link href="/sitemap-index.xml" rel="sitemap" />
+
+{/* OpenGraph Tags */}
+<meta property="og:type" content={type ?? 'website'} />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:image" content={new URL(metaImage, Astro.url)} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:title" content={title ?? siteName} />
+{description && <meta property="og:description" content={description} />}
+{modifiedTime && <meta property="og:updated_time" content={new Date(modifiedTime).getTime().toString()} />}
+
+{publishedTime && <meta property="article:published_time" content={new Date(publishedTime).toISOString()} />}
+{modifiedTime && <meta property="article:modified_time" content={new Date(modifiedTime).toISOString()} />}
+{tags && tags.map(tag => <meta property="article:tag" content={tag} />)}
+
+{/* Twitter Tags */}
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:image" content={new URL(metaImage, Astro.url)} />
+<meta property="twitter:site" content={siteName} />
+<meta property="twitter:creator" content={siteName} />
+<meta property="twitter:title" content={title ?? siteName} />
+{description && <meta property="twitter:description" content={description} />}
+
+{/*
+  Robots meta tag for Google Search.
+  Enables a large image preview in Google search results, most pertinently in Chrome’s “Discover” view on mobile.
+  See: https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag#max-image-preview
+*/}
+<meta name="robots" content="max-image-preview:large" />
+
+<ViewTransitions />

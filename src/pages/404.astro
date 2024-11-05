@@ -1,0 +1,13 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import { MoveLeft } from 'lucide-preact';
+---
+
+<Layout title="Página no encontrada">
+  <div class="h-full place-content-center">
+    <span class="text-9xl font-light leading-tight">:(</span>
+    <h1 class="text-5xl font-light my-4">No se encontró la página que buscabas.</h1>
+    <p class="my-4">Código: 404 Not Found</p>
+    <p class="my-8"><a href="/"><MoveLeft class="size-4 inline mr-2" />Volver al inicio</a></p>
+  </div>
+</Layout>
