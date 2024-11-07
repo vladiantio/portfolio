@@ -24,6 +24,36 @@
         "network": "GitHub",
         "username": "vladiantio",
         "url": "https://github.com/vladiantio"
+      },
+      {
+        "network": "Instagram",
+        "username": "vladiantio",
+        "url": "https://instagram.com/vladiantio",
+        "isSecondary": true
+      },
+      {
+        "network": "Threads",
+        "username": "vladiantio",
+        "url": "https://threads.net/@vladiantio",
+        "isSecondary": true
+      },
+      {
+        "network": "YouTube",
+        "username": "vladiantio",
+        "url": "https://youtube.com/@vladiantio",
+        "isSecondary": true
+      },
+      {
+        "network": "TikTok",
+        "username": "vladiantio",
+        "url": "https://tiktok.com/@vladiantio",
+        "isSecondary": true
+      },
+      {
+        "network": "X",
+        "username": "vladiantio",
+        "url": "https://x.com/vladiantio",
+        "isSecondary": true
       }
     ]
   },

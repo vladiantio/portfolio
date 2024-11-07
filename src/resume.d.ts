@@ -44,6 +44,7 @@ export interface Profile {
   network: string;
   username: string;
   url: string;
+  isSecondary?: boolean;
 }
 
 export interface Certificate {

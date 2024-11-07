@@ -5,7 +5,7 @@ import ThemeSelector from "./client/ThemeSelector";
 <nav class="sticky top-0 z-10 py-4 bg-background bg-opacity-75 backdrop-blur">
   <div class="w-full max-w-screen-lg mx-auto px-5 flex items-center justify-between gap-4">
     <a href="/" title="@vladiantio">
-      <img alt="Logo" src="/favicon.svg" class="size-10 rounded-full shadow" />
+      <img alt="Logo" src="/favicon.svg" class="size-10 rounded-full shadow" transition:name="logo" />
     </a>
     <div class="p-1 rounded-full bg-background border border-soft shadow">
       <ThemeSelector client:load />

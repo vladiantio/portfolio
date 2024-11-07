@@ -1,0 +1,26 @@
+---
+import { basics } from '~/resume.json'
+import SimpleLayout from '~/layouts/SimpleLayout.astro';
+import ExternalLink from '~/components/ExternalLink.astro';
+import SocialIcon from '~/components/SocialIcon.astro';
+---
+
+<SimpleLayout class="max-w-screen-md mx-auto px-5 py-8" title="Links">
+  <header class="grid place-items-center gap-4 mb-8">
+    <a href="/">
+      <img alt="Logo" src="/favicon.svg" class="size-20 rounded-full shadow" transition:name="logo" />
+    </a>
+    <h1 class="bg-gradient-primary text-bg">@vladiantio</h1>
+  </header>
+  <main class="grid gap-4 mb-8">
+    {basics.profiles.map(item => (
+      <ExternalLink class="bg-soft flex px-5 py-4 shadow rounded-full" href={item.url}>
+        <SocialIcon class="size-6" name={item.network.toLowerCase()} />
+        <b class="w-full text-center">{item.network}</b>
+      </ExternalLink>
+    ))}
+  </main>
+  <footer class="text-center">
+    <p>Made with ❤️ by <a href="/">@vladiantio</a></p>
+  </footer>
+</SimpleLayout>
