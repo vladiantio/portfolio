@@ -1,9 +1,9 @@
 ---
 import Layout from "~/layouts/Layout.astro";
 import BlogGrid from "~/components/blog/BlogGrid.astro";
-import { getPosts } from "~/services/blog";
+import { getAllBlogPosts } from "~/services/blog";
 
-const posts = await getPosts('es');
+const posts = await getAllBlogPosts('es');
 ---
 
 <Layout title="Blog" description="Últimas publicaciones de @vladiantio">
