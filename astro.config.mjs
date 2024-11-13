@@ -4,15 +4,33 @@ import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel/static';
 import sitemap from '@astrojs/sitemap';
 
+// Markdown Plugins
+import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
+import rehypeExternalLinks from 'rehype-external-links';
+
+/** @type {import('rehype-external-links').Options} */
+const externalLinksOptions = {
+  properties: {
+    'class': 'external'
+  },
+  target: '_blank',
+  rel: ['noopener', 'noreferrer']
+};
+// End Markdown Plugins
+
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://vladiantio.com',
+  adapter: vercel(),
   integrations: [
     sitemap(),
     preact({ compat: true }),
     tailwind(),
   ],
-  server: { port: 4680 },
+  markdown: {
+    remarkPlugins: [remarkReadingTime],
+    rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]],
+  },
   output: 'static',
-  adapter: vercel(),
+  server: { port: 4680 },
+  site: 'https://vladiantio.com',
 });
