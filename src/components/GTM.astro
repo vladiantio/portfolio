@@ -2,6 +2,12 @@
 <script is:inline>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-7JEEW8LXCY');
+document.addEventListener(
+	'astro:page-load',
+	() => {
+		gtag('js', new Date());
+		gtag('config', 'G-7JEEW8LXCY');
+	},
+	{ once: false }
+);
 </script>
