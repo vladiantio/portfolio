@@ -14,28 +14,12 @@ export interface Props {
 	tags?: string[] | null;
 }
 
-/**
- * Enforce some standard canonical URL formatting across the site.
- */
-function formatCanonicalURL(url: string | URL) {
-	const path = url.toString();
-	const hasQueryParams = path.includes('?');
-	// If there are query params, make sure the URL has no trailing slash
-	if (hasQueryParams) {
-		path.replace(/\/?$/, '');
-	}
-	// otherwise, canonical URL always has a trailing slash
-	return path.replace(/\/?$/, hasQueryParams ? '' : '/');
-}
-
 const { title, description, type, image, publishedTime, modifiedTime, tags } = Astro.props;
 
 const metaImage = image || '/banner.png';
 
 const siteName = '@vladiantio';
 const author = 'Vladimir Figueroa';
-
-const canonicalURL = new URL(Astro.request.url, Astro.site);
 ---
 
 <meta charset="UTF-8" />
@@ -44,7 +28,7 @@ const canonicalURL = new URL(Astro.request.url, Astro.site);
 <title>{title ? `${title} · ${siteName}` : siteName}</title>
 
 <ThemeLoader />
-<GTM />
+<GTM id="G-7JEEW8LXCY" />
 
 {/* Page Metadata */}
 {description && <meta name="description" content={description} />}
@@ -53,7 +37,7 @@ const canonicalURL = new URL(Astro.request.url, Astro.site);
 <meta name="theme-color" content="#3fa0fa" />
 <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
 <link href="/rss.xml" rel="alternate" type="application/rss+xml" title="RSS" />
-<link href={formatCanonicalURL(canonicalURL)} rel="canonical" />
+<link href={Astro.url} rel="canonical" />
 <link href="/sitemap-index.xml" rel="sitemap" />
 
 {/* OpenGraph Tags */}
