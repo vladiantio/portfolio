@@ -1,13 +1,25 @@
-<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-7JEEW8LXCY"></script>
-<script is:inline>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-document.addEventListener(
-	'astro:page-load',
-	() => {
-		gtag('js', new Date());
-		gtag('config', 'G-7JEEW8LXCY');
-	},
-	{ once: false }
-);
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+
+const gtagUrl = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+---
+<script is:inline type="text/partytown" src={gtagUrl}></script>
+<script is:inline type="text/partytown" define:vars={{id}}>
+window.dataLayer=window.dataLayer||[];
+window.gtag=function(){dataLayer.push(arguments);};
+document.addEventListener('astro:page-load',()=>{
+	gtag('js',new Date());
+	// Implement default denied consents and ONLY collect anonymous data.
+	gtag('consent','default',{
+		ad_storage:'denied',
+		ad_user_data:'denied',
+		ad_personalization:'denied',
+		analytics_storage:'denied',
+	});
+	gtag('config',id);
+},{once:false});
 </script>

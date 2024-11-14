@@ -1,10 +1,16 @@
 <script is:inline>
-if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
-if ('color' in localStorage) document.documentElement.style.setProperty('--color-hex', localStorage.color);
+function setTheme(doc) {
+	if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) doc.documentElement.classList.add('dark');
+	if ('color' in localStorage) doc.documentElement.style.setProperty('--color-hex', localStorage.color);
+}
+setTheme(document);
+// set the current theme on change page using ViewTransitions
+document.addEventListener('astro:before-swap', ev => setTheme(ev.newDocument));
 
+// close the dropdown by clicking out of the dropdown
 document.addEventListener('click', ({ target }) => {
-  const details = [...document.querySelectorAll('details.dropdown')];
-  if (!details.some(f => f.contains(target))) details.forEach(f => f.removeAttribute('open'));
-  else details.forEach(f => !f.contains(target) ? f.removeAttribute('open') : '');
+	const details = [...document.querySelectorAll('details.dropdown')];
+	if (!details.some(f => f.contains(target))) details.forEach(f => f.removeAttribute('open'));
+	else details.forEach(f => !f.contains(target) ? f.removeAttribute('open') : '');
 });
 </script>

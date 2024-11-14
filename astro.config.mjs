@@ -3,6 +3,7 @@ import preact from '@astrojs/preact';
 import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel/static';
 import sitemap from '@astrojs/sitemap';
+import partytown from '@astrojs/partytown';
 
 // Markdown Plugins
 import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
@@ -23,6 +24,11 @@ export default defineConfig({
   adapter: vercel(),
   integrations: [
     sitemap(),
+    partytown({
+      config: {
+        forward: ['dataLayer.push'],
+      }
+    }),
     preact({ compat: true }),
     tailwind(),
   ],
