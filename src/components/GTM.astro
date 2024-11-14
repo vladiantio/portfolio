@@ -7,8 +7,8 @@ const { id } = Astro.props;
 
 const gtagUrl = `https://www.googletagmanager.com/gtag/js?id=${id}`;
 ---
-<script is:inline type="text/partytown" src={gtagUrl}></script>
-<script is:inline type="text/partytown" define:vars={{id}}>
+<script is:inline async src={gtagUrl}></script>
+<script is:inline define:vars={{id}}>
 window.dataLayer=window.dataLayer||[];
 window.gtag=function(){dataLayer.push(arguments);};
 document.addEventListener('astro:page-load',()=>{
