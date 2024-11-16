@@ -3,9 +3,10 @@ import { basics } from '~/resume.json'
 import SimpleLayout from '~/layouts/SimpleLayout.astro';
 import ExternalLink from '~/components/ExternalLink.astro';
 import SocialIcon from '~/components/SocialIcon.astro';
+import { Globe } from 'lucide-preact';
 ---
 
-<SimpleLayout class="max-w-screen-md mx-auto px-5 py-8" title="Links">
+<SimpleLayout class="max-w-screen-md mx-auto px-5 py-8" title="Links" description="Mis redes de @vladiantio">
   <header class="grid place-items-center gap-4 mb-8">
     <a href="/">
       <img alt="Logo" src="/favicon.svg" class="size-20 rounded-full shadow" transition:name="logo" />
@@ -13,6 +14,10 @@ import SocialIcon from '~/components/SocialIcon.astro';
     <h1 class="bg-gradient-primary text-bg">@vladiantio</h1>
   </header>
   <main class="grid gap-4 mb-8">
+    <a class="bg-soft flex px-5 py-4 shadow rounded-full" href="/">
+      <Globe class="size-6" />
+      <b class="w-full text-center">Website</b>
+    </a>
     {basics.profiles.map(item => (
       <ExternalLink class="bg-soft flex px-5 py-4 shadow rounded-full" href={item.url}>
         <SocialIcon class="size-6" name={item.network.toLowerCase()} />

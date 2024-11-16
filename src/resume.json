@@ -38,6 +38,12 @@
         "isSecondary": true
       },
       {
+        "network": "Bluesky",
+        "username": "vladiantio",
+        "url": "https://bsky.app/profile/vladiantio.bsky.social",
+        "isSecondary": true
+      },
+      {
         "network": "YouTube",
         "username": "vladiantio",
         "url": "https://youtube.com/@vladiantio",
@@ -47,6 +53,12 @@
         "network": "TikTok",
         "username": "vladiantio",
         "url": "https://tiktok.com/@vladiantio",
+        "isSecondary": true
+      },
+      {
+        "network": "Pinterest",
+        "username": "vladiantio",
+        "url": "https://pinterest.com/vladiantio",
         "isSecondary": true
       },
       {
