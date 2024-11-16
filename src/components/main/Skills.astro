@@ -1,5 +1,6 @@
 ---
 import { skills } from '~/resume.json'
+import SkillIcon from '../SkillIcon.astro'
 ---
 <section>
   <h2 class="text-primary">Habilidades</h2>
@@ -10,7 +11,10 @@ import { skills } from '~/resume.json'
         <h3 class="mb-2">{item.name}</h3>
         <div class="flex flex-wrap items-center gap-3">
           {item.keywords.map(keyword => (
-            <span class="px-3 py-1 rounded-lg bg-soft">{keyword}</span>
+            <span class="p-0 rounded-xl overflow-hidden bg-soft/50" title={keyword}>
+              <span class="sr-only">{keyword}</span>
+              <SkillIcon class="size-12" name={keyword} />
+            </span>
           ))}
         </div>
       </div>
