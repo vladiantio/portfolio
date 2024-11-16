@@ -163,8 +163,7 @@
         "C#",
         "Python",
         "PHP",
-        "SQL",
-        "Transact SQL (T-SQL)"
+        "SQL"
       ]
     },
     {
@@ -173,7 +172,7 @@
       "keywords": [
         ".NET",
         "Angular",
-        "Vue.js",
+        "Vue",
         "Bootstrap",
         "jQuery",
         "TailwindCSS",
@@ -184,14 +183,14 @@
       "name": "Herramientas y Plataformas",
       "level": "Master",
       "keywords": [
+        "Git",
+        "Linux",
         "Visual Studio Code",
         "Visual Studio",
-        "Git",
         "Microsoft SQL Server",
         "MySQL",
+        "Azure",
         "Azure DevOps",
-        "Azure Virtual Machines",
-        "Linux",
         "GitHub",
         "Trello",
         "Postman",
