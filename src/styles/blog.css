@@ -66,11 +66,11 @@ article.rich-text {
   }
 
   pre {
-    @apply font-mono rounded-lg bg-soft p-4 my-6;
+    @apply rounded-3xl bg-soft p-5 my-6;
   }
 
-  code {
-    @apply font-mono rounded-lg bg-soft px-2 py-1;
+  :not(pre) > code {
+    @apply rounded-xl bg-soft px-2 py-0.5;
   }
 
   table {
@@ -87,6 +87,6 @@ article.rich-text {
 
   /* Images */
   img {
-    @apply w-full object-cover rounded-xl my-6;
+    @apply w-full object-cover rounded-3xl my-6;
   }
 }

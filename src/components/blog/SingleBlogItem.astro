@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import { Calendar, Clock, Tag } from "lucide-preact";
 import type { PostEntry } from "~/types/Post";
 import { formatShortDate } from "~/utils/date";
 
@@ -10,21 +12,17 @@ const { post } = Astro.props;
 const { id } = post;
 const { title, description, date, tags, image } = post.data;
 const { Content, remarkPluginFrontmatter } = await post.render();
-let { readingTime } = remarkPluginFrontmatter;
+const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<div class="container mx-auto">
-  <h1 class="text-primary text-3xl leading-tight mb-6" transition:name={`t-${id}`}>{title}</h1>
-  <h2 class="mt-6 text-xl font-normal text-pretty" transition:name={`d-${id}`}>{description}</h2>
-  <div class="flex flex-wrap items-center gap-2 font-medium text-sm mt-6" transition:name={`m-${id}`}>
-    <time class="px-2 py-1 bg-soft rounded-lg" title="Fecha de publicación" datetime={date.toISOString()}>{formatShortDate(date)}</time>
-    <span class="px-2 py-1 bg-soft rounded-lg" title="Tiempo de lectura">{readingTime}</span>
-    {tags.map(tag => <span class="px-2 py-1 bg-soft rounded-lg">{tag}</span>)}
-  </div>
-  {image && (
-    <img alt={image.alt} class="w-full rounded-xl mt-6" src={image.src} transition:name={`i-${id}`} />
-  )}
-  <article class="mt-12 mb-6 rich-text">
-    <Content />
-  </article>
+{image && <Image alt={image.alt} class="w-full rounded-3xl mb-8" src={image.src} width="1200" height="628" loading="eager" transition:name={`i-${id}`} />}
+<h1 class="text-3xl leading-tight mb-6" transition:name={`t-${id}`}>{title}</h1>
+<h2 class="mb-6 text-xl font-normal text-pretty" transition:name={`d-${id}`}>{description}</h2>
+<div class="flex flex-wrap gap-4 text-muted text-sm mb-6" transition:name={`m-${id}`}>
+  <time class="flex items-center" title="Fecha de publicación" datetime={date.toISOString()}><Calendar class="size-4 mr-2"/>{formatShortDate(date)}</time>
+  <span class="flex items-center" title="Tiempo de lectura"><Clock class="size-4 mr-2"/>{readingTime}</span>
+  {tags.map(tag => <span class="flex items-center"><Tag class="size-4 mr-2"/>{tag}</span>)}
 </div>
+<article class="mt-12 mb-6 rich-text">
+  <Content />
+</article>
