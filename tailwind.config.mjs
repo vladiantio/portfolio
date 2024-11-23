@@ -10,9 +10,14 @@ export default {
 			colors: {
 				body: 'oklch(var(--color-body) / <alpha-value>)',
 				background: 'oklch(var(--color-background) / <alpha-value>)',
+				foreground: 'oklch(var(--color-foreground) / <alpha-value>)',
 				soft: 'oklch(var(--color-soft) / <alpha-value>)',
 				muted: 'oklch(var(--color-muted) / <alpha-value>)',
-				primary: 'oklch(var(--color-primary) / <alpha-value>)',
+				primary: {
+					DEFAULT: 'oklch(var(--color-primary) / <alpha-value>)',
+					light: 'oklch(var(--color-primary-light) / <alpha-value>)',
+					dark: 'oklch(var(--color-primary-dark) / <alpha-value>)',
+				},
 			},
 			fontFamily: {
 				sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],

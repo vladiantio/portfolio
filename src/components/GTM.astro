@@ -10,16 +10,14 @@ const gtagUrl = `https://www.googletagmanager.com/gtag/js?id=${id}`;
 <script is:inline async src={gtagUrl}></script>
 <script is:inline define:vars={{id}}>
 window.dataLayer=window.dataLayer||[];
-window.gtag=function(){dataLayer.push(arguments);};
-document.addEventListener('astro:page-load',()=>{
-	gtag('js',new Date());
-	// Implement default denied consents and ONLY collect anonymous data.
-	gtag('consent','default',{
-		ad_storage:'denied',
-		ad_user_data:'denied',
-		ad_personalization:'denied',
-		analytics_storage:'denied',
-	});
-	gtag('config',id);
-},{once:false});
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+// Implement default denied consents and ONLY collect anonymous data.
+gtag('consent','default',{
+	ad_storage:'denied',
+	ad_user_data:'denied',
+	ad_personalization:'denied',
+	analytics_storage:'denied',
+});
+gtag('config',id);
 </script>

@@ -4,12 +4,16 @@ import SimpleLayout from '~/layouts/SimpleLayout.astro';
 import ExternalLink from '~/components/ExternalLink.astro';
 import SocialIcon from '~/components/SocialIcon.astro';
 import { Globe } from 'lucide-preact';
+import ThemeSelector from '~/components/client/ThemeSelector';
 ---
 
-<SimpleLayout class="max-w-screen-md mx-auto px-5 py-8" title="Links" description="Mis redes de @vladiantio">
-  <header class="grid place-items-center gap-4 mb-8">
+<SimpleLayout class="max-w-screen-md mx-auto px-5 pt-4 pb-8" title="Links" description="Mis redes de @vladiantio">
+  <header class="grid place-items-center gap-4 pt-4 mb-8 relative">
+    <div class="p-1 rounded-full bg-background border border-soft shadow absolute top-0 right-0">
+      <ThemeSelector client:load />
+    </div>
     <a href="/">
-      <img alt="Logo" src="/favicon.svg" class="size-20 rounded-full shadow" transition:name="logo" />
+      <img alt="Logo" src="/favicon.svg" class="size-20 rounded-full shadow" />
     </a>
     <h1 class="bg-gradient-primary text-bg">@vladiantio</h1>
   </header>

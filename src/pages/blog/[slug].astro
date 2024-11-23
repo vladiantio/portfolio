@@ -26,7 +26,7 @@ const { title, description, date, update, image, tags, language } = post.data;
   type="article"
   publishedTime={date}
   modifiedTime={update}
-  image={image && image.src}
+  image={image && (image.og ? image.og : image.src)}
   tags={tags}
 >
   <SingleBlogItem post={post} />
