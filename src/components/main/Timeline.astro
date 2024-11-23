@@ -34,7 +34,7 @@ import { parseMD } from '~/utils/md';
         <div class="absolute w-4 h-4 rounded-full mt-1 -start-2 bg-gradient-primary ring-8 ring-background"></div>
         <span class="-ms-2 px-2 py-1 bg-soft rounded-lg">{formatMonth(item.startDate)} - {item.endDate.length > 0 ? formatMonth(item.endDate) : 'presente'}</span>
         <h3 class="mt-2 text-black dark:text-white">
-          {item.url ? <ExternalLink class="external" href={item.url}><b>{item.institution}</b></ExternalLink> : <b>{item.institution}</b>}
+          {item.url ? <ExternalLink class="external font-semibold" href={item.url}>{item.institution}</ExternalLink> : <span class="font-semibold">{item.institution}</span>}
         </h3>
         <p>{item.area}</p>
       </li>
