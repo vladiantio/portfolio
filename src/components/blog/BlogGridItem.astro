@@ -1,29 +1,48 @@
 ---
+import { Calendar, Clock } from 'lucide-preact';
 import type { PostEntry } from '~/types/Post';
 import { formatShortDate } from '~/utils/date';
+import { removeExtension } from '~/utils/files';
 
 interface Props {
   post: PostEntry;
 }
 
 const { post } = Astro.props;
-const { id, slug } = post;
-const { title, description, date, tags, image } = post.data;
+const { slug } = post;
+const { title, description, date, image } = post.data;
 const { remarkPluginFrontmatter } = await post.render();
-let { readingTime } = remarkPluginFrontmatter;
+const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<div class="rounded-2xl overflow-hidden border border-soft shadow grid [grid-template-columns:auto_1fr] gap-4">
-  <div class="p-4">
-    <h2 class="text-base m-0" transition:name={`t-${id}`}><a href={`/blog/${slug}`}>{title}</a></h2>  
-    <p class="mt-1 line-clamp-1" transition:name={`d-${id}`}>{description}</p>
-    <div class="flex flex-wrap items-center gap-2 font-medium text-sm mt-2" transition:name={`m-${id}`}>
-      <time class="px-2 py-1 bg-soft rounded-lg" title="Fecha de publicación" datetime={date.toISOString()}>{formatShortDate(date)}</time>
-      <span class="px-2 py-1 bg-soft rounded-lg" title="Tiempo de lectura">{readingTime}</span>
-      {tags.map(tag => <span class="px-2 py-1 bg-soft rounded-lg">{tag}</span>)}
-    </div>
-  </div>
+<a href={`/blog/${slug}/`} class={`relative rounded-3xl overflow-hidden p-4 -mx-3 ${!image && 'bg-soft/50'}`}>
   {image && (
-    <a href={`/blog/${slug}`} class="w-28 md:w-56 h-full"><img alt={image.alt} class="size-full object-cover" src={image.src} loading="lazy" transition:name={`i-${id}`} /></a>
+    image.src.endsWith('.svg')
+    ? <img
+        alt={image.alt}
+        class="size-full object-cover absolute top-0 left-0 opacity-25 blur"
+        loading="lazy"
+        src={image.src}
+        width="1080"
+        height="567"
+      />
+    : <picture>
+        <source srcset={removeExtension(image.src) + '-thumb.avif'} type="image/avif" />
+        <source srcset={removeExtension(image.src) + '-thumb.webp'} type="image/webp" />
+        <img
+          alt={image.alt}
+          class="size-full object-cover absolute top-0 left-0 opacity-25 blur"
+          loading="lazy"
+          src={removeExtension(image.src) + '-thumb.jpg'}
+          width="320"
+          height="168"
+        />
+      </picture>
   )}
-</div>
+  <h3 class="text-base m-0 line-clamp-1">{title}</h3>
+  <p class="mt-1 line-clamp-1 text-foreground">{description}</p>
+  <div class="flex flex-wrap gap-4 text-foreground text-sm mt-2">
+    <time class="flex items-center" title="Fecha de publicación" datetime={date.toISOString()}><Calendar class="size-4 mr-2" />{formatShortDate(date)}</time>
+    <span class="flex items-center" title="Tiempo de lectura"><Clock class="size-4 mr-2" />{readingTime}</span>
+  </div>
+</a>

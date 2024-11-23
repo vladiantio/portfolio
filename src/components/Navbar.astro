@@ -2,13 +2,40 @@
 import ThemeSelector from "./client/ThemeSelector";
 ---
 
-<nav class="sticky top-0 z-10 py-4 bg-background bg-opacity-75 backdrop-blur">
-  <div class="w-full max-w-screen-lg mx-auto px-5 flex items-center justify-between gap-4">
+<nav class="sticky top-0 left-0 w-full z-10 py-4 transition-all" id="mainNavbar">
+  <div class="w-full max-w-screen-md mx-auto px-5 flex items-center justify-between gap-4">
     <a href="/" title="@vladiantio">
-      <img alt="Logo" src="/favicon.svg" class="size-10 rounded-full shadow" transition:name="logo" />
+      <span class="sr-only">@vladiantio</span>
+      <img alt="Logo" src="/favicon.svg" class="size-10 rounded-full shadow" loading="eager" />
     </a>
     <div class="p-1 rounded-full bg-background border border-soft shadow">
       <ThemeSelector client:load />
     </div>
   </div>
 </nav>
+
+<script>
+  let prevScrollY = window.scrollY;
+  function handleScroll() {
+    const navbar = document.getElementById('mainNavbar');
+    const activeClassList = ['bg-background/75', 'backdrop-blur', 'shadow-md'];
+    const hideClassList = ['-translate-y-full'];
+    const { offsetHeight } = navbar!;
+    const { scrollY } = window;
+    const isActive = scrollY > offsetHeight;
+    const isScrollDown = scrollY > prevScrollY;
+    if (isActive && !isScrollDown) {
+      navbar!.classList.add(...activeClassList);
+    } else {
+      navbar!.classList.remove(...activeClassList);
+    }
+    if (isActive && isScrollDown) {
+      navbar!.classList.add(...hideClassList);
+    } else {
+      navbar!.classList.remove(...hideClassList);
+    }
+    prevScrollY = scrollY;
+  }
+  window.addEventListener('scroll', handleScroll);
+  document.addEventListener('DOMContentLoaded', handleScroll);
+</script>

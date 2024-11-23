@@ -1,5 +1,4 @@
 ---
-import { ViewTransitions } from "astro:transitions";
 import GTM from "./GTM.astro";
 import ThemeLoader from "./ThemeLoader.astro";
 
@@ -16,7 +15,7 @@ export interface Props {
 
 const { title, description, type, image, publishedTime, modifiedTime, tags } = Astro.props;
 
-const metaImage = image || '/banner.png';
+const metaImage = image || '/banner.jpg';
 
 const siteName = '@vladiantio';
 const author = 'Vladimir Figueroa';
@@ -68,5 +67,3 @@ const author = 'Vladimir Figueroa';
   See: https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag#max-image-preview
 */}
 <meta name="robots" content="max-image-preview:large" />
-
-<ViewTransitions />

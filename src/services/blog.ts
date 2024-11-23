@@ -1,5 +1,10 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import type { PostEntry } from '~/types/Post';
 
-export const getAllBlogPosts: (language?: string) => Promise<CollectionEntry<'blog'>[]> = (language: string = 'en') => getCollection('blog', ({ data }) => {
-  return data.language === language && import.meta.env.PROD ? data.isDraft !== true : true;
-});
+export const getAllBlogPosts: (language?: string) => Promise<PostEntry[]> = async (language) => {
+  const entries = await getCollection('blog', ({ data }) => {
+    return (language ? data.language === language : true) && (import.meta.env.PROD ? data.isDraft !== true : true);
+  });
+  entries.sort((a, b) => b.id.localeCompare(a.id));
+  return entries;
+}
