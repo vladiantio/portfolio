@@ -10,7 +10,7 @@ const gtagUrl = `https://www.googletagmanager.com/gtag/js?id=${id}`;
 <script is:inline type="text/partytown" src={gtagUrl}></script>
 <script is:inline type="text/partytown" data-gid={id} id="gt-init">
 window.dataLayer=window.dataLayer||[];
-function gtag(){dataLayer.push(arguments);}
+window.gtag=function gtag(){dataLayer.push(arguments);}
 gtag('js',new Date());
 // Implement default denied consents and ONLY collect anonymous data.
 gtag('consent','default',{
