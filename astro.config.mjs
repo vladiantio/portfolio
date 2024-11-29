@@ -26,11 +26,6 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap(),
-    partytown({
-      config: {
-        forward: ['dataLayer.push', 'gtag'],
-      }
-    }),
     preact({ compat: true }),
     tailwind(),
   ],
