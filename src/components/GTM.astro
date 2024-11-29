@@ -7,8 +7,8 @@ const { id } = Astro.props;
 
 const gtagUrl = `https://www.googletagmanager.com/gtag/js?id=${id}`;
 ---
-<script is:inline type="text/partytown" src={gtagUrl}></script>
-<script is:inline type="text/partytown" data-gid={id} id="gt-init">
+<script is:inline defer src={gtagUrl}></script>
+<script is:inline data-gid={id} id="gt-init">
 window.dataLayer=window.dataLayer||[];
 window.gtag=function gtag(){dataLayer.push(arguments);}
 gtag('js',new Date());
