@@ -25,7 +25,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap(),
-    preact({ compat: true }),
+    preact(),
     tailwind(),
   ],
   markdown: {

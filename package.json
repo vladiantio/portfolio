@@ -35,9 +35,5 @@
     "@types/bun": "^1.1.12",
     "prettier": "3.3.3",
     "prettier-plugin-astro": "0.14.1"
-  },
-  "overrides": {
-    "react": "npm:@preact/compat@latest",
-    "react-dom": "npm:@preact/compat@latest"
   }
 }
