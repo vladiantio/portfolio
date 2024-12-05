@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import preact from '@astrojs/preact';
 import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel/static';
+import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 
