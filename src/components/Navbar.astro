@@ -2,13 +2,15 @@
 import ThemeSelector from "./client/ThemeSelector";
 ---
 
-<nav class="sticky top-0 left-0 w-full z-10 py-4 transition-all" id="mainNavbar">
-  <div class="w-full max-w-screen-md mx-auto px-5 flex items-center justify-between gap-4">
-    <a href="/" title="@vladiantio">
-      <span class="sr-only">@vladiantio</span>
-      <img alt="Logo" src="/favicon.svg" class="size-10 rounded-full shadow" loading="lazy" />
-    </a>
-    <div class="p-1 rounded-full bg-background border border-soft shadow">
+<nav class="sticky top-0 inset-x-0 w-full max-w-screen-md mx-auto z-10 p-3 transition-all" id="mainNavbar">
+  <div class="flex items-center justify-between gap-4">
+    <div class="p-2 rounded-full bg-background border border-soft shadow">
+      <a class="rounded-full overflow-hidden" href="/" title="@vladiantio">
+        <span class="sr-only">@vladiantio</span>
+        <img alt="Logo" src="/favicon.svg" class="size-10" loading="lazy" width="40" height="40" />
+      </a>
+    </div>
+    <div class="p-2 rounded-full bg-background border border-soft shadow">
       <ThemeSelector client:load />
     </div>
   </div>
@@ -18,17 +20,11 @@ import ThemeSelector from "./client/ThemeSelector";
   let prevScrollY = window.scrollY;
   function handleScroll() {
     const navbar = document.getElementById('mainNavbar');
-    const activeClassList = ['bg-background/75', 'backdrop-blur', 'shadow-md'];
     const hideClassList = ['-translate-y-full'];
     const { offsetHeight } = navbar!;
     const { scrollY } = window;
     const isActive = scrollY > offsetHeight;
     const isScrollDown = scrollY > prevScrollY;
-    if (isActive && !isScrollDown) {
-      navbar!.classList.add(...activeClassList);
-    } else {
-      navbar!.classList.remove(...activeClassList);
-    }
     if (isActive && isScrollDown) {
       navbar!.classList.add(...hideClassList);
     } else {
@@ -37,5 +33,4 @@ import ThemeSelector from "./client/ThemeSelector";
     prevScrollY = scrollY;
   }
   window.addEventListener('scroll', handleScroll);
-  document.addEventListener('DOMContentLoaded', handleScroll);
 </script>

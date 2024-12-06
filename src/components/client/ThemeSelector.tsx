@@ -30,10 +30,10 @@ function ThemeSelector() {
     <details ref={ref} className="dropdown dropdown-end">
       <summary tabIndex={0} role="button" title="Tema" className="inline-block align-middle select-none rounded-full p-2 transition hover:bg-primary/10">{
         currentColorScheme == 'light' ?
-          <Sun className="size-5" /> :
+          <Sun className="size-6" /> :
         currentColorScheme == 'dark' ?
-          <Moon className="size-5" /> :
-        <div className="size-5"></div>
+          <Moon className="size-6" /> :
+        <div className="size-6"></div>
       }<span class="sr-only">Tema</span></summary>
       <div tabIndex={0} className="dropdown-content border border-soft bg-background rounded-xl z-10 w-68 p-1 shadow -me-2 mt-6">
         <ul className="grid grid-cols-3 gap-1 text-sm">
