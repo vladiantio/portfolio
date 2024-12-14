@@ -1,5 +1,5 @@
 import { loadColorTheme, saveColor } from "~/utils/theme";
-import { createSignal, Index, onMount } from "solid-js";
+import { createMemo, createSignal, Index, onMount } from "solid-js";
 
 const colors = [
   { name: 'Azul', value: '#3fa0fa' },
@@ -22,7 +22,7 @@ function ColorPicker() {
     setCurrentColor(loadColorTheme());
   });
 
-  const isOtherColor = () => !colors.some(color => color.value == currentColor());
+  const isOtherColor = createMemo(() => !colors.some(color => color.value == currentColor()));
 
   return (
     <div>
