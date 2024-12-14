@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-import preact from '@astrojs/preact';
+import solid from '@astrojs/solid-js';
 import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
@@ -25,7 +25,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap(),
-    preact(),
+    solid(),
     tailwind(),
   ],
   markdown: {
