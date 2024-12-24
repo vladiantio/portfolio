@@ -4,6 +4,7 @@ import Footer from '~/components/Footer.astro';
 import Main from '~/components/Main.astro';
 import Navbar from '~/components/Navbar.astro';
 import '~/styles/global.css';
+import { Snowflakes } from '~/components/backgrounds/Snowflakes';
 
 interface Props extends BaseHeadProps {}
 
@@ -21,5 +22,6 @@ const head = Astro.props;
 			<Main><slot /></Main>
 			<Footer />
 		</div>
+		<Snowflakes client:load />
 	</body>
 </html>
