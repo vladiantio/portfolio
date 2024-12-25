@@ -17,7 +17,7 @@
   top: calc(-2 * var(--sf-size));
   width: var(--sf-size);
   height: var(--sf-size);
-  animation: var(--sf-float-duration) ease-in var(--sf-float-delay) infinite float-down;
+  animation: var(--sf-float-duration) ease-in var(--sf-float-delay) infinite sf-float-down;
 
   svg {
     position: absolute;
@@ -29,7 +29,7 @@
     filter: drop-shadow(0 0 0.25rem #fff);
     animation:
       var(--sf-sway-duration) ease-in-out var(--sf-sway-delay) infinite alternate var(--sf-sway-type),
-      var(--sf-sway-duration) ease-in-out var(--sf-sway-delay) infinite alternate sway-wiggle;
+      var(--sf-sway-duration) ease-in-out var(--sf-sway-delay) infinite alternate sf-wiggle;
 
     .dark & {
       color: #fff;
@@ -37,13 +37,13 @@
   }
 }
 
-@keyframes float-down {
+@keyframes sf-float-down {
   to {
-    translate: 0 calc(var(--sf-box-height) + 2 * var(--sf-size));
+    translate: var(--sf-gravity) calc(var(--sf-box-height) + 2 * var(--sf-size));
   }
 }
 
-@keyframes sway-left-to-right {
+@keyframes sf-sway-left-to-right {
   from {
     translate: 0;
   }
@@ -53,7 +53,7 @@
   }
 }
 
-@keyframes sway-right-to-left {
+@keyframes sf-sway-right-to-left {
   from {
     translate: 0;
   }
@@ -63,7 +63,7 @@
   }
 }
 
-@keyframes sway-wiggle {
+@keyframes sf-wiggle {
   from {
     rotate: 0deg;
   }
