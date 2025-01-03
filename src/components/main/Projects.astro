@@ -1,8 +1,13 @@
 ---
-import { projects } from '~/resume.json'
+import { projects } from '~/resume.json';
+import type { Locale } from '~/i18n/constants';
+import { useTranslations } from '~/i18n/helpers';
+
+const locale = Astro.currentLocale as Locale | undefined;
+const translate = useTranslations(locale);
 ---
 <section>
-  <h2 class="text-primary">Proyectos</h2>
+  <h2 class="text-primary">{translate('portfolio.projects')}</h2>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     {projects.map(item => (

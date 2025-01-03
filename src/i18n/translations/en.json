@@ -1,0 +1,17 @@
+{
+  "language": "Language",
+  "backToHome": "Back to home",
+  "hero.welcome": "Welcome, i'm",
+  "portfolio.present": "present",
+  "portfolio.experience": "Experience",
+  "portfolio.education": "Education",
+  "portfolio.skills": "Skills",
+  "portfolio.projects": "Projects",
+  "blog.posts": "Posts",
+  "blog.latestPosts": "Latest posts",
+  "blog.pubDate": "Pub date",
+  "blog.readingTime": "Reading time",
+  "blog.sources": "Sources",
+  "status.404.title": "Page not found",
+  "status.404.description": "The page you were looking for was not found."
+}

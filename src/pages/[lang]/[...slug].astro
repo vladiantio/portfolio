@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   const posts = await getAllBlogPosts();
   return posts.map((post) => {
     return {
-      params: { slug: post.slug },
+      params: { lang: post.lang, slug: post.slug },
       props: { post },
     };
   });
@@ -16,11 +16,11 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
-const { title, description, date, update, image, tags, language } = post.data;
+const { title, description, date, update, image, tags } = post.data;
 ---
 
 <Layout
-  lang={language}
+  lang={post.lang}
   title={title}
   description={description}
   type="article"

@@ -1,8 +1,6 @@
 ---
-title: "Lo nuevo de JavaScript ES2025: Import Attributes"
-slug: js-es2025-import-attributes
+title: "What's new in JavaScript ES2025: Import Attributes"
 description: Comprendiendo su nueva sintaxis y por qué no podemos fiarnos solo de las extensiones de archivo.
-language: es
 date: 2024-11-22T21:33:25.684Z
 update: 2024-11-22T21:33:25.684Z
 image:
@@ -28,7 +26,7 @@ import { BaselineStatus } from '@astro-community/astro-embed-baseline-status';
 
 JavaScript incorpora una nueva función que hace que las importaciones de módulos sean más explícitas y seguras. Los **Import Attributes** añaden una forma de pasar metadatos sobre cualquier módulo que estemos importando, ya sea JSON, JavaScript u otros tipos de módulos.
 
-## ❌ El problema
+## ❌ The problem
 
 En Internet, las extensiones de archivo no indican el contenido de forma fiable. Un servidor puede devolver JavaScript cuando usted espera JSON:
 
@@ -48,7 +46,7 @@ export default (function(){
 })();
 ```
 
-## 💡 La solución: Import Attributes
+## 💡 The solution: Import Attributes
 
 Los Import Attributes crean un contrato entre el código y el tiempo de ejecución. Declaras explícitamente qué tipo de módulo esperas:
 
@@ -78,7 +76,7 @@ new Worker('processor.wasm', {
 });
 ```
 
-## 💭 ¿Por qué los Import Attributes?
+## 💭 Why the Import Attributes?
 
 El principal problema es la seguridad. En Internet, las extensiones de archivo no indican el contenido de forma fiable. Una URL que termine en `json` podría en realidad servir JavaScript:
 

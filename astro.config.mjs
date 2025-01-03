@@ -22,6 +22,14 @@ const externalLinksOptions = {
 // https://astro.build/config
 export default defineConfig({
   adapter: vercel(),
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'es'],
+    routing: {
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: false,
+    },
+  },
   integrations: [
     mdx(),
     sitemap(),

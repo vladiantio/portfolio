@@ -1,0 +1,19 @@
+---
+import Layout from "~/layouts/Layout.astro";
+import BlogGrid from "~/components/blog/BlogGrid.astro";
+import { getAllBlogPosts } from "~/services/blog";
+import type { Locale } from '~/i18n/constants';
+import { localeParams, useTranslations } from '~/i18n/helpers';
+
+const locale = Astro.currentLocale as Locale | undefined;
+const translate = useTranslations(locale);
+
+const posts = await getAllBlogPosts(locale);
+
+export const getStaticPaths = () => localeParams;
+---
+
+<Layout title="Blog" description={translate('blog.latestPosts')} lang={locale}>
+  <h1 class="text-primary text-3xl mb-3">{translate('blog.latestPosts')}</h1>
+  <BlogGrid posts={posts} />
+</Layout>

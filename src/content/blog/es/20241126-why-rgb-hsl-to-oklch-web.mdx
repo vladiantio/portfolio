@@ -1,0 +1,49 @@
+---
+title: ¿Por qué deberías cambiar de RGB a OKLCH en tus proyectos web?
+description: Sabemos que en el mundo del diseño y la programación web, los colores son fundamentales. Pero ¿por qué no empezar a utilizar OKLCH?
+date: 2024-11-27T12:52:16.383Z
+update: 2024-11-27T12:52:16.383Z
+image:
+  src: /media/2024/11/js-es2025.svg
+  alt: JavaScript ES2025
+  og: /media/2024/11/js-es2025.png
+tags:
+  - Programación
+  - JavaScript
+  - ES2025
+  - JSON
+sources:
+  - title: 'oklch() - CSS: Cascading Style Sheets | MDN'
+    href: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch
+  - title: 'OKLCH in CSS: why we moved from RGB and HSL - Andrey Sitnik, Travis Turner (Martian Chronicles, Evil Martians’ team blog)'
+    href: https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl
+  - title: What is OKLCH in CSS and why we use it at Uploadcare - Trust Jamin (Uploadcare Blog)
+    href: https://uploadcare.com/blog/oklch-in-css/
+---
+import { BaselineStatus } from '@astro-community/astro-embed-baseline-status';
+
+<BaselineStatus id="oklab" />
+
+Primero, vamos a hablar un poco sobre el problema actual con los colores en CSS. Los colores RGB y HSL no pueden representar todos los colores visibles humanos. Esto significa que hay colores que no podemos crear con estas notaciones.
+
+La solución es OKLCH, que utiliza una base de color más amplia para representar todos los colores visibles humanos. Pero, ¿por qué OKLCH en particular?
+
+Una de las principales ventajas de OKLCH es su capacidad para realizar modificaciones de color de manera predecible y fácil. Esto significa que puedes crear paletas de colores más complejas y precisas.
+
+Otra ventaja importante es la compatibilidad con diferentes dispositivos y monitores. OKLCH puede representar colores que no pueden ser creados con RGB o HSL, lo que mejora la experiencia del usuario.
+
+Ahora, ¿cómo se utiliza OKLCH en CSS? La notación OKLCH consiste en cuatro números: `l` (lightness), `c` (chroma), `h` (hue) y `a` (opacity).
+
+`oklch(l c h / a)`
+
+* `l` es la luz percibida del color. Se encuentra entre 0 y 1, con 1 siendo el blanco y 0 el negro. Se puede expresarse también con porcentajes entre 0% y 100%.
+
+* `c` es la saturación del color, que se encuentra entre 0 y infinito.
+
+* `h` es el ángulo de matiz del color, que se encuentra entre 0 y 360 grados.
+
+* `a` es la opacidad del color, que se encuentra entre 0 y 1.
+
+Finalmente, vamos a hablar un poco sobre la gamutación en OKLCH. Esto se refiere a la capacidad de representar colores que no pueden ser creados con RGB o HSL.
+
+En resumen, OKLCH es una notación de color más amplia y predecible que puede mejorar tu experiencia del usuario y facilitar el trabajo con paletas de colores complejas.

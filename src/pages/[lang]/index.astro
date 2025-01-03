@@ -1,0 +1,23 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import Timeline from '~/components/main/Timeline.astro';
+// import AboutMe from '~/components/main/AboutMe.astro';
+import Skills from '~/components/main/Skills.astro';
+import Hero from '~/components/main/Hero.astro';
+import Posts from '~/components/main/Posts.astro';
+import { localeParams } from '~/i18n/helpers';
+// import Projects from '~/components/main/Projects.astro';
+
+const locale = Astro.currentLocale;
+
+export const getStaticPaths = () => localeParams;
+---
+
+<Layout description='Ingeniero de software con 4 años de experiencia, construyendo sitios y aplicaciones web innovadoras y de calidad.' lang={locale}>
+	<Hero />
+	<Timeline />
+	<!-- <Projects /> -->
+	<Skills />
+	<Posts />
+	<!-- <AboutMe /> -->
+</Layout>
