@@ -71,6 +71,18 @@
   },
   "work": [
     {
+      "name": "Happy Foto",
+      "position": "Desarrollador Full Stack con WordPress",
+      "url": "https://happyfoto.cl",
+      "startDate": "2024-08-01",
+      "endDate": "",
+      "summary": "Happy Foto es un servicio de enmarcado de fotografías ubicado en Las Condes con envío a domicilio a Santiago y a más regiones de Chile.",
+      "highlights": [
+        "Actualmente desarrollo nuevas funcionalidades del sitio web hecho en WordPress.",
+        "Logré mejorar la experiencia de usuario en la carga de imágenes."
+      ]
+    },
+    {
       "name": "Lecaros Group",
       "position": "Asesor informático y Webmaster",
       "url": "https://www.lecarosgroup.com",
