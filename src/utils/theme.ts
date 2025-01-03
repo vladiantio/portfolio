@@ -1,29 +1,31 @@
-import type { ColorScheme } from "~/types/Theme";
+export const COLOR_SCHEMES = ['light', 'dark', 'system'] as const;
 
-export function loadColorScheme(): ColorScheme {
+export type ColorScheme = (typeof COLOR_SCHEMES)[number];
+
+export function getCurrentColorScheme(): ColorScheme {
   if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark')
     return 'dark';
   } else {
-    document.documentElement.classList.remove('dark')
     return 'light';
   }
 }
 
-function setColor(value: string) {
-  document.documentElement.style.setProperty('--color-hex', value);
+export function loadCurrentColorScheme(scheme: ColorScheme) {
+  if (scheme == 'dark')
+    document.documentElement.classList.add('dark');
+  else
+    document.documentElement.classList.remove('dark');
 }
 
-export function loadColorTheme() {
+export function getColorTheme() {
   if ('color' in localStorage) {
-    setColor(localStorage.color);
     return localStorage.color;
   } else {
     return getComputedStyle(document.documentElement).getPropertyValue('--color-hex');
   }
 }
 
-export function saveColor(value: string) {
-  setColor(value);
+export function saveColorTheme(value: string) {
+  document.documentElement.style.setProperty('--color-hex', value);
   localStorage.setItem('color', value);
 }
