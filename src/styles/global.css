@@ -115,6 +115,20 @@ a.external:after {
   width: 0.75em;
 }
 
+.bg-color-wheel {
+  background-image: conic-gradient(
+    hsl(360 100% 50%),
+    hsl(315 100% 50%),
+    hsl(270 100% 50%),
+    hsl(225 100% 50%),
+    hsl(180 100% 50%),
+    hsl(135 100% 50%),
+    hsl(90 100% 50%),
+    hsl(45 100% 50%),
+    hsl(0 100% 50%)
+  );
+}
+
 .bg-gradient-primary {
   background-image: linear-gradient(
     to right,
