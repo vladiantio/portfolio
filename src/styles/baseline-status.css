@@ -35,9 +35,9 @@
     --color-newly-secondary: var(--color-newly-secondary--light);
     --color-no_data-secondary: var(--color-no_data-secondary--light);
 
-    border: solid 1px oklch(var(--color-soft));
+    border: solid 1px transparent;
     border-radius: 1.5rem;
-    background: oklch(var(--color-soft));
+    background: oklch(var(--color-body) / 0.1);
     padding-top: 1rem;
     padding-inline: 1.5rem;
     max-width: 50rem;
