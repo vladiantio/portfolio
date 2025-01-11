@@ -29,12 +29,12 @@ function ThemeSelector() {
     <details ref={ref} class="dropdown dropdown-end">
       <summary tabIndex={0} role="button" title="Tema" class="inline-block align-middle select-none rounded-full p-2 transition hover:bg-primary/10">{
         currentColorScheme() == 'light' ?
-          <Sun class="size-6" /> :
+          <Sun class="size-6 text-primary" /> :
         currentColorScheme() == 'dark' ?
-          <Moon class="size-6" /> :
+          <Moon class="size-6 text-white" /> :
         <div class="size-6"></div>
       }<span class="sr-only">Tema</span></summary>
-      <div tabIndex={0} class="dropdown-content border border-soft bg-background rounded-xl z-10 w-68 p-1 shadow -me-2 mt-6">
+      <div tabIndex={0} class="dropdown-content border border-body/10 bg-background rounded-xl z-10 w-68 p-1 shadow -me-2 mt-6">
         <ul class="grid grid-cols-3 gap-1 text-sm">
           <li><button type="button" class={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] ${colorScheme() == 'light' ? 'bg-primary/10 text-primary' : ''} hover:bg-primary/10`} onClick={handleChangeColorScheme} value="light"><Sun class="size-6" /><span>Claro</span></button></li>
           <li><button type="button" class={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] ${colorScheme() == 'dark' ? 'bg-primary/10 text-primary' : ''} hover:bg-primary/10`} onClick={handleChangeColorScheme} value="dark"><Moon class="size-6" /><span>Oscuro</span></button></li>
