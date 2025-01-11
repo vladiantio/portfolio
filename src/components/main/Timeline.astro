@@ -4,18 +4,17 @@ import ExternalLink from '~/components/ExternalLink.astro'
 import { formatMonth } from '~/utils/date'
 import { parseMD } from '~/utils/md';
 ---
-<section>
-  <h2 class="text-primary">Experiencia</h2>
-  <ol class="relative border-s-2 border-soft ms-2">
+<section class="my-8">
+  <h2>Experiencia</h2>
+  <ol class="timeline">
     {work.map(item => (
-      <li class="mb-10 ms-6">
-        <div class="absolute w-4 h-4 rounded-full mt-1 -start-2 bg-gradient-primary ring-8 ring-background"></div>
-        <span class="-ms-2 px-2 py-1 bg-soft rounded-lg">{formatMonth(item.startDate)} - {item.endDate.length > 0 ? formatMonth(item.endDate) : 'presente'}</span>
-        <h3 class="mt-3 mb-1 text-black dark:text-white font-semibold">
+      <li class="timeline-item">
+        <div class="timeline-bullet bg-gradient-primary"></div>
+        <span class="timeline-timeFrame">{formatMonth(item.startDate)} - {item.endDate.length > 0 ? formatMonth(item.endDate) : 'presente'}</span>
+        <h3 class="timeline-title">
           {item.url ? <ExternalLink class="external" href={item.url}>{item.name}</ExternalLink> : item.name}<span class="mx-3">·</span>{item.position}
         </h3>
-        {/* <p>{item.position}</p> */}
-        {item.summary && <p class="my-1 text-muted">{item.summary}</p>}
+        {item.summary && <p class="timeline-summary">{item.summary}</p>}
         <ul class="list-disc ms-4">
           {item.highlights.map(highlight => (
             <li class="mb-1"><Fragment set:html={parseMD(highlight)} /></li>
@@ -26,17 +25,43 @@ import { parseMD } from '~/utils/md';
   </ol>
 </section>
 
-<section>
-  <h2 class="text-primary">Educación</h2>
-  <ol class="relative border-s-2 border-soft ms-2">
+<section class="my-8">
+  <h2>Educación</h2>
+  <ol class="timeline">
     {education.map(item => (
-      <li class="mb-10 ms-6">
-        <div class="absolute w-4 h-4 rounded-full mt-1 -start-2 bg-gradient-primary ring-8 ring-background"></div>
-        <span class="-ms-2 px-2 py-1 bg-soft rounded-lg">{formatMonth(item.startDate)} - {item.endDate.length > 0 ? formatMonth(item.endDate) : 'presente'}</span>
-        <h3 class="mt-3 mb-1 text-black dark:text-white font-semibold">
+      <li class="timeline-item">
+        <div class="timeline-bullet bg-gradient-primary"></div>
+        <span class="timeline-timeFrame">{formatMonth(item.startDate)} - {item.endDate.length > 0 ? formatMonth(item.endDate) : 'presente'}</span>
+        <h3 class="timeline-title">
           {item.url ? <ExternalLink class="external" href={item.url}>{item.institution}</ExternalLink> : item.institution}<span class="mx-3">·</span>{item.area}
         </h3>
       </li>
     ))}
   </ol>
 </section>
+
+<style>
+  .timeline {
+    @apply relative border-s-2 border-body/10 ms-2;
+  }
+
+  .timeline-item {
+    @apply mb-10 ms-6;
+  }
+
+  .timeline-bullet {
+    @apply absolute w-4 h-4 rounded-full mt-1 -start-2 bg-primary shadow-neon-md shadow-primary;
+  }
+
+  .timeline-timeFrame {
+    @apply -ms-2 px-2 py-1 bg-body/10 rounded-lg;
+  }
+
+  .timeline-title {
+    @apply mt-3 mb-1 font-semibold;
+  }
+
+  .timeline-summary {
+    @apply my-1 text-muted;
+  }
+</style>

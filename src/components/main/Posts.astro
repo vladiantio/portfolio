@@ -6,8 +6,8 @@ const posts = await getAllBlogPosts('es');
 posts.map(a => a)
 ---
 {posts && posts.length > 0 && (
-  <section>
-    <h2 class="text-primary">Publicaciones</h2>
+  <section class="my-8">
+    <h2>Publicaciones</h2>
     <BlogGrid posts={posts} />
   </section>
 )}
