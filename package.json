@@ -19,7 +19,7 @@
     "@astrojs/solid-js": "5.0.1",
     "@astrojs/tailwind": "5.1.4",
     "@astrojs/vercel": "8.0.1",
-    "@fontsource-variable/rubik": "5.1.0",
+    "@fontsource-variable/figtree": "^5.1.2",
     "@midudev/tailwind-animations": "0.1.0",
     "astro": "5.1.5",
     "lucide-solid": "0.469.0",
