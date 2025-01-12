@@ -30,7 +30,6 @@ const { readingTime } = remarkPluginFrontmatter;
             />
           : <picture>
               <source srcset={removeExtension(image.src) + '-thumb.avif'} type="image/avif" />
-              <source srcset={removeExtension(image.src) + '-thumb.webp'} type="image/webp" />
               <img
                 alt={image.alt}
                 loading="lazy"

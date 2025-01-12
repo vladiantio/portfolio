@@ -32,7 +32,6 @@ const { readingTime } = remarkPluginFrontmatter;
         />
       : <picture>
           <source srcset={removeExtension(image.src) + '.avif'} type="image/avif" />
-          <source srcset={removeExtension(image.src) + '.webp'} type="image/webp" />
           <img
             alt={image.alt}
             class={'heroImage ' + className}
