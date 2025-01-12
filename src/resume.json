@@ -1,11 +1,12 @@
 {
   "basics": {
-    "name": "vladiantio",
-    "label": "Ingeniería en informática",
-    "image": "",
+    "name": "Vladimir Antonio Figueroa Carvajal",
+    "username": "vladiantio",
+    "label": "Ingeniero en Informática",
+    "image": "/img/avatar.jpg",
     "email": "contact@vladiantio.com",
     "phone": "",
-    "url": "https://www.vladiantio.com",
+    "url": "https://vladiantio.com",
     "summary": "Ingeniero de software con 4 años de experiencia, construyendo sitios y aplicaciones web innovadoras y de calidad.",
     "location": {
       "address": "2712 Broadway St",
@@ -17,54 +18,45 @@
     "profiles": [
       {
         "network": "LinkedIn",
-        "username": "vladiantio",
         "url": "https://www.linkedin.com/in/vladiantio"
       },
       {
         "network": "GitHub",
-        "username": "vladiantio",
         "url": "https://github.com/vladiantio"
       },
       {
         "network": "Instagram",
-        "username": "vladiantio",
         "url": "https://instagram.com/vladiantio",
         "isSecondary": true
       },
       {
         "network": "Threads",
-        "username": "vladiantio",
         "url": "https://threads.net/@vladiantio",
         "isSecondary": true
       },
       {
         "network": "Bluesky",
-        "username": "vladiantio",
         "url": "https://bsky.app/profile/vladiantio.com",
         "isSecondary": true
       },
       {
+        "network": "X",
+        "url": "https://x.com/vladiantio",
+        "isSecondary": true
+      },
+      {
         "network": "YouTube",
-        "username": "vladiantio",
         "url": "https://youtube.com/@vladiantio",
         "isSecondary": true
       },
       {
         "network": "TikTok",
-        "username": "vladiantio",
         "url": "https://tiktok.com/@vladiantio",
         "isSecondary": true
       },
       {
         "network": "Pinterest",
-        "username": "vladiantio",
         "url": "https://pinterest.com/vladiantio",
-        "isSecondary": true
-      },
-      {
-        "network": "X",
-        "username": "vladiantio",
-        "url": "https://x.com/vladiantio",
         "isSecondary": true
       }
     ]

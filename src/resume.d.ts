@@ -22,6 +22,7 @@ export interface Award {
 
 export interface Basics {
   name: string;
+  username: string;
   label: string;
   image: string;
   email: string;
@@ -42,7 +43,6 @@ export interface Location {
 
 export interface Profile {
   network: string;
-  username: string;
   url: string;
   isSecondary?: boolean;
 }
