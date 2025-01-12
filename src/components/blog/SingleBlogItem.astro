@@ -16,32 +16,39 @@ const { title, description, date, tags, image, sources } = post.data;
 const { Content, remarkPluginFrontmatter } = await post.render();
 const { readingTime } = remarkPluginFrontmatter;
 ---
+
 {image && (
-  image.src.endsWith('.svg')
-  ? <img
-      alt={image.alt}
-      class="w-full rounded-3xl mb-10"
-      loading="eager"
-      src={image.src}
-      width="1080"
-      height="567"
-    />
-  : <picture>
-      <source srcset={removeExtension(image.src) + '.avif'} type="image/avif" />
-      <source srcset={removeExtension(image.src) + '.webp'} type="image/webp" />
-      <img
-        alt={image.alt}
-        class="w-full rounded-3xl mb-10"
-        loading="eager"
-        src={image.src}
-        width="1080"
-        height="567"
-      />
-    </picture>
+  <div class="relative mb-6">
+    {['heroImage-blurred', 'heroImage-shadow'].map(className => (
+      image.src.endsWith('.svg')
+      ? <img
+          alt={image.alt}
+          class={'heroImage ' + className}
+          fetchpriority="high"
+          loading="lazy"
+          src={image.src}
+          width="1080"
+          height="567"
+        />
+      : <picture>
+          <source srcset={removeExtension(image.src) + '.avif'} type="image/avif" />
+          <source srcset={removeExtension(image.src) + '.webp'} type="image/webp" />
+          <img
+            alt={image.alt}
+            class={'heroImage ' + className}
+            fetchpriority="high"
+            loading="lazy"
+            src={image.src}
+            width="1080"
+            height="567"
+          />
+        </picture>
+    ))}
+  </div>
 )}
-<h1 class="text-3xl leading-normal text-pretty">{title}</h1>
-<h2 class="mb-6 text-xl font-normal text-pretty">{description}</h2>
-<div class="flex flex-wrap gap-4 text-sm mb-6">
+<h1 class="mb-4 text-2xl leading-normal text-pretty">{title}</h1>
+<h2 class="text-xl font-normal text-pretty">{description}</h2>
+<div class="flex flex-wrap gap-4 text-sm my-6">
   <time class="flex items-center" title="Fecha de publicación" datetime={date.toISOString()}><Calendar class="size-4 mr-2" />{formatShortDate(date)}</time>
   <span class="flex items-center" title="Tiempo de lectura"><Clock class="size-4 mr-2" />{readingTime}</span>
   {tags.map(tag => <span class="flex items-center"><Tag class="size-4 mr-2" />{tag}</span>)}
@@ -57,3 +64,17 @@ const { readingTime } = remarkPluginFrontmatter;
     </ul>
   )}
 </article>
+
+<style>
+  .heroImage {
+    @apply w-full object-cover aspect-[120/63] rounded-3xl bg-white/40 dark:bg-black/40;
+  }
+
+  .heroImage-shadow {
+    @apply shadow-center-xl shadow-primary/60 dark:shadow-black/60;
+  }
+
+  .heroImage-blurred {
+    @apply absolute top-4 blur-3xl -z-[1] opacity-60;
+  }
+</style>
