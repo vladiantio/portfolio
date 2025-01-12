@@ -1,16 +1,17 @@
 ---
+import { basics } from '~/resume.json'
 import ThemeSelector from "./client/ThemeSelector";
 ---
 
-<nav class="sticky top-0 inset-x-0 w-full max-w-screen-md mx-auto z-10 p-3 transition-all" id="mainNavbar">
-  <div class="flex items-center justify-between gap-4">
-    <div class="p-1 rounded-full bg-background border border-soft shadow">
-      <a class="rounded-full overflow-hidden" href="/" title="@vladiantio">
-        <span class="sr-only">@vladiantio</span>
-        <img alt="Logo" src="/favicon.svg" class="size-10" loading="lazy" width="40" height="40" />
+<nav class="navbar" id="mainNavbar">
+  <div class="navbar-container">
+    <div class="navbar-bar">
+      <a class="rounded-full p-2.5 transition hover:bg-primary/10" href="/" title={'@' + basics.username}>
+        <span class="sr-only">@{basics.username}</span>
+        <svg aria-label="Logo" class="size-5 text-primary dark:text-white" width="20" height="20" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m54.469 0.71373a64 64.001 0 0 0-19.09 6.043 64 64.001 0 0 0-28.623 85.866l18.242 36.485a64 64.001 0 0 0 85.865 28.621 64 64.001 0 0 0 28.621-85.866l-18.24-36.483a64 64.001 0 0 0-66.775-34.666zm403.06 0a64 64.001 0 0 0-66.775 34.666l-134.76 269.51-38.687-77.376a64 64.001 0 0 0-85.865-28.621 64 64.001 0 0 0-28.621 85.866l95.929 191.86a64.006 64.007 0 0 0 114.49 0l192-384a64 64.001 0 0 0-28.623-85.866 64 64.001 0 0 0-19.09-6.043z" fill="currentColor"/></svg>
       </a>
     </div>
-    <div class="p-1 rounded-full bg-background border border-soft shadow">
+    <div class="navbar-bar">
       <ThemeSelector client:load />
     </div>
   </div>
@@ -34,3 +35,17 @@ import ThemeSelector from "./client/ThemeSelector";
   }
   window.addEventListener('scroll', handleScroll);
 </script>
+
+<style>
+  .navbar {
+    @apply sticky top-0 inset-x-0 w-full max-w-screen-md mx-auto z-10 p-3 transition-all;
+  }
+
+  .navbar-container {
+    @apply flex items-center justify-between gap-4;
+  }
+
+  .navbar-bar {
+    @apply h-12 min-w-12 flex items-center justify-center rounded-full bg-background shadow-neon shadow-primary;
+  }
+</style>
