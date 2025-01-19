@@ -18,15 +18,15 @@ const { readingTime } = remarkPluginFrontmatter;
 
 <a href={`/blog/${slug}/`} class="blogGridItem">
   <div class="frame">
-    {image && ['image', 'blurredImage'].map(className => (
-      <div class={className}>
+    {image && (
+      <div class="image">
         {image.src.endsWith('.svg')
           ? <img
               alt={image.alt}
               loading="lazy"
               src={image.src}
-              width="1080"
-              height="567"
+              width="320"
+              height="168"
             />
           : <picture>
               <source srcset={removeExtension(image.src) + '-thumb.avif'} type="image/avif" />
@@ -40,11 +40,11 @@ const { readingTime } = remarkPluginFrontmatter;
             </picture>
         }
       </div>
-    ))}
+    )}
     <div class="content">
       <h3 class="title">{title}</h3>
       <p class="description">{description}</p>
-      <div class="flex flex-wrap gap-4 text-foreground text-sm mt-1">
+      <div class="flex flex-wrap gap-x-4 text-foreground text-sm mt-1">
         <time class="flex items-center" title="Fecha de publicación" datetime={date.toISOString()}><Calendar class="size-4 mr-2" />{formatShortDate(date)}</time>
         <span class="flex items-center" title="Tiempo de lectura"><Clock class="size-4 mr-2" />{readingTime}</span>
       </div>
@@ -54,43 +54,46 @@ const { readingTime } = remarkPluginFrontmatter;
 
 <style>
   .blogGridItem {
-    --frame-height: 6.5rem;
-    @apply relative overflow-hidden bg-primary/20 rounded-3xl shadow-center-lg shadow-primary/40 dark:shadow-black/40 p-1;
+    @apply bg-gradient-to-bl from-primary/10 to-primary/50 overflow-hidden p-1 rounded-2xl shadow-neon-lg transition-shadow;
+
+    &:hover {
+      @apply shadow-primary/50;
+    }
 
     .frame {
-      @apply flex gap-x-1 rounded-[1.25rem] overflow-hidden;
+      @apply bg-background flex overflow-hidden rounded-xl;
     }
 
     .image {
-      @apply shrink-0 overflow-hidden rounded-md max-sm:hidden;
+      @apply shrink-0 w-24 overflow-hidden relative;
 
       img {
-        @apply size-[var(--frame-height)] object-cover bg-white/40 dark:bg-black/40 transform-gpu transition-transform;
+        @apply size-full object-cover;
+      }
+
+      &:after {
+        @apply [content:''] absolute top-0 left-[calc(100%_-_0.75rem)] size-full bg-background rounded-xl shadow-center-2xl shadow-primary-light/25 transition-shadow;
       }
     }
 
-    &:hover .image img {
-      @apply scale-110;
-    }
-
-    .blurredImage {
-      @apply absolute inset-0 -z-[1] brightness-200 dark:brightness-50;
-
-      img {
-        @apply size-full object-cover blur-xl opacity-80;
-      }
+    &:hover .image:after {
+      @apply shadow-primary-light;
     }
 
     .content {
-      @apply px-4 bg-background rounded-md h-[var(--frame-height)] content-center;
+      @apply w-full px-3 py-2;
+    }
+
+    .image + .content {
+      @apply pl-0;
     }
 
     .title {
-      @apply text-base m-0 line-clamp-1;
+      @apply text-base m-0 line-clamp-2 text-pretty;
     }
 
     .description {
-      @apply line-clamp-1 text-foreground;
+      @apply text-sm line-clamp-1 text-foreground;
     }
   }
 </style>
