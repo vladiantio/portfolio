@@ -15,6 +15,7 @@ export default {
 				muted: 'oklch(var(--color-muted) / <alpha-value>)',
 				primary: {
 					DEFAULT: 'oklch(var(--color-primary) / <alpha-value>)',
+					hover: 'oklch(var(--color-primary-hover) / <alpha-value>)',
 					light: 'oklch(var(--color-primary-light) / <alpha-value>)',
 					dark: 'oklch(var(--color-primary-dark) / <alpha-value>)',
 				},

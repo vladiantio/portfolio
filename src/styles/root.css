@@ -8,9 +8,12 @@
   --color-soft: from var(--color-hex) 92% calc(c * 0.16) h;
   --color-foreground: from var(--color-hex) 15% calc(c * 0.16) h;
   --color-muted: from var(--color-hex) 62% calc(c * 0.16) h;
-  --color-primary-light: from var(--color-hex) 88% c h;
-  --color-primary-dark: from var(--color-hex) 62% c h;
+  --color-primary-light: from var(--color-hex) 86% c h;
+  --color-primary-light-hover: from var(--color-hex) 98% c h;
+  --color-primary-dark: from var(--color-hex) 60% c h;
+  --color-primary-dark-hover: from var(--color-hex) 48% c h;
   --color-primary: var(--color-primary-dark);
+  --color-primary-hover: var(--color-primary-dark-hover);
 }
 
 html.dark {
@@ -20,4 +23,5 @@ html.dark {
   --color-foreground: from var(--color-hex) 98% calc(c * 0.02) h;
   --color-muted: from var(--color-hex) 88% calc(c * 0.16) h;
   --color-primary: var(--color-primary-light);
+  --color-primary-hover: var(--color-primary-light-hover);
 }

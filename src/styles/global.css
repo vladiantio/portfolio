@@ -38,7 +38,7 @@ a {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   &:hover {
-    color: oklch(var(--color-body));
+    color: oklch(var(--color-primary-hover));
   }
 
   &.icon {
