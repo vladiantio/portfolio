@@ -1,5 +1,5 @@
-@import '~/styles/baseline-status.css';
-@import '~/styles/link-preview.css';
+@import './baseline-status.css';
+@import './link-preview.css';
 
 article.rich-text {
   /* Headers */

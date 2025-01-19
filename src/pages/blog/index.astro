@@ -1,7 +1,7 @@
 ---
-import Layout from "~/layouts/Layout.astro";
-import BlogGrid from "~/components/blog/BlogGrid.astro";
-import { getAllBlogPosts } from "~/services/blog";
+import Layout from "@/layouts/Layout.astro";
+import BlogGrid from "@/components/blog/BlogGrid.astro";
+import { getAllBlogPosts } from "@/services/blog";
 
 const posts = await getAllBlogPosts('es');
 ---

@@ -1,6 +1,6 @@
 import Snowflake from "lucide-solid/icons/snowflake";
-import { randomRange, roundDecimals } from "~/utils/numbers";
-import '~/styles/snowflakes.css';
+import { randomRange, roundDecimals } from "@/utils/numbers";
+import '@/styles/snowflakes.css';
 import { createSignal, onMount, onCleanup, createMemo } from "solid-js";
 
 const COUNT = 16;

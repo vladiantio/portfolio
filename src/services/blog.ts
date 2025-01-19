@@ -1,5 +1,5 @@
 import { getCollection } from 'astro:content';
-import type { PostEntry } from '~/types/Post';
+import type { PostEntry } from '@/types/Post';
 
 export const getAllBlogPosts: (language?: string) => Promise<PostEntry[]> = async (language) => {
   const entries = await getCollection('blog', ({ data }) => {

@@ -1,6 +1,6 @@
 ---
-import BlogGrid from "~/components/blog/BlogGrid.astro";
-import { getAllBlogPosts } from "~/services/blog";
+import BlogGrid from "@/components/blog/BlogGrid.astro";
+import { getAllBlogPosts } from "@/services/blog";
 
 const posts = await getAllBlogPosts('es');
 posts.map(a => a)

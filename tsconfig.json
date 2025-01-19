@@ -5,7 +5,7 @@
 		"jsx": "preserve",
     "jsxImportSource": "solid-js",
 		"paths": {
-			"~/*": ["./src/*"]
+			"@/*": ["./src/*"]
 		}
 	},
 	"exclude": ["node_modules", "dist", ".vercel", ".netlify", "public"]

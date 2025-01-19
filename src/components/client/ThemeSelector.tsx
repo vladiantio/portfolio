@@ -2,7 +2,7 @@ import Sun from 'lucide-solid/icons/sun';
 import Moon from 'lucide-solid/icons/moon';
 import SunMoon from 'lucide-solid/icons/sun-moon';
 import { createSignal, onMount } from 'solid-js';
-import { getCurrentColorScheme, loadCurrentColorScheme, type ColorScheme } from '~/utils/theme';
+import { getCurrentColorScheme, loadCurrentColorScheme, type ColorScheme } from '@/utils/theme';
 import ColorPicker from './ColorPicker';
 
 function ThemeSelector() {

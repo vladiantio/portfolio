@@ -1,4 +1,4 @@
-import { getColorTheme, saveColorTheme } from "~/utils/theme";
+import { getColorTheme, saveColorTheme } from "@/utils/theme";
 import { createMemo, createSignal, Index, onMount } from "solid-js";
 
 const colors = [
