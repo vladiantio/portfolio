@@ -22,6 +22,7 @@ export default {
 			},
 			fontFamily: {
 				sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
+				mono: ["var(--font-mono)", ...defaultTheme.fontFamily.mono],
 			},
 			boxShadow: {
 				'center-sm':	'0 0 2px 0 rgb(0 0 0 / 0.05)',
