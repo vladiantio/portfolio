@@ -1,5 +1,18 @@
 <script is:inline>
-if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
+(function(){
+let reloadTheme = false;
+const matchPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+const updateTheme = () => {
+	if (reloadTheme) matchPrefersDark.removeEventListener('change', updateTheme);
+	matchPrefersDark.addEventListener('change', updateTheme);
+	reloadTheme = true;
+	const theme = localStorage.theme ?? 'system';
+	const isDark = theme === 'dark' || (theme === 'system' && matchPrefersDark.matches);
+	document.documentElement.classList[isDark ? 'add' : 'remove']('dark')
+};
+updateTheme();
+
 if ('color' in localStorage) document.documentElement.style.setProperty('--color-hex', localStorage.color);
 
 // close the dropdown by clicking out of the dropdown
@@ -8,4 +21,5 @@ document.addEventListener('click', ({ target }) => {
 	if (!details.some(f => f.contains(target))) details.forEach(f => f.removeAttribute('open'));
 	else details.forEach(f => !f.contains(target) ? f.removeAttribute('open') : '');
 });
+})();
 </script>

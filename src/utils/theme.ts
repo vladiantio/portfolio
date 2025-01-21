@@ -1,31 +1,18 @@
-export const COLOR_SCHEMES = ['light', 'dark', 'system'] as const;
+export const THEMES = ['light', 'dark', 'system'] as const;
 
-export type ColorScheme = (typeof COLOR_SCHEMES)[number];
+export type Theme = (typeof THEMES)[number];
 
-export function getCurrentColorScheme(): ColorScheme {
-  if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    return 'dark';
-  } else {
-    return 'light';
-  }
+const $html = () => document.documentElement;
+
+export function switchTheme(theme: Theme) {
+  localStorage.setItem('theme', theme);
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  $html().classList[isDark ? 'add' : 'remove']('dark');
 }
 
-export function loadCurrentColorScheme(scheme: ColorScheme) {
-  if (scheme == 'dark')
-    document.documentElement.classList.add('dark');
-  else
-    document.documentElement.classList.remove('dark');
-}
+export const getColor = () => localStorage.color ?? getComputedStyle($html()).getPropertyValue('--color-hex');
 
-export function getColorTheme() {
-  if ('color' in localStorage) {
-    return localStorage.color;
-  } else {
-    return getComputedStyle(document.documentElement).getPropertyValue('--color-hex');
-  }
-}
-
-export function saveColorTheme(value: string) {
-  document.documentElement.style.setProperty('--color-hex', value);
+export function changeColor(value: string) {
   localStorage.setItem('color', value);
+  $html().style.setProperty('--color-hex', value);
 }

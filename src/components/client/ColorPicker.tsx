@@ -1,4 +1,4 @@
-import { getColorTheme, saveColorTheme } from "@/utils/theme";
+import { getColor, changeColor } from "@/utils/theme";
 import { createMemo, createSignal, Index, onMount } from "solid-js";
 
 const colors = [
@@ -15,11 +15,11 @@ function ColorPicker() {
 
   const handleChangeColor = ({ currentTarget } : { currentTarget: HTMLButtonElement | HTMLInputElement }) => {
     setCurrentColor(currentTarget.value);
-    saveColorTheme(currentTarget.value);
+    changeColor(currentTarget.value);
   };
 
   onMount(() => {
-    setCurrentColor(getColorTheme());
+    setCurrentColor(getColor());
   });
 
   const isOtherColor = createMemo(() => !colors.some(color => color.value == currentColor()));
