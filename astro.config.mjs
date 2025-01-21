@@ -4,6 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
+import expressiveCode from 'astro-expressive-code';
 
 // Markdown Plugins
 import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
@@ -23,6 +24,18 @@ const externalLinksOptions = {
 export default defineConfig({
   adapter: vercel(),
   integrations: [
+    expressiveCode({
+      defaultProps: {
+        wrap: true,
+      },
+      styleOverrides: {
+        codeFontFamily: 'var(--font-mono)',
+        codeFontWeight: '500',
+      },
+      themes: ['github-dark', 'github-light'],
+      themeCssSelector: (theme) => `[data-theme='${theme.type}']`,
+      useDarkModeMediaQuery: false,
+    }),
     mdx(),
     sitemap(),
     solid(),

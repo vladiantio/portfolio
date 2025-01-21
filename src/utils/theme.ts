@@ -8,6 +8,9 @@ export function switchTheme(theme: Theme) {
   localStorage.setItem('theme', theme);
   const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
   $html().classList[isDark ? 'add' : 'remove']('dark');
+
+	// Expressive Code Theme
+	$html().dataset.theme = isDark ? 'dark' : 'light';
 }
 
 export const getColor = () => localStorage.color ?? getComputedStyle($html()).getPropertyValue('--color-hex');

@@ -23,6 +23,7 @@
     "@fontsource-variable/inconsolata": "^5.1.1",
     "@midudev/tailwind-animations": "0.1.0",
     "astro": "5.1.5",
+    "astro-expressive-code": "^0.40.1",
     "lucide-solid": "0.469.0",
     "marked": "15.0.4",
     "mdast-util-to-string": "^4.0.0",

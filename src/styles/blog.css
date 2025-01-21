@@ -57,11 +57,11 @@ article.rich-text {
   }
 
   pre {
-    @apply rounded-lg py-2 px-3 mt-2 mb-6 shadow-md max-w-[calc(100vw_-_2.5rem)] overflow-hidden;
+    @apply mb-6;
   }
 
   :not(pre) > code {
-    @apply rounded-lg bg-soft text-primary px-1.5 py-0.5 whitespace-nowrap;
+    @apply rounded-lg bg-primary/10 font-medium text-primary px-1.5 py-0.5 whitespace-nowrap;
   }
 
   table {
