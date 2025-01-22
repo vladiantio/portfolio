@@ -4,16 +4,25 @@ import ThemeLoader from "./ThemeLoader.astro";
 
 export interface Props {
 	title?: string | null;
-	lang?: string | null;
 	description?: string | null;
 	type?: 'article' | 'website';
 	image?: string | null;
 	publishedTime?: Date | null;
 	modifiedTime?: Date | null;
 	tags?: string[] | null;
+	loadGTM?: boolean | null;
 }
 
-const { title, description, type, image, publishedTime, modifiedTime, tags } = Astro.props;
+const {
+	title,
+	description,
+	type,
+	image,
+	publishedTime,
+	modifiedTime,
+	tags,
+	loadGTM = true,
+} = Astro.props;
 
 const metaImage = image || '/banner.jpg';
 
@@ -25,7 +34,7 @@ const author = 'Vladimir Figueroa';
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 
-<GTM id="G-7JEEW8LXCY" />
+{loadGTM && <GTM id="G-7JEEW8LXCY" />}
 <ThemeLoader />
 
 <title>{title ? `${title} · ${siteName}` : siteName}</title>

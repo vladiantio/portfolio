@@ -1,10 +1,16 @@
 import Sun from 'lucide-solid/icons/sun';
 import Moon from 'lucide-solid/icons/moon';
 import SunMoon from 'lucide-solid/icons/sun-moon';
-import { createSignal, onMount } from 'solid-js';
+import { createSignal, Index, onMount, type Component } from 'solid-js';
 import { Dynamic } from "solid-js/web";
-import { switchTheme, type Theme } from '@/utils/theme';
+import type { Locale } from '@/i18n/constants';
+import { useBaseTranslations } from '@/i18n/base';
+import { switchTheme, THEMES, type Theme } from '@/utils/theme';
 import ColorPicker from './ColorPicker';
+
+export interface Props {
+  lang?: Locale;
+}
 
 const iconTheme = {
   light: Sun,
@@ -12,9 +18,26 @@ const iconTheme = {
   system: SunMoon,
 };
 
-function ThemeSelector() {
+const translations = {
+  en: {
+    theme: 'Theme',
+    light: 'Light',
+    dark: 'Dark',
+    system: 'System',
+  },
+  es: {
+    theme: 'Tema',
+    light: 'Claro',
+    dark: 'Oscuro',
+    system: 'Sistema',
+  },
+};
+
+const ThemeSelector: Component<Props> = (props) => {
   let dropdownRef: HTMLDetailsElement | undefined;
   const [currentTheme, setCurrentTheme] = createSignal<Theme>();
+  const lang = () => props.lang;
+  const translate = useBaseTranslations(translations, lang());
 
   const handleChangeTheme = ({ currentTarget } : { currentTarget: HTMLButtonElement }) => {
     const theme = currentTarget.value as Theme;
@@ -37,15 +60,25 @@ function ThemeSelector() {
         <span class="sr-only">Tema</span>
       </summary>
       <div tabIndex={0} class="dropdown-content border border-body/10 bg-background rounded-xl z-10 w-68 p-1 shadow -me-2 mt-4">
-        <ul class="grid grid-cols-3 gap-1 text-sm">
-          <li><button type="button" class={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] ${currentTheme() == 'light' ? 'bg-primary/10 text-primary' : ''} hover:bg-primary/10`} onClick={handleChangeTheme} value="light"><Sun class="size-6" /><span>Claro</span></button></li>
-          <li><button type="button" class={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] ${currentTheme() == 'dark' ? 'bg-primary/10 text-primary' : ''} hover:bg-primary/10`} onClick={handleChangeTheme} value="dark"><Moon class="size-6" /><span>Oscuro</span></button></li>
-          <li><button type="button" class={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] ${currentTheme() == 'system' ? 'bg-primary/10 text-primary' : ''} hover:bg-primary/10`} onClick={handleChangeTheme} value="system"><SunMoon class="size-6" /><span>Sistema</span></button></li>
-        </ul>
-        <ColorPicker />
+        <div class="grid grid-cols-3 gap-1 text-sm">
+          <Index each={THEMES}>
+            {theme => (
+              <button
+                type="button"
+                class={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] ${currentTheme() == theme() ? 'bg-primary/10 text-primary' : ''} hover:bg-primary/10`}
+                onClick={handleChangeTheme}
+                value={theme()}
+              >
+                <Dynamic component={iconTheme[theme()]} class="size-6" />
+                <span>{translate(theme())}</span>
+              </button>
+            )}
+          </Index>
+        </div>
+        <ColorPicker {...props} />
       </div>
     </details>
   );
-}
+};
 
 export default ThemeSelector;

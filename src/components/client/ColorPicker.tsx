@@ -1,17 +1,42 @@
+import type { Props } from "./ThemeSelector";
+import { useBaseTranslations } from "@/i18n/base";
 import { getColor, changeColor } from "@/utils/theme";
-import { createMemo, createSignal, Index, onMount } from "solid-js";
+import { createMemo, createSignal, Index, onMount, type Component } from "solid-js";
 
 const colors = [
-  { name: 'Azul', value: '#3fa0fa' },
-  { name: 'Índigo', value: '#7593fe' },
-  { name: 'Rojo', value: '#ee6f5d' },
-  { name: 'Naranja', value: '#e17f08' },
-  { name: 'Verde', value: '#5ab352' },
-  { name: 'Gris', value: '#9b9b9b' },
+  { name: 'blue', value: '#3fa0fa' },
+  { name: 'indigo', value: '#7593fe' },
+  { name: 'red', value: '#ee6f5d' },
+  { name: 'orange', value: '#e17f08' },
+  { name: 'green', value: '#5ab352' },
+  { name: 'gray', value: '#9b9b9b' },
 ];
 
-function ColorPicker() {
+const translations = {
+  en: {
+    blue: 'Blue',
+    indigo: 'Indigo',
+    red: 'Red',
+    orange: 'Orange',
+    green: 'Green',
+    gray: 'Gray',
+    otherColor: 'Other color'
+  },
+  es: {
+    blue: 'Azul',
+    indigo: 'Índigo',
+    red: 'Rojo',
+    orange: 'Naranja',
+    green: 'Verde',
+    gray: 'Gris',
+    otherColor: 'Otro color'
+  },
+};
+
+const ColorPicker: Component<Props> = (props) => {
   const [currentColor, setCurrentColor] = createSignal<string>();
+  const lang = () => props.lang;
+  const translate = useBaseTranslations(translations, lang());
 
   const handleChangeColor = ({ currentTarget } : { currentTarget: HTMLButtonElement | HTMLInputElement }) => {
     setCurrentColor(currentTarget.value);
@@ -32,19 +57,26 @@ function ColorPicker() {
             <button
               type="button"
               class={`size-4 rounded-full transition ${color().value == currentColor() ? 'ring-4 ring-primary ring-opacity-25' : ''}`}
-              title={color().name}
+              title={translate(color().name)}
+              aria-label={translate(color().name)}
               style={{
                 'background-color': color().value,
               }}
               onClick={handleChangeColor}
               value={color().value}
             >
-              <span class="sr-only">{color().name}</span>
+              <span class="sr-only">{translate(color().name)}</span>
             </button>
           )}
         </Index>
-        <label for="otherColor" class={`size-4 rounded-full transition ${isOtherColor() ? 'ring-4 ring-primary ring-opacity-25' : ''}`} role="button" title="Otro color" aria-label="Otro color">
-          <span class="sr-only">Otro color</span>
+        <label
+          for="otherColor"
+          class={`size-4 rounded-full transition ${isOtherColor() ? 'ring-4 ring-primary ring-opacity-25' : ''}`}
+          role="button"
+          title={translate('otherColor')}
+          aria-label={translate('otherColor')}
+        >
+          <span class="sr-only">{translate('otherColor')}</span>
           <span class="bg-color-wheel block size-4 rounded-full" />
         </label>
         <input

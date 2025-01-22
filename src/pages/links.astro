@@ -1,43 +1,11 @@
 ---
-import { basics } from '@/resume.json'
-import SimpleLayout from '@/layouts/SimpleLayout.astro';
-import ExternalLink from '@/components/ExternalLink.astro';
-import SocialIcon from '@/components/SocialIcon.astro';
-import Globe from 'lucide-solid/icons/globe';
-import GradientTop from '@/components/backgrounds/GradientTop.astro';
-import GradientBottom from '@/components/backgrounds/GradientBottom.astro';
-import Navbar from '@/components/Navbar.astro';
-import Hero from '@/sections/Hero.astro';
+import Redirection from "@/i18n/Redirection.astro";
+import SimpleLayout from "@/layouts/SimpleLayout.astro";
 ---
 
-<SimpleLayout title="Links" description="@vladiantio network links">
-  <GradientTop />
-  <div class="wrapper">
-    <Navbar />
-    <div class="max-w-screen-md w-full mx-auto px-5 mt-3">
-      <Hero hideLinks />
-      <main class="grid sm:grid-cols-2 gap-4">
-        <a class="networkLink sm:col-span-2" href="/">
-          <Globe class="size-full" />
-          <strong>Website</strong>
-        </a>
-        {basics.profiles.map(item => (
-          <ExternalLink class="networkLink" href={item.url}>
-            <SocialIcon class="size-full" name={item.network.toLowerCase()} />
-            <strong>{item.network}</strong>
-          </ExternalLink>
-        ))}
-      </main>
-    </div>
-    <footer class="max-w-screen-md mx-auto px-5 my-8 text-center">
-      <p>Made with ❤️ by <a href="/">@vladiantio</a></p>
-    </footer>
-  </div>
-  <GradientBottom />
+<SimpleLayout title="Links" description="@vladiantio network links" loadGTM={false}>
+  <Fragment slot="before-head">
+    <Redirection />
+  </Fragment>
+  <h1>Redirecting ⌛</h1>
 </SimpleLayout>
-
-<style is:global>
-  .networkLink {
-    @apply bg-primary/5 text-center grid grid-cols-[1.5rem,1fr] px-5 py-4 shadow-neon shadow-primary rounded-full hover:bg-primary/10;
-  }
-</style>

@@ -1,0 +1,28 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import MoveLeft from 'lucide-solid/icons/move-left';
+import type { Locale } from '@/i18n/constants';
+import { localeParams, useTranslations } from '@/i18n/helpers';
+
+const locale = Astro.currentLocale as Locale | undefined;
+const translate = useTranslations(locale);
+
+export const getStaticPaths = () => localeParams;
+---
+
+<Layout title={translate('status.404.title')}>
+  <Fragment slot="after-head">
+    <script is:inline>
+      if (localStorage.userAccessPath) {
+        history.replaceState("", "", localStorage.userAccessPath);
+        localStorage.removeItem("userAccessPath");
+      }
+    </script>
+  </Fragment>
+  <div class="h-full place-content-center">
+    <span class="text-9xl font-light leading-tight">:(</span>
+    <h1 class="text-5xl font-light my-4">{translate('status.404.description')}</h1>
+    <p class="my-4">Status: 404 Not Found</p>
+    <p class="my-8"><a href="/"><MoveLeft class="size-4 inline mr-2" />{translate('backToHome')}</a></p>
+  </div>
+</Layout>

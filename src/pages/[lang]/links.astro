@@ -1,0 +1,41 @@
+---
+import { basics } from '@/resume.json'
+import SimpleLayout from '@/layouts/SimpleLayout.astro';
+import ExternalLink from '@/components/ExternalLink.astro';
+import SocialIcon from '@/components/SocialIcon.astro';
+import GradientTop from '@/components/backgrounds/GradientTop.astro';
+import GradientBottom from '@/components/backgrounds/GradientBottom.astro';
+import Navbar from '@/components/Navbar.astro';
+import { localeParams } from '@/i18n/helpers';
+import Hero from '@/sections/Hero.astro';
+
+export const getStaticPaths = () => localeParams;
+---
+
+<SimpleLayout title="Links" description="@vladiantio network links">
+  <GradientTop />
+  <div class="wrapper">
+    <Navbar />
+    <div class="max-w-screen-md w-full mx-auto px-5 my-3 place-content-center">
+      <Hero hideLinks />
+      <main class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {basics.profiles.map(item => (
+          <ExternalLink class="networkLink" href={item.url}>
+            <SocialIcon class="size-full" name={item.network.toLowerCase()} />
+            <strong>{item.network}</strong>
+          </ExternalLink>
+        ))}
+      </main>
+    </div>
+    <footer class="max-w-screen-md mx-auto px-5 mt-6 mb-9 text-center">
+      <p>Made with ❤️ by <a href="/">@vladiantio</a></p>
+    </footer>
+  </div>
+  <GradientBottom />
+</SimpleLayout>
+
+<style is:global>
+  .networkLink {
+    @apply bg-primary/5 text-center grid grid-cols-[1.5rem,1fr] px-5 py-4 shadow-neon shadow-primary rounded-full hover:bg-primary/10;
+  }
+</style>

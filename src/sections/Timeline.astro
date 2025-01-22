@@ -1,16 +1,21 @@
 ---
-import { work, education } from '@/resume.json'
-import ExternalLink from '@/components/ExternalLink.astro'
-import { formatMonth } from '@/utils/date'
+import { work, education } from '@/resume.json';
+import ExternalLink from '@/components/ExternalLink.astro';
+import type { Locale } from '@/i18n/constants';
+import { useTranslations } from '@/i18n/helpers';
+import { formatMonth } from '@/utils/date';
 import { parseMD } from '@/utils/md';
+
+const locale = Astro.currentLocale as Locale | undefined;
+const translate = useTranslations(locale);
 ---
 <section class="my-8">
-  <h2>Experiencia</h2>
+  <h2>{translate('portfolio.experience')}</h2>
   <ol class="timeline">
     {work.map(item => (
       <li class="item">
         <div class="bullet bg-gradient-primary"></div>
-        <span class="period">{formatMonth(item.startDate)} - {item.endDate.length > 0 ? formatMonth(item.endDate) : 'actualidad'}</span>
+        <span class="period">{formatMonth(item.startDate, locale)} - {item.endDate.length > 0 ? formatMonth(item.endDate, locale) : translate('portfolio.present')}</span>
         <h3 class="title">
           {item.url ? <ExternalLink class="external" href={item.url}>{item.name}</ExternalLink> : item.name}<span class="mx-3">·</span>{item.position}
         </h3>
@@ -26,12 +31,12 @@ import { parseMD } from '@/utils/md';
 </section>
 
 <section class="my-8">
-  <h2>Educación</h2>
+  <h2>{translate('portfolio.education')}</h2>
   <ol class="timeline">
     {education.map(item => (
       <li class="item">
         <div class="bullet bg-gradient-primary"></div>
-        <span class="period">{formatMonth(item.startDate)} - {item.endDate.length > 0 ? formatMonth(item.endDate) : 'presente'}</span>
+        <span class="period">{formatMonth(item.startDate, locale)} - {item.endDate.length > 0 ? formatMonth(item.endDate, locale) : translate('portfolio.present')}</span>
         <h3 class="title">
           {item.url ? <ExternalLink class="external" href={item.url}>{item.institution}</ExternalLink> : item.institution}<span class="mx-3">·</span>{item.area}
         </h3>

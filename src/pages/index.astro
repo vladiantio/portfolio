@@ -1,18 +1,11 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import Timeline from '@/sections/Timeline.astro';
-// import AboutMe from '@/sections/AboutMe.astro';
-import Skills from '@/sections/Skills.astro';
-import Hero from '@/sections/Hero.astro';
-import Posts from '@/sections/Posts.astro';
-// import Projects from '@/sections/Projects.astro';
+import Redirection from "@/i18n/Redirection.astro";
+import SimpleLayout from "@/layouts/SimpleLayout.astro";
 ---
 
-<Layout description='Ingeniero de software con 4 años de experiencia, construyendo sitios y aplicaciones web innovadoras y de calidad.'>
-	<Hero />
-	<Timeline />
-	<!-- <Projects /> -->
-	<Skills />
-	<Posts />
-	<!-- <AboutMe /> -->
-</Layout>
+<SimpleLayout loadGTM={false}>
+  <Fragment slot="before-head">
+    <Redirection />
+  </Fragment>
+  <h1>Redirecting ⌛</h1>
+</SimpleLayout>

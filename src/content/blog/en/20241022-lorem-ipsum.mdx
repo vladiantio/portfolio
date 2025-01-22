@@ -1,8 +1,6 @@
 ---
 title: Lorem Ipsum
-slug: lorem-ipsum
 description: Aliquam at suscipit quam. Quisque quis purus erat. Praesent dictum felis ipsum, vitae tristique ante finibus at.
-language: es
 date: 2024-10-22T20:35:26.081Z
 isDraft: true
 ---

