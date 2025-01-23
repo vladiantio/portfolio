@@ -6,15 +6,17 @@ import { useTranslations } from '@/i18n/helpers';
 const locale = Astro.currentLocale as Locale | undefined;
 const translate = useTranslations(locale);
 ---
-<section class="my-8">
-  <h2>{translate('portfolio.projects')}</h2>
+{projects && projects.length > 0 && (
+  <section class="my-8">
+    <h2>{translate('portfolio.projects')}</h2>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    {projects.map(item => (
-      <div class="bg-body/10 rounded-xl p-4 shadow">
-        <h3>{item.name}</h3>
-        <p>{item.description}</p>
-      </div>
-    ))}
-  </div>
-</section>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {projects.map(item => (
+        <div class="bg-body/10 rounded-xl p-4 shadow">
+          <h3>{item.name}</h3>
+          <p>{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
