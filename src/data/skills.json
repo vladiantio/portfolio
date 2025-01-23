@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Programación",
+    "level": "Master",
+    "keywords": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "TypeScript",
+      "C#",
+      "Python",
+      "PHP",
+      "SQL"
+    ]
+  },
+  {
+    "name": "Frameworks y Librerías",
+    "level": "Master",
+    "keywords": [
+      ".NET",
+      "Angular",
+      "Vue",
+      "Bootstrap",
+      "jQuery",
+      "TailwindCSS",
+      "React"
+    ]
+  },
+  {
+    "name": "Herramientas y Plataformas",
+    "level": "Master",
+    "keywords": [
+      "Git",
+      "Linux",
+      "Visual Studio Code",
+      "Visual Studio",
+      "Microsoft SQL Server",
+      "MySQL",
+      "Azure",
+      "Azure DevOps",
+      "GitHub",
+      "Trello",
+      "Postman",
+      "WordPress"
+    ]
+  }
+]

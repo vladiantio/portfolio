@@ -1,5 +1,5 @@
 ---
-import { basics } from '@/resume.json'
+import networks from '@/data/networks.json';
 import SimpleLayout from '@/layouts/SimpleLayout.astro';
 import ExternalLink from '@/components/ExternalLink.astro';
 import SocialIcon from '@/components/SocialIcon.astro';
@@ -19,10 +19,10 @@ export const getStaticPaths = () => localeParams;
     <div class="max-w-screen-md w-full mx-auto px-5 my-3 place-content-center">
       <Hero hideLinks />
       <main class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {basics.profiles.map(item => (
+        {networks.map(item => (
           <ExternalLink class="networkLink" href={item.url}>
-            <SocialIcon class="size-full" name={item.network.toLowerCase()} />
-            <strong>{item.network}</strong>
+            <SocialIcon class="size-full" name={item.name.toLowerCase()} />
+            <strong>{item.name}</strong>
           </ExternalLink>
         ))}
       </main>
