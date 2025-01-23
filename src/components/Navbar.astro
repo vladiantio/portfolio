@@ -41,6 +41,8 @@ const locale = Astro.currentLocale as Locale | undefined;
 </script>
 
 <style>
+  @reference '@/styles/global.css';
+
   .navbar {
     @apply sticky top-0 inset-x-0 w-full max-w-screen-md mx-auto z-10 p-3 transition-all;
   }
@@ -50,6 +52,6 @@ const locale = Astro.currentLocale as Locale | undefined;
   }
 
   .navbar-bar {
-    @apply flex items-center justify-center gap-1 p-1 rounded-full bg-background shadow-neon shadow-primary;
+    @apply flex items-center justify-center gap-1 p-1 rounded-full bg-background shadow-neon-sm shadow-primary;
   }
 </style>

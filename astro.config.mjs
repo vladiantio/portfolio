@@ -1,10 +1,10 @@
 import { defineConfig } from 'astro/config';
 import solid from '@astrojs/solid-js';
-import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import expressiveCode from 'astro-expressive-code';
+import tailwindcss from "@tailwindcss/vite";
 
 // Markdown Plugins
 import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
@@ -47,7 +47,6 @@ export default defineConfig({
     mdx(),
     sitemap(),
     solid(),
-    tailwind(),
   ],
   markdown: {
     remarkPlugins: [remarkReadingTime],
@@ -56,4 +55,7 @@ export default defineConfig({
   output: 'static',
   server: { port: 4680 },
   site: 'https://vladiantio.com',
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

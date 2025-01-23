@@ -56,7 +56,7 @@ const ColorPicker: Component<Props> = (props) => {
           {color => (
             <button
               type="button"
-              class={`size-4 rounded-full transition ${color().value == currentColor() ? 'ring-4 ring-primary ring-opacity-25' : ''}`}
+              class={`size-4 rounded-full transition ${color().value == currentColor() ? 'ring-4 ring-primary/25' : ''}`}
               title={translate(color().name)}
               aria-label={translate(color().name)}
               style={{
@@ -71,7 +71,7 @@ const ColorPicker: Component<Props> = (props) => {
         </Index>
         <label
           for="otherColor"
-          class={`size-4 rounded-full transition ${isOtherColor() ? 'ring-4 ring-primary ring-opacity-25' : ''}`}
+          class={`size-4 rounded-full transition ${isOtherColor() ? 'ring-4 ring-primary/25' : ''}`}
           role="button"
           title={translate('otherColor')}
           aria-label={translate('otherColor')}

@@ -7,15 +7,12 @@ const $html = () => document.documentElement;
 export function switchTheme(theme: Theme) {
   localStorage.setItem('theme', theme);
   const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-  $html().classList[isDark ? 'add' : 'remove']('dark');
-
-	// Expressive Code Theme
 	$html().dataset.theme = isDark ? 'dark' : 'light';
 }
 
-export const getColor = () => localStorage.color ?? getComputedStyle($html()).getPropertyValue('--color-hex');
+export const getColor = () => localStorage.color ?? getComputedStyle($html()).getPropertyValue('--main-color');
 
 export function changeColor(value: string) {
   localStorage.setItem('color', value);
-  $html().style.setProperty('--color-hex', value);
+  $html().style.setProperty('--main-color', value);
 }

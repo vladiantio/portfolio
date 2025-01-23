@@ -1,28 +1,25 @@
 :root {
-  --font-sans: 'Figtree Variable';
-  --font-mono: 'Inconsolata Variable';
+  --main-color: #3fa0fa;
 
-  --color-hex: #3fa0fa;
-
-  --color-body: 0% 0 0;
-  --color-background: from var(--color-hex) 98% calc(c * 0.12) h;
-  --color-soft: from var(--color-hex) 92% calc(c * 0.16) h;
-  --color-foreground: from var(--color-hex) 15% calc(c * 0.16) h;
-  --color-muted: from var(--color-hex) 62% calc(c * 0.16) h;
-  --color-primary-light: from var(--color-hex) 86% c h;
-  --color-primary-light-hover: from var(--color-hex) 98% c h;
-  --color-primary-dark: from var(--color-hex) 60% c h;
-  --color-primary-dark-hover: from var(--color-hex) 48% c h;
-  --color-primary: var(--color-primary-dark);
-  --color-primary-hover: var(--color-primary-dark-hover);
+  --body: 0% 0 0;
+  --background: from var(--main-color) 98% calc(c * 0.12) h;
+  --soft: from var(--main-color) 92% calc(c * 0.16) h;
+  --foreground: from var(--main-color) 15% calc(c * 0.16) h;
+  --muted: from var(--main-color) 62% calc(c * 0.16) h;
+  --primary-dark: from var(--main-color) 86% c h;
+  --primary-dark-hover: from var(--main-color) 98% c h;
+  --primary-light: from var(--main-color) 60% c h;
+  --primary-light-hover: from var(--main-color) 48% c h;
+  --primary: var(--primary-light);
+  --primary-hover: var(--primary-light-hover);
 }
 
-html.dark {
-  --color-body: 100% 0 0;
-  --color-background: from var(--color-hex) 20% calc(c * 0.142) h;
-  --color-soft: from var(--color-hex) 30% calc(c * 0.16) h;
-  --color-foreground: from var(--color-hex) 98% calc(c * 0.02) h;
-  --color-muted: from var(--color-hex) 88% calc(c * 0.16) h;
-  --color-primary: var(--color-primary-light);
-  --color-primary-hover: var(--color-primary-light-hover);
+[data-theme='dark'] {
+  --body: 100% 0 0;
+  --background: from var(--main-color) 20% calc(c * 0.142) h;
+  --soft: from var(--main-color) 30% calc(c * 0.16) h;
+  --foreground: from var(--main-color) 98% calc(c * 0.02) h;
+  --muted: from var(--main-color) 88% calc(c * 0.16) h;
+  --primary: var(--primary-dark);
+  --primary-hover: var(--primary-dark-hover);
 }

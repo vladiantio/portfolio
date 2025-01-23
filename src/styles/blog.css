@@ -1,3 +1,5 @@
+@reference './global.css';
+
 @import './baseline-status.css';
 @import './link-preview.css';
 
@@ -80,5 +82,4 @@ article.rich-text {
   img {
     @apply w-full rounded-3xl my-6 bg-white/40 dark:bg-black/40;
   }
-
 }

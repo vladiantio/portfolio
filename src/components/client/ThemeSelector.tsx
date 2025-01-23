@@ -59,7 +59,7 @@ const ThemeSelector: Component<Props> = (props) => {
         }
         <span class="sr-only">Tema</span>
       </summary>
-      <div tabIndex={0} class="dropdown-content border border-body/10 bg-background rounded-xl z-10 w-68 p-1 shadow -me-2 mt-4">
+      <div tabIndex={0} class="dropdown-content border border-body/10 bg-background rounded-xl z-10 p-1 shadow-sm -me-2 mt-4">
         <div class="grid grid-cols-3 gap-1 text-sm">
           <Index each={THEMES}>
             {theme => (

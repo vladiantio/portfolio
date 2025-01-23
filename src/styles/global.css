@@ -1,138 +1,131 @@
-@import 'root.css';
-@import 'fonts.css';
+@import 'tailwindcss';
+@import './root.css';
+@import './theme.css';
+@import './fonts.css';
 
-@tailwind base;
-
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: oklch(var(--color-background));
-  color: oklch(var(--color-foreground));
-  position: relative;
-}
-
-body::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-body::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: oklch(var(--color-primary));
-  border-radius: 3px;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-  background-color: oklch(var(--color-primary-hover));
-}
-
-@supports not selector(::-webkit-scrollbar) {
+@layer base {
   body {
-    scrollbar-color: oklch(var(--color-primary)) transparent;
-    scrollbar-width: thin;
-  }
-}
-
-h1, h2, h3, h4 {
-  text-wrap: balance;
-}
-
-h1, h2 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.75rem;
-}
-
-h2 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-}
-
-h3, h4 {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-a {
-  color: oklch(var(--color-primary));
-  transition-property: background, color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-  &:hover {
-    color: oklch(var(--color-primary-hover));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: oklch(var(--background));
+    color: oklch(var(--foreground));
+    position: relative;
   }
 
-  &.icon {
-    color: oklch(var(--color-body));
+  body::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  body::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: oklch(var(--primary));
+    border-radius: 3px;
+  }
+
+  body::-webkit-scrollbar-thumb:hover {
+    background-color: oklch(var(--primary-hover));
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    body {
+      scrollbar-color: oklch(var(--primary)) transparent;
+      scrollbar-width: thin;
+    }
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  h1, h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  h3, h4 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    color: oklch(var(--primary));
+    transition-property: background, color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
     &:hover {
-      color: oklch(var(--color-primary));
+      color: oklch(var(--primary-hover));
+    }
+
+    &.icon {
+      color: oklch(var(--body));
+      &:hover {
+        color: oklch(var(--primary));
+      }
+    }
+  }
+
+  p {
+    line-height: 1.875;
+    text-wrap: pretty;
+  }
+
+  hr {
+    border-color: oklch(var(--soft));
+  }
+}
+
+@layer components {
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    position: absolute;
+
+    .dropdown-end & {
+      inset-inline-end: 0;
     }
   }
 }
 
-p {
-  line-height: 1.875;
-  text-wrap: pretty;
-}
 
-hr {
-  border-color: oklch(var(--color-soft));
-}
-
-@tailwind components;
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  position: absolute;
-
-  .dropdown-end & {
-    inset-inline-end: 0;
-  }
-}
-
-@tailwind utilities;
-
-.wrapper {
+@utility wrapper {
   display: grid;
   min-height: 100dvh;
   grid-template-rows: auto 1fr auto;
 }
 
-.link {
-  color: oklch(var(--color-body));
-  border-bottom-width: 2px;
-  border-color: oklch(var(--color-muted));
-  text-decoration: none !important;
-  transition-property: border;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-  outline: 0;
+@utility external {
+  @variant after {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIwLjc1ZW0iIGhlaWdodD0iMC43NWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik03IDdoMTB2MTAiLz48cGF0aCBkPSJNNyAxNyAxNyA3Ii8+PC9zdmc+');
+    background-repeat: no-repeat;
+    content: '';
+    display: inline-block;
+    margin-left: 0.125em;
+    height: 1em;
+    width: 0.75em;
+  }
 
-  &:hover, &:focus {
-    border-bottom-width: 4px;
-    border-color: oklch(var(--color-primary));
+  @variant dark {
+    @variant after {
+      filter: invert();
+    }
   }
 }
 
-a.external:after {
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIwLjc1ZW0iIGhlaWdodD0iMC43NWVtIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik03IDdoMTB2MTAiLz48cGF0aCBkPSJNNyAxNyAxNyA3Ii8+PC9zdmc+');
-  background-repeat: no-repeat;
-  content: '';
-  display: inline-block;
-  margin-left: 0.125em;
-  height: 1em;
-  width: 0.75em;
-}
-
-.bg-color-wheel {
+@utility bg-color-wheel {
   background-image: conic-gradient(
     hsl(360 100% 50%),
     hsl(315 100% 50%),
@@ -146,29 +139,18 @@ a.external:after {
   );
 }
 
-.bg-gradient-primary {
+@utility bg-gradient-primary {
   background-image: linear-gradient(
     to right,
-    oklch(from var(--color-hex) 72% c h),
-    oklch(from var(--color-hex) 52% c h)
+    oklch(from var(--main-color) 72% c h),
+    oklch(from var(--main-color) 52% c h)
   );
-}
 
-.text-bg {
-  background-clip: text;
-  color: transparent;
-}
-
-html.dark {
-  .bg-gradient-primary {
+  @variant dark {
     background-image: linear-gradient(
       to right,
-      oklch(from var(--color-hex) 96% c h),
-      oklch(from var(--color-hex) 76% c h)
+      oklch(from var(--main-color) 96% c h),
+      oklch(from var(--main-color) 76% c h)
     );
-  }
-
-  a.external:after {
-    filter: invert();
   }
 }

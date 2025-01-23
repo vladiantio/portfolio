@@ -35,7 +35,9 @@ export const getStaticPaths = () => localeParams;
 </SimpleLayout>
 
 <style is:global>
+  @reference '@/styles/global.css';
+
   .networkLink {
-    @apply bg-primary/5 text-center grid grid-cols-[1.5rem,1fr] px-5 py-4 shadow-neon shadow-primary rounded-full hover:bg-primary/10;
+    @apply bg-primary/5 text-center grid grid-cols-[1.5rem_1fr] px-5 py-4 shadow-neon-sm shadow-primary rounded-full hover:bg-primary/10;
   }
 </style>

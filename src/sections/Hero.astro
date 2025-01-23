@@ -12,7 +12,7 @@ interface Props {
 const { hideLinks } = Astro.props;
 ---
 <section class="mb-8">
-  <div class="grid sm:grid-cols-[8rem,1fr] sm:items-center gap-x-4">
+  <div class="grid sm:grid-cols-[8rem_1fr] sm:items-center gap-x-4">
     <div class="relative flex justify-center">
       {['avatar-blurred', 'avatar-shadow'].map(className => (
         <picture>
@@ -43,6 +43,8 @@ const { hideLinks } = Astro.props;
 </section>
 
 <style>
+  @reference '@/styles/global.css';
+
   .avatar {
     @apply rounded-full w-full max-w-32 aspect-square;
   }

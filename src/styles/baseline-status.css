@@ -37,7 +37,7 @@
 
     border: solid 1px transparent;
     border-radius: 1.5rem;
-    background: oklch(var(--color-body) / 0.1);
+    background: oklch(var(--body) / 0.1);
     padding-top: 1rem;
     padding-inline: 1.5rem;
     max-width: 50rem;
@@ -118,7 +118,7 @@
   &::part(link),
   &::part(link):active,
   &::part(link):visited {
-    color: oklch(var(--color-primary));
+    color: oklch(var(--primary));
   }
 
   &::part(summary) {

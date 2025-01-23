@@ -9,14 +9,11 @@ const updateTheme = () => {
 	reloadTheme = true;
 	const theme = localStorage.theme ?? 'system';
 	const isDark = theme === 'dark' || (theme === 'system' && matchPrefersDark.matches);
-	document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
-
-	// Expressive Code Theme
 	document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
 };
 updateTheme();
 
-if ('color' in localStorage) document.documentElement.style.setProperty('--color-hex', localStorage.color);
+if ('color' in localStorage) document.documentElement.style.setProperty('--main-color', localStorage.color);
 
 // close the dropdown by clicking out of the dropdown
 document.addEventListener('click', ({ target }) => {

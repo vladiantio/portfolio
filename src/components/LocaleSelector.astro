@@ -16,7 +16,7 @@ const translate = useTranslations(locale);
   >
     <Languages class="size-6 text-primary dark:text-white" />
   </summary>
-  <div tabindex="0" class="dropdown-content border border-body/10 bg-background rounded-xl z-10 w-68 p-1 shadow -me-2 mt-4 flex flex-col gap-1">
+  <div tabindex="0" class="dropdown-content border border-body/10 bg-background rounded-xl z-10 p-1 shadow-sm -me-2 mt-4 flex flex-col gap-1">
     {
       Object.keys(LOCALES).map(lang => (
         <button
