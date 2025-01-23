@@ -1,7 +1,6 @@
 [
   {
     "name": "Programación",
-    "level": "Master",
     "keywords": [
       "HTML",
       "CSS",
@@ -15,7 +14,6 @@
   },
   {
     "name": "Frameworks y Librerías",
-    "level": "Master",
     "keywords": [
       ".NET",
       "Angular",
@@ -28,7 +26,6 @@
   },
   {
     "name": "Herramientas y Plataformas",
-    "level": "Master",
     "keywords": [
       "Git",
       "Linux",
