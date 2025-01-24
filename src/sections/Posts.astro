@@ -1,4 +1,5 @@
 ---
+import NotebookPen from 'lucide-solid/icons/notebook-pen';
 import BlogGrid from "@/components/blog/BlogGrid.astro";
 import type { Locale } from '@/i18n/constants';
 import { useTranslations } from '@/i18n/helpers';
@@ -10,7 +11,7 @@ const posts = await getAllBlogPosts(locale);
 ---
 {posts && posts.length > 0 && (
   <section class="my-8">
-    <h2>{translate('blog.posts')}</h2>
+    <h2 class="flex items-center"><NotebookPen class="text-primary drop-shadow-primary-xl mr-2" />{translate('blog.posts')}</h2>
     <BlogGrid posts={posts} />
   </section>
 )}

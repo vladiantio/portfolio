@@ -1,4 +1,6 @@
 ---
+import BriefcaseBusiness from 'lucide-solid/icons/briefcase-business';
+import GraduationCap from 'lucide-solid/icons/graduation-cap';
 import work from '@/data/work.json';
 import education from '@/data/education.json';
 import ExternalLink from '@/components/ExternalLink.astro';
@@ -11,11 +13,10 @@ const locale = Astro.currentLocale as Locale | undefined;
 const translate = useTranslations(locale);
 ---
 <section class="my-8">
-  <h2>{translate('portfolio.experience')}</h2>
+  <h2 class="flex items-center"><BriefcaseBusiness class="text-primary drop-shadow-primary-xl mr-2" />{translate('portfolio.experience')}</h2>
   <ol class="timeline">
     {work.map(item => (
       <li class="item">
-        <div class="bullet bg-gradient-primary"></div>
         <span class="period">{formatMonth(item.startDate, locale)} - {item.endDate.length > 0 ? formatMonth(item.endDate, locale) : translate('portfolio.present')}</span>
         <h3 class="title">
           {item.url ? <ExternalLink class="external" href={item.url}>{item.name}</ExternalLink> : item.name}<span class="mx-3">·</span>{item.position}
@@ -32,11 +33,10 @@ const translate = useTranslations(locale);
 </section>
 
 <section class="my-8">
-  <h2>{translate('portfolio.education')}</h2>
+  <h2 class="flex items-center"><GraduationCap class="text-primary drop-shadow-primary-xl mr-2" />{translate('portfolio.education')}</h2>
   <ol class="timeline">
     {education.map(item => (
       <li class="item">
-        <div class="bullet bg-gradient-primary"></div>
         <span class="period">{formatMonth(item.startDate, locale)} - {item.endDate.length > 0 ? formatMonth(item.endDate, locale) : translate('portfolio.present')}</span>
         <h3 class="title">
           {item.url ? <ExternalLink class="external" href={item.url}>{item.institution}</ExternalLink> : item.institution}<span class="mx-3">·</span>{item.area}
@@ -50,18 +50,24 @@ const translate = useTranslations(locale);
   @reference '@/styles/global.css';
 
   .timeline {
-    @apply relative border-s-2 border-body/10 ms-2;
+    @apply relative border-s-2 border-body/10 ms-2.5;
 
     .item {
-      @apply mb-10 ms-6;
-    }
+      @apply mb-10 ms-5;
 
-    .bullet {
-      @apply absolute w-4 h-4 rounded-full mt-1 -start-2 bg-primary shadow-neon-md shadow-primary;
+      &:before {
+        @apply absolute [content:''] main-gradient-light size-4 rounded-full mt-1 -start-2 drop-shadow-primary-lg;
+      }
+
+      @variant dark {
+        &:before {
+          @apply main-gradient-dark;
+        }
+      }
     }
 
     .period {
-      @apply -ms-2 px-2 py-1 bg-body/10 rounded-lg;
+      @apply px-2 py-1 bg-body/10 rounded-lg;
     }
 
     .title {

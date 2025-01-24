@@ -1,4 +1,5 @@
 ---
+import PencilRuler from 'lucide-solid/icons/pencil-ruler';
 import skills from '@/data/skills.json';
 import SkillIcon from '@/components/SkillIcon.astro';
 import type { Locale } from '@/i18n/constants';
@@ -8,7 +9,7 @@ const locale = Astro.currentLocale as Locale | undefined;
 const translate = useTranslations(locale);
 ---
 <section class="my-8">
-  <h2>{translate('portfolio.skills')}</h2>
+  <h2 class="flex items-center"><PencilRuler class="text-primary drop-shadow-primary-xl mr-2" />{translate('portfolio.skills')}</h2>
   
   {skills.map(item => (
     <div class="mb-5">

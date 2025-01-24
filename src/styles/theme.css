@@ -14,6 +14,13 @@
   --color-primary-dark: oklch(var(--primary-dark));
   --color-primary-light: oklch(var(--primary-light));
 
+  --drop-shadow-primary-xs: 0 0 1px oklch(var(--primary) / 0.2);
+  --drop-shadow-primary-sm: 0 0 2px oklch(var(--primary) / 0.6);
+  --drop-shadow-primary-md: 0 0 3px oklch(var(--primary) / 0.6);
+  --drop-shadow-primary-lg: 0 0 4px oklch(var(--primary) / 0.6);
+  --drop-shadow-primary-xl: 0 0 7px oklch(var(--primary) / 0.6);
+  --drop-shadow-primary-2xl: 0 0 25px oklch(var(--primary) / 0.6);
+
   --shadow-center-xs: 0 0 2px 0 rgb(0 0 0 / 0.05);
   --shadow-center-sm: 0 0 3px 0 rgb(0 0 0 / 0.1), 0 0 2px -1px rgb(0 0 0 / 0.1);
   --shadow-center-md: 0 0 6px -1px rgb(0 0 0 / 0.1), 0 0 4px -2px rgb(0 0 0 / 0.1);
