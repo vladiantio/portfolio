@@ -1,5 +1,5 @@
 ---
-import GTM from "./GTM.astro";
+import Analytics from "./Analytics.astro";
 import ThemeLoader from "./ThemeLoader.astro";
 
 export interface Props {
@@ -10,7 +10,7 @@ export interface Props {
 	publishedTime?: Date | null;
 	modifiedTime?: Date | null;
 	tags?: string[] | null;
-	loadGTM?: boolean | null;
+	noAnalytics?: boolean;
 }
 
 const {
@@ -21,7 +21,7 @@ const {
 	publishedTime,
 	modifiedTime,
 	tags,
-	loadGTM = true,
+	noAnalytics,
 } = Astro.props;
 
 const metaImage = image || '/banner.jpg';
@@ -34,7 +34,7 @@ const author = 'Vladimir Figueroa';
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 
-{loadGTM && <GTM id="G-7JEEW8LXCY" />}
+{!noAnalytics && <Analytics id="0I0mKo/WxPtHHZULp99xRg" />}
 <ThemeLoader />
 
 <title>{title ? `${title} · ${siteName}` : siteName}</title>

@@ -1,0 +1,7 @@
+---
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+---
+<script is:inline async src="https://analytics.ahrefs.com/analytics.js" data-key={id}></script>

@@ -7,7 +7,7 @@ import SimpleLayout from "@/layouts/SimpleLayout.astro";
 const translate = useTranslations(DEFAULT_LOCALE);
 ---
 
-<SimpleLayout title="Blog" description={translate('blog.latestPosts')} loadGTM={false}>
+<SimpleLayout title="Blog" description={translate('blog.latestPosts')} noAnalytics>
   <Fragment slot="before-head">
     <Redirection />
   </Fragment>
