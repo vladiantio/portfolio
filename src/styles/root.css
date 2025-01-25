@@ -6,10 +6,10 @@
   --soft: from var(--main-color) 92% calc(c * 0.16) h;
   --foreground: from var(--main-color) 15% calc(c * 0.16) h;
   --muted: from var(--main-color) 62% calc(c * 0.16) h;
-  --primary-dark: from var(--main-color) 86% c h;
-  --primary-dark-hover: from var(--main-color) 98% c h;
-  --primary-light: from var(--main-color) 60% c h;
-  --primary-light-hover: from var(--main-color) 48% c h;
+  --primary-dark: from var(--main-color) 76% calc(c * 0.85) h;
+  --primary-dark-hover: from var(--main-color) 92% calc(c * 0.85) h;
+  --primary-light: from var(--main-color) 56% calc(c * 0.85) h;
+  --primary-light-hover: from var(--main-color) 40% calc(c * 0.85) h;
   --primary: var(--primary-light);
   --primary-hover: var(--primary-light-hover);
 }
