@@ -1,4 +1,5 @@
 ---
+import NotebookPen from 'lucide-solid/icons/notebook-pen';
 import Layout from "@/layouts/Layout.astro";
 import BlogGrid from "@/components/blog/BlogGrid.astro";
 import type { Locale } from '@/i18n/constants';
@@ -13,6 +14,6 @@ export const getStaticPaths = () => localeParams;
 ---
 
 <Layout title="Blog" description={translate('blog.latestPosts')}>
-  <h1 class="text-primary text-3xl mb-3">{translate('blog.latestPosts')}</h1>
+  <h1 class="flex items-center text-2xl mb-3"><NotebookPen class="text-primary drop-shadow-primary-xl mr-2" />{translate('blog.latestPosts')}</h1>
   <BlogGrid posts={posts} />
 </Layout>
