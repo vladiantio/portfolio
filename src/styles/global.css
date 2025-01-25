@@ -60,9 +60,8 @@
 
   a {
     color: oklch(var(--primary));
-    transition-property: background, color;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
+    @apply motion-safe:transition-[background,color,scale];
+
     &:hover {
       color: oklch(var(--primary-hover));
     }
@@ -71,6 +70,7 @@
       color: oklch(var(--body));
       &:hover {
         color: oklch(var(--primary));
+        scale: 1.1;
       }
     }
   }
