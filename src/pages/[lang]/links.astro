@@ -16,17 +16,17 @@ export const getStaticPaths = () => localeParams;
   <GradientTop />
   <div class="wrapper">
     <Navbar />
-    <div class="max-w-screen-md w-full mx-auto px-5 my-3 place-content-center">
+    <main class="max-w-screen-md w-full mx-auto px-5 my-3 place-content-center">
       <Hero hideLinks />
-      <main class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <section class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 pt-8">
         {networks.map(item => (
           <ExternalLink class="networkLink" href={item.url}>
             <SocialIcon class="size-full" name={item.name.toLowerCase()} />
             <strong>{item.name}</strong>
           </ExternalLink>
         ))}
-      </main>
-    </div>
+      </section>
+    </main>
     <footer class="max-w-screen-md mx-auto px-5 mt-6 mb-9 text-center">
       <p>Made with ❤️ by <a href="/">@vladiantio</a></p>
     </footer>
