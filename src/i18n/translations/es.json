@@ -1,7 +1,8 @@
 {
   "language": "Idioma",
   "backToHome": "Volver al inicio",
-  "portfolio.present": "presente",
+  "home": "Inicio",
+  "portfolio.present": "actualidad",
   "portfolio.experience": "Experiencia",
   "portfolio.education": "Educación",
   "portfolio.skills": "Habilidades",
