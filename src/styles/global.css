@@ -83,6 +83,14 @@
   hr {
     border-color: oklch(var(--soft));
   }
+
+  [role=button], button {
+    cursor: pointer;
+  }
+
+  :disabled {
+    cursor: default
+  }
 }
 
 @layer components {
