@@ -4,6 +4,10 @@
 @import './fonts.css';
 
 @layer base {
+  html {
+    @apply motion-safe:scroll-smooth;
+  }
+
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
