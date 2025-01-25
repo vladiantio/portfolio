@@ -12,7 +12,7 @@ import { parseMD } from '@/utils/md';
 const locale = Astro.currentLocale as Locale | undefined;
 const translate = useTranslations(locale);
 ---
-<section class="my-8">
+<section class="pt-16" id="experience">
   <h2 class="flex items-center"><BriefcaseBusiness class="text-primary drop-shadow-primary-xl mr-2" />{translate('portfolio.experience')}</h2>
   <ol class="timeline">
     {work.map(item => (
@@ -32,7 +32,7 @@ const translate = useTranslations(locale);
   </ol>
 </section>
 
-<section class="my-8">
+<section class="pt-8">
   <h2 class="flex items-center"><GraduationCap class="text-primary drop-shadow-primary-xl mr-2" />{translate('portfolio.education')}</h2>
   <ol class="timeline">
     {education.map(item => (
@@ -53,7 +53,7 @@ const translate = useTranslations(locale);
     @apply relative border-s-2 border-body/10 ms-2.5;
 
     .item {
-      @apply mb-10 ms-5;
+      @apply mb-6 ms-5;
 
       &:before {
         @apply absolute [content:''] main-gradient-light size-4 rounded-full mt-1 -start-2 drop-shadow-primary-lg;

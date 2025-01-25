@@ -11,7 +11,7 @@ interface Props {
 
 const { hideLinks } = Astro.props;
 ---
-<section class="mb-8">
+<section class="pt-4">
   <div class="grid sm:grid-cols-[8rem_1fr] sm:items-center gap-x-4">
     <div class="relative flex justify-center">
       {['avatar-blurred', 'avatar-shadow'].map(className => (
@@ -20,10 +20,10 @@ const { hideLinks } = Astro.props;
           <img
             alt="Profile photo"
             class={'avatar ' + className}
-            loading="eager"
+            loading="lazy"
             src={basics.image}
-            width="64"
-            height="64"
+            width="128"
+            height="128"
           />
         </picture>
       ))}
@@ -46,7 +46,7 @@ const { hideLinks } = Astro.props;
   @reference '@/styles/global.css';
 
   .avatar {
-    @apply rounded-full w-full max-w-32 aspect-square;
+    @apply rounded-full size-32;
   }
 
   .avatar-shadow {

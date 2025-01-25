@@ -8,20 +8,22 @@ import { useTranslations } from '@/i18n/helpers';
 const locale = Astro.currentLocale as Locale | undefined;
 const translate = useTranslations(locale);
 ---
-<section class="my-8">
+<section class="pt-8">
   <h2 class="flex items-center"><PencilRuler class="text-primary drop-shadow-primary-xl mr-2" />{translate('portfolio.skills')}</h2>
   
-  {skills.map(item => (
-    <div class="mb-5">
-      <h3 class="mb-2">{item.name}</h3>
-      <div class="flex flex-wrap items-center gap-3">
-        {item.keywords.map(keyword => (
-          <span class="p-0 rounded-xl overflow-hidden bg-body/5" title={keyword}>
-            <span class="sr-only">{keyword}</span>
-            <SkillIcon class="size-12" name={keyword} />
-          </span>
-        ))}
+  <div class="grid md:grid-cols-3 gap-x-8 gap-y-4">
+    {skills.map(item => (
+      <div>
+        <h3 class="mb-2">{item.name}</h3>
+        <div class="flex flex-wrap items-center gap-2">
+          {item.keywords.map(keyword => (
+            <span class="p-0 rounded-xl overflow-hidden bg-body/5" title={keyword}>
+              <span class="sr-only">{keyword}</span>
+              <SkillIcon class="size-12" name={keyword} />
+            </span>
+          ))}
+        </div>
       </div>
-    </div>
-  ))}
+    ))}
+  </div>
 </section>

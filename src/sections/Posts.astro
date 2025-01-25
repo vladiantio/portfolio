@@ -10,7 +10,7 @@ const translate = useTranslations(locale);
 const posts = await getAllBlogPosts(locale);
 ---
 {posts && posts.length > 0 && (
-  <section class="my-8">
+  <section class="pt-8">
     <h2 class="flex items-center"><NotebookPen class="text-primary drop-shadow-primary-xl mr-2" />{translate('blog.posts')}</h2>
     <BlogGrid posts={posts} />
   </section>
