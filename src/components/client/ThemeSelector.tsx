@@ -52,12 +52,17 @@ const ThemeSelector: Component<Props> = (props) => {
 
   return (
     <details ref={dropdownRef} class="dropdown dropdown-end">
-      <summary tabIndex={0} role="button" title="Tema" class="inline-block align-middle select-none rounded-full p-2 transition hover:bg-primary/10">
+      <summary
+        tabIndex={0}
+        role="button"
+        aria-label={translate('theme')}
+        title={translate('theme')}
+        class="inline-block align-middle select-none rounded-full p-2 transition text-body hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
+      >
         {currentTheme()
-          ? <Dynamic component={iconTheme[currentTheme()!]} class="size-6 text-primary dark:text-white" />
-          : <div class="size-6" />
+          ? <Dynamic component={iconTheme[currentTheme()!]} class="size-5" />
+          : <div class="size-5" />
         }
-        <span class="sr-only">Tema</span>
       </summary>
       <div tabIndex={0} class="dropdown-content border border-body/10 bg-background rounded-xl z-10 p-1 shadow-sm -me-2 mt-4">
         <div class="grid grid-cols-3 gap-1 text-sm">
@@ -65,7 +70,7 @@ const ThemeSelector: Component<Props> = (props) => {
             {theme => (
               <button
                 type="button"
-                class={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition-[background-color] ${currentTheme() == theme() ? 'bg-primary/10 text-primary' : ''} hover:bg-primary/10`}
+                class={`flex flex-col items-center justify-center w-full rounded-lg px-4 py-2 transition ${currentTheme() == theme() ? 'bg-primary/10 text-primary' : ''} hover:bg-primary/10 hover:text-primary`}
                 onClick={handleChangeTheme}
                 value={theme()}
               >

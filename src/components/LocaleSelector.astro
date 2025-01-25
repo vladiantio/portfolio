@@ -12,9 +12,9 @@ const translate = useTranslations(locale);
     role="button"
     title={translate('language')}
     aria-label={translate('language')}
-    class="inline-block align-middle select-none rounded-full p-2 transition hover:bg-primary/10"
+    class="inline-block align-middle select-none rounded-full p-2 transition text-body hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
   >
-    <Languages class="size-6 text-primary dark:text-white" />
+    <Languages class="size-5" />
   </summary>
   <div tabindex="0" class="dropdown-content border border-body/10 bg-background rounded-xl z-10 p-1 shadow-sm -me-2 mt-4 flex flex-col gap-1">
     {
@@ -22,7 +22,7 @@ const translate = useTranslations(locale);
         <button
           type="button"
           data-lang={lang}
-          class={`btnChangeLocale rounded-lg px-3 py-1 transition-[background-color] ${lang === locale ? 'bg-primary/10 text-primary' : ''} hover:bg-primary/10`}
+          class={`btnChangeLocale rounded-lg px-3 py-1 transition ${lang === locale ? 'bg-primary/10 text-primary' : ''} hover:bg-primary/10 hover:text-primary`}
         >{LOCALES[lang as Locale].label}</button>
       ))
     }
