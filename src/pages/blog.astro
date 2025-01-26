@@ -4,10 +4,10 @@ import { useTranslations } from "@/i18n/helpers";
 import Redirection from "@/i18n/Redirection.astro";
 import SimpleLayout from "@/layouts/SimpleLayout.astro";
 
-const translate = useTranslations(DEFAULT_LOCALE);
+const t = useTranslations(DEFAULT_LOCALE);
 ---
 
-<SimpleLayout title="Blog" description={translate('blog.latestPosts')} noAnalytics>
+<SimpleLayout title="Blog" description={t('blog.latestPosts')} noAnalytics>
   <Fragment slot="before-head">
     <Redirection />
   </Fragment>

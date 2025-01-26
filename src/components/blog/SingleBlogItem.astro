@@ -15,7 +15,7 @@ interface Props {
 
 const { post } = Astro.props;
 const locale = post.lang as Locale;
-const translate = useTranslations(locale);
+const t = useTranslations(locale);
 const { title, description, date, tags, image, sources } = post.data;
 const { Content, remarkPluginFrontmatter } = await post.render();
 const { readingTime } = remarkPluginFrontmatter;
@@ -52,14 +52,14 @@ const { readingTime } = remarkPluginFrontmatter;
 <h1 class="mb-4 text-2xl leading-normal text-pretty">{title}</h1>
 <h2 class="text-xl font-normal text-pretty">{description}</h2>
 <div class="flex flex-wrap gap-4 text-sm my-6">
-  <time class="flex items-center" title={translate('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-2" />{formatShortDate(date, locale)}</time>
-  <span class="flex items-center" title={translate('blog.readingTime')}><Clock class="size-4 mr-2" />{readingTime}</span>
+  <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-2" />{formatShortDate(date, locale)}</time>
+  <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-2" />{readingTime}</span>
   {tags.map(tag => <span class="flex items-center"><Tag class="size-4 mr-2" />{tag}</span>)}
 </div>
 <article class="mt-12 mb-6 rich-text">
   <Content />
   {sources.length > 0 && (
-    <h2>{translate('blog.sources')}</h2>
+    <h2>{t('blog.sources')}</h2>
     <ul>
       {sources.map(source => (
         <li><ExternalLink class="external" href={source.href}>{source.title}</ExternalLink></li>

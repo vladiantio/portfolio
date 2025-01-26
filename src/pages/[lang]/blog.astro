@@ -7,13 +7,13 @@ import { localeParams, useTranslations } from '@/i18n/helpers';
 import { getAllBlogPosts } from "@/services/blog";
 
 const locale = Astro.currentLocale as Locale | undefined;
-const translate = useTranslations(locale);
+const t = useTranslations(locale);
 const posts = await getAllBlogPosts(locale);
 
 export const getStaticPaths = () => localeParams;
 ---
 
-<Layout title="Blog" description={translate('blog.latestPosts')}>
-  <h1 class="flex items-center text-2xl mb-3"><NotebookPen class="text-primary drop-shadow-primary-xl mr-2" />{translate('blog.latestPosts')}</h1>
+<Layout title="Blog" description={t('blog.latestPosts')}>
+  <h1 class="flex items-center text-2xl mb-3"><NotebookPen class="text-primary drop-shadow-primary-xl mr-2" />{t('blog.latestPosts')}</h1>
   <BlogGrid posts={posts} />
 </Layout>

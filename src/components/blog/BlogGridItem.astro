@@ -13,7 +13,7 @@ interface Props {
 
 const { post } = Astro.props;
 const locale = post.lang as Locale;
-const translate = useTranslations(locale);
+const t = useTranslations(locale);
 const { slug } = post;
 const { title, description, date, image } = post.data;
 const { remarkPluginFrontmatter } = await post.render();
@@ -49,8 +49,8 @@ const { readingTime } = remarkPluginFrontmatter;
       <h3 class="title">{title}</h3>
       <p class="description">{description}</p>
       <div class="flex flex-wrap gap-x-4 text-foreground text-sm mt-1">
-        <time class="flex items-center" title={translate('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-2" />{formatShortDate(date, locale)}</time>
-        <span class="flex items-center" title={translate('blog.readingTime')}><Clock class="size-4 mr-2" />{readingTime}</span>
+        <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-2" />{formatShortDate(date, locale)}</time>
+        <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-2" />{readingTime}</span>
       </div>
     </div>
   </div>

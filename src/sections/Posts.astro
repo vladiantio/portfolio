@@ -6,12 +6,12 @@ import { useTranslations } from '@/i18n/helpers';
 import { getAllBlogPosts } from "@/services/blog";
 
 const locale = Astro.currentLocale as Locale | undefined;
-const translate = useTranslations(locale);
+const t = useTranslations(locale);
 const posts = await getAllBlogPosts(locale);
 ---
 {posts && posts.length > 0 && (
   <section class="pt-8">
-    <h2 class="flex items-center"><NotebookPen class="text-primary drop-shadow-primary-xl mr-2" />{translate('blog.posts')}</h2>
+    <h2 class="flex items-center"><NotebookPen class="text-primary drop-shadow-primary-xl mr-2" />{t('blog.posts')}</h2>
     <BlogGrid posts={posts} />
   </section>
 )}

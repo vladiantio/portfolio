@@ -36,7 +36,7 @@ const translations = {
 const ColorPicker: Component<Props> = (props) => {
   const [currentColor, setCurrentColor] = createSignal<string>();
   const lang = () => props.lang;
-  const translate = useBaseTranslations(translations, lang());
+  const t = useBaseTranslations(translations, lang());
 
   const handleChangeColor = ({ currentTarget } : { currentTarget: HTMLButtonElement | HTMLInputElement }) => {
     setCurrentColor(currentTarget.value);
@@ -57,15 +57,15 @@ const ColorPicker: Component<Props> = (props) => {
             <button
               type="button"
               class={`size-4 rounded-full transition ${color().value == currentColor() ? 'ring-4 ring-primary/25' : ''}`}
-              title={translate(color().name)}
-              aria-label={translate(color().name)}
+              title={t(color().name)}
+              aria-label={t(color().name)}
               style={{
                 'background-color': color().value,
               }}
               onClick={handleChangeColor}
               value={color().value}
             >
-              <span class="sr-only">{translate(color().name)}</span>
+              <span class="sr-only">{t(color().name)}</span>
             </button>
           )}
         </Index>
@@ -73,10 +73,10 @@ const ColorPicker: Component<Props> = (props) => {
           for="otherColor"
           class={`size-4 rounded-full transition ${isOtherColor() ? 'ring-4 ring-primary/25' : ''}`}
           role="button"
-          title={translate('otherColor')}
-          aria-label={translate('otherColor')}
+          title={t('otherColor')}
+          aria-label={t('otherColor')}
         >
-          <span class="sr-only">{translate('otherColor')}</span>
+          <span class="sr-only">{t('otherColor')}</span>
           <span class="bg-color-wheel block size-4 rounded-full" />
         </label>
         <input

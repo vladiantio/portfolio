@@ -37,7 +37,7 @@ const ThemeSelector: Component<Props> = (props) => {
   let dropdownRef: HTMLDetailsElement | undefined;
   const [currentTheme, setCurrentTheme] = createSignal<Theme>();
   const lang = () => props.lang;
-  const translate = useBaseTranslations(translations, lang());
+  const t = useBaseTranslations(translations, lang());
 
   const handleChangeTheme = ({ currentTarget } : { currentTarget: HTMLButtonElement }) => {
     const theme = currentTarget.value as Theme;
@@ -55,8 +55,8 @@ const ThemeSelector: Component<Props> = (props) => {
       <summary
         tabIndex={0}
         role="button"
-        aria-label={translate('theme')}
-        title={translate('theme')}
+        aria-label={t('theme')}
+        title={t('theme')}
         class="inline-block align-middle select-none rounded-full p-2 transition text-body hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
       >
         {currentTheme()
@@ -75,7 +75,7 @@ const ThemeSelector: Component<Props> = (props) => {
                 value={theme()}
               >
                 <Dynamic component={iconTheme[theme()]} class="size-6" />
-                <span>{translate(theme())}</span>
+                <span>{t(theme())}</span>
               </button>
             )}
           </Index>
