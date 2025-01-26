@@ -1,15 +1,18 @@
 ---
-import basics from '@/data/basics.json'
+import basics from '@/data/basics'
 import ExternalLink from '@/components/ExternalLink.astro'
 import FileText from 'lucide-solid/icons/file-text'
 import SocialLinks from '@/components/SocialLinks.astro'
 import { removeExtension } from '@/utils/files'
+import type { Locale } from '@/i18n/constants'
+import { translate } from '@/i18n/helpers'
 
 interface Props {
   hideLinks?: boolean
 }
 
 const { hideLinks } = Astro.props;
+const locale = Astro.currentLocale as Locale | undefined;
 ---
 <section class="pt-4">
   <div class="grid sm:grid-cols-[8rem_1fr] sm:items-center gap-x-4">
@@ -31,7 +34,7 @@ const { hideLinks } = Astro.props;
     <div class="my-4 max-sm:text-center">
       <h1>{basics.name}</h1>
       <p class="font-semibold mb-1"><span class="bg-primary/10 text-primary py-1 px-3 rounded-full">@{basics.username}</span></p>
-      <p>{basics.summary}</p>
+      <p>{translate(basics.summary, locale)}</p>
     </div>
   </div>
   {!hideLinks && (

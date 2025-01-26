@@ -1,7 +1,18 @@
-[
+interface Skill {
+  name: {
+    en: string;
+    es: string;
+  };
+  keywords: string[];
+};
+
+export default [
   {
-    "name": "Programación",
-    "keywords": [
+    name: {
+      en: "Programming",
+      es: "Programación",
+    },
+    keywords: [
       "HTML",
       "CSS",
       "JavaScript",
@@ -13,8 +24,11 @@
     ]
   },
   {
-    "name": "Frameworks y Librerías",
-    "keywords": [
+    name: {
+      en: "Frameworks and Libraries",
+      es: "Frameworks y Librerías",
+    },
+    keywords: [
       ".NET",
       "Angular",
       "Vue",
@@ -25,8 +39,11 @@
     ]
   },
   {
-    "name": "Herramientas y Plataformas",
-    "keywords": [
+    name: {
+      en: "Tools and Platforms",
+      es: "Herramientas y Plataformas",
+    },
+    keywords: [
       "Git",
       "Linux",
       "Visual Studio Code",
@@ -41,4 +58,4 @@
       "WordPress"
     ]
   }
-]
+] as Skill[];

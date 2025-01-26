@@ -1,15 +1,15 @@
 ---
 import Globe from 'lucide-solid/icons/globe';
-import projects from '@/data/projects.json';
+import projects from '@/data/projects';
 import type { Locale } from '@/i18n/constants';
 import { useTranslations } from '@/i18n/helpers';
 
 const locale = Astro.currentLocale as Locale | undefined;
-const translate = useTranslations(locale);
+const t = useTranslations(locale);
 ---
 {projects && projects.length > 0 && (
   <section class="pt-8">
-    <h2 class="flex items-center"><Globe class="text-primary drop-shadow-primary-xl mr-2" />{translate('portfolio.projects')}</h2>
+    <h2 class="flex items-center"><Globe class="text-primary drop-shadow-primary-xl mr-2" />{t('portfolio.projects')}</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       {projects.map(item => (

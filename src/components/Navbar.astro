@@ -1,17 +1,17 @@
 ---
 import Logo from '@/assets/logo.svg';
-import basics from '@/data/basics.json';
+import basics from '@/data/basics';
 import ThemeSelector from "./client/ThemeSelector";
 import LocaleSelector from "./LocaleSelector.astro";
 import type { Locale } from "@/i18n/constants";
 import { useTranslations } from '@/i18n/helpers';
 
 const locale = Astro.currentLocale as Locale | undefined;
-const translate = useTranslations(locale);
+const t = useTranslations(locale);
 
 const menu = [
-  { href: `/${locale}/#`, label: translate('home') },
-  { href: `/${locale}/#experience`, label: translate('portfolio.experience') },
+  { href: `/${locale}/#`, label: t('home') },
+  { href: `/${locale}/#experience`, label: t('portfolio.experience') },
   { href: `/${locale}/blog`, label: 'Blog' },
   { href: `/${locale}/links`, label: 'Links' },
 ];
