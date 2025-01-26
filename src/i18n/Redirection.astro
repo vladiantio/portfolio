@@ -22,6 +22,5 @@ if (localStorage.selectedLang && langs.includes(localStorage.selectedLang)) {
 		baseUrl += defaultLocale;
 	}
 }
-console.log(baseUrl + location.pathname);
 location.href = baseUrl + location.pathname;
 </script>
