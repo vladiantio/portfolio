@@ -6,15 +6,15 @@ import Timeline from '@/sections/Timeline.astro';
 import Skills from '@/sections/Skills.astro';
 import Hero from '@/sections/Hero.astro';
 import Posts from '@/sections/Posts.astro';
-// import Projects from '@/sections/Projects.astro';
+import Projects from '@/sections/Projects.astro';
 
 export const getStaticPaths = () => localeParams;
 ---
 
 <Layout description='Ingeniero de software con 4 años de experiencia, construyendo sitios y aplicaciones web innovadoras y de calidad.'>
 	<Hero />
+	<Projects />
 	<Timeline />
-	<!-- <Projects /> -->
 	<Skills />
 	<Posts />
 	<!-- <AboutMe /> -->
