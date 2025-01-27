@@ -34,7 +34,7 @@ export default [
       "Vue",
       "Bootstrap",
       "jQuery",
-      "TailwindCSS",
+      "Tailwind CSS",
       "React"
     ]
   },
