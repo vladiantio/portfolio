@@ -1,8 +1,9 @@
 ---
+import FileText from 'lucide-solid/icons/file-text';
+import Mail from 'lucide-solid/icons/mail';
 import basics from '@/data/basics';
 import avatar from '@/assets/avatar.jpg';
 import ExternalLink from '@/components/ExternalLink.astro';
-import FileText from 'lucide-solid/icons/file-text';
 import SocialLinks from '@/components/SocialLinks.astro';
 import type { Locale } from '@/i18n/constants';
 import { translate } from '@/i18n/helpers';
@@ -37,7 +38,8 @@ const locale = Astro.currentLocale as Locale | undefined;
   </div>
   {!hideLinks && (
     <div class="flex flex-wrap gap-8 sm:ml-36 max-sm:justify-center">
-      <ExternalLink class="icon font-bold inline-flex items-center gap-1" href="/docs/CV-2025-01.pdf" title="Curriculum Vitae"><FileText class="size-6 mr-1" />CV</ExternalLink>
+      <ExternalLink class="icon font-bold inline-flex items-center" href="/docs/CV-2025-01.pdf" title="Curriculum Vitae"><FileText class="size-6 mr-1" />CV</ExternalLink>
+      <ExternalLink class="icon" href={`mailto:${translate(basics.email, locale)}`} title={translate(basics.email, locale) ?? ''} aria-label="Email"><Mail class="size-6" /></ExternalLink>
       <SocialLinks />
     </div>
   )}

@@ -8,6 +8,7 @@ import GradientBottom from '@/components/backgrounds/GradientBottom.astro';
 import Navbar from '@/components/Navbar.astro';
 import { localeParams } from '@/i18n/helpers';
 import Hero from '@/sections/Hero.astro';
+import Footer from '@/components/Footer.astro';
 
 export const getStaticPaths = () => localeParams;
 ---
@@ -27,9 +28,7 @@ export const getStaticPaths = () => localeParams;
         ))}
       </section>
     </main>
-    <footer class="max-w-screen-md mx-auto px-5 mt-6 mb-9 text-center">
-      <p>Made with ❤️ by <a href="/">@vladiantio</a></p>
-    </footer>
+    <Footer />
   </div>
   <GradientBottom />
 </SimpleLayout>
