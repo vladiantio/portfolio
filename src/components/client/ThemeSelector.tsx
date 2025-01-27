@@ -57,7 +57,7 @@ const ThemeSelector: Component<Props> = (props) => {
         role="button"
         aria-label={t('theme')}
         title={t('theme')}
-        class="inline-block align-middle select-none rounded-full p-2 transition text-body hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
+        class="inline-block align-middle select-none rounded-full p-2.5 transition text-body hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
       >
         {currentTheme()
           ? <Dynamic component={iconTheme[currentTheme()!]} class="size-5" />

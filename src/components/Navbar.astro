@@ -21,7 +21,7 @@ const menu = [
 <nav class="navbar" id="mainNavbar">
   <div class="navbar-container">
     <div class="navbar-bar">
-      <a class="rounded-full p-2 transition hover:bg-primary/10 text-body hover:text-primary" href="/" title={'@' + basics.username}>
+      <a class="rounded-full p-2.5 transition hover:bg-primary/10 text-body hover:text-primary" href="/" title={'@' + basics.username}>
         <span class="sr-only">@{basics.username}</span>
         <Logo class="size-5" />
       </a>
@@ -37,7 +37,7 @@ const menu = [
         <ThemeSelector client:load lang={locale} />
       </div>
       <div class="navbar-bar sm:!hidden">
-        <button class="rounded-full p-2 transition hover:bg-primary/10 text-body hover:text-primary" popovertarget="mainMenu">
+        <button class="rounded-full p-2.5 transition hover:bg-primary/10 text-body hover:text-primary" popovertarget="mainMenu">
           <svg class="size-5" width="20" height="20" viewBox="0 0 100 100">
             <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
             <path class="line line2" d="M 20,50 H 80" />
@@ -63,7 +63,7 @@ const menu = [
   @reference '@/styles/global.css';
 
   .navbar {
-    @apply sticky top-0 inset-x-0 w-full max-w-screen-md mx-auto z-10 p-2.5 overflow-x-clip;
+    @apply sticky top-0 inset-x-0 w-full max-w-screen-md mx-auto z-10 py-2 px-3 overflow-x-clip;
   }
 
   .navbar-container {
@@ -75,7 +75,7 @@ const menu = [
   }
 
   .navbar-link {
-    @apply font-semibold py-1.5 px-4 rounded-full transition text-body hover:text-primary hover:bg-primary/10;
+    @apply font-semibold py-2 px-4 rounded-full transition text-body hover:text-primary hover:bg-primary/10;
   }
 
   @media (width < 40rem) {
