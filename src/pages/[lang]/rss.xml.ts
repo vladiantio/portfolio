@@ -1,17 +1,18 @@
 import rss from '@astrojs/rss';
 import type { APIRoute } from 'astro';
 import type { Locale } from '@/i18n/constants';
-import { localeParams } from '@/i18n/helpers';
+import { localeParams, translate } from '@/i18n/helpers';
 import { getAllBlogPosts } from '@/services/blog';
+import basics from '@/data/basics';
 
 export const getStaticPaths = () => localeParams;
 
 export const GET: APIRoute = async ({ params, site }) => {
-  const { lang } = params;
-  const posts = await getAllBlogPosts(lang as Locale | undefined);
+  const lang = params.lang as Locale | undefined;
+  const posts = await getAllBlogPosts(lang);
   return rss({
-    title: '@vladiantio',
-    description: 'Ingeniero de software con 4 años de experiencia, construyendo sitios y aplicaciones web innovadoras y de calidad.',
+    title: `${basics.shortname} · ${translate(basics.shortDescription, lang)}`,
+    description: translate(basics.seoDescription, lang) ?? '',
     site: site!,
     items: posts.map((post) => ({
       title: post.data.title,
