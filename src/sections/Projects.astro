@@ -33,7 +33,7 @@ const t = useTranslations(locale);
             <div class="flex items-center">
               {item.urlCode && (
                 <ExternalLink
-                  class="px-2"
+                  class="px-2 icon"
                   href={item.urlCode}
                   title={t('projects.viewCode')}
                   aria-label={t('projects.viewCode')}
@@ -43,7 +43,7 @@ const t = useTranslations(locale);
               )}
               {item.urlContributions && (
                 <ExternalLink
-                  class="px-2"
+                  class="px-2 icon"
                   href={item.urlContributions}
                   title={t('projects.viewMyContributions')}
                   aria-label={t('projects.viewMyContributions')}
