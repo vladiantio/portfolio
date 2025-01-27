@@ -15,6 +15,7 @@ interface Work {
     en: string[];
     es: string[];
   };
+  skills: string[];
 }
 
 export default [
@@ -36,7 +37,8 @@ export default [
         "Actualmente desarrollo nuevas funcionalidades del sitio web hecho en WordPress.",
         "Logré mejorar la experiencia de usuario en la carga de imágenes."
       ],
-    }
+    },
+    skills: ['Vue', 'Tailwind CSS', 'WordPress', 'PHP'],
   },
   {
     name: "Lecaros Group",
@@ -58,7 +60,8 @@ export default [
         "Desarrollé e implementé una plataforma para brokers y embajadores en **Portal Inversionista**, y se han registrado **más de 40 brokers y más de 5 embajadores**.",
         "Desarrollé e implementé un webscraping que obtiene propiedades disponibles de varias inmobiliarias."
       ],
-    }
+    },
+    skills: ['.NET', 'Vue', 'Angular', 'jQuery', 'Bootstrap', 'Microsoft SQL Server', 'Azure', 'Azure DevOps', 'Python'],
   },
   {
     name: "Gestión Tecnológica Empresarial SpA (G5)",
@@ -84,6 +87,7 @@ export default [
         "Desarrollé e implementé una ficha de asesoramiento en **Portal Inversionista**.",
         "Implementé **UPago** en el módulo de pagos de **Portal Arriendo**, y se han registrado **más de 6.000 pagos**."
       ],
-    }
+    },
+    skills: ['.NET', 'Vue', 'Angular', 'jQuery', 'Bootstrap', 'Microsoft SQL Server', 'Azure', 'Azure DevOps'],
   }
 ] as Work[];
