@@ -13,7 +13,7 @@ const locale = Astro.currentLocale as Locale | undefined;
 const t = useTranslations(locale);
 ---
 <section class="pt-16" id="experience">
-  <h2 class="flex items-center"><BriefcaseBusiness class="text-primary drop-shadow-primary-xl mr-2" />{t('portfolio.experience')}</h2>
+  <h2 class="flex items-center mb-4"><BriefcaseBusiness class="text-primary drop-shadow-primary-xl mr-2" />{t('portfolio.experience')}</h2>
   <ol class="timeline">
     {work.map(item => (
       <li class="item">
@@ -33,7 +33,7 @@ const t = useTranslations(locale);
 </section>
 
 <section class="pt-8">
-  <h2 class="flex items-center"><GraduationCap class="text-primary drop-shadow-primary-xl mr-2" />{t('portfolio.education')}</h2>
+  <h2 class="flex items-center mb-4"><GraduationCap class="text-primary drop-shadow-primary-xl mr-2" />{t('portfolio.education')}</h2>
   <ol class="timeline">
     {education.map(item => (
       <li class="item">
