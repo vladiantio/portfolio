@@ -1,5 +1,6 @@
 export default {
   name: "Vladimir Antonio Figueroa Carvajal",
+  shortname: "Vladimir Antonio F. C.",
   username: "vladiantio",
   email: "contact@vladiantio.com",
   summary: {
