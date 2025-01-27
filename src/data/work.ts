@@ -38,7 +38,7 @@ export default [
         "Logré mejorar la experiencia de usuario en la carga de imágenes."
       ],
     },
-    skills: ['Vue', 'Tailwind CSS', 'WordPress', 'PHP'],
+    skills: ['Vue', 'TypeScript', 'Tailwind CSS', 'WordPress', 'PHP'],
   },
   {
     name: "Lecaros Group",
