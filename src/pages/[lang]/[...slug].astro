@@ -1,0 +1,35 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SingleBlogItem from "@/components/blog/SingleBlogItem.astro";
+import { getAllBlogPosts } from "@/services/blog";
+import '@/styles/blog.css';
+import { getImage } from "astro:assets";
+
+export async function getStaticPaths() {
+  const posts = await getAllBlogPosts();
+  return posts.map((post) => {
+    return {
+      params: { lang: post.lang, slug: post.slug },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+
+const { title, description, date, update, hero, og, tags } = post.data;
+
+const ogImage = hero && (og ? og : await getImage({ src: hero, format: "jpg" }));
+---
+
+<Layout
+  title={title}
+  description={description}
+  type="article"
+  publishedTime={date}
+  modifiedTime={update}
+  image={ogImage?.src}
+  tags={tags}
+>
+  <SingleBlogItem post={post} />
+</Layout>

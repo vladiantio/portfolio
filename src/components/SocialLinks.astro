@@ -1,12 +1,11 @@
 ---
-import { basics } from '~/resume.json'
+import networks from '@/data/networks'
 import ExternalLink from "./ExternalLink.astro";
 import SocialIcon from './SocialIcon.astro';
 ---
-<div class="flex flex-wrap items-center gap-8">
-  {basics.profiles.filter(p => !p.isSecondary).map(item => (
-    <ExternalLink class="icon" href={item.url} title={item.network}>
-      <SocialIcon class="size-6" name={item.network.toLowerCase()} />
-    </ExternalLink>
-  ))}
-</div>
+
+{networks.filter(p => !p.isSecondary).map(item => (
+  <ExternalLink class="icon" href={item.url} title={item.name}>
+    <SocialIcon class="size-6" name={item.name.toLowerCase()} />
+  </ExternalLink>
+))}

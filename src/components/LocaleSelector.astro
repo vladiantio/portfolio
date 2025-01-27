@@ -1,0 +1,41 @@
+---
+import Languages from 'lucide-solid/icons/languages';
+import { LOCALES, type Locale } from '@/i18n/constants';
+import { useTranslations } from '@/i18n/helpers';
+const locale = Astro.currentLocale as Locale | undefined;
+const t = useTranslations(locale);
+---
+
+<details class="dropdown dropdown-end">
+  <summary
+    tabindex="0"
+    role="button"
+    title={t('language')}
+    aria-label={t('language')}
+    class="inline-block align-middle select-none rounded-full p-2.5 transition text-body hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
+  >
+    <Languages class="size-5" />
+  </summary>
+  <div tabindex="0" class="dropdown-content border border-body/10 bg-background rounded-xl z-10 p-1 shadow-sm -me-2 mt-4 flex flex-col gap-1">
+    {
+      Object.keys(LOCALES).map(lang => (
+        <button
+          type="button"
+          data-lang={lang}
+          class={`btnChangeLocale rounded-lg px-3 py-1 transition ${lang === locale ? 'bg-primary/10 text-primary' : ''} hover:bg-primary/10 hover:text-primary`}
+        >{LOCALES[lang as Locale].label}</button>
+      ))
+    }
+  </div>
+</details>
+
+<script>
+  document.addEventListener("click", ev => {
+    const el = ev.target as HTMLElement;
+    if (el.classList.contains('btnChangeLocale')) {
+      const { lang } = el.dataset;
+      localStorage.selectedLang = lang!;
+      location.href = '/' + lang! + location.pathname.replace(/^\/[a-zA-Z-]+/, '');
+    }
+  });
+</script>

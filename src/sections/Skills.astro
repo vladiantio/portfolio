@@ -1,0 +1,29 @@
+---
+import PencilRuler from 'lucide-solid/icons/pencil-ruler';
+import skills from '@/data/skills';
+import SkillIcon from '@/components/SkillIcon.astro';
+import type { Locale } from '@/i18n/constants';
+import { translate, useTranslations } from '@/i18n/helpers';
+
+const locale = Astro.currentLocale as Locale | undefined;
+const t = useTranslations(locale);
+---
+<section class="pt-8">
+  <h2 class="flex items-center mb-4"><PencilRuler class="text-primary drop-shadow-primary-xl mr-2" />{t('portfolio.skills')}</h2>
+  
+  <div class="grid md:grid-cols-3 gap-x-8 gap-y-4">
+    {skills.map(item => (
+      <div>
+        <h3 class="mb-2">{translate(item.name, locale)}</h3>
+        <div class="flex flex-wrap items-center gap-2">
+          {item.keywords.map(keyword => (
+            <span class="p-0 rounded-xl overflow-hidden bg-body/5" title={keyword}>
+              <span class="sr-only">{keyword}</span>
+              <SkillIcon class="size-12" name={keyword} />
+            </span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

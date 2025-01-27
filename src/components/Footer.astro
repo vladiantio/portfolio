@@ -1,6 +1,16 @@
 ---
+import Mail from 'lucide-solid/icons/mail';
+import basics from "@/data/basics";
+import { translate } from "@/i18n/helpers";
+import type { Locale } from "@/i18n/constants";
+import ExternalLink from "./ExternalLink.astro";
 import SocialLinks from "./SocialLinks.astro";
+
+const locale = Astro.currentLocale as Locale | undefined;
 ---
-<footer class="max-w-screen-lg mx-auto px-5 flex flex-col-reverse sm:flex-row items-center justify-center gap-4 py-10">
-  <SocialLinks />
+<footer class="max-w-screen-md mx-auto px-5 flex items-center justify-center gap-4 py-10">
+  <div class="flex flex-wrap items-center gap-8">
+    <ExternalLink class="icon" href={`mailto:${translate(basics.email, locale)}`} title={translate(basics.email, locale) ?? ''} aria-label="Email"><Mail class="size-6" /></ExternalLink>
+    <SocialLinks />
+  </div>
 </footer>

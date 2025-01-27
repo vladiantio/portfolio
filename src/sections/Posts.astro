@@ -1,0 +1,17 @@
+---
+import NotebookPen from 'lucide-solid/icons/notebook-pen';
+import BlogGrid from "@/components/blog/BlogGrid.astro";
+import type { Locale } from '@/i18n/constants';
+import { useTranslations } from '@/i18n/helpers';
+import { getAllBlogPosts } from "@/services/blog";
+
+const locale = Astro.currentLocale as Locale | undefined;
+const t = useTranslations(locale);
+const posts = await getAllBlogPosts(locale);
+---
+{posts && posts.length > 0 && (
+  <section class="pt-8">
+    <h2 class="flex items-center mb-4"><NotebookPen class="text-primary drop-shadow-primary-xl mr-2" />{t('blog.posts')}</h2>
+    <BlogGrid posts={posts} />
+  </section>
+)}

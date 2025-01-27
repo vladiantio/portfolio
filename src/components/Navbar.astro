@@ -1,36 +1,127 @@
 ---
+import Logo from '@/assets/logo.svg';
+import basics from '@/data/basics';
 import ThemeSelector from "./client/ThemeSelector";
+import LocaleSelector from "./LocaleSelector.astro";
+import type { Locale } from "@/i18n/constants";
+import { useTranslations } from '@/i18n/helpers';
+
+const locale = Astro.currentLocale as Locale | undefined;
+const t = useTranslations(locale);
+
+const menu = [
+  { href: `/${locale}/#`, label: t('home') },
+  { href: `/${locale}/#projects`, label: t('projects') },
+  { href: `/${locale}/#experience`, label: t('portfolio.experience') },
+  { href: `/${locale}/links`, label: 'Links' },
+];
 ---
 
-<nav class="sticky top-0 inset-x-0 w-full max-w-screen-md mx-auto z-10 p-3 transition-all" id="mainNavbar">
-  <div class="flex items-center justify-between gap-4">
-    <div class="p-1 rounded-full bg-background border border-soft shadow">
-      <a class="rounded-full overflow-hidden" href="/" title="@vladiantio">
-        <span class="sr-only">@vladiantio</span>
-        <img alt="Logo" src="/favicon.svg" class="size-10" loading="lazy" width="40" height="40" />
+<nav class="navbar" id="mainNavbar">
+  <div class="navbar-container">
+    <div class="navbar-bar">
+      <a class="rounded-full p-2.5 transition hover:bg-primary/10 text-body hover:text-primary" href="/" title={'@' + basics.username}>
+        <span class="sr-only">@{basics.username}</span>
+        <Logo class="size-5" />
       </a>
     </div>
-    <div class="p-1 rounded-full bg-background border border-soft shadow">
-      <ThemeSelector client:load />
+    <div class="navbar-bar static" id="mainMenu" popover="auto">
+      {menu.map(item => (
+        <a class="navbar-link" href={item.href}>{item.label}</a>
+      ))}
+    </div>
+    <div class="flex gap-x-4">
+      <div class="navbar-bar">
+        <LocaleSelector />
+        <ThemeSelector client:load lang={locale} />
+      </div>
+      <div class="navbar-bar sm:!hidden">
+        <button class="rounded-full p-2.5 transition hover:bg-primary/10 text-body hover:text-primary" popovertarget="mainMenu">
+          <svg class="size-5" width="20" height="20" viewBox="0 0 100 100">
+            <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+            <path class="line line2" d="M 20,50 H 80" />
+            <path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 </nav>
 
 <script>
-  let prevScrollY = window.scrollY;
-  function handleScroll() {
-    const navbar = document.getElementById('mainNavbar');
-    const hideClassList = ['-translate-y-full'];
-    const { offsetHeight } = navbar!;
-    const { scrollY } = window;
-    const isActive = scrollY > offsetHeight;
-    const isScrollDown = scrollY > prevScrollY;
-    if (isActive && isScrollDown) {
-      navbar!.classList.add(...hideClassList);
-    } else {
-      navbar!.classList.remove(...hideClassList);
-    }
-    prevScrollY = scrollY;
-  }
-  window.addEventListener('scroll', handleScroll);
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('#mainMenu .navbar-link').forEach(el => {
+      el.addEventListener('click', () => {
+        document.getElementById('mainMenu')?.hidePopover();
+      });
+    })
+  });
 </script>
+
+<style is:global>
+  @reference '@/styles/global.css';
+
+  .navbar {
+    @apply sticky top-0 inset-x-0 w-full max-w-screen-md mx-auto z-10 py-2 px-3 overflow-x-clip;
+  }
+
+  .navbar-container {
+    @apply flex items-center justify-between gap-4;
+  }
+
+  .navbar-bar {
+    @apply flex items-center justify-center p-1 gap-0.5 rounded-full bg-background/75 shadow-neon-sm shadow-primary backdrop-blur-lg;
+  }
+
+  .navbar-link {
+    @apply font-semibold py-2 px-4 rounded-full transition text-body hover:text-primary hover:bg-primary/10;
+  }
+
+  @media (width < 40rem) {
+    #mainMenu {
+      @apply fixed top-16 right-2.5 inset-auto z-10 items-stretch rounded-3xl flex-col;
+      @apply motion-safe:transition-all transition-discrete duration-300;
+      @apply open:flex not-open:hidden;
+      @apply starting:open:translate-x-[calc(100%_+_var(--spacing)_*_16)];
+      @apply not-open:translate-x-[calc(100%_+_var(--spacing)_*_16)];
+    }
+  }
+
+  /* Source: https://uxdesign.cc/the-menu-210bec7ad80c */
+  .line {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 8;
+    @apply motion-safe:transition-[stroke-dasharray,stroke-dashoffset] duration-300;
+  }
+  .line1 {
+    stroke-dasharray: 60 207;
+    stroke-width: 8;
+  }
+  .line2 {
+    stroke-dasharray: 60 60;
+    stroke-width: 8;
+  }
+  .line3 {
+    stroke-dasharray: 60 207;
+    stroke-width: 8;
+  }
+
+  body:has(#mainMenu:popover-open) {
+    .line1 {
+      stroke-dasharray: 90 207;
+      stroke-dashoffset: -134;
+      stroke-width: 8;
+    }
+    .line2 {
+      stroke-dasharray: 1 60;
+      stroke-dashoffset: -30;
+      stroke-width: 8;
+    }
+    .line3 {
+      stroke-dasharray: 90 207;
+      stroke-dashoffset: -134;
+      stroke-width: 8;
+    }
+  }
+</style>

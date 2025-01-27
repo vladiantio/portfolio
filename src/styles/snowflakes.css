@@ -25,7 +25,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    color: oklch(var(--color-primary));
+    color: oklch(var(--primary));
     filter: drop-shadow(0 0 0.25rem #fff);
     animation:
       var(--sf-sway-duration) ease-in-out var(--sf-sway-delay) infinite alternate var(--sf-sway-type),

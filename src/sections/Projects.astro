@@ -1,0 +1,114 @@
+---
+import Globe from 'lucide-solid/icons/globe';
+import UserRoundPen from 'lucide-solid/icons/user-round-pen';
+import projects from '@/data/projects';
+import type { Locale } from '@/i18n/constants';
+import { translate, useTranslations } from '@/i18n/helpers';
+import ExternalLink from '@/components/ExternalLink.astro';
+import Illustration from '@/components/Illustration.astro';
+import SocialIcon from '@/components/SocialIcon.astro';
+import SkillIcon from '@/components/SkillIcon.astro';
+
+const locale = Astro.currentLocale as Locale | undefined;
+const t = useTranslations(locale);
+---
+{projects && projects.length > 0 && (
+  <section class="pt-16" id="projects">
+    <h2 class="flex items-center mb-4"><Globe class="text-primary drop-shadow-primary-xl mr-2" />{t('projects.featuredProjects')}</h2>
+
+    <div class="projects-grid">
+      {projects.map(item => (
+        <article class="project-item">
+          {['img-blurred', 'img-main'].map(className => (
+            <Illustration
+              alt={item.name}
+              class={'img ' + className}
+              src={item.image}
+              width="960"
+              height="540"
+            />
+          ))}
+          <header class="mt-4 mb-1 flex items-center justify-between">
+            <h3 class="title"><ExternalLink href={item.url}>{item.name}</a></h3>
+            <div class="flex items-center">
+              {item.urlCode && (
+                <ExternalLink
+                  class="px-2 icon"
+                  href={item.urlCode}
+                  title={t('projects.viewCode')}
+                  aria-label={t('projects.viewCode')}
+                >
+                  <SocialIcon name="github" class="size-6" />
+                </ExternalLink>
+              )}
+              {item.urlContributions && (
+                <ExternalLink
+                  class="px-2 icon"
+                  href={item.urlContributions}
+                  title={t('projects.viewMyContributions')}
+                  aria-label={t('projects.viewMyContributions')}
+                >
+                  <UserRoundPen class="size-6" />
+                </ExternalLink>
+              )}
+            </div>
+          </header>
+          <div class="mb-2">
+            <div class="flex flex-wrap items-center gap-2">
+              {item.technologies.map(technology => (
+                <span class="skill-badge">
+                  <SkillIcon name={technology} />
+                  <span>{technology}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+          <p>{translate(item.description, locale)}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  @reference '@/styles/global.css';
+
+  .projects-grid {
+    @apply grid sm:grid-cols-2 gap-x-8 gap-y-10;
+  }
+
+  .project-item {
+    @apply relative;
+
+    a {
+      @apply text-body hover:text-primary z-[1];
+    }
+
+    .img {
+      @apply rounded-xl w-full aspect-video motion-safe:transition-all duration-300;
+
+      .project-item:has(a:hover) & {
+        @apply -translate-y-1;
+      }
+    }
+
+    .img-main {
+      @apply shadow-[0_0.1rem_0.75rem_0_rgba(0,0,0,0.3)] shadow-primary/30 dark:shadow-black/30;
+    }
+
+    .img-blurred {
+      @apply absolute top-1 blur-sm -z-[1] opacity-60;
+
+      .project-item:has(a:hover) & {
+        @apply blur-md;
+      }
+    }
+
+    .title {
+      @apply m-0 font-bold;
+      a:before {
+        @apply [content:''] block absolute inset-0 size-full;
+      }
+    }
+  }
+</style>

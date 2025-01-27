@@ -1,29 +1,18 @@
-import type { ColorScheme } from "~/types/Theme";
+export const THEMES = ['light', 'dark', 'system'] as const;
 
-export function loadColorScheme(): ColorScheme {
-  if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark')
-    return 'dark';
-  } else {
-    document.documentElement.classList.remove('dark')
-    return 'light';
-  }
+export type Theme = (typeof THEMES)[number];
+
+const $html = () => document.documentElement;
+
+export function switchTheme(theme: Theme) {
+  localStorage.setItem('theme', theme);
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+	$html().dataset.theme = isDark ? 'dark' : 'light';
 }
 
-function setColor(value: string) {
-  document.documentElement.style.setProperty('--color-hex', value);
-}
+export const getColor = () => localStorage.color ?? getComputedStyle($html()).getPropertyValue('--main-color');
 
-export function loadColorTheme() {
-  if ('color' in localStorage) {
-    setColor(localStorage.color);
-    return localStorage.color;
-  } else {
-    return getComputedStyle(document.documentElement).getPropertyValue('--color-hex');
-  }
-}
-
-export function saveColor(value: string) {
-  setColor(value);
+export function changeColor(value: string) {
   localStorage.setItem('color', value);
+  $html().style.setProperty('--main-color', value);
 }

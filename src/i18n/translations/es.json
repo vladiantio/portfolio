@@ -1,0 +1,20 @@
+{
+  "language": "Idioma",
+  "backToHome": "Volver al inicio",
+  "home": "Inicio",
+  "portfolio.present": "actualidad",
+  "portfolio.experience": "Experiencia",
+  "portfolio.education": "Educación",
+  "portfolio.skills": "Habilidades",
+  "projects": "Proyectos",
+  "projects.featuredProjects": "Proyectos destacados",
+  "projects.viewCode": "Ver código",
+  "projects.viewMyContributions": "Ver mis contribuciones",
+  "blog.posts": "Publicaciones",
+  "blog.latestPosts": "Últimas publicaciones",
+  "blog.pubDate": "Fecha de publicación",
+  "blog.readingTime": "Tiempo de lectura",
+  "blog.sources": "Fuentes",
+  "status.404.title": "Página no encontrada",
+  "status.404.description": "No se encontró la página que buscabas."
+}

@@ -1,49 +1,98 @@
 ---
 import Calendar from 'lucide-solid/icons/calendar';
 import Clock from 'lucide-solid/icons/clock';
-import type { PostEntry } from '~/types/Post';
-import { formatShortDate } from '~/utils/date';
-import { removeExtension } from '~/utils/files';
+import type { Locale } from '@/i18n/constants';
+import { useTranslations } from '@/i18n/helpers';
+import type { PostEntry } from '@/types/Post';
+import { formatShortDate } from '@/utils/date';
+import Illustration from '../Illustration.astro';
 
 interface Props {
   post: PostEntry;
 }
 
 const { post } = Astro.props;
+const locale = post.lang as Locale;
+const t = useTranslations(locale);
 const { slug } = post;
-const { title, description, date, image } = post.data;
+const { title, description, date, hero, heroAlt } = post.data;
 const { remarkPluginFrontmatter } = await post.render();
 const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<a href={`/blog/${slug}/`} class={`relative rounded-3xl overflow-hidden p-4 -mx-3 ${!image && 'bg-soft/50'}`}>
-  {image && (
-    image.src.endsWith('.svg')
-    ? <img
-        alt={image.alt}
-        class="size-full object-cover absolute top-0 left-0 opacity-25 blur"
-        loading="lazy"
-        src={image.src}
-        width="1080"
-        height="567"
+<div class="blogGridItem">
+  <div class="relative">
+    {hero && ['img-blurred', 'img-main'].map(className => (
+      <Illustration
+        alt={heroAlt}
+        class={'img ' + className}
+        src={hero}
+        width="320"
+        height="168"
       />
-    : <picture>
-        <source srcset={removeExtension(image.src) + '-thumb.avif'} type="image/avif" />
-        <source srcset={removeExtension(image.src) + '-thumb.webp'} type="image/webp" />
-        <img
-          alt={image.alt}
-          class="size-full object-cover absolute top-0 left-0 opacity-25 blur"
-          loading="lazy"
-          src={removeExtension(image.src) + '-thumb.jpg'}
-          width="320"
-          height="168"
-        />
-      </picture>
-  )}
-  <h3 class="text-base m-0 line-clamp-1">{title}</h3>
-  <p class="mt-1 line-clamp-1 text-foreground">{description}</p>
-  <div class="flex flex-wrap gap-4 text-foreground text-sm mt-2">
-    <time class="flex items-center" title="Fecha de publicación" datetime={date.toISOString()}><Calendar class="size-4 mr-2" />{formatShortDate(date)}</time>
-    <span class="flex items-center" title="Tiempo de lectura"><Clock class="size-4 mr-2" />{readingTime}</span>
+    ))}
   </div>
-</a>
+  <div class="content">
+    <h3 class="title"><a href={`/${locale}/${slug}/`}>{title}</a></h3>
+    <p class="description">{description}</p>
+    <div class="flex flex-wrap gap-x-4 text-sm mt-1">
+      <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-2" />{formatShortDate(date, locale)}</time>
+      <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-2" />{readingTime}</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  @reference '@/styles/global.css';
+
+  .blogGridItem {
+    @apply flex p-2 relative bg-primary/10 rounded-2xl;
+
+    a {
+      @apply text-body hover:text-primary z-[1];
+    }
+
+    .img {
+      @apply shrink-0 rounded-xl w-24 h-16 object-cover motion-safe:transition-all duration-300;
+    }
+
+    .img-main {
+      @apply shadow-[0_0.05rem_0.375rem_0_rgba(0,0,0,0.3)] shadow-primary/30 dark:shadow-black/30;
+
+      .blogGridItem:has(a:hover) & {
+        @apply -translate-0.5;
+      }
+    }
+
+    .img-blurred {
+      @apply absolute top-0.5 -z-[1] opacity-60 blur-xs;
+
+      .blogGridItem:has(a:hover) & {
+        @apply blur-sm;
+      }
+    }
+
+    picture {
+      @apply shrink-0;
+
+      &:has(img.img-blurred) {
+        @apply absolute size-full;
+      }
+    }
+
+    .content {
+      @apply w-full px-2;
+    }
+
+    .title {
+      @apply text-base m-0 line-clamp-2 text-pretty;
+      a:before {
+        @apply [content:''] block absolute inset-0 size-full;
+      }
+    }
+
+    .description {
+      @apply text-sm line-clamp-1;
+    }
+  }
+</style>

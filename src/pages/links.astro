@@ -1,37 +1,11 @@
 ---
-import { basics } from '~/resume.json'
-import SimpleLayout from '~/layouts/SimpleLayout.astro';
-import ExternalLink from '~/components/ExternalLink.astro';
-import SocialIcon from '~/components/SocialIcon.astro';
-import Globe from 'lucide-solid/icons/globe';
-import ThemeSelector from '~/components/client/ThemeSelector';
-import { Snowflakes } from '~/components/backgrounds/Snowflakes';
+import Redirection from "@/i18n/Redirection.astro";
+import SimpleLayout from "@/layouts/SimpleLayout.astro";
 ---
 
-<SimpleLayout class="max-w-screen-md mx-auto px-5 pt-4 pb-8" title="Links" description="@vladiantio network links">
-  <header class="grid place-items-center gap-4 pt-4 mb-8 relative">
-    <div class="p-1 rounded-full bg-background border border-soft shadow absolute top-0 right-0 z-10">
-      <ThemeSelector client:load />
-    </div>
-    <a href="/">
-      <img alt="Logo" src="/favicon.svg" class="size-20 rounded-full shadow" loading="lazy" />
-    </a>
-    <h1 class="bg-gradient-primary text-bg">@vladiantio</h1>
-  </header>
-  <main class="grid gap-4 mb-8">
-    <a class="bg-soft flex px-5 py-4 shadow rounded-full" href="/">
-      <Globe class="size-6" />
-      <b class="w-full text-center">Website</b>
-    </a>
-    {basics.profiles.map(item => (
-      <ExternalLink class="bg-soft flex px-5 py-4 shadow rounded-full" href={item.url}>
-        <SocialIcon class="size-6" name={item.network.toLowerCase()} />
-        <b class="w-full text-center">{item.network}</b>
-      </ExternalLink>
-    ))}
-  </main>
-  <footer class="text-center">
-    <p>Made with ❤️ by <a href="/">@vladiantio</a></p>
-  </footer>
-  <Snowflakes client:load />
+<SimpleLayout title="Links" description="@vladiantio network links" noAnalytics>
+  <Fragment slot="before-head">
+    <Redirection />
+  </Fragment>
+  <h1>Redirecting ⌛</h1>
 </SimpleLayout>

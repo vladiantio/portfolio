@@ -1,0 +1,98 @@
+---
+import BriefcaseBusiness from 'lucide-solid/icons/briefcase-business';
+import GraduationCap from 'lucide-solid/icons/graduation-cap';
+import work from '@/data/work';
+import education from '@/data/education';
+import ExternalLink from '@/components/ExternalLink.astro';
+import type { Locale } from '@/i18n/constants';
+import { translate, useTranslations } from '@/i18n/helpers';
+import { formatMonth } from '@/utils/date';
+import { parseMD } from '@/utils/md';
+import SkillIcon from '@/components/SkillIcon.astro';
+
+const locale = Astro.currentLocale as Locale | undefined;
+const t = useTranslations(locale);
+---
+<section class="pt-16" id="experience">
+  <h2 class="flex items-center mb-4"><BriefcaseBusiness class="text-primary drop-shadow-primary-xl mr-2" />{t('portfolio.experience')}</h2>
+  <ol class="timeline">
+    {work.map(item => (
+      <li class="item">
+        <span class="period">{formatMonth(item.startDate, locale)} - {item.endDate.length > 0 ? formatMonth(item.endDate, locale) : t('portfolio.present')}</span>
+        <h3 class="title">
+          {item.url ? <ExternalLink class="external" href={item.url}>{item.name}</ExternalLink> : item.name}<span class="mx-3">·</span>{translate(item.position, locale)}
+        </h3>
+        {item.summary && <p class="summary">{translate(item.summary, locale)}</p>}
+        <ul class="highlights">
+          {translate(item.highlights, locale)?.map(highlight => (
+            <li class="mb-0.5"><Fragment set:html={parseMD(highlight)} /></li>
+          ))}
+        </ul>
+        <div class="mt-3 flex flex-wrap items-center gap-2">
+          {item.skills.map(skill => (
+            <span class="skill-badge">
+              <SkillIcon name={skill} />
+              <span>{skill}</span>
+            </span>
+          ))}
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<section class="pt-8">
+  <h2 class="flex items-center mb-4"><GraduationCap class="text-primary drop-shadow-primary-xl mr-2" />{t('portfolio.education')}</h2>
+  <ol class="timeline">
+    {education.map(item => (
+      <li class="item">
+        <span class="period">{formatMonth(item.startDate, locale)} - {item.endDate.length > 0 ? formatMonth(item.endDate, locale) : t('portfolio.present')}</span>
+        <h3 class="title">
+          {item.url ? <ExternalLink class="external" href={item.url}>{item.institution}</ExternalLink> : item.institution}<span class="mx-3">·</span>{translate(item.area, locale)}
+        </h3>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  @reference '@/styles/global.css';
+
+  .timeline {
+    @apply relative border-s-2 border-body/10 ms-2.5;
+
+    .item {
+      @apply ms-4;
+
+      &:not(:last-child) {
+        @apply pb-5 mb-5 border-b-2 border-body/10;
+      }
+
+      &:before {
+        @apply absolute [content:''] main-gradient-light size-4 rounded-full mt-1 -start-2 drop-shadow-primary-lg;
+      }
+
+      @variant dark {
+        &:before {
+          @apply main-gradient-dark;
+        }
+      }
+    }
+
+    .period {
+      @apply px-2 py-1 bg-primary/10 rounded-lg;
+    }
+
+    .title {
+      @apply mt-3 mb-2 font-semibold;
+    }
+
+    .summary {
+      @apply my-1;
+    }
+
+    .highlights {
+      @apply list-disc ms-4;
+    }
+  }
+</style>

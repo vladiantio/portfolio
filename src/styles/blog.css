@@ -1,10 +1,12 @@
-@import '~/styles/baseline-status.css';
-@import '~/styles/link-preview.css';
+@reference './global.css';
+
+@import './baseline-status.css';
+@import './link-preview.css';
 
 article.rich-text {
   /* Headers */
   h1 {
-    @apply text-3xl font-bold mt-8 mb-6;
+    @apply text-2xl font-bold mt-8 mb-6;
   }
 
   h2 {
@@ -12,7 +14,7 @@ article.rich-text {
   }
 
   h3 {
-    @apply text-xl font-medium mt-5 mb-3;
+    @apply text-xl font-semibold mt-5 mb-3;
   }
 
   h4 {
@@ -33,7 +35,7 @@ article.rich-text {
   }
 
   blockquote {
-    @apply border-l-4 border-soft pl-4 py-2 mb-4;
+    @apply border-l-4 border-body/10 pl-4 py-2 mb-4;
   }
 
   ul {
@@ -57,11 +59,11 @@ article.rich-text {
   }
 
   pre {
-    @apply rounded-3xl py-3 px-4 mt-2 mb-6 shadow-md max-w-[calc(100vw_-_2.5rem)];
+    @apply mb-6;
   }
 
   :not(pre) > code {
-    @apply rounded-xl bg-soft text-primary font-semibold px-2 py-0.5;
+    @apply rounded-lg bg-primary/10 font-medium text-primary px-1.5 py-0.5 whitespace-nowrap;
   }
 
   table {
@@ -78,7 +80,6 @@ article.rich-text {
 
   /* Images */
   img {
-    @apply w-full object-cover rounded-3xl my-6;
+    @apply w-full rounded-3xl my-6 bg-white/40 dark:bg-black/40;
   }
-
 }
