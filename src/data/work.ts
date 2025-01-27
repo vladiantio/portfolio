@@ -7,7 +7,7 @@ interface Work {
   url: string;
   startDate: string;
   endDate: string;
-  summary: {
+  summary?: {
     en: string;
     es: string;
   };
@@ -27,10 +27,6 @@ export default [
     url: "https://happyfoto.cl",
     startDate: "2024-08-01",
     endDate: "",
-    summary: {
-      en: "Happy Foto is a photo booking service located in Las Condes with delivery to Santiago and more regions of Chile.",
-      es: "Happy Foto es un servicio de enmarcado de fotografías ubicado en Las Condes con envío a domicilio a Santiago y a más regiones de Chile.",
-    },
     highlights: {
       en: [
         "Currently developing new features of the website built in WordPress.",
@@ -51,10 +47,6 @@ export default [
     url: "https://www.lecarosgroup.com",
     startDate: "2023-02-01",
     endDate: "2024-06-30",
-    summary: {
-      en: "",
-      es: "",
-    },
     highlights: {
       en: [
         "Continued developing, maintaining, and deploying various web projects of Lecaros Group.",
@@ -77,10 +69,6 @@ export default [
     url: "",
     startDate: "2020-02-05",
     endDate: "2022-10-01",
-    summary: {
-      en: "",
-      es: "",
-    },
     highlights: {
       en: [
         "One of the most requested clients of **G5** was **Lecaros Group**.",
