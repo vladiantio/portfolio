@@ -110,7 +110,7 @@
   }
 
   .skill-badge {
-    @apply flex items-center rounded-lg overflow-hidden bg-body/5 text-sm;
+    @apply flex items-center rounded-lg overflow-hidden bg-primary/10 text-sm;
 
     span {
       @apply mx-2;
@@ -164,15 +164,15 @@
 @utility main-gradient-light {
   background-image: linear-gradient(
     to right,
-    oklch(from var(--main-color) 72% c h),
-    oklch(from var(--main-color) 52% c h)
+    oklch(from var(--main-color) 70% c h),
+    oklch(from var(--main-color) 50% c h)
   );
 }
 
 @utility main-gradient-dark {
   background-image: linear-gradient(
     to right,
-    oklch(from var(--main-color) 96% c h),
-    oklch(from var(--main-color) 76% c h)
+    oklch(from var(--main-color) 90% c h),
+    oklch(from var(--main-color) 70% c h)
   );
 }
