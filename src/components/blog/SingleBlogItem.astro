@@ -7,7 +7,7 @@ import { useTranslations } from '@/i18n/helpers';
 import type { PostEntry } from "@/types/Post";
 import { formatShortDate } from "@/utils/date";
 import ExternalLink from "../ExternalLink.astro";
-import { removeExtension } from "@/utils/files";
+import Illustration from '../Illustration.astro';
 
 interface Props {
   post: PostEntry;
@@ -16,36 +16,19 @@ interface Props {
 const { post } = Astro.props;
 const locale = post.lang as Locale;
 const t = useTranslations(locale);
-const { title, description, date, tags, image, sources } = post.data;
+const { title, description, date, tags, hero, heroAlt, sources } = post.data;
 const { Content, remarkPluginFrontmatter } = await post.render();
 const { readingTime } = remarkPluginFrontmatter;
 ---
 
-{image && (
+{hero && (
   <div class="relative mb-6">
     {['heroImage-blurred', 'heroImage-shadow'].map(className => (
-      image.src.endsWith('.svg')
-      ? <img
-          alt={image.alt}
-          class={'heroImage ' + className}
-          fetchpriority="high"
-          loading="lazy"
-          src={image.src}
-          width="1080"
-          height="567"
-        />
-      : <picture>
-          <source srcset={removeExtension(image.src) + '.avif'} type="image/avif" />
-          <img
-            alt={image.alt}
-            class={'heroImage ' + className}
-            fetchpriority="high"
-            loading="lazy"
-            src={image.src}
-            width="1080"
-            height="567"
-          />
-        </picture>
+      <Illustration
+        alt={heroAlt}
+        class={'heroImage ' + className}
+        src={hero}
+      />
     ))}
   </div>
 )}
