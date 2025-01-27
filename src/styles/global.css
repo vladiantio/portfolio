@@ -78,7 +78,7 @@
   }
 
   p {
-    line-height: 1.875;
+    line-height: 1.75;
     text-wrap: pretty;
   }
 
@@ -106,6 +106,18 @@
 
     .dropdown-end & {
       inset-inline-end: 0;
+    }
+  }
+
+  .skill-badge {
+    @apply flex items-center rounded-lg overflow-hidden bg-body/5 text-sm;
+
+    span {
+      @apply mx-2;
+    }
+
+    svg {
+      @apply rounded-lg size-6;
     }
   }
 }
