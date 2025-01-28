@@ -21,7 +21,7 @@ interface Project {
 
 export default [
   {
-    name: "JSConf España 2025",
+    name: "JSConf España 2025 (@midudev)",
     image: jsconfEs,
     startDate: "2024-12-29",
     endDate: "2024-12-30",
