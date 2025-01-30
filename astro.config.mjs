@@ -48,7 +48,15 @@ export default defineConfig({
       useDarkModeMediaQuery: false,
     }),
     mdx(),
-    sitemap(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en',
+          es: 'es',
+        },
+      },
+    }),
     solid(),
   ],
   markdown: {
