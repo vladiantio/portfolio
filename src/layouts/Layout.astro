@@ -12,10 +12,11 @@ type Props = BaseHeadProps;
 
 const locale = Astro.currentLocale;
 const head = Astro.props;
+const themeColorStyle = head.themeColor && `--main-color: ${head.themeColor}`;
 ---
 
 <!doctype html>
-<html lang={locale ?? DEFAULT_LOCALE}>
+<html lang={locale ?? DEFAULT_LOCALE} style={themeColorStyle}>
 	<head>
 		<slot name="before-head" />
 		<BaseHead {...head} />

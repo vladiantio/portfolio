@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
-const { title, description, date, update, hero, og, tags } = post.data;
+const { title, description, date, update, hero, og, tags, themeColor } = post.data;
 
 const ogImage = hero && (og ? og : await getImage({ src: hero, format: "jpg" }));
 ---
@@ -30,6 +30,7 @@ const ogImage = hero && (og ? og : await getImage({ src: hero, format: "jpg" }))
   modifiedTime={update}
   image={ogImage?.src}
   tags={tags}
+  themeColor={themeColor}
 >
   <SingleBlogItem post={post} />
 </Layout>
