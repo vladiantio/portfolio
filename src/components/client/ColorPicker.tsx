@@ -53,12 +53,12 @@ const ColorPicker: Component<Props> = (props) => {
   const isOtherColor = createMemo(() => !colors.some(color => color.value == currentColor()));
 
   return (
-    <div class="flex gap-3 m-3">
+    <div class="flex gap-3 m-2 mt-3">
       <Index each={colors}>
         {color => (
           <button
             type="button"
-            class={`radio border-body/20 ${color().value == currentColor() ? 'checked' : ''}`}
+            class={`radio size-5 ${color().value == currentColor() ? 'checked' : ''}`}
             title={t(color().name)}
             aria-label={t(color().name)}
             style={{
@@ -73,7 +73,7 @@ const ColorPicker: Component<Props> = (props) => {
       </Index>
       <label
         for="otherColor"
-        class={`radio bg-color-wheel border-body/20 ${isOtherColor() ? 'checked' : ''}`}
+        class={`radio bg-color-wheel size-5 ${isOtherColor() ? 'checked' : ''}`}
         role="button"
         title={t('otherColor')}
         aria-label={t('otherColor')}
