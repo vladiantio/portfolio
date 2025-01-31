@@ -2,7 +2,7 @@
 import basics from "@/data/basics";
 import Analytics from "./Analytics.astro";
 import ThemeLoader from "./ThemeLoader.astro";
-import type { Locale } from "@/i18n/constants";
+import { DEFAULT_LOCALE, type Locale } from "@/i18n/constants";
 import { translate } from "@/i18n/helpers";
 
 export interface Props {
@@ -32,7 +32,7 @@ const {
 const metaImage = image || '/img/banner.png';
 
 const siteName = basics.shortname;
-const locale = Astro.currentLocale as Locale | undefined;
+const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
 const metaTitle = title ? `${title} · ${siteName}` : `${siteName} · ${translate(basics.shortDescription, locale)}`;
 const metaDescription = description ? description : translate(basics.seoDescription, locale);
 ---
@@ -52,7 +52,7 @@ const metaDescription = description ? description : translate(basics.seoDescript
 <meta name="generator" content={Astro.generator} />
 <meta name="theme-color" content={themeColor || '#0e1720'} />
 <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
-<link href="/rss.xml" rel="alternate" type="application/rss+xml" title="RSS" />
+<link href={`/${locale}/rss.xml`} rel="alternate" type="application/rss+xml" title="RSS" />
 <link href={Astro.url} rel="canonical" />
 <link href="/sitemap-index.xml" rel="sitemap" />
 
