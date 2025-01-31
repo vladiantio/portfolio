@@ -8,6 +8,7 @@ const colors = [
   { name: 'indigo', value: '#7593fe' },
   { name: 'red', value: '#ee6f5d' },
   { name: 'orange', value: '#e17f08' },
+  { name: 'yellow', value: '#f9ba26' },
   { name: 'green', value: '#5ab352' },
   { name: 'gray', value: '#9b9b9b' },
 ];
@@ -18,6 +19,7 @@ const translations = {
     indigo: 'Indigo',
     red: 'Red',
     orange: 'Orange',
+    yellow: 'Yellow',
     green: 'Green',
     gray: 'Gray',
     otherColor: 'Other color'
@@ -27,6 +29,7 @@ const translations = {
     indigo: 'Índigo',
     red: 'Rojo',
     orange: 'Naranja',
+    yellow: 'Amarillo',
     green: 'Verde',
     gray: 'Gris',
     otherColor: 'Otro color'
