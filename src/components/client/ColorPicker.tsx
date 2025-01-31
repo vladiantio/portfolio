@@ -8,6 +8,7 @@ const colors = [
   { name: 'indigo', value: '#7593fe' },
   { name: 'red', value: '#ee6f5d' },
   { name: 'orange', value: '#e17f08' },
+  { name: 'yellow', value: '#f9ba26' },
   { name: 'green', value: '#5ab352' },
   { name: 'gray', value: '#9b9b9b' },
 ];
@@ -18,6 +19,7 @@ const translations = {
     indigo: 'Indigo',
     red: 'Red',
     orange: 'Orange',
+    yellow: 'Yellow',
     green: 'Green',
     gray: 'Gray',
     otherColor: 'Other color'
@@ -27,6 +29,7 @@ const translations = {
     indigo: 'Índigo',
     red: 'Rojo',
     orange: 'Naranja',
+    yellow: 'Amarillo',
     green: 'Verde',
     gray: 'Gris',
     otherColor: 'Otro color'
@@ -50,43 +53,40 @@ const ColorPicker: Component<Props> = (props) => {
   const isOtherColor = createMemo(() => !colors.some(color => color.value == currentColor()));
 
   return (
-    <div>
-      <div class="flex gap-4 m-3">
-        <Index each={colors}>
-          {color => (
-            <button
-              type="button"
-              class={`size-4 rounded-full transition ${color().value == currentColor() ? 'ring-4 ring-primary/25' : ''}`}
-              title={t(color().name)}
-              aria-label={t(color().name)}
-              style={{
-                'background-color': color().value,
-              }}
-              onClick={handleChangeColor}
-              value={color().value}
-            >
-              <span class="sr-only">{t(color().name)}</span>
-            </button>
-          )}
-        </Index>
-        <label
-          for="otherColor"
-          class={`size-4 rounded-full transition ${isOtherColor() ? 'ring-4 ring-primary/25' : ''}`}
-          role="button"
-          title={t('otherColor')}
-          aria-label={t('otherColor')}
-        >
-          <span class="sr-only">{t('otherColor')}</span>
-          <span class="bg-color-wheel block size-4 rounded-full" />
-        </label>
-        <input
-          type="color"
-          class="sr-only bottom-0 left-0"
-          id="otherColor"
-          onInput={handleChangeColor}
-          value={currentColor()}
-        />
-      </div>
+    <div class="flex gap-3 m-3">
+      <Index each={colors}>
+        {color => (
+          <button
+            type="button"
+            class={`radio border-body/20 ${color().value == currentColor() ? 'checked' : ''}`}
+            title={t(color().name)}
+            aria-label={t(color().name)}
+            style={{
+              'background-color': color().value,
+            }}
+            onClick={handleChangeColor}
+            value={color().value}
+          >
+            <span class="sr-only">{t(color().name)}</span>
+          </button>
+        )}
+      </Index>
+      <label
+        for="otherColor"
+        class={`radio bg-color-wheel border-body/20 ${isOtherColor() ? 'checked' : ''}`}
+        role="button"
+        title={t('otherColor')}
+        aria-label={t('otherColor')}
+      >
+        <span class="sr-only">{t('otherColor')}</span>
+      </label>
+      <input
+        type="color"
+        class="sr-only bottom-0 left-0"
+        id="otherColor"
+        onInput={handleChangeColor}
+        value={currentColor()}
+      />
     </div>
   );
 }

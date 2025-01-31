@@ -10,7 +10,7 @@ export function switchTheme(theme: Theme) {
 	$html().dataset.theme = isDark ? 'dark' : 'light';
 }
 
-export const getColor = () => localStorage.color ?? getComputedStyle($html()).getPropertyValue('--main-color');
+export const getColor = () => getComputedStyle($html()).getPropertyValue('--main-color');
 
 export function changeColor(value: string) {
   localStorage.setItem('color', value);

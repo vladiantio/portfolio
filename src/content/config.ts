@@ -16,6 +16,7 @@ const blog = defineCollection({
       title: z.string(),
       href: z.string(),
     })).default([]),
+    themeColor: z.string().optional(),
   }),
 });
 

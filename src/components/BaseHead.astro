@@ -14,6 +14,7 @@ export interface Props {
 	modifiedTime?: Date | null;
 	tags?: string[] | null;
 	noAnalytics?: boolean;
+	themeColor?: string | null;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
 	modifiedTime,
 	tags,
 	noAnalytics,
+	themeColor,
 } = Astro.props;
 
 const metaImage = image || '/img/banner.png';
@@ -48,7 +50,7 @@ const metaDescription = description ? description : translate(basics.seoDescript
 <meta name="description" content={metaDescription} />
 <meta name="author" content={basics.name} />
 <meta name="generator" content={Astro.generator} />
-<meta name="theme-color" content="#3fa0fa" />
+<meta name="theme-color" content={themeColor || '#0e1720'} />
 <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
 <link href="/rss.xml" rel="alternate" type="application/rss+xml" title="RSS" />
 <link href={Astro.url} rel="canonical" />
