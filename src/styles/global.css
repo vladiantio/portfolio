@@ -124,7 +124,7 @@
   .radio {
     @apply relative appearance-none rounded-full size-4 border border-body/20 bg-white dark:bg-black;
     &:checked, &.checked {
-      @apply bg-primary border-primary before:absolute before:inset-1 before:bg-white before:rounded-full before:shadow-xs;
+      @apply bg-primary before:absolute before:inset-1 before:bg-white before:rounded-full before:shadow-xs before:shadow-black/30;
     }
   }
 }
