@@ -2,6 +2,7 @@
   "language": "Idioma",
   "backToHome": "Volver al inicio",
   "home": "Inicio",
+  "navbar.toggleMenu": "Alternar menú",
   "portfolio.present": "actualidad",
   "portfolio.experience": "Experiencia",
   "portfolio.education": "Educación",
