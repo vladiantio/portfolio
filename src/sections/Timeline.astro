@@ -20,7 +20,7 @@ const t = useTranslations(locale);
       <li class="item">
         <span class="period">{formatMonth(item.startDate, locale)} - {item.endDate.length > 0 ? formatMonth(item.endDate, locale) : t('portfolio.present')}</span>
         <h3 class="title">
-          {item.url ? <ExternalLink class="external" href={item.url}>{item.name}</ExternalLink> : item.name}<span class="mx-3">·</span>{translate(item.position, locale)}
+          {translate(item.position, locale)}<span class="mx-3">·</span>{item.url ? <ExternalLink class="external" href={item.url}>{item.name}</ExternalLink> : item.name}
         </h3>
         {item.summary && <p class="summary">{translate(item.summary, locale)}</p>}
         <ul class="highlights">
@@ -48,7 +48,7 @@ const t = useTranslations(locale);
       <li class="item">
         <span class="period">{formatMonth(item.startDate, locale)} - {item.endDate.length > 0 ? formatMonth(item.endDate, locale) : t('portfolio.present')}</span>
         <h3 class="title">
-          {item.url ? <ExternalLink class="external" href={item.url}>{item.institution}</ExternalLink> : item.institution}<span class="mx-3">·</span>{translate(item.area, locale)}
+          {translate(item.area, locale)}<span class="mx-3">·</span>{item.url ? <ExternalLink class="external" href={item.url}>{item.institution}</ExternalLink> : item.institution}
         </h3>
       </li>
     ))}
