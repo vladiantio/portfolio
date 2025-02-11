@@ -58,7 +58,7 @@ const ColorPicker: Component<Props> = (props) => {
         {color => (
           <button
             type="button"
-            class={`radio size-5 ${color().value == currentColor() ? 'checked' : ''}`}
+            class={`radio size-4.5 md:size-4 ${color().value == currentColor() ? 'checked' : ''}`}
             title={t(color().name)}
             aria-label={t(color().name)}
             style={{
@@ -73,7 +73,7 @@ const ColorPicker: Component<Props> = (props) => {
       </Index>
       <label
         for="otherColor"
-        class={`radio bg-color-wheel size-5 ${isOtherColor() ? 'checked' : ''}`}
+        class={`radio bg-color-wheel size-4.5 md:size-4 ${isOtherColor() ? 'checked' : ''}`}
         role="button"
         title={t('otherColor')}
         aria-label={t('otherColor')}
