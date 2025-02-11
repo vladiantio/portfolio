@@ -131,9 +131,7 @@
 
 
 @utility wrapper {
-  display: grid;
-  min-height: 100dvh;
-  grid-template-rows: auto 1fr auto;
+  @apply grid grid-rows-[auto_1fr_auto] max-w-screen-md min-h-dvh mx-auto;
 }
 
 @utility external {

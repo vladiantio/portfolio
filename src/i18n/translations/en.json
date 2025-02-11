@@ -15,6 +15,7 @@
   "blog.latestPosts": "Latest posts",
   "blog.pubDate": "Pub date",
   "blog.readingTime": "Reading time",
+  "blog.readingTime.read": "read",
   "blog.sources": "Sources",
   "status.404.title": "Page not found",
   "status.404.description": "The page you were looking for was not found."

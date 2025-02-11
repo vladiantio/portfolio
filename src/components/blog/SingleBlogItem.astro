@@ -36,7 +36,7 @@ const { readingTime } = remarkPluginFrontmatter;
 <h2 class="text-xl font-normal text-pretty">{description}</h2>
 <div class="flex flex-wrap gap-4 text-sm my-6">
   <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-2" />{formatShortDate(date, locale)}</time>
-  <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-2" />{readingTime}</span>
+  <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-2" />{readingTime} {t('blog.readingTime.read')}</span>
   {tags.map(tag => <span class="flex items-center"><Tag class="size-4 mr-2" />{tag}</span>)}
 </div>
 <article class="mt-12 mb-6 rich-text">
