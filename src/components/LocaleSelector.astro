@@ -1,8 +1,8 @@
 ---
 import Languages from 'lucide-solid/icons/languages';
-import { LOCALES, type Locale } from '@/i18n/constants';
+import { DEFAULT_LOCALE, LOCALES, type Locale } from '@/i18n/constants';
 import { useTranslations } from '@/i18n/helpers';
-const locale = Astro.currentLocale as Locale | undefined;
+const locale = Astro.currentLocale as Locale ?? DEFAULT_LOCALE;
 const t = useTranslations(locale);
 ---
 
@@ -32,10 +32,11 @@ const t = useTranslations(locale);
 <script>
   document.addEventListener("click", ev => {
     const el = ev.target as HTMLElement;
-    if (el.classList.contains('btnChangeLocale')) {
+    if (el.classList.contains('btnChangeLocale') && el.dataset.lang) {
       const { lang } = el.dataset;
-      localStorage.selectedLang = lang!;
-      location.href = '/' + lang! + location.pathname.replace(/^\/[a-zA-Z-]+/, '');
+      localStorage.selectedLang = lang;
+      const path = location.pathname.match(/^\/[a-zA-Z-]+\/(\S*)/)?.[1] ?? '';
+      location.replace('/' + lang + '/' + path);
     }
   });
 </script>
