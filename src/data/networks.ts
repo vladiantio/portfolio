@@ -14,16 +14,6 @@ export default [
     url: "https://github.com/vladiantio"
   },
   {
-    name: "Instagram",
-    url: "https://instagram.com/vladiantio",
-    isSecondary: true
-  },
-  {
-    name: "Threads",
-    url: "https://threads.net/@vladiantio",
-    isSecondary: true
-  },
-  {
     name: "Bluesky",
     url: "https://bsky.app/profile/vladiantio.com",
     isSecondary: true
