@@ -16,8 +16,8 @@ interface Props {
 const { hideLinks } = Astro.props;
 const locale = Astro.currentLocale as Locale | undefined;
 ---
-<section class="pt-4">
-  <div class="grid sm:grid-cols-[8rem_1fr] sm:items-center gap-x-4">
+<section class="pt-12">
+  <div class="grid sm:grid-cols-[8rem_1fr] sm:items-center gap-x-12">
     <div class="relative flex justify-center">
       {['avatar-blurred', 'avatar-shadow'].map(className => (
         <Picture
@@ -30,14 +30,14 @@ const locale = Astro.currentLocale as Locale | undefined;
         />
       ))}
     </div>
-    <div class="my-4 max-sm:text-center">
-      <h1>{basics.name}</h1>
-      <p class="font-semibold mb-1"><span class="bg-primary/10 text-primary py-1 px-3 rounded-full">@{basics.username}</span></p>
+    <div class="my-8 max-sm:text-center">
+      <h1 class="mb-2">{basics.name}</h1>
+      <p class="font-semibold mb-4"><span class="bg-primary/10 text-primary py-1 px-3 rounded-full">@{basics.username}</span></p>
       <p>{translate(basics.summary, locale)}</p>
     </div>
   </div>
   {!hideLinks && (
-    <div class="flex flex-wrap gap-8 sm:ml-36 max-sm:justify-center">
+    <div class="flex flex-wrap gap-8 sm:ml-44 max-sm:justify-center">
       <ExternalLink class="icon font-bold inline-flex items-center" href="/docs/CV-2025-01.pdf" title="Curriculum Vitae"><FileText class="size-6 mr-1" />CV</ExternalLink>
       <ExternalLink class="icon" href={`mailto:${translate(basics.email, locale)}`} title={translate(basics.email, locale) ?? ''} aria-label="Email"><Mail class="size-6" /></ExternalLink>
       <SocialLinks />

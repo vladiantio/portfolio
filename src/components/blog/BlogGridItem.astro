@@ -33,11 +33,11 @@ const { readingTime } = remarkPluginFrontmatter;
     ))}
   </div>
   <div class="content">
-    <h3 class="title"><a href={`/${locale}/${slug}/`}>{title}</a></h3>
-    <p class="description">{description}</p>
-    <div class="flex flex-wrap gap-x-4 text-sm mt-1">
-      <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-2" />{formatShortDate(date, locale)}</time>
-      <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-2" />{readingTime} {t('blog.readingTime.read')}</span>
+    <h3 class="title mb-2"><a href={`/${locale}/${slug}/`}>{title}</a></h3>
+    <p class="description mb-3">{description}</p>
+    <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
+      <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time>
+      <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
     </div>
   </div>
 </div>
@@ -46,7 +46,7 @@ const { readingTime } = remarkPluginFrontmatter;
   @reference '@/styles/global.css';
 
   .blogGridItem {
-    @apply flex p-2 relative bg-primary/10 rounded-2xl;
+    @apply flex p-4 gap-x-4 relative bg-primary/10 rounded-2xl;
 
     a {
       @apply text-body hover:text-primary z-[1];
@@ -81,11 +81,11 @@ const { readingTime } = remarkPluginFrontmatter;
     }
 
     .content {
-      @apply w-full px-2;
+      @apply flex-1;
     }
 
     .title {
-      @apply text-base m-0 line-clamp-2 text-pretty;
+      @apply text-base line-clamp-2 text-pretty;
       a:before {
         @apply [content:''] block absolute inset-0 size-full;
       }

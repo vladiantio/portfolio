@@ -14,6 +14,6 @@ export const getStaticPaths = () => localeParams;
 ---
 
 <Layout title="Blog" description={t('blog.latestPosts')}>
-  <h1 class="flex items-center text-2xl mb-4"><NotebookPen class="text-primary drop-shadow-primary-xl mr-2" />{t('blog.latestPosts')}</h1>
+  <h1 class="flex items-center text-2xl mb-8"><NotebookPen class="text-primary drop-shadow-primary-xl mr-3" />{t('blog.latestPosts')}</h1>
   <BlogGrid posts={posts} />
 </Layout>

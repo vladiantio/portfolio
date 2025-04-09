@@ -8,8 +8,8 @@ import { translate, useTranslations } from '@/i18n/helpers';
 const locale = Astro.currentLocale as Locale | undefined;
 const t = useTranslations(locale);
 ---
-<section class="pt-8">
-  <h2 class="flex items-center mb-4"><PencilRuler class="text-primary drop-shadow-primary-xl mr-2" />{t('portfolio.skills')}</h2>
+<section class="pt-16">
+  <h2 class="flex items-center mb-8"><PencilRuler class="text-primary drop-shadow-primary-xl mr-3" />{t('portfolio.skills')}</h2>
   
   <div class="grid md:grid-cols-3 gap-x-8 gap-y-4">
     {skills.map(item => (
