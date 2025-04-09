@@ -7,7 +7,7 @@ hero: ./js-es2025.svg
 heroAlt: JavaScript ES2025
 og: ./js-es2025.png
 tags:
-  - Programación
+  - Programming
   - JavaScript
   - ES2025
   - JSON
@@ -106,18 +106,15 @@ new Worker('worker.wasm', {
 ## 📌 Key Benefits
 
 - **Security**: When importing JSON modules, the `type: "json"` attribute guarantees you'll receive either JSON data or an error - never executable code.
-
 - **Consistency**: Provides a standard way to handle different module types across all JavaScript environments.
-
 - **Extensibility**: While JSON modules are the first use case, the syntax is designed to support future module types and additional metadata attributes.
-
 - **Cache Control**: Hosts can use attributes as part of their module caching strategy, with the behavior defined by each environment.
 
-## Practical Applications
+## ⚙️ Practical Applications
 
 - **JSON Modules**: The core use case of import attributes is to reliably load JSON modules. By specifying `type: "json"` you guarantee that the server delivers data as JSON, not potentially malicious code.
 - **Dynamic Imports**:  Import attributes allow using dynamic imports (`await import()`) and control over module type, making them more flexible for various use cases.
 
-## The Future of Import Attributes
+## 🔮 The Future of Import Attributes
 
 Import attributes are a crucial step towards a safer and more predictable JavaScript ecosystem. They're expected to become part of ES2025 and will likely be essential for web development in the coming years.

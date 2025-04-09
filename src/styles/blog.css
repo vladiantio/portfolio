@@ -6,19 +6,19 @@
 article.rich-text {
   /* Headers */
   h1 {
-    @apply text-2xl font-bold mt-8 mb-6;
+    @apply text-2xl font-bold mt-12 mb-10;
   }
 
   h2 {
-    @apply text-xl font-bold mt-8 mb-4;
+    @apply text-xl font-bold mt-10 mb-8;
   }
 
   h3 {
-    @apply text-xl font-semibold mt-5 mb-3;
+    @apply text-xl font-semibold mt-10 mb-8;
   }
 
   h4 {
-    @apply text-lg font-medium mt-4 mb-2;
+    @apply text-lg font-medium mt-8 mb-6;
   }
 
   /* Horizontal rules */
@@ -27,7 +27,7 @@ article.rich-text {
   }
 
   p {
-    @apply mt-2 mb-4;
+    @apply my-8;
   }
 
   del {
@@ -35,15 +35,15 @@ article.rich-text {
   }
 
   blockquote {
-    @apply border-l-4 border-body/10 pl-4 py-2 mb-4;
+    @apply border-l-4 border-body/10 pl-4 py-2 mb-8;
   }
 
   ul {
-    @apply list-disc pl-4 mb-4;
+    @apply list-disc pl-4 mb-8;
   }
 
   ol {
-    @apply list-decimal pl-4 mb-4;
+    @apply list-decimal pl-4 mb-8;
   }
 
   li {
@@ -59,7 +59,7 @@ article.rich-text {
   }
 
   pre {
-    @apply mb-6;
+    @apply mb-8;
   }
 
   :not(pre) > code {
@@ -67,7 +67,7 @@ article.rich-text {
   }
 
   table {
-    @apply w-full border-collapse my-6;
+    @apply w-full border-collapse my-8;
   }
 
   th {
@@ -80,6 +80,6 @@ article.rich-text {
 
   /* Images */
   img {
-    @apply w-full rounded-3xl my-6 bg-white/40 dark:bg-black/40;
+    @apply w-full rounded-3xl my-8 bg-white/40 dark:bg-black/40;
   }
 }

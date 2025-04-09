@@ -9,7 +9,7 @@ interface Props {
 const { posts } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 gap-4">
+<div class="grid grid-cols-1 gap-6">
   {
     posts && posts.length > 0
       ? posts.map((post) => <BlogGridItem post={post} />)
