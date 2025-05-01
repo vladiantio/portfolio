@@ -22,7 +22,7 @@ export const getStaticPaths = () => localeParams;
       <section class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 pt-16">
         {networks.map(item => (
           <ExternalLink class="networkLink" href={item.url}>
-            <SocialIcon class="size-full" name={item.name.toLowerCase()} />
+            <SocialIcon class="size-6" name={item.name.toLowerCase()} />
             <strong>{item.name}</strong>
           </ExternalLink>
         ))}
