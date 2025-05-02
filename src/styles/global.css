@@ -131,7 +131,7 @@
 
 
 @utility wrapper {
-  @apply flex flex-col max-w-screen-md min-h-dvh mx-auto;
+  @apply flex flex-col max-w-(--main-container-width) min-h-dvh mx-auto;
 }
 
 @utility external {

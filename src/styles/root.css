@@ -12,6 +12,8 @@
   --primary-light-hover: from var(--main-color) 40% calc(c * 0.85) h;
   --primary: var(--primary-light);
   --primary-hover: var(--primary-light-hover);
+
+  --main-container-width: 48rem;
 }
 
 [data-theme='dark'] {
