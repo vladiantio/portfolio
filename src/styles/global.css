@@ -13,6 +13,7 @@
     -moz-osx-font-smoothing: grayscale;
     background-color: oklch(var(--background));
     color: oklch(var(--foreground));
+    font-size: var(--text-base);
     position: relative;
   }
 
@@ -46,13 +47,14 @@
   }
 
   h1, h2 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.75rem;
+    font-size: 1.5rem;
+  }
+
+  h1 {
+    font-weight: 900;
   }
 
   h2 {
-    font-size: 1.25rem;
     font-weight: 700;
   }
 

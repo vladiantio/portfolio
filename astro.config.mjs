@@ -41,7 +41,10 @@ export default defineConfig({
       },
       styleOverrides: {
         codeFontFamily: 'var(--font-mono)',
+        codeFontSize: 'var(--text-base)',
         codeFontWeight: '500',
+        uiFontFamily: 'var(--font-sans)',
+        uiFontSize: 'var(--text-base)',
       },
       themes: ['github-dark', 'github-light'],
       themeCssSelector: (theme) => `[data-theme='${theme.type}']`,
