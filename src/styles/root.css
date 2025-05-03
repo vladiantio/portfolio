@@ -13,7 +13,7 @@
   --primary: var(--primary-light);
   --primary-hover: var(--primary-light-hover);
 
-  --main-container-width: 56rem;
+  --main-container-width: 52rem;
 }
 
 [data-theme='dark'] {
