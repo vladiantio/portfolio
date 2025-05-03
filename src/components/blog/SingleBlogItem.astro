@@ -22,18 +22,20 @@ const { readingTime } = remarkPluginFrontmatter;
 ---
 
 {hero && (
-  <div class="relative mt-8 mb-12">
-    {['heroImage-blurred', 'heroImage-shadow'].map(className => (
+  <div class="hero">
+    {['hero-blurred', ''].map(className => (
       <Illustration
         alt={heroAlt}
-        class={'heroImage ' + className}
+        class={className}
         src={hero}
       />
     ))}
   </div>
 )}
-<h1 class="my-8 text-2xl leading-normal text-center">{title}</h1>
-<h2 class="text-xl font-normal text-center mb-12">{description}</h2>
+<div class="heading">
+  <h1 class="title">{title}</h1>
+  <h2 class="description">{description}</h2>
+</div>
 <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm mb-12">
   <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time>
   <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
@@ -54,15 +56,32 @@ const { readingTime } = remarkPluginFrontmatter;
 <style>
   @reference '@/styles/global.css';
 
-  .heroImage {
-    @apply w-full object-cover aspect-[120/63] rounded-3xl bg-white/40 dark:bg-black/40;
+  :root {
+    --hero-width: min(var(--main-container-width) - 2.5rem, 100vw - 2.5rem)
   }
 
-  .heroImage-shadow {
-    @apply shadow-center-xl shadow-primary/60 dark:shadow-black/60;
+  .hero {
+    @apply absolute -z-[1] inset-0 pt-20 mask-radial-[100%_100%] mask-radial-from-50% mask-radial-at-top;
+    height: calc(var(--hero-width) / 120 * 63 + 6rem);
+
+    img {
+      @apply object-cover aspect-[120/63] rounded-3xl bg-white/40 dark:bg-black/40 fixed inset-x-0 mx-auto w-(--hero-width);
+    }
   }
 
-  .heroImage-blurred {
-    @apply absolute top-4 blur-3xl -z-[1] opacity-60;
+  .hero-blurred {
+    @apply blur-3xl -z-[1] contrast-150 saturate-200 opacity-60;
+  }
+
+  .hero + .heading {
+    margin-top: calc(var(--hero-width) / 120 * 63 - 1rem);
+  }
+
+  .title {
+    @apply text-4xl text-center text-primary my-8;
+  }
+
+  .description {
+    @apply font-normal text-center text-pretty mb-10;
   }
 </style>
