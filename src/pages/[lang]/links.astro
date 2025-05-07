@@ -19,7 +19,7 @@ export const getStaticPaths = () => localeParams;
     <Navbar />
     <main class="flex-1 px-5 my-8 place-content-center">
       <Hero hideLinks />
-      <section class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 pt-16">
+      <section class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 pt-16">
         {networks.map(item => (
           <ExternalLink class="networkLink" href={item.url}>
             <SocialIcon class="size-6" name={item.name.toLowerCase()} />
