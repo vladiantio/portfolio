@@ -14,6 +14,7 @@ const icons = new Map([
   ["x", { id: "x", label: "X / Twitter" }],
   ["pinterest", { id: "pinterest", label: "Pinterest" }],
   ["bluesky", { id: "bluesky", label: "Bluesky" }],
+  ["mastodon", { id: "mastodon", label: "Mastodon" }],
 ]);
 
 const icon = icons.get(name);
@@ -24,5 +25,5 @@ const icon = icons.get(name);
   aria-label={icon?.label}
   class={className}
 >
-  <use href={`/icons/social.svg#${icon?.id}`}></use>
+  <use href={`/icons/social.svg?1#${icon?.id}`}></use>
 </svg>

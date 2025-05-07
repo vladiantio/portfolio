@@ -37,5 +37,10 @@ export default [
     name: "Pinterest",
     url: "https://pinterest.com/vladiantio",
     isSecondary: true
-  }
+  },
+  {
+    name: "Mastodon",
+    url: "https://mastodon.social/@vladiantio",
+    isSecondary: true
+  },
 ] as Network[];
