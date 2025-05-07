@@ -9,11 +9,7 @@ interface Props {
 const { class: className, name: label } = Astro.props;
 
 const icons = new Map([
-  ["html", { className: undefined, id: "html" }],
-  ["css", { className: undefined, id: "css" }],
-  ["javascript", { className: undefined, id: "js" }],
   ["typescript", { className: undefined, id: "ts" }],
-  ["c#", { className: undefined, id: "csharp" }],
   ["python", { className: undefined, id: "python" }],
   ["php", { className: "p-0.5", id: "php" }],
   ["sql", { className: undefined, id: "sql" }],
@@ -24,19 +20,14 @@ const icons = new Map([
   ["bootstrap", { className: undefined, id: "bootstrap" }],
   ["jquery", { className: "p-0.5", id: "jquery" }],
   ["tailwind css", { className: "p-0.5", id: "tailwindcss" }],
-  ["react", { className: undefined, id: "react" }],
-  ["visual studio code", { className: undefined, id: "vscode" }],
-  ["visual studio", { className: undefined, id: "vstudio" }],
-  ["git", { className: undefined, id: "git" }],
+  ["react", { className: "fill-[#087ea4] dark:fill-[#58c4dc]", id: "react" }],
   ["mysql", { className: "p-1", id: "mysql" }],
   ["azure", { className: "p-0.5", id: "azure" }],
   ["azure devops", { className: undefined, id: "azure-devops" }],
   ["trello", { className: undefined, id: "trello" }],
-  ["postman", { className: undefined, id: "postman" }],
   ["wordpress", { className: undefined, id: "wordpress" }],
-  ["github", { className: undefined, id: "github" }],
-  ["linux", { className: undefined, id: "linux" }],
   ["astro", { className: "p-0.5", id: "astro" }],
+  ["laravel", { className: "p-0.5", id: "laravel" }],
 ]);
 
 const icon = icons.get(label.toLowerCase());
@@ -47,5 +38,5 @@ const icon = icons.get(label.toLowerCase());
   aria-label={label}
   class={cn(icon?.className, className)}
 >
-  <use xlink:href={`/img/skill-icons.svg#${icon?.id}`}></use>
+  <use href={`/icons/skills.svg?1#${icon?.id}`}></use>
 </svg>
