@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@types/bun": "^1.2.4",
+    "@types/svg-sprite": "^0.0.39",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "0.14.1"
   }
