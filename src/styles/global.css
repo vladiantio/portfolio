@@ -115,11 +115,11 @@
     @apply flex items-center rounded-lg overflow-hidden bg-primary/10 text-sm;
 
     span {
-      @apply mx-3;
+      @apply mx-4;
     }
 
     svg {
-      @apply rounded-lg size-6;
+      @apply rounded-lg size-8;
     }
   }
 
