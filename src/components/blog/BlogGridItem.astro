@@ -15,12 +15,12 @@ const { post } = Astro.props;
 const locale = post.lang as Locale;
 const t = useTranslations(locale);
 const { slug } = post;
-const { title, description, date, hero, heroAlt } = post.data;
+const { title, description, date, hero, heroAlt, themeColor } = post.data;
 const { remarkPluginFrontmatter } = await post.render();
 const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<div class="blogGridItem">
+<div class="blogGridItem" style={{ '--main-color': themeColor }}>
   <div class="relative">
     {hero && ['img-blurred', 'img-main'].map(className => (
       <Illustration
@@ -46,6 +46,11 @@ const { readingTime } = remarkPluginFrontmatter;
   @reference '@/styles/global.css';
 
   .blogGridItem {
+    --primary: from var(--main-color) 56% calc(c * 0.85) h;
+    [data-theme='dark'] & {
+      --primary: from var(--main-color) 76% calc(c * 0.85) h;
+    }
+
     @apply flex p-4 gap-x-4 relative bg-primary/10 rounded-2xl;
 
     a {
