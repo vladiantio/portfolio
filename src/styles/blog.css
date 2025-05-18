@@ -1,8 +1,5 @@
 @reference './global.css';
 
-@import './baseline-status.css';
-@import './link-preview.css';
-
 article.rich-text {
   /* Headers */
   h1 {
@@ -27,7 +24,8 @@ article.rich-text {
   }
 
   p {
-    @apply my-8;
+    margin-block: 1em;
+    margin-block: 1lh;
   }
 
   del {
