@@ -40,7 +40,7 @@ export default [
   },
   {
     name: "Mastodon",
-    url: "https://mastodon.social/@vladiantio",
+    url: "https://elk.zone/mastodon.social/@vladiantio",
     isSecondary: true
   },
 ] as Network[];
