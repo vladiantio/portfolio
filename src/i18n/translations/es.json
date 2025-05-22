@@ -20,5 +20,9 @@
   "blog.next": "Siguiente",
   "blog.previous": "Anterior",
   "status.404.title": "Página no encontrada",
-  "status.404.description": "No se encontró la página que buscabas."
+  "status.404.description": "No se encontró la página que buscabas.",
+  "theme": "Tema",
+  "light": "Claro",
+  "dark": "Oscuro",
+  "system": "Sistema"
 }
