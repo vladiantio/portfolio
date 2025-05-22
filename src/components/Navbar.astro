@@ -1,10 +1,10 @@
 ---
 import Logo from '@/assets/logo.svg';
 import basics from '@/data/basics';
-import ThemeSelector from "./client/ThemeSelector";
 import LocaleSelector from "./LocaleSelector.astro";
 import type { Locale } from "@/i18n/constants";
 import { useTranslations } from '@/i18n/helpers';
+import ThemeDropdown from './theme/ThemeDropdown.astro';
 
 const locale = Astro.currentLocale as Locale | undefined;
 const t = useTranslations(locale);
@@ -33,7 +33,7 @@ const menu = [
     <div class="flex gap-x-4">
       <div class="navbar-bar">
         <LocaleSelector />
-        <ThemeSelector client:load lang={locale} />
+        <ThemeDropdown />
       </div>
       <div class="navbar-bar sm:!hidden">
         <button
