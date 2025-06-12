@@ -1,18 +1,26 @@
 ---
 import ExternalLink from '../ExternalLink.astro';
 import { parseOpenGraph } from './lib';
+import type { Meta } from './types';
 
 export interface Props {
 	/** URL to fetch Open Graph data. */
 	id: string;
 	/** Hide any image or video even if set in the OpenGraph data. */
 	hideMedia?: boolean;
+	/** Metadata to use instead of fetching Open Graph data. */
+	meta?: Meta;
 }
 
-const { id, hideMedia = false } = Astro.props;
+const { id, hideMedia = false, meta: metaProp } = Astro.props;
 
-const meta = await parseOpenGraph(id);
-const domain = meta?.url ? new URL(meta.url).hostname.replace('www.', '') : '';
+const metaOpenGraph = await parseOpenGraph(id);
+const meta = {
+	...metaOpenGraph,
+	...metaProp,
+};
+const url = meta?.url || id;
+const domain = url ? new URL(url).hostname.replace('www.', '') : '';
 ---
 
 {
