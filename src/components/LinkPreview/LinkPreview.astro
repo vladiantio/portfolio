@@ -14,17 +14,21 @@ export interface Props {
 
 const { id, hideMedia = false, fallbackMeta } = Astro.props;
 
-const metaOpenGraph = await parseOpenGraph(id);
+const openGraphMeta = await parseOpenGraph(id);
 const meta = {
-	...fallbackMeta,
-	...metaOpenGraph,
+	title: openGraphMeta?.title || fallbackMeta?.title,
+	description: openGraphMeta?.description || fallbackMeta?.description,
+	image: openGraphMeta?.image || fallbackMeta?.image,
+	imageAlt: openGraphMeta?.imageAlt || fallbackMeta?.imageAlt,
+	url: openGraphMeta?.url || fallbackMeta?.url || id,
+	video: openGraphMeta?.video || fallbackMeta?.video,
+	videoType: openGraphMeta?.videoType || fallbackMeta?.videoType,
 };
-const url = meta?.url || id;
-const domain = url ? new URL(url).hostname.replace('www.', '') : '';
+const domain = meta.url ? new URL(meta.url).hostname.replace('www.', '') : '';
 ---
 
 {
-	meta && meta.title ? (
+	meta.title ? (
 		<article
 			class:list={[
 				'link-preview',
