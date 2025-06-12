@@ -8,16 +8,16 @@ export interface Props {
 	id: string;
 	/** Hide any image or video even if set in the OpenGraph data. */
 	hideMedia?: boolean;
-	/** Metadata to use instead of fetching Open Graph data. */
-	meta?: Meta;
+	/** Fallback metadata in case of failure to fetch Open Graph data. */
+	fallbackMeta?: Meta;
 }
 
-const { id, hideMedia = false, meta: metaProp } = Astro.props;
+const { id, hideMedia = false, fallbackMeta } = Astro.props;
 
 const metaOpenGraph = await parseOpenGraph(id);
 const meta = {
+	...fallbackMeta,
 	...metaOpenGraph,
-	...metaProp,
 };
 const url = meta?.url || id;
 const domain = url ? new URL(url).hostname.replace('www.', '') : '';
