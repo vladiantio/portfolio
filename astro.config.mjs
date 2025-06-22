@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import solid from '@astrojs/solid-js';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
@@ -57,7 +56,6 @@ export default defineConfig({
         },
       },
     }),
-    solid(),
   ],
   markdown: {
     remarkPlugins: [remarkReadingTime],
