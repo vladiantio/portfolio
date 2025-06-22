@@ -2,13 +2,14 @@
 import Sun from '@lucide/astro/icons/sun';
 import Moon from '@lucide/astro/icons/moon';
 import SunMoon from '@lucide/astro/icons/sun-moon';
-import { THEMES } from '@/utils/theme';
 import ColorPicker from './ColorPicker.astro';
 
 import { DEFAULT_LOCALE, type Locale } from '@/i18n/constants';
 import { useTranslations } from '@/i18n/helpers';
 const locale = Astro.currentLocale as Locale ?? DEFAULT_LOCALE;
 const t = useTranslations(locale);
+
+const THEMES = ['light', 'dark', 'system'] as const;
 
 const iconTheme = {
   light: Sun,
