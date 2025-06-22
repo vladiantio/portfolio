@@ -90,15 +90,18 @@ const { readingTime } = remarkPluginFrontmatter;
   @reference '@/styles/global.css';
 
   :root {
-    --hero-width: min(var(--main-container-width) - 2.5rem, 100vw - 2.5rem)
+    --hero-width: min(var(--main-container-width) - 2.5rem, 100vw - 2.5rem);
+    --aspect-width: 120;
+    --aspect-height: 63;
+    --aspect: calc(var(--aspect-width) / var(--aspect-height));
   }
 
   .hero {
     @apply absolute -z-[1] inset-0 pt-20 mask-radial-[100%_100%] mask-radial-from-60% mask-radial-at-top;
-    height: calc(var(--hero-width) / 120 * 63 + 6rem);
+    height: calc(var(--hero-width) / var(--aspect-width) * var(--aspect-height) + 6rem);
 
     img {
-      @apply object-cover aspect-[120/63] rounded-3xl bg-white/40 dark:bg-black/40 fixed inset-x-0 mx-auto w-(--hero-width);
+      @apply object-cover aspect-(--aspect) rounded-3xl bg-white/40 dark:bg-black/40 fixed inset-x-0 mx-auto w-(--hero-width);
     }
   }
 
@@ -107,7 +110,7 @@ const { readingTime } = remarkPluginFrontmatter;
   }
 
   .hero + .heading {
-    margin-top: calc(var(--hero-width) / 120 * 63 - 1rem);
+    margin-top: calc(var(--hero-width) / var(--aspect-width) * var(--aspect-height) - 1rem);
   }
 
   .title {
