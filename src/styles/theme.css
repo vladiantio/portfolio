@@ -1,5 +1,33 @@
 @variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+:root {
+  --main-color: #3fa0fa;
+
+  --body: 0% 0 0;
+  --background: from var(--main-color) 98% calc(c * 0.12) h;
+  --soft: from var(--main-color) 92% calc(c * 0.16) h;
+  --foreground: from var(--main-color) 15% calc(c * 0.16) h;
+  --muted: from var(--main-color) 62% calc(c * 0.16) h;
+  --primary-dark: from var(--main-color) 76% calc(c * 0.85) h;
+  --primary-dark-hover: from var(--main-color) 92% calc(c * 0.85) h;
+  --primary-light: from var(--main-color) 56% calc(c * 0.85) h;
+  --primary-light-hover: from var(--main-color) 40% calc(c * 0.85) h;
+  --primary: var(--primary-light);
+  --primary-hover: var(--primary-light-hover);
+
+  --main-container-width: 54rem;
+}
+
+[data-theme='dark'] {
+  --body: 100% 0 0;
+  --background: from var(--main-color) 20% calc(c * 0.142) h;
+  --soft: from var(--main-color) 30% calc(c * 0.16) h;
+  --foreground: from var(--main-color) 98% calc(c * 0.02) h;
+  --muted: from var(--main-color) 88% calc(c * 0.16) h;
+  --primary: var(--primary-dark);
+  --primary-hover: var(--primary-dark-hover);
+}
+
 @theme inline {
   --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-mono: 'Inconsolata Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
