@@ -76,17 +76,15 @@ const updateIcon = (activeTheme) => {
   })
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const currentTheme = localStorage.theme ?? 'system';
-  document.querySelector(`#themeDropdown [data-icon-theme="${currentTheme}"]`)?.classList.remove('hidden');
-  document.querySelector(`#themeDropdown [name="themeOption"][value="${currentTheme}"]`)?.setAttribute('checked', '');
+const currentTheme = localStorage.theme ?? 'system';
+document.querySelector(`#themeDropdown [data-icon-theme="${currentTheme}"]`)?.classList.remove('hidden');
+document.querySelector(`#themeDropdown [name="themeOption"][value="${currentTheme}"]`)?.setAttribute('checked', '');
 
-  document.getElementsByName('themeOption').forEach((el) => {
-    el.addEventListener('change', (ev) => {
-      const activeTheme = ev.target.value;
-      switchTheme(activeTheme);
-      updateIcon(activeTheme);
-    });
-  })
+document.getElementsByName('themeOption').forEach((el) => {
+  el.addEventListener('change', (ev) => {
+    const activeTheme = ev.target.value;
+    switchTheme(activeTheme);
+    updateIcon(activeTheme);
+  });
 });
 </script>
