@@ -3,15 +3,15 @@
 :root {
   --main-color: #3fa0fa;
 
-  --background: oklch(from var(--main-color) 98% calc(c * 0.12) h);
-  --foreground: oklch(from var(--main-color) 15% calc(c * 0.16) h);
-  --muted: oklch(from var(--main-color) 62% calc(c * 0.16) h);
-  --body: oklch(0% 0 0);
-  --soft: oklch(from var(--main-color) 92% calc(c * 0.16) h);
-  --primary-dark: oklch(from var(--main-color) 76% calc(c * 0.85) h);
-  --primary-dark-hover: oklch(from var(--main-color) 92% calc(c * 0.85) h);
-  --primary-light: oklch(from var(--main-color) 56% calc(c * 0.85) h);
-  --primary-light-hover: oklch(from var(--main-color) 40% calc(c * 0.85) h);
+  --background: oklch(from var(--main-color) 0.98 calc(c * 0.12) h);
+  --foreground: oklch(from var(--main-color) 0.15 calc(c * 0.16) h);
+  --muted: oklch(from var(--main-color) 0.62 calc(c * 0.16) h);
+  --body: oklch(0 0 0);
+  --soft: oklch(from var(--main-color) 0.92 calc(c * 0.16) h);
+  --primary-dark: oklch(from var(--main-color) 0.76 calc(c * 0.85) h);
+  --primary-dark-hover: oklch(from var(--main-color) 0.92 calc(c * 0.85) h);
+  --primary-light: oklch(from var(--main-color) 0.56 calc(c * 0.85) h);
+  --primary-light-hover: oklch(from var(--main-color) 0.4 calc(c * 0.85) h);
   --primary: var(--primary-light);
   --primary-hover: var(--primary-light-hover);
 
@@ -19,11 +19,11 @@
 }
 
 [data-theme='dark'] {
-  --background: oklch(from var(--main-color) 20% calc(c * 0.142) h);
-  --foreground: oklch(from var(--main-color) 98% calc(c * 0.02) h);
-  --muted: oklch(from var(--main-color) 88% calc(c * 0.16) h);
-  --body: oklch(100% 0 0);
-  --soft: oklch(from var(--main-color) 30% calc(c * 0.16) h);
+  --background: oklch(from var(--main-color) 0.2 calc(c * 0.142) h);
+  --foreground: oklch(from var(--main-color) 0.98 calc(c * 0.02) h);
+  --muted: oklch(from var(--main-color) 0.88 calc(c * 0.16) h);
+  --body: oklch(1 0 0);
+  --soft: oklch(from var(--main-color) 0.3 calc(c * 0.16) h);
   --primary: var(--primary-dark);
   --primary-hover: var(--primary-dark-hover);
 }
