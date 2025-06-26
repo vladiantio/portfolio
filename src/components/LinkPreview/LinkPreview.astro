@@ -85,7 +85,7 @@ const domain = meta.url ? new URL(meta.url).hostname.replace('www.', '') : '';
 		display: flex;
 		flex-direction: column-reverse;
 		border-radius: var(--lp-corners);
-		border: 1px solid oklch(var(--body) / 0.1);
+		border: 1px solid color-mix(in oklab, var(--body) 10%, transparent);
 		transition: scale 150ms cubic-bezier(0.4, 0, 0.2, 1);
 
 		* {
@@ -112,7 +112,7 @@ const domain = meta.url ? new URL(meta.url).hostname.replace('www.', '') : '';
 		}
 
 		&:has(img, video) .link-preview__content {
-			border-top: 1px solid oklch(var(--body) / 0.1);
+			border-top: 1px solid color-mix(in oklab, var(--body) 10%, transparent);
 		}
 
 		&:active {
@@ -135,7 +135,7 @@ const domain = meta.url ? new URL(meta.url).hostname.replace('www.', '') : '';
 	}
 
 	.link-preview__domain {
-		color: oklch(var(--muted));
+		color: var(--muted);
 	}
 
 	.link-preview__description {

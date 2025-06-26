@@ -111,7 +111,7 @@ const year = baseline === 'newly' && baselineDate ? baselineDate.split(' ')[1]! 
 
     border: solid 1px transparent;
     border-radius: 1.5rem;
-    background: oklch(var(--body) / 0.1);
+    background: color-mix(in oklab, var(--body) 10%, transparent);
     padding-top: 1em;
     padding-top: 1lh;
     padding-inline: 1.5rem;
@@ -193,7 +193,7 @@ const year = baseline === 'newly' && baselineDate ? baselineDate.split(' ')[1]! 
     .link,
     .link:active,
     .link:visited {
-      color: oklch(var(--primary));
+      color: var(--primary);
     }
 
     .link:hover {

@@ -47,9 +47,9 @@ const { readingTime } = remarkPluginFrontmatter;
   @reference '@/styles/global.css';
 
   .blogGridItem {
-    --primary: from var(--main-color) 56% calc(c * 0.85) h;
+    --primary: oklch(from var(--main-color) 56% calc(c * 0.85) h);
     [data-theme='dark'] & {
-      --primary: from var(--main-color) 76% calc(c * 0.85) h;
+      --primary: oklch(from var(--main-color) 76% calc(c * 0.85) h);
     }
 
     @apply flex p-4 gap-x-4 relative bg-primary/10 rounded-2xl;

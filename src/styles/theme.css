@@ -3,15 +3,15 @@
 :root {
   --main-color: #3fa0fa;
 
-  --body: 0% 0 0;
-  --background: from var(--main-color) 98% calc(c * 0.12) h;
-  --soft: from var(--main-color) 92% calc(c * 0.16) h;
-  --foreground: from var(--main-color) 15% calc(c * 0.16) h;
-  --muted: from var(--main-color) 62% calc(c * 0.16) h;
-  --primary-dark: from var(--main-color) 76% calc(c * 0.85) h;
-  --primary-dark-hover: from var(--main-color) 92% calc(c * 0.85) h;
-  --primary-light: from var(--main-color) 56% calc(c * 0.85) h;
-  --primary-light-hover: from var(--main-color) 40% calc(c * 0.85) h;
+  --background: oklch(from var(--main-color) 98% calc(c * 0.12) h);
+  --foreground: oklch(from var(--main-color) 15% calc(c * 0.16) h);
+  --muted: oklch(from var(--main-color) 62% calc(c * 0.16) h);
+  --body: oklch(0% 0 0);
+  --soft: oklch(from var(--main-color) 92% calc(c * 0.16) h);
+  --primary-dark: oklch(from var(--main-color) 76% calc(c * 0.85) h);
+  --primary-dark-hover: oklch(from var(--main-color) 92% calc(c * 0.85) h);
+  --primary-light: oklch(from var(--main-color) 56% calc(c * 0.85) h);
+  --primary-light-hover: oklch(from var(--main-color) 40% calc(c * 0.85) h);
   --primary: var(--primary-light);
   --primary-hover: var(--primary-light-hover);
 
@@ -19,11 +19,11 @@
 }
 
 [data-theme='dark'] {
-  --body: 100% 0 0;
-  --background: from var(--main-color) 20% calc(c * 0.142) h;
-  --soft: from var(--main-color) 30% calc(c * 0.16) h;
-  --foreground: from var(--main-color) 98% calc(c * 0.02) h;
-  --muted: from var(--main-color) 88% calc(c * 0.16) h;
+  --background: oklch(from var(--main-color) 20% calc(c * 0.142) h);
+  --foreground: oklch(from var(--main-color) 98% calc(c * 0.02) h);
+  --muted: oklch(from var(--main-color) 88% calc(c * 0.16) h);
+  --body: oklch(100% 0 0);
+  --soft: oklch(from var(--main-color) 30% calc(c * 0.16) h);
   --primary: var(--primary-dark);
   --primary-hover: var(--primary-dark-hover);
 }
@@ -32,22 +32,22 @@
   --font-sans: 'Figtree Variable', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-mono: 'Inconsolata Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
-  --color-body: oklch(var(--body));
-  --color-background: oklch(var(--background));
-  --color-soft: oklch(var(--soft));
-  --color-foreground: oklch(var(--foreground));
-  --color-muted: oklch(var(--muted));
-  --color-primary: oklch(var(--primary));
-  --color-primary-hover: oklch(var(--primary-hover));
-  --color-primary-dark: oklch(var(--primary-dark));
-  --color-primary-light: oklch(var(--primary-light));
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-body: var(--body);
+  --color-soft: var(--soft);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
 
-  --drop-shadow-primary-xs: 0 0 1px oklch(var(--primary) / 0.2);
-  --drop-shadow-primary-sm: 0 0 2px oklch(var(--primary) / 0.6);
-  --drop-shadow-primary-md: 0 0 3px oklch(var(--primary) / 0.6);
-  --drop-shadow-primary-lg: 0 0 4px oklch(var(--primary) / 0.6);
-  --drop-shadow-primary-xl: 0 0 7px oklch(var(--primary) / 0.6);
-  --drop-shadow-primary-2xl: 0 0 25px oklch(var(--primary) / 0.6);
+  --drop-shadow-primary-xs: 0 0 1px color-mix(in oklab, var(--primary) 20%, transparent);
+  --drop-shadow-primary-sm: 0 0 2px color-mix(in oklab, var(--primary) 60%, transparent);
+  --drop-shadow-primary-md: 0 0 3px color-mix(in oklab, var(--primary) 60%, transparent);
+  --drop-shadow-primary-lg: 0 0 4px color-mix(in oklab, var(--primary) 60%, transparent);
+  --drop-shadow-primary-xl: 0 0 7px color-mix(in oklab, var(--primary) 60%, transparent);
+  --drop-shadow-primary-2xl: 0 0 25px color-mix(in oklab, var(--primary) 60%, transparent);
 
   --shadow-center-xs: 0 0 2px 0 rgb(0 0 0 / 0.05);
   --shadow-center-sm: 0 0 3px 0 rgb(0 0 0 / 0.1), 0 0 2px -1px rgb(0 0 0 / 0.1);
