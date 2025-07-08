@@ -7,6 +7,7 @@ import { useTranslations } from '@/i18n/helpers';
 import type { PostEntry } from '@/types/Post';
 import { formatShortDate } from '@/utils/date';
 import Illustration from '../Illustration.astro';
+import { cn } from "@/utils/cn";
 
 interface Props {
   post: PostEntry;
@@ -21,15 +22,16 @@ const { remarkPluginFrontmatter } = await render(post);
 const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<div class="blogGridItem" style={{ '--main-color': themeColor }}>
+<article class="blogGridItem" style={{ '--main-color': themeColor }}>
   <div class="relative">
     {hero && ['img-blurred', 'img-main'].map(className => (
       <Illustration
         alt={heroAlt}
-        class={'img ' + className}
+        class={cn("img", className)}
         src={hero}
         width="320"
         height="168"
+        aria-hidden={className === 'img-blurred'}
       />
     ))}
   </div>
@@ -41,7 +43,7 @@ const { readingTime } = remarkPluginFrontmatter;
       <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
     </div>
   </div>
-</div>
+</article>
 
 <style>
   @reference '@/styles/global.css';
