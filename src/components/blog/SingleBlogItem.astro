@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import { render } from "astro:content";
 import Calendar from "@lucide/astro/icons/calendar";
 import Clock from "@lucide/astro/icons/clock";
@@ -8,7 +9,6 @@ import { useTranslations } from '@/i18n/helpers';
 import type { PostEntry } from "@/types/Post";
 import { formatShortDate } from "@/utils/date";
 import ExternalLink from "../ExternalLink.astro";
-import Illustration from '../Illustration.astro';
 
 interface Props {
   post: PostEntry;
@@ -21,25 +21,25 @@ const t = useTranslations(locale);
 const { title, description, date, tags, hero, heroAlt, sources } = post.data;
 const { Content, remarkPluginFrontmatter } = await render(post);
 const { readingTime } = remarkPluginFrontmatter;
+
+const heroImage = hero && (hero.format === 'svg' ? hero : await getImage({
+  src: hero,
+  format: "avif"
+}));
 ---
 
 <article>
-  {hero && (
-    <div class="hero">
-      {['hero-blurred', ''].map(className => (
-        <Illustration
-          alt={heroAlt}
-          class={className}
-          src={hero}
-          aria-hidden={className === 'hero-blurred'}
-        />
-      ))}
-    </div>
+  {heroImage && (
+    <div
+      aria-label={heroAlt}
+      class="hero-image"
+      style={{
+        '--hero-url': `url(${heroImage.src})`
+      }}
+    />
   )}
-  <div class="heading">
-    <h1 class="title">{title}</h1>
-    <h2 class="description">{description}</h2>
-  </div>
+  <h1 class="title">{title}</h1>
+  <h2 class="description">{description}</h2>
   <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm mb-12">
     <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time>
     <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
@@ -92,28 +92,19 @@ const { readingTime } = remarkPluginFrontmatter;
 <style>
   @reference '@/styles/global.css';
 
-  :root {
-    --hero-width: min(var(--main-container-width) - 2.5rem, 100vw - 2.5rem);
-    --aspect-width: 120;
-    --aspect-height: 63;
-    --aspect: calc(var(--aspect-width) / var(--aspect-height));
-  }
-
-  .hero {
-    @apply absolute -z-[1] inset-0 pt-20 mask-radial-[100%_100%] mask-radial-from-60% mask-radial-at-top;
-    height: calc(var(--hero-width) / var(--aspect-width) * var(--aspect-height) + 6rem);
-
-    img {
-      @apply object-cover aspect-(--aspect) rounded-3xl bg-white/40 dark:bg-black/40 fixed inset-x-0 mx-auto w-(--hero-width);
+  .hero-image {
+    @apply relative aspect-[120/63] w-full h-auto -mb-8;
+    &::before, &::after {
+      @apply absolute content-[''] -z-[1] inset-0 size-full;
+      @apply [background-image:var(--hero-url)] bg-cover bg-center bg-no-repeat;
     }
-  }
-
-  .hero-blurred {
-    @apply blur-3xl -z-[1] contrast-150 saturate-200 opacity-60;
-  }
-
-  .hero + .heading {
-    margin-top: calc(var(--hero-width) / var(--aspect-width) * var(--aspect-height) - 1rem);
+    &::before {
+      @apply blur-[128px] contrast-150 saturate-200 opacity-60;
+    }
+    &::after {
+      @apply bg-white/40 dark:bg-black/40 -mb-20 rounded-3xl;
+      @apply mask-radial-[100%_100%] mask-radial-from-60% mask-radial-at-top;
+    }
   }
 
   .title {
