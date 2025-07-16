@@ -9,12 +9,14 @@ import Navbar from '@/components/Navbar.astro';
 import { localeParams } from '@/i18n/helpers';
 import Hero from '@/sections/Hero.astro';
 import Footer from '@/components/Footer.astro';
+import Noise from '@/components/backgrounds/Noise.astro';
 
 export const getStaticPaths = () => localeParams;
 ---
 
 <SimpleLayout title="Links" description="@vladiantio network links">
   <GradientTop />
+  <Noise />
   <div class="wrapper">
     <Navbar />
     <main class="flex-1 px-5 my-8 place-content-center">
