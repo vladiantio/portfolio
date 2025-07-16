@@ -3,6 +3,10 @@
 @import './fonts.css';
 
 @layer base {
+  * {
+    @apply decoration-1 underline-offset-2;
+  }
+
   html {
     @apply motion-safe:scroll-smooth;
   }
