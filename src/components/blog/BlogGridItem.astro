@@ -23,7 +23,15 @@ const { readingTime } = remarkPluginFrontmatter;
 ---
 
 <article class="blogGridItem" style={{ '--main-color': themeColor }}>
-  <div class="relative">
+  <div class="content">
+    <h3 class="title mb-2"><a href={`/${locale}/${slug}/`}>{title}</a></h3>
+    <p class="description mb-3">{description}</p>
+    <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
+      <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time>
+      <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
+    </div>
+  </div>
+  <div class="relative size-20">
     {hero && ['img-blurred', 'img-main'].map(className => (
       <Illustration
         alt={heroAlt}
@@ -34,14 +42,6 @@ const { readingTime } = remarkPluginFrontmatter;
         aria-hidden={className === 'img-blurred'}
       />
     ))}
-  </div>
-  <div class="content">
-    <h3 class="title mb-2"><a href={`/${locale}/${slug}/`}>{title}</a></h3>
-    <p class="description mb-3">{description}</p>
-    <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
-      <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time>
-      <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
-    </div>
   </div>
 </article>
 
@@ -54,21 +54,21 @@ const { readingTime } = remarkPluginFrontmatter;
       --primary: oklch(from var(--main-color) 0.76 calc(c * 0.85) h);
     }
 
-    @apply flex p-4 gap-x-4 relative bg-primary/10 rounded-2xl;
+    @apply flex items-center p-4 gap-x-4 relative bg-primary/10 rounded-2xl;
 
     a {
-      @apply text-body hover:text-primary z-[1];
+      @apply text-primary hover:underline;
     }
 
     .img {
-      @apply shrink-0 rounded-xl w-24 h-16 object-cover motion-safe:transition-all duration-300;
+      @apply shrink-0 rounded-xl size-full object-cover motion-safe:transition-all duration-300;
     }
 
     .img-main {
       @apply shadow-[0_0.05rem_0.375rem_0_rgba(0,0,0,0.3)] shadow-primary/30 dark:shadow-black/30;
 
       .blogGridItem:has(a:hover:not(:active)) & {
-        @apply -translate-1;
+        @apply translate-x-1 -translate-y-1;
       }
     }
 
@@ -95,7 +95,7 @@ const { readingTime } = remarkPluginFrontmatter;
     .title {
       @apply text-base line-clamp-2 text-pretty;
       a:before {
-        @apply [content:''] block absolute inset-0;
+        @apply [content:''] block absolute inset-0 z-[1];
       }
     }
 
