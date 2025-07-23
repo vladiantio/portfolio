@@ -18,6 +18,8 @@
     color: var(--foreground);
     font-size: var(--text-base);
     position: relative;
+
+    @apply selection:bg-primary/25;
   }
 
   body::-webkit-scrollbar {
