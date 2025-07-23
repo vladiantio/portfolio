@@ -1,5 +1,5 @@
 ---
-import Languages from 'lucide-solid/icons/languages';
+import Languages from '@lucide/astro/icons/languages';
 import { DEFAULT_LOCALE, LOCALES, type Locale } from '@/i18n/constants';
 import { useTranslations } from '@/i18n/helpers';
 const locale = Astro.currentLocale as Locale ?? DEFAULT_LOCALE;
@@ -12,11 +12,11 @@ const t = useTranslations(locale);
     role="button"
     title={t('language')}
     aria-label={t('language')}
-    class="inline-block align-middle select-none rounded-full p-2.5 transition text-body hover:bg-primary/10 hover:text-primary focus:bg-primary/10 focus:text-primary"
+    class="inline-block align-middle select-none navbar-link-icon"
   >
     <Languages class="size-5" />
   </summary>
-  <div tabindex="0" class="dropdown-content border border-body/10 bg-background rounded-xl z-10 p-1 shadow-sm -me-2 mt-4 flex flex-col gap-1">
+  <div tabindex="0" class="dropdown-content border bg-background rounded-xl z-10 p-1 shadow-sm -me-2 mt-4 flex flex-col gap-1">
     {
       Object.keys(LOCALES).map(lang => (
         <button

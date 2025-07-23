@@ -1,6 +1,6 @@
 ---
-import BriefcaseBusiness from 'lucide-solid/icons/briefcase-business';
-import GraduationCap from 'lucide-solid/icons/graduation-cap';
+import BriefcaseBusiness from '@lucide/astro/icons/briefcase-business';
+import GraduationCap from '@lucide/astro/icons/graduation-cap';
 import work from '@/data/work';
 import education from '@/data/education';
 import ExternalLink from '@/components/ExternalLink.astro';
@@ -59,32 +59,22 @@ const t = useTranslations(locale);
   @reference '@/styles/global.css';
 
   .timeline {
-    @apply relative border-s-2 border-body/10 ms-2.5;
+    @apply border-s-2 border-primary/25 ms-2.5;
 
     .item {
       @apply ms-6;
 
       &:not(:last-child) {
-        @apply mb-12 border-body/10;
-      }
-
-      &:before {
-        @apply absolute [content:''] main-gradient-light size-4 rounded-full mt-1 -start-2 drop-shadow-primary-lg;
-      }
-
-      @variant dark {
-        &:before {
-          @apply main-gradient-dark;
-        }
+        @apply mb-12;
       }
     }
 
     .period {
-      @apply px-2 py-1 bg-primary/10 rounded-lg;
+      @apply px-4 py-2 -ml-10 shadow-neon-sm shadow-primary bg-background rounded-xl z-[1];
     }
 
     .title {
-      @apply mt-4 mb-4 font-semibold;
+      @apply mt-6 mb-4 font-semibold;
     }
 
     .summary {

@@ -1,9 +1,6 @@
 @reference './global.css';
 
-@import './baseline-status.css';
-@import './link-preview.css';
-
-article.rich-text {
+.rich-text {
   /* Headers */
   h1 {
     @apply text-2xl font-bold mt-12 mb-10;
@@ -27,7 +24,8 @@ article.rich-text {
   }
 
   p {
-    @apply my-8;
+    margin-block: 1em;
+    margin-block: 1lh;
   }
 
   del {
@@ -35,7 +33,7 @@ article.rich-text {
   }
 
   blockquote {
-    @apply border-l-4 border-body/10 pl-4 py-2 mb-8;
+    @apply border-l-4 pl-4 py-2 mb-8;
   }
 
   ul {

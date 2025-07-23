@@ -1,0 +1,90 @@
+---
+import Sun from '@lucide/astro/icons/sun';
+import Moon from '@lucide/astro/icons/moon';
+import SunMoon from '@lucide/astro/icons/sun-moon';
+import ColorPicker from './ColorPicker.astro';
+
+import { DEFAULT_LOCALE, type Locale } from '@/i18n/constants';
+import { useTranslations } from '@/i18n/helpers';
+const locale = Astro.currentLocale as Locale ?? DEFAULT_LOCALE;
+const t = useTranslations(locale);
+
+const THEMES = ['light', 'dark', 'system'] as const;
+
+const iconTheme = {
+  light: Sun,
+  dark: Moon,
+  system: SunMoon,
+};
+---
+
+<details id="themeDropdown" class="dropdown dropdown-end">
+  <summary
+    tabindex="0"
+    role="button"
+    aria-label={t('theme')}
+    title={t('theme')}
+    class="inline-block align-middle select-none navbar-link-icon"
+  >
+    <div class="size-5">
+      {THEMES.map((theme) => {
+        const Icon = iconTheme[theme];
+        return (
+          <Icon
+            class="size-full hidden"
+            data-icon-theme={theme}
+          />
+        )
+      })}
+    </div>
+  </summary>
+  <div
+    tabindex="0"
+    class="dropdown-content border bg-background rounded-xl z-10 p-1 shadow-sm -me-2 mt-4"
+  >
+    <div class="grid grid-cols-3 gap-1 text-sm">
+      {THEMES.map((theme) => {
+        const Icon = iconTheme[theme];
+        return (
+          <label class="flex flex-col items-center justify-center rounded-lg p-2 transition hover:bg-primary/10 hover:text-primary has-checked:bg-primary/10 has-checked:text-primary">
+            <Icon class="size-6" />
+            {t(theme)}
+            <input
+              type="radio"
+              name="themeOption"
+              value={theme}
+              class="sr-only"
+            />
+          </label>
+        )
+      })}
+    </div>
+    <ColorPicker />
+  </div>
+</details>
+
+<script is:inline>
+const switchTheme = (theme) => {
+  localStorage.setItem('theme', theme);
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
+}
+
+const updateIcon = (activeTheme) => {
+  document.querySelectorAll("#themeDropdown [data-icon-theme]").forEach((el) => {
+    el.classList.toggle('hidden', el.dataset.iconTheme != activeTheme)
+  })
+}
+
+const currentTheme = localStorage.theme ?? 'system';
+document.querySelector(`#themeDropdown [data-icon-theme="${currentTheme}"]`)?.classList.remove('hidden');
+document.querySelector(`#themeDropdown [name="themeOption"][value="${currentTheme}"]`)?.setAttribute('checked', '');
+
+document.getElementsByName('themeOption').forEach((el) => {
+  el.addEventListener('change', (ev) => {
+    const activeTheme = ev.target.value;
+    switchTheme(activeTheme);
+    updateIcon(activeTheme);
+  });
+});
+</script>

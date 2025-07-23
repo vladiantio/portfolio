@@ -1,11 +1,13 @@
 ---
-import Calendar from 'lucide-solid/icons/calendar';
-import Clock from 'lucide-solid/icons/clock';
+import { render } from "astro:content";
+import Calendar from '@lucide/astro/icons/calendar';
+import Clock from '@lucide/astro/icons/clock';
 import type { Locale } from '@/i18n/constants';
 import { useTranslations } from '@/i18n/helpers';
 import type { PostEntry } from '@/types/Post';
 import { formatShortDate } from '@/utils/date';
 import Illustration from '../Illustration.astro';
+import { cn } from "@/utils/cn";
 
 interface Props {
   post: PostEntry;
@@ -15,23 +17,12 @@ const { post } = Astro.props;
 const locale = post.lang as Locale;
 const t = useTranslations(locale);
 const { slug } = post;
-const { title, description, date, hero, heroAlt } = post.data;
-const { remarkPluginFrontmatter } = await post.render();
+const { title, description, date, hero, heroAlt, themeColor } = post.data;
+const { remarkPluginFrontmatter } = await render(post);
 const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<div class="blogGridItem">
-  <div class="relative">
-    {hero && ['img-blurred', 'img-main'].map(className => (
-      <Illustration
-        alt={heroAlt}
-        class={'img ' + className}
-        src={hero}
-        width="320"
-        height="168"
-      />
-    ))}
-  </div>
+<article class="blogGridItem" style={{ '--main-color': themeColor }}>
   <div class="content">
     <h3 class="title mb-2"><a href={`/${locale}/${slug}/`}>{title}</a></h3>
     <p class="description mb-3">{description}</p>
@@ -40,34 +31,47 @@ const { readingTime } = remarkPluginFrontmatter;
       <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
     </div>
   </div>
-</div>
+  <div class="relative size-20">
+    {hero && ['img-blurred', 'img-main'].map(className => (
+      <Illustration
+        alt={heroAlt}
+        class={cn("img", className)}
+        src={hero}
+        width="320"
+        height="168"
+        aria-hidden={className === 'img-blurred'}
+      />
+    ))}
+  </div>
+</article>
 
 <style>
   @reference '@/styles/global.css';
 
   .blogGridItem {
-    @apply flex p-4 gap-x-4 relative bg-primary/10 rounded-2xl;
-
-    a {
-      @apply text-body hover:text-primary z-[1];
+    --primary: oklch(from var(--main-color) 0.56 calc(c * 0.85) h);
+    [data-theme='dark'] & {
+      --primary: oklch(from var(--main-color) 0.76 calc(c * 0.85) h);
     }
 
+    @apply flex items-center p-4 gap-x-4 relative bg-primary/10 rounded-2xl;
+
     .img {
-      @apply shrink-0 rounded-xl w-24 h-16 object-cover motion-safe:transition-all duration-300;
+      @apply shrink-0 rounded-xl size-full object-cover motion-safe:transition-all duration-300;
     }
 
     .img-main {
       @apply shadow-[0_0.05rem_0.375rem_0_rgba(0,0,0,0.3)] shadow-primary/30 dark:shadow-black/30;
 
-      .blogGridItem:has(a:hover) & {
-        @apply -translate-0.5;
+      .blogGridItem:has(a:hover:not(:active)) & {
+        @apply translate-x-1 -translate-y-1;
       }
     }
 
     .img-blurred {
-      @apply absolute top-0.5 -z-[1] opacity-60 blur-xs;
+      @apply absolute top-0.5 -z-[1] contrast-150 saturate-200 opacity-60 blur-xs;
 
-      .blogGridItem:has(a:hover) & {
+      .blogGridItem:has(a:hover:not(:active)) & {
         @apply blur-sm;
       }
     }
@@ -87,7 +91,7 @@ const { readingTime } = remarkPluginFrontmatter;
     .title {
       @apply text-base line-clamp-2 text-pretty;
       a:before {
-        @apply [content:''] block absolute inset-0 size-full;
+        @apply [content:''] block absolute inset-0 z-[1];
       }
     }
 

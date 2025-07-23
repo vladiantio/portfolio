@@ -1,0 +1,120 @@
+---
+import { useBaseTranslations } from "@/i18n/base";
+import { DEFAULT_LOCALE, type Locale } from "@/i18n/constants";
+
+const COLORS = [
+  { name: 'blue', value: '#3fa0fa' },
+  { name: 'indigo', value: '#7593fe' },
+  { name: 'red', value: '#ee6f5d' },
+  { name: 'orange', value: '#e17f08' },
+  { name: 'yellow', value: '#f9ba26' },
+  { name: 'green', value: '#5ab352' },
+  { name: 'gray', value: '#9b9b9b' },
+];
+
+const translations = {
+  en: {
+    blue: 'Blue',
+    indigo: 'Indigo',
+    red: 'Red',
+    orange: 'Orange',
+    yellow: 'Yellow',
+    green: 'Green',
+    gray: 'Gray',
+    otherColor: 'Other color'
+  },
+  es: {
+    blue: 'Azul',
+    indigo: 'Índigo',
+    red: 'Rojo',
+    orange: 'Naranja',
+    yellow: 'Amarillo',
+    green: 'Verde',
+    gray: 'Gris',
+    otherColor: 'Otro color'
+  },
+};
+
+const locale = Astro.currentLocale as Locale ?? DEFAULT_LOCALE;
+const t = useBaseTranslations(translations, locale);
+const colorValues = COLORS.map((c) => c.value);
+---
+
+<div class="flex gap-3 m-2 mt-3">
+  {COLORS.map((color) => (
+    <button
+      type="button"
+      class="radio size-4.5 md:size-4"
+      title={t(color.name)}
+      style={{
+        'background-color': color.value,
+      }}
+      name="colorOption"
+      value={color.value}
+    >
+      <span class="sr-only">{t(color.name)}</span>
+    </button>
+  ))}
+  <label
+    for="otherColor"
+    class="radio bg-color-wheel size-4.5 md:size-4"
+    role="button"
+    title={t('otherColor')}
+  >
+    <span class="sr-only">{t('otherColor')}</span>
+  </label>
+  <input
+    type="color"
+    class="sr-only bottom-0 left-0"
+    id="otherColor"
+  />
+</div>
+
+<script is:inline define:vars={{ colorValues }}>
+const getColor = () => getComputedStyle(document.documentElement).getPropertyValue('--main-color');
+
+const updateCheck = (currentColor) => {
+  document.querySelectorAll('#themeDropdown [name="colorOption"]').forEach((el) => {
+    el.classList.toggle('checked', el.value == currentColor);
+  })
+  document.getElementById('otherColor').value = currentColor;
+}
+
+const checkOtherColor = (checked) => {
+  document.querySelector('#themeDropdown label[for="otherColor"]')?.classList.toggle('checked', checked);
+};
+
+const changeColor = (value) => {
+  localStorage.setItem('color', value);
+  document.documentElement.style.setProperty('--main-color', value);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const currentColor = getColor();
+  let isOtherColor = !colorValues.some(color => color == currentColor);
+  document.querySelector(`#themeDropdown [name="colorOption"][value="${currentColor}"]`)?.classList.add('checked');
+  checkOtherColor(isOtherColor);
+
+  document.getElementsByName('colorOption').forEach((el) => {
+    el.addEventListener('click', (ev) => {
+      const color = ev.target.value;
+      changeColor(color);
+      updateCheck(color);
+      if (isOtherColor) {
+        checkOtherColor(false);
+        isOtherColor = false;
+      }
+    });
+  });
+
+  document.getElementById('otherColor').addEventListener('change', (ev) => {
+    const color = ev.target.value;
+    changeColor(color);
+    if (!isOtherColor) {
+      updateCheck(color);
+      checkOtherColor(true);
+      isOtherColor = true;
+    }
+  });
+});
+</script>

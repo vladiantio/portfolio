@@ -1,4 +1,5 @@
 import { safeGetDOM } from '@astro-community/astro-embed-utils';
+import type { Meta } from './types';
 
 /** Helper to get the `content` attribute of an element. */
 const getContent = (el: Element | null) => el?.getAttribute('content');
@@ -10,7 +11,7 @@ const urlOrNull = (url: string | null | undefined) =>
  * Loads and parses an HTML page to return Open Graph metadata.
  * @param pageUrl URL to parse
  */
-export async function parseOpenGraph(pageUrl: string) {
+export async function parseOpenGraph(pageUrl: string): Promise<Meta | undefined> {
 	const html = await safeGetDOM(pageUrl);
 	if (!html) return;
 
@@ -39,7 +40,7 @@ export async function parseOpenGraph(pageUrl: string) {
 		urlOrNull(
 			getMetaProperty('og:url') ||
 				html.querySelector("link[rel='canonical']")?.getAttribute('href')
-		) || pageUrl;
+		);
 
 	return { title, description, image, imageAlt, url, video, videoType };
 }

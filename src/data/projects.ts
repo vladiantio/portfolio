@@ -17,6 +17,7 @@ interface Project {
   urlCode?: string;
   urlContributions?: string;
   hidden?: boolean;
+  themeColor?: string;
 }
 
 export default [
@@ -33,6 +34,7 @@ export default [
     url: "https://jsconf.es/",
     urlCode: "https://github.com/midudev/jsconf.es",
     urlContributions: "https://github.com/midudev/jsconf.es/commits/main/?author=vladiantio",
+    themeColor: "#f7df1d",
   },
   {
     name: "Happy Foto",
@@ -45,6 +47,7 @@ export default [
     },
     technologies: ['Vue', 'WordPress'],
     url: "https://happyfoto.cl/",
+    themeColor: "#00eac7",
   },
   {
     name: "Portal Inversionista",
@@ -58,5 +61,6 @@ export default [
     technologies: ['Angular', 'Bootstrap', '.NET'],
     madeAt: "Lecaros Group",
     url: "https://portalinversionista.com/",
+    themeColor: "#03a7e2",
   }
 ] as Project[];

@@ -1,68 +1,117 @@
 ---
-import Calendar from "lucide-solid/icons/calendar";
-import Clock from "lucide-solid/icons/clock";
-import Tag from "lucide-solid/icons/tag";
+import { getImage } from "astro:assets";
+import { render } from "astro:content";
+import Calendar from "@lucide/astro/icons/calendar";
+import Clock from "@lucide/astro/icons/clock";
+import Tag from "@lucide/astro/icons/tag";
 import type { Locale } from '@/i18n/constants';
 import { useTranslations } from '@/i18n/helpers';
 import type { PostEntry } from "@/types/Post";
 import { formatShortDate } from "@/utils/date";
 import ExternalLink from "../ExternalLink.astro";
-import Illustration from '../Illustration.astro';
 
 interface Props {
   post: PostEntry;
 }
 
 const { post } = Astro.props;
+const { next, previous } = post;
 const locale = post.lang as Locale;
 const t = useTranslations(locale);
 const { title, description, date, tags, hero, heroAlt, sources } = post.data;
-const { Content, remarkPluginFrontmatter } = await post.render();
+const { Content, remarkPluginFrontmatter } = await render(post);
 const { readingTime } = remarkPluginFrontmatter;
+
+const heroImage = hero && (hero.format === 'svg' ? hero : await getImage({
+  src: hero,
+  format: "avif"
+}));
 ---
 
-{hero && (
-  <div class="relative mt-8 mb-12">
-    {['heroImage-blurred', 'heroImage-shadow'].map(className => (
-      <Illustration
-        alt={heroAlt}
-        class={'heroImage ' + className}
-        src={hero}
-      />
-    ))}
+<article>
+  {heroImage && (
+    <div
+      aria-label={heroAlt}
+      class="hero-image"
+      style={{
+        '--hero-url': `url(${heroImage.src})`
+      }}
+    />
+  )}
+  <h1 class="title">{title}</h1>
+  <h2 class="description">{description}</h2>
+  <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm mb-12">
+    <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time>
+    <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
+    {tags.map(tag => <span class="flex items-center"><Tag class="size-4 mr-3" />{tag}</span>)}
+  </div>
+  <section class="mb-8 rich-text">
+    <Content />
+    {sources.length > 0 && (
+      <h2>{t('blog.sources')}</h2>
+      <ul>
+        {sources.map(source => (
+          <li><ExternalLink class="external" href={source.href}>{source.title}</ExternalLink></li>
+        ))}
+      </ul>
+    )}
+  </section>
+</article>
+
+{(next || previous) && (
+  <div class="flex justify-between gap-4 text-balance text-body/80">
+    <div class="flex flex-1">
+      {previous && (
+        <article class="relative p-4 rounded-2xl space-y-1 w-full hover:bg-primary/10 motion-safe:transition-all duration-300">
+          <h2 class="text-sm">{t('blog.previous')}</h2>
+          <a
+            href={`/${locale}/${previous.slug}/`}
+            class="font-semibold text-inherit hover:text-primary after:absolute after:block after:inset-0 duration-300"
+          >
+            {previous.data.title}
+          </a>
+        </article>
+      )}
+    </div>
+    <div class="flex flex-1">
+      {next && (
+        <article class="relative p-4 rounded-2xl space-y-1 w-full text-right hover:bg-primary/10 motion-safe:transition-all duration-300">
+          <h2 class="text-sm">{t('blog.next')}</h2>
+          <a
+            href={`/${locale}/${next.slug}/`}
+            class="font-semibold text-inherit hover:text-primary after:absolute after:block after:inset-0 duration-300"
+          >
+            {next.data.title}
+          </a>
+        </article>
+      )}
+    </div>
   </div>
 )}
-<h1 class="my-8 text-2xl leading-normal text-center">{title}</h1>
-<h2 class="text-xl font-normal text-center mb-12">{description}</h2>
-<div class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm mb-12">
-  <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time>
-  <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
-  {tags.map(tag => <span class="flex items-center"><Tag class="size-4 mr-3" />{tag}</span>)}
-</div>
-<article class="mb-8 rich-text">
-  <Content />
-  {sources.length > 0 && (
-    <h2>{t('blog.sources')}</h2>
-    <ul>
-      {sources.map(source => (
-        <li><ExternalLink class="external" href={source.href}>{source.title}</ExternalLink></li>
-      ))}
-    </ul>
-  )}
-</article>
 
 <style>
   @reference '@/styles/global.css';
 
-  .heroImage {
-    @apply w-full object-cover aspect-[120/63] rounded-3xl bg-white/40 dark:bg-black/40;
+  .hero-image {
+    @apply relative aspect-[120/63] w-full h-auto -mb-8;
+    &::before, &::after {
+      @apply absolute content-[''] -z-[1] inset-0 size-full;
+      @apply [background-image:var(--hero-url)] bg-cover bg-center bg-no-repeat;
+    }
+    &::before {
+      @apply blur-[128px] contrast-150 saturate-200 opacity-60;
+    }
+    &::after {
+      @apply bg-white/40 dark:bg-black/40 -mb-20 rounded-3xl;
+      @apply mask-radial-[100%_100%] mask-radial-from-60% mask-radial-at-top;
+    }
   }
 
-  .heroImage-shadow {
-    @apply shadow-center-xl shadow-primary/60 dark:shadow-black/60;
+  .title {
+    @apply text-4xl text-center text-primary my-8;
   }
 
-  .heroImage-blurred {
-    @apply absolute top-4 blur-3xl -z-[1] opacity-60;
+  .description {
+    @apply font-normal text-center text-pretty mb-10;
   }
 </style>

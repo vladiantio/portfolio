@@ -7,12 +7,13 @@ interface Props {
 }
 
 const { posts } = Astro.props;
+const sortedPosts = posts.toSorted((a, b) => b.id.localeCompare(a.id));
 ---
 
 <div class="grid grid-cols-1 gap-6">
   {
-    posts && posts.length > 0
-      ? posts.map((post) => <BlogGridItem post={post} />)
+    sortedPosts && sortedPosts.length > 0
+      ? sortedPosts.map((post) => <BlogGridItem post={post} />)
       : "No posts founds"
   }
 </div>

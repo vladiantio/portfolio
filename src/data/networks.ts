@@ -23,19 +23,4 @@ export default [
     url: "https://x.com/vladiantio",
     isSecondary: true
   },
-  {
-    name: "YouTube",
-    url: "https://youtube.com/@vladiantio",
-    isSecondary: true
-  },
-  {
-    name: "TikTok",
-    url: "https://tiktok.com/@vladiantio",
-    isSecondary: true
-  },
-  {
-    name: "Pinterest",
-    url: "https://pinterest.com/vladiantio",
-    isSecondary: true
-  }
 ] as Network[];

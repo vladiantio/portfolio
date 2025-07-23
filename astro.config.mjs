@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import solid from '@astrojs/solid-js';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
@@ -23,9 +22,6 @@ const externalLinksOptions = {
 // https://astro.build/config
 export default defineConfig({
   adapter: vercel(),
-  experimental: {
-    svg: true,
-  },
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es'],
@@ -41,7 +37,10 @@ export default defineConfig({
       },
       styleOverrides: {
         codeFontFamily: 'var(--font-mono)',
+        codeFontSize: 'var(--text-base)',
         codeFontWeight: '500',
+        uiFontFamily: 'var(--font-sans)',
+        uiFontSize: 'var(--text-base)',
       },
       themes: ['github-dark', 'github-light'],
       themeCssSelector: (theme) => `[data-theme='${theme.type}']`,
@@ -57,7 +56,6 @@ export default defineConfig({
         },
       },
     }),
-    solid(),
   ],
   markdown: {
     remarkPlugins: [remarkReadingTime],

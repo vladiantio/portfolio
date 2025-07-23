@@ -9,20 +9,22 @@ import Navbar from '@/components/Navbar.astro';
 import { localeParams } from '@/i18n/helpers';
 import Hero from '@/sections/Hero.astro';
 import Footer from '@/components/Footer.astro';
+import Noise from '@/components/backgrounds/Noise.astro';
 
 export const getStaticPaths = () => localeParams;
 ---
 
 <SimpleLayout title="Links" description="@vladiantio network links">
   <GradientTop />
+  <Noise />
   <div class="wrapper">
     <Navbar />
     <main class="flex-1 px-5 my-8 place-content-center">
       <Hero hideLinks />
-      <section class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 pt-16">
+      <section class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 pt-16">
         {networks.map(item => (
           <ExternalLink class="networkLink" href={item.url}>
-            <SocialIcon class="size-full" name={item.name.toLowerCase()} />
+            <SocialIcon class="size-6" name={item.name.toLowerCase()} />
             <strong>{item.name}</strong>
           </ExternalLink>
         ))}
@@ -37,6 +39,6 @@ export const getStaticPaths = () => localeParams;
   @reference '@/styles/global.css';
 
   .networkLink {
-    @apply bg-primary/5 text-center text-body hover:text-primary grid grid-cols-[1.5rem_1fr] px-5 py-4 shadow-neon-sm shadow-primary rounded-full hover:bg-primary/10;
+    @apply bg-primary/5 text-center text-body hover:text-primary grid grid-cols-[1.5rem_1fr] px-5 py-4 shadow-neon-sm shadow-primary rounded-full hover:bg-primary/10 hover:no-underline;
   }
 </style>

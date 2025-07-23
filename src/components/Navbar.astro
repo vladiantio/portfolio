@@ -1,51 +1,64 @@
 ---
-import Logo from '@/assets/logo.svg';
-import basics from '@/data/basics';
-import ThemeSelector from "./client/ThemeSelector";
+import Hamburger from "@/assets/hamburger.svg";
+import Logo from "@/assets/logo.svg";
+import basics from "@/data/basics";
 import LocaleSelector from "./LocaleSelector.astro";
 import type { Locale } from "@/i18n/constants";
-import { useTranslations } from '@/i18n/helpers';
+import { useTranslations } from "@/i18n/helpers";
+import ThemeDropdown from "./theme/ThemeDropdown.astro";
+import LinkIcon from "@lucide/astro/icons/link";
 
 const locale = Astro.currentLocale as Locale | undefined;
 const t = useTranslations(locale);
 
 const menu = [
-  { href: `/${locale}/#`, label: t('home') },
-  { href: `/${locale}/#projects`, label: t('projects') },
-  { href: `/${locale}/#experience`, label: t('portfolio.experience') },
-  { href: `/${locale}/links`, label: 'Links' },
+  {
+    id: 'home',
+    href: `/${locale}/#`,
+    label: t('home')
+  },
+  {
+    id: 'projects',
+    href: `/${locale}/#projects`,
+    label: t('projects')
+  },
+  {
+    id: 'experience',
+    href: `/${locale}/#experience`,
+    label: t('portfolio.experience')
+  },
 ];
 ---
 
 <nav class="navbar" id="mainNavbar">
   <div class="navbar-container">
     <div class="navbar-bar">
-      <a class="rounded-full p-2.5 transition hover:bg-primary/10 text-body hover:text-primary" href="/" title={'@' + basics.username}>
-        <span class="sr-only">@{basics.username}</span>
+      <a class="navbar-link-icon" href="/" title={'@' + basics.username}>
         <Logo class="size-5" />
+        <span class="sr-only">@{basics.username}</span>
       </a>
     </div>
     <div class="navbar-bar static" id="mainMenu" popover="auto">
       {menu.map(item => (
-        <a class="navbar-link" href={item.href}>{item.label}</a>
+        <a class="navbar-link" data-id={item.id} href={item.href}>{item.label}</a>
       ))}
     </div>
     <div class="flex gap-x-4">
       <div class="navbar-bar">
+        <a class="navbar-link-icon" href={`/${locale}/links`} title="Links">
+          <LinkIcon class="size-5" />
+          <span class="sr-only">Links</span>
+        </a>
         <LocaleSelector />
-        <ThemeSelector client:load lang={locale} />
+        <ThemeDropdown />
       </div>
       <div class="navbar-bar sm:!hidden">
         <button
           aria-label={t('navbar.toggleMenu')}
-          class="rounded-full p-2.5 transition hover:bg-primary/10 text-body hover:text-primary"
+          class="navbar-link-icon"
           popovertarget="mainMenu"
         >
-          <svg class="size-5" width="20" height="20" viewBox="0 0 100 100">
-            <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
-            <path class="line line2" d="M 20,50 H 80" />
-            <path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
-          </svg>
+          <Hamburger class="size-5" />
         </button>
       </div>
     </div>
@@ -53,12 +66,48 @@ const menu = [
 </nav>
 
 <script>
+  function initScrollHandler() {
+    const root = document.querySelector('main');
+    if (!root) return;
+
+    let sections: Map<Element, string> = new Map();
+    for (let element of root.children) {
+      if (element.id && element.tagName === "SECTION")
+        sections.set(element, `#${element.id}`);
+    }
+
+    let visibleElements = new Set<Element>();
+
+    const callback = (entries: IntersectionObserverEntry[]) => {
+      for (let entry of entries) {
+        if (entry.isIntersecting) {
+          visibleElements.add(entry.target);
+        } else {
+          visibleElements.delete(entry.target);
+        }
+      }
+
+      let firstVisibleSection = Array.from(sections.entries()).find(([element]) => visibleElements.has(element));
+      if (!firstVisibleSection) return;
+      document.querySelectorAll('#mainMenu [data-id]').forEach(el => {
+        el.classList.toggle('navbar-link-active', el.getAttribute('data-id') === firstVisibleSection[1].slice(1));
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, {
+      rootMargin: "-24px 0px",
+    });
+
+    Array.from(sections.keys()).forEach((element) => observer.observe(element));
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('#mainMenu .navbar-link').forEach(el => {
       el.addEventListener('click', () => {
         document.getElementById('mainMenu')?.hidePopover();
       });
-    })
+    });
+    initScrollHandler();
   });
 </script>
 
@@ -74,11 +123,19 @@ const menu = [
   }
 
   .navbar-bar {
-    @apply flex items-center justify-center p-1 gap-0.5 rounded-full bg-background/75 shadow-neon-sm shadow-primary backdrop-blur-lg;
+    @apply flex items-center justify-center p-1 gap-0.5 rounded-full bg-background/75 backdrop-blur-xs border shadow-sm;
   }
 
   .navbar-link {
-    @apply font-semibold py-2 px-5 rounded-full transition text-body hover:text-primary hover:bg-primary/10;
+    @apply font-semibold h-10 content-center px-5 rounded-full transition text-body hover:bg-body/5 hover:no-underline;
+  }
+
+  .navbar-link-icon {
+    @apply rounded-full p-2.5 text-body transition hover:bg-body/5;
+  }
+
+  .navbar-link-active {
+    @apply bg-primary/10 text-primary hover:bg-primary/10;
   }
 
   @media (width < 40rem) {

@@ -1,9 +1,12 @@
 @import 'tailwindcss';
-@import './root.css';
 @import './theme.css';
 @import './fonts.css';
 
 @layer base {
+  * {
+    @apply decoration-2 underline-offset-2 border-body/10;
+  }
+
   html {
     @apply motion-safe:scroll-smooth;
   }
@@ -11,9 +14,12 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: oklch(var(--background));
-    color: oklch(var(--foreground));
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: var(--text-base);
     position: relative;
+
+    @apply selection:bg-primary/25;
   }
 
   body::-webkit-scrollbar {
@@ -26,17 +32,17 @@
   }
 
   body::-webkit-scrollbar-thumb {
-    background-color: oklch(var(--primary));
+    background-color: var(--primary);
     border-radius: 3px;
   }
 
   body::-webkit-scrollbar-thumb:hover {
-    background-color: oklch(var(--primary-hover));
+    background-color: var(--primary-hover);
   }
 
   @supports not selector(::-webkit-scrollbar) {
     body {
-      scrollbar-color: oklch(var(--primary)) transparent;
+      scrollbar-color: var(--primary) transparent;
       scrollbar-width: thin;
     }
   }
@@ -46,13 +52,14 @@
   }
 
   h1, h2 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.75rem;
+    font-size: 1.5rem;
+  }
+
+  h1 {
+    font-weight: 900;
   }
 
   h2 {
-    font-size: 1.25rem;
     font-weight: 700;
   }
 
@@ -61,17 +68,17 @@
   }
 
   a {
-    color: oklch(var(--primary));
+    color: var(--primary);
     @apply motion-safe:transition-[background,color,scale];
 
-    &:hover {
-      color: oklch(var(--primary-hover));
+    &:hover:not(.icon) {
+      text-decoration: underline;
     }
 
     &.icon {
-      color: oklch(var(--body));
+      color: var(--body);
       &:hover {
-        color: oklch(var(--primary));
+        color: var(--primary);
         scale: 1.1;
       }
     }
@@ -83,7 +90,7 @@
   }
 
   hr {
-    border-color: oklch(var(--soft));
+    border-color: var(--soft);
   }
 
   [role=button], button {
@@ -113,16 +120,16 @@
     @apply flex items-center rounded-lg overflow-hidden bg-primary/10 text-sm;
 
     span {
-      @apply mx-3;
+      @apply mx-4;
     }
 
     svg {
-      @apply rounded-lg size-6;
+      @apply rounded-lg size-8;
     }
   }
 
   .radio {
-    @apply relative appearance-none rounded-full size-4 border border-body/20 bg-white dark:bg-black;
+    @apply relative appearance-none rounded-full size-4 border bg-white dark:bg-black;
     &:checked, &.checked {
       @apply bg-primary before:absolute before:inset-1 before:bg-white before:rounded-full before:shadow-xs before:shadow-black/30;
     }
@@ -131,7 +138,7 @@
 
 
 @utility wrapper {
-  @apply flex flex-col max-w-screen-md min-h-dvh mx-auto;
+  @apply flex flex-col max-w-(--main-container-width) min-h-dvh mx-auto;
 }
 
 @utility external {

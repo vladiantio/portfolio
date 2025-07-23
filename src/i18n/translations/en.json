@@ -17,6 +17,12 @@
   "blog.readingTime": "Reading time",
   "blog.readingTime.read": "read",
   "blog.sources": "Sources",
+  "blog.next": "Next",
+  "blog.previous": "Previous",
   "status.404.title": "Page not found",
-  "status.404.description": "The page you were looking for was not found."
+  "status.404.description": "The page you were looking for was not found.",
+  "theme": "Theme",
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System"
 }
