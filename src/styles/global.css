@@ -72,7 +72,7 @@
     @apply motion-safe:transition-[background,color,scale];
 
     &:hover {
-      color: var(--primary-hover);
+      text-decoration: underline;
     }
 
     &.icon {
