@@ -9,10 +9,12 @@ import { DEFAULT_LOCALE } from '@/i18n/constants';
 import '@/styles/global.css';
 import Noise from '@/components/backgrounds/Noise.astro';
 
-type Props = BaseHeadProps;
+interface Props extends BaseHeadProps {
+	class?: string;
+};
 
 const locale = Astro.currentLocale;
-const head = Astro.props;
+const { class: className, ...head } = Astro.props;
 const themeColorStyle = head.themeColor && `--main-color: ${head.themeColor}`;
 ---
 
@@ -28,7 +30,7 @@ const themeColorStyle = head.themeColor && `--main-color: ${head.themeColor}`;
 		<Noise />
 		<div class="wrapper">
 			<Navbar />
-			<Main><slot /></Main>
+			<Main class={className}><slot /></Main>
 			<Footer />
 		</div>
 		<GradientBottom />
