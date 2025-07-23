@@ -4,7 +4,7 @@
 
 @layer base {
   * {
-    @apply decoration-1 underline-offset-2;
+    @apply decoration-1 underline-offset-2 border-body/10;
   }
 
   html {
@@ -127,7 +127,7 @@
   }
 
   .radio {
-    @apply relative appearance-none rounded-full size-4 border border-body/20 bg-white dark:bg-black;
+    @apply relative appearance-none rounded-full size-4 border bg-white dark:bg-black;
     &:checked, &.checked {
       @apply bg-primary before:absolute before:inset-1 before:bg-white before:rounded-full before:shadow-xs before:shadow-black/30;
     }

@@ -1,12 +1,12 @@
 ---
-import Hamburger from '@/assets/hamburger.svg';
-import Logo from '@/assets/logo.svg';
-import basics from '@/data/basics';
+import Hamburger from "@/assets/hamburger.svg";
+import Logo from "@/assets/logo.svg";
+import basics from "@/data/basics";
 import LocaleSelector from "./LocaleSelector.astro";
 import type { Locale } from "@/i18n/constants";
-import { useTranslations } from '@/i18n/helpers';
-import ThemeDropdown from './theme/ThemeDropdown.astro';
-import LinkIcon from '@lucide/astro/icons/link';
+import { useTranslations } from "@/i18n/helpers";
+import ThemeDropdown from "./theme/ThemeDropdown.astro";
+import LinkIcon from "@lucide/astro/icons/link";
 
 const locale = Astro.currentLocale as Locale | undefined;
 const t = useTranslations(locale);
@@ -123,7 +123,7 @@ const menu = [
   }
 
   .navbar-bar {
-    @apply flex items-center justify-center p-1 gap-0.5 rounded-full bg-background/75 backdrop-blur-xs border border-body/10 shadow-sm;
+    @apply flex items-center justify-center p-1 gap-0.5 rounded-full bg-background/75 backdrop-blur-xs border shadow-sm;
   }
 
   .navbar-link {

@@ -33,7 +33,7 @@
   }
 
   blockquote {
-    @apply border-l-4 border-body/10 pl-4 py-2 mb-8;
+    @apply border-l-4 pl-4 py-2 mb-8;
   }
 
   ul {
