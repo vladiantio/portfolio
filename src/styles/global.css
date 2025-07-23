@@ -71,7 +71,7 @@
     color: var(--primary);
     @apply motion-safe:transition-[background,color,scale];
 
-    &:hover {
+    &:hover:not(.icon) {
       text-decoration: underline;
     }
 
