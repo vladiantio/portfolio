@@ -19,7 +19,7 @@
     "@fontsource-variable/figtree": "^5.2.7",
     "@fontsource-variable/inconsolata": "^5.2.5",
     "@lucide/astro": "^0.511.0",
-    "@tailwindcss/vite": "^4.1.7",
+    "@tailwindcss/vite": "^4.1.11",
     "astro": "5.7.13",
     "astro-expressive-code": "^0.41.2",
     "clsx": "^2.1.1",
@@ -29,7 +29,7 @@
     "rehype-external-links": "^3.0.0",
     "svg-sprite": "^2.0.4",
     "tailwind-merge": "^3.3.0",
-    "tailwindcss": "^4.1.7",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
