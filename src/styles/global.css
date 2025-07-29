@@ -4,7 +4,7 @@
 
 @layer base {
   * {
-    @apply decoration-2 underline-offset-2 border-body/10;
+    @apply decoration-2 underline-offset-2 border-body/15;
   }
 
   html {
