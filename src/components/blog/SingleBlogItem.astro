@@ -59,27 +59,27 @@ const heroImage = hero && (hero.format === 'svg' ? hero : await getImage({
 </article>
 
 {(next || previous) && (
-  <div class="flex justify-between gap-4 text-balance text-body/80">
-    <div class="flex flex-1">
+  <div class="grid grid-cols-2 gap-4 text-balance text-body/80">
+    <div class="flex">
       {previous && (
         <article class="relative p-4 rounded-2xl space-y-1 w-full hover:bg-primary/10 motion-safe:transition-all duration-300">
           <h2 class="text-sm">{t('blog.previous')}</h2>
           <a
             href={`/${locale}/${previous.slug}/`}
-            class="font-semibold text-inherit hover:text-primary after:absolute after:block after:inset-0 duration-300"
+            class="font-semibold after:absolute after:block after:inset-0 after:select-none"
           >
             {previous.data.title}
           </a>
         </article>
       )}
     </div>
-    <div class="flex flex-1">
+    <div class="flex">
       {next && (
         <article class="relative p-4 rounded-2xl space-y-1 w-full text-right hover:bg-primary/10 motion-safe:transition-all duration-300">
           <h2 class="text-sm">{t('blog.next')}</h2>
           <a
             href={`/${locale}/${next.slug}/`}
-            class="font-semibold text-inherit hover:text-primary after:absolute after:block after:inset-0 duration-300"
+            class="font-semibold after:absolute after:block after:inset-0 after:select-none"
           >
             {next.data.title}
           </a>
