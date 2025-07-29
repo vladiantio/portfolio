@@ -38,5 +38,5 @@
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "0.14.1"
   },
-  "packageManager": "pnpm@latest"
+  "packageManager": "pnpm@10.13.1"
 }
