@@ -7,12 +7,12 @@ export default {
     es: "contacto@vladiantio.com",
   },
   summary: {
-    en: "+4 years of experience in developing website and application development.",
-    es: "+4 años de experiencia en desarrollo de sitios y aplicaciones web.",
+    en: "+5 years of experience in developing website and application development.",
+    es: "+5 años de experiencia en desarrollo de sitios y aplicaciones web.",
   },
   shortDescription: {
-    en: "Full Stack Developer with +4 years of experience.",
-    es: "Desarrollador Full Stack con +4 años de experiencia.",
+    en: "Full Stack Developer with +5 years of experience.",
+    es: "Desarrollador Full Stack con +5 años de experiencia.",
   },
   seoDescription: {
     en: "Full Stack Developer with experience in TypeScript, .NET and WordPress, delivering innovative and efficient web solutions.",
