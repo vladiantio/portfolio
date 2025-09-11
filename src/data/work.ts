@@ -20,10 +20,46 @@ interface Work {
 
 export default [
   {
+    name: "Profugas.cl",
+    position: {
+      en: "Full Stack Developer with Laravel",
+      es: "Desarrollador Full Stack con Laravel",
+    },
+    startDate: "2025-07-01",
+    endDate: "",
+    highlights: {
+      en: [
+        "Currently developing new features.",
+      ],
+      es: [
+        "Actualmente desarrollo un SaaS para la gestión de inspecciones e informes termográficos.",
+      ],
+    },
+    skills: ['Laravel', 'PHP', 'React', 'TypeScript', 'Tailwind CSS'],
+  },
+  {
+    name: "Farmacia Latinoamericana",
+    position: {
+      en: "Full Stack Developer with Laravel",
+      es: "Desarrollador Full Stack con Laravel",
+    },
+    startDate: "2025-02-14",
+    endDate: "",
+    highlights: {
+      en: [
+        "Currently developing new features.",
+      ],
+      es: [
+        "Actualmente desarrollo un SaaS para la gestión de la farmacia.",
+      ],
+    },
+    skills: ['Laravel', 'PHP', 'React', 'TypeScript', 'Tailwind CSS'],
+  },
+  {
     name: "Happy Foto",
     position: {
-      en: "Full Stack Developer with WordPress",
-      es: "Desarrollador Full Stack con WordPress",
+      en: "WordPress Administrator and PHP/Vue.js Developer",
+      es: "Administrador de WordPress y Desarrollador de PHP y Vue.js",
     },
     url: "https://happyfoto.cl",
     startDate: "2024-08-01",
