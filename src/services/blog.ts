@@ -3,7 +3,7 @@ import type { Locale } from '@/i18n/constants';
 import type { PostEntry } from '@/types/Post';
 
 function transformPost(post: PostEntry, index: number, posts: PostEntry[]): PostEntry {
-  const slugPaths = post.slug.split('/');
+  const slugPaths = post.id.split('/');
   post.slug = slugPaths[0].slice(slugPaths[0].indexOf('-') + 1);
   post.lang = slugPaths[1] as Locale;
   post.next = index < posts.length - 1
@@ -16,11 +16,11 @@ function transformPost(post: PostEntry, index: number, posts: PostEntry[]): Post
 }
 
 export const getAllBlogPosts: (language?: Locale) => Promise<PostEntry[]> = async (language) => {
-  const collection = await getCollection('blog', ({ data, slug }) =>
-    (language ? slug.split('/')[1] === language : true) &&
+  const collection = await getCollection('blog', ({ data, id }) =>
+    (language ? id.split('/')[1] === language : true) &&
     (import.meta.env.PROD ? data.isDraft !== true : true)
   ) as PostEntry[];
-  const groupedPosts = Object.groupBy(collection, ({ slug }) => slug.split('/')[1]);
+  const groupedPosts = Object.groupBy(collection, ({ id }) => id.split('/')[1]);
   const posts: PostEntry[] = [];
   for (const group of Object.values(groupedPosts)) {
     if (!group) continue;

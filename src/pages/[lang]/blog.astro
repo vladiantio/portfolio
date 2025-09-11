@@ -1,9 +1,9 @@
 ---
-import NotebookPen from '@lucide/astro/icons/notebook-pen';
+import NotebookPen from "@lucide/astro/icons/notebook-pen";
 import Layout from "@/layouts/Layout.astro";
 import BlogGrid from "@/components/blog/BlogGrid.astro";
-import type { Locale } from '@/i18n/constants';
-import { localeParams, useTranslations } from '@/i18n/helpers';
+import type { Locale } from "@/i18n/constants";
+import { localeParams, useTranslations } from "@/i18n/helpers";
 import { getAllBlogPosts } from "@/services/blog";
 
 const locale = Astro.currentLocale as Locale | undefined;
@@ -13,7 +13,11 @@ const posts = await getAllBlogPosts(locale);
 export const getStaticPaths = () => localeParams;
 ---
 
-<Layout title="Blog" description={t('blog.latestPosts')}>
-  <h1 class="flex items-center text-2xl mb-8"><NotebookPen class="text-primary drop-shadow-primary-xl mr-3" />{t('blog.latestPosts')}</h1>
+<Layout title="Blog" description={t("blog.latestPosts")}>
+  <h1 class="flex items-center text-2xl mb-8">
+    <NotebookPen class="text-primary drop-shadow-primary-xl mr-3" />{
+      t("blog.latestPosts")
+    }
+  </h1>
   <BlogGrid posts={posts} />
 </Layout>

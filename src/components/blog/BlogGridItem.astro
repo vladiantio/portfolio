@@ -61,18 +61,18 @@ const { readingTime } = remarkPluginFrontmatter;
     }
 
     .img-main {
-      @apply shadow-[0_0.05rem_0.375rem_0_rgba(0,0,0,0.3)] shadow-primary/30 dark:shadow-black/30;
+      @apply border shadow-[0_0.05rem_0.375rem_0_rgba(0,0,0,0.2)] -translate-y-1;
 
       .blogGridItem:has(a:hover:not(:active)) & {
-        @apply translate-x-1 -translate-y-1;
+        @apply shadow-[0_0.02rem_0.125rem_0_rgba(0,0,0,0.3)] translate-y-0;
       }
     }
 
     .img-blurred {
-      @apply absolute top-0.5 -z-[1] contrast-150 saturate-200 opacity-60 blur-xs;
+      @apply absolute select-none blur-sm -z-[1] contrast-150 saturate-200 opacity-60;
 
       .blogGridItem:has(a:hover:not(:active)) & {
-        @apply blur-sm;
+        @apply blur-[2px];
       }
     }
 
@@ -91,7 +91,7 @@ const { readingTime } = remarkPluginFrontmatter;
     .title {
       @apply text-base line-clamp-2 text-pretty;
       a:before {
-        @apply [content:''] block absolute inset-0 z-[1];
+        @apply [content:''] absolute inset-0 select-none z-[1];
       }
     }
 
