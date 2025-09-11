@@ -7,6 +7,9 @@ dist/
 # vercel
 .vercel/
 
+# netlify
+.netlify/
+
 # dependencies
 node_modules/
 
@@ -25,3 +28,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# vscode setting folder
+.vscode/
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# zed setting folder
+.zed/
