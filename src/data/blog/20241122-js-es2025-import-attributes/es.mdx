@@ -29,11 +29,11 @@ JavaScript incluyó **Import Attributes**, una característica que te permite de
 
 Al importar módulos en la web, no podemos usar de forma fiable las extensiones de archivo para determinar el tipo de módulo. Un servidor podría enviar código JavaScript incluso cuando se solicita un archivo con extensión `.json`, lo que podría crear riesgos de seguridad:
 
-Lo que esperas recibir:
-
 ```js title="main.js"
 import config from "./config.json";
 ```
+
+Lo que esperas recibir:
 
 ```json title="config.json"
 {
