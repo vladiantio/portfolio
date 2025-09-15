@@ -60,7 +60,7 @@
     @apply bg-primary/10 border rounded-2xl shadow-sm flex flex-col items-start gap-y-2 mb-8 p-2;
 
     figcaption {
-      @apply bg-primary/10 rounded-lg text-sm px-4 py-1 text-center;
+      @apply bg-background dark:bg-body/10 border rounded-lg shadow-xs text-sm px-4 py-1 text-center;
     }
 
     pre {
@@ -69,7 +69,7 @@
   }
 
   :not(pre) > code {
-    @apply rounded-lg bg-primary/10 font-medium text-primary px-1.5 py-0.5 whitespace-nowrap;
+    @apply rounded-lg bg-primary/10 px-1.5 py-0.5 whitespace-nowrap;
   }
 
   table {
