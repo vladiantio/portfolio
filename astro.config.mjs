@@ -1,21 +1,37 @@
-import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel';
-import sitemap from '@astrojs/sitemap';
-import mdx from '@astrojs/mdx';
-import expressiveCode from 'astro-expressive-code';
+import { defineConfig } from "astro/config";
+import vercel from "@astrojs/vercel";
+import sitemap from "@astrojs/sitemap";
+import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 
 // Markdown Plugins
-import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
-import rehypeExternalLinks from 'rehype-external-links';
+import { remarkReadingTime } from "./plugins/remark-reading-time.mjs";
+import rehypeExternalLinks from "rehype-external-links";
+import rehypePrettyCode from "rehype-pretty-code";
 
-/** @type {import('rehype-external-links').Options} */
+// Shiki Transformers
+import { transformerColorizedBrackets } from "@shikijs/colorized-brackets";
+
+// Shiki Options
+const themes = {
+  light: "github-light",
+  dark: "github-dark",
+};
+const transformers = [transformerColorizedBrackets()];
+
+/** @type {import("rehype-external-links").Options} */
 const externalLinksOptions = {
   properties: {
-    'class': 'external'
+    class: "external",
   },
-  target: '_blank',
-  rel: ['noopener', 'noreferrer']
+  target: "_blank",
+  rel: ["noopener", "noreferrer"],
+};
+
+/** @type {import("rehype-pretty-code").Options} */
+const prettyCodeOptions = {
+  transformers,
+  theme: themes,
 };
 // End Markdown Plugins
 
@@ -23,47 +39,41 @@ const externalLinksOptions = {
 export default defineConfig({
   adapter: vercel(),
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'es'],
+    defaultLocale: "en",
+    locales: ["en", "es"],
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false,
     },
   },
   integrations: [
-    expressiveCode({
-      defaultProps: {
-        wrap: true,
-      },
-      styleOverrides: {
-        codeFontFamily: 'var(--font-mono)',
-        codeFontSize: 'var(--text-base)',
-        codeFontWeight: '500',
-        uiFontFamily: 'var(--font-sans)',
-        uiFontSize: 'var(--text-base)',
-      },
-      themes: ['github-dark', 'github-light'],
-      themeCssSelector: (theme) => `[data-theme='${theme.type}']`,
-      useDarkModeMediaQuery: false,
-    }),
     mdx(),
     sitemap({
       i18n: {
-        defaultLocale: 'en',
+        defaultLocale: "en",
         locales: {
-          en: 'en',
-          es: 'es',
+          en: "en",
+          es: "es",
         },
       },
     }),
   ],
   markdown: {
     remarkPlugins: [remarkReadingTime],
-    rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]],
+    rehypePlugins: [
+      [rehypeExternalLinks, externalLinksOptions],
+      [rehypePrettyCode, prettyCodeOptions],
+    ],
+    syntaxHighlight: false,
+    shikiConfig: {
+      transformers,
+      themes,
+      wrap: true,
+    },
   },
-  output: 'static',
+  output: "static",
   server: { port: 4680 },
-  site: 'https://vladiantio.com',
+  site: "https://vladiantio.com",
   vite: {
     plugins: [tailwindcss()],
   },
