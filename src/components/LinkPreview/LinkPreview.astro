@@ -1,148 +1,151 @@
 ---
-import ExternalLink from '../ExternalLink.astro';
-import { parseOpenGraph } from './lib';
-import type { Meta } from './types';
+import ExternalLink from "../ExternalLink.astro";
+import { parseOpenGraph } from "./lib";
+import type { Meta } from "./types";
 
 export interface Props {
-	/** URL to fetch Open Graph data. */
-	id: string;
-	/** Hide any image or video even if set in the OpenGraph data. */
-	hideMedia?: boolean;
-	/** Fallback metadata in case of failure to fetch Open Graph data. */
-	fallbackMeta?: Meta;
+  /** URL to fetch Open Graph data. */
+  id: string;
+  /** Hide any image or video even if set in the OpenGraph data. */
+  hideMedia?: boolean;
+  /** Fallback metadata in case of failure to fetch Open Graph data. */
+  fallbackMeta?: Meta;
 }
 
 const { id, hideMedia = false, fallbackMeta } = Astro.props;
 
 const openGraphMeta = await parseOpenGraph(id);
 const meta = {
-	title: openGraphMeta?.title || fallbackMeta?.title,
-	description: openGraphMeta?.description || fallbackMeta?.description,
-	image: openGraphMeta?.image || fallbackMeta?.image,
-	imageAlt: openGraphMeta?.imageAlt || fallbackMeta?.imageAlt,
-	url: openGraphMeta?.url || fallbackMeta?.url || id,
-	video: openGraphMeta?.video || fallbackMeta?.video,
-	videoType: openGraphMeta?.videoType || fallbackMeta?.videoType,
+  title: openGraphMeta?.title || fallbackMeta?.title,
+  description: openGraphMeta?.description || fallbackMeta?.description,
+  image: openGraphMeta?.image || fallbackMeta?.image,
+  imageAlt: openGraphMeta?.imageAlt || fallbackMeta?.imageAlt,
+  url: openGraphMeta?.url || fallbackMeta?.url || id,
+  video: openGraphMeta?.video || fallbackMeta?.video,
+  videoType: openGraphMeta?.videoType || fallbackMeta?.videoType,
 };
-const domain = meta.url ? new URL(meta.url).hostname.replace('www.', '') : '';
+const domain = meta.url ? new URL(meta.url).hostname.replace("www.", "") : "";
 ---
 
 {
-	meta.title ? (
-		<article
-			class:list={[
-				'link-preview',
-				{
-					'link-preview--has-video': !hideMedia && meta.video && meta.videoType,
-					'link-preview--no-media':
-						hideMedia || !((meta.video && meta.videoType) || meta.image),
-				},
-			]}
-		>
-			<div class="link-preview__content">
-				<header>
-					<ExternalLink class="link-preview__title" href={id}>
-						{meta.title}
-					</ExternalLink>{' '}
-					{domain && <small class="link-preview__domain">{domain}</small>}
-				</header>
-				<small class="link-preview__description">{meta.description}</small>
-			</div>
-			{hideMedia ? null : meta.video && meta.videoType ? (
-				<video controls preload="metadata" width="1200" height="630">
-					<source src={meta.video} type={meta.videoType} />
-				</video>
-			) : meta.image ? (
-				<img
-					src={meta.image}
-					alt={meta.imageAlt || ''}
-					width="1200"
-					height="630"
-					fetchpriority="low"
-					loading="lazy"
-				/>
-			) : null}
-		</article>
-	) : (
-		<div class="link-preview link-preview--no-metadata">
-			<a href={id}>{id}</a>
-		</div>
-	)
+  meta.title ? (
+    <article
+      class:list={[
+        "link-preview",
+        {
+          "link-preview--has-video": !hideMedia && meta.video && meta.videoType,
+          "link-preview--no-media":
+            hideMedia || !((meta.video && meta.videoType) || meta.image),
+        },
+      ]}
+    >
+      <div class="link-preview__content">
+        <header>
+          <ExternalLink class="link-preview__title" href={id}>
+            {meta.title}
+          </ExternalLink>{" "}
+          {domain && <small class="link-preview__domain">{domain}</small>}
+        </header>
+        <small class="link-preview__description">{meta.description}</small>
+      </div>
+      {hideMedia ? null : meta.video && meta.videoType ? (
+        <video controls preload="metadata" width="1200" height="630">
+          <source src={meta.video} type={meta.videoType} />
+        </video>
+      ) : meta.image ? (
+        <img
+          src={meta.image}
+          alt={meta.imageAlt || ""}
+          width="1200"
+          height="630"
+          fetchpriority="low"
+          loading="lazy"
+        />
+      ) : null}
+    </article>
+  ) : (
+    <div class="link-preview link-preview--no-metadata">
+      <a href={id}>{id}</a>
+    </div>
+  )
 }
 
 <style>
-	/* Default styles */
-	.link-preview {
-		--lp-width: 30rem;
-		--lp-pad-x: 0.75rem;
-		--lp-pad-y: 1rem;
-		--lp-corners: 1rem;
-		--lp-title-lines: 2;
-		--lp-desc-lines: 1;
+  /* Default styles */
+  .link-preview {
+    --lp-width: 30rem;
+    --lp-pad-x: 0.75rem;
+    --lp-pad-y: 1rem;
+    --lp-corners: 1rem;
+    --lp-title-lines: 2;
+    --lp-desc-lines: 1;
 
-		position: relative;
-		max-width: var(--lp-width);
-		display: flex;
-		flex-direction: column-reverse;
-		border-radius: var(--lp-corners);
-		border: 1px solid color-mix(in oklab, var(--body) 10%, transparent);
-		transition: scale 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    max-width: var(--lp-width);
+    display: flex;
+    flex-direction: column-reverse;
+    border-radius: var(--lp-corners);
+    border-width: 1px;
+    transition: scale 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+      0 1px 3px 0 rgb(0 0 0 / 0.1),
+      0 1px 2px -1px rgb(0 0 0 / 0.1);
 
-		* {
-			line-height: 1.2;
-			margin: 0 !important;
-		}
-		header {
-			display: flex;
-			flex-direction: column-reverse;
-		}
+    * {
+      line-height: 1.2;
+      margin: 0 !important;
+    }
+    header {
+      display: flex;
+      flex-direction: column-reverse;
+    }
 
-		&:not(.link-preview__content--has-video) a::after {
-			content: '';
-			position: absolute;
-			inset: 0;
-		}
-		img,
-		video {
-			aspect-ratio: 1200 / 630;
-			width: 100%;
-			height: auto;
-			object-fit: contain;
-			border-radius: var(--lp-corners) var(--lp-corners) 0 0 !important;
-		}
+    &:not(.link-preview__content--has-video) a::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+    img,
+    video {
+      aspect-ratio: 1200 / 630;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: var(--lp-corners) var(--lp-corners) 0 0 !important;
+    }
 
-		&:has(img, video) .link-preview__content {
-			border-top: 1px solid color-mix(in oklab, var(--body) 10%, transparent);
-		}
+    &:has(img, video) .link-preview__content {
+      border-top-width: 1px;
+    }
 
-		&:active {
-			scale: 0.98;
-		}
-	}
+    &:active {
+      scale: 0.98;
+    }
+  }
 
-	.link-preview__content {
-		display: flex;
-		flex-direction: column;
-		padding: var(--lp-pad-y) var(--lp-pad-x);
-	}
+  .link-preview__content {
+    display: flex;
+    flex-direction: column;
+    padding: var(--lp-pad-y) var(--lp-pad-x);
+  }
 
-	.link-preview__title {
-		display: -webkit-box;
-		-webkit-line-clamp: var(--lp-title-lines);
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
+  .link-preview__title {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--lp-title-lines);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-	.link-preview__domain {
-		color: var(--muted);
-	}
+  .link-preview__domain {
+    color: var(--muted);
+  }
 
-	.link-preview__description {
-		display: -webkit-box;
-		-webkit-line-clamp: var(--lp-desc-lines);
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
+  .link-preview__description {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--lp-desc-lines);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 </style>
