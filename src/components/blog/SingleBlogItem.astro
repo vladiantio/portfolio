@@ -65,7 +65,7 @@ const heroImage = hero && (hero.format === 'svg' ? hero : await getImage({
         <article class="relative p-4 rounded-2xl space-y-1 w-full hover:bg-primary/10 motion-safe:transition-all duration-300">
           <h2 class="text-sm">{t('blog.previous')}</h2>
           <a
-            href={`/${locale}/${previous.slug}/`}
+            href={`/${locale}/blog/${previous.slug}/`}
             class="font-semibold after:absolute after:block after:inset-0 after:select-none"
           >
             {previous.data.title}
@@ -78,7 +78,7 @@ const heroImage = hero && (hero.format === 'svg' ? hero : await getImage({
         <article class="relative p-4 rounded-2xl space-y-1 w-full text-right hover:bg-primary/10 motion-safe:transition-all duration-300">
           <h2 class="text-sm">{t('blog.next')}</h2>
           <a
-            href={`/${locale}/${next.slug}/`}
+            href={`/${locale}/blog/${next.slug}/`}
             class="font-semibold after:absolute after:block after:inset-0 after:select-none"
           >
             {next.data.title}

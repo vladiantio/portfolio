@@ -1,12 +1,12 @@
 ---
 import { render } from "astro:content";
-import Calendar from '@lucide/astro/icons/calendar';
-import Clock from '@lucide/astro/icons/clock';
-import type { Locale } from '@/i18n/constants';
-import { useTranslations } from '@/i18n/helpers';
-import type { PostEntry } from '@/types/Post';
-import { formatShortDate } from '@/utils/date';
-import Illustration from '../Illustration.astro';
+import Calendar from "@lucide/astro/icons/calendar";
+import Clock from "@lucide/astro/icons/clock";
+import type { Locale } from "@/i18n/constants";
+import { useTranslations } from "@/i18n/helpers";
+import type { PostEntry } from "@/types/Post";
+import { formatShortDate } from "@/utils/date";
+import Illustration from "../Illustration.astro";
 import { cn } from "@/utils/cn";
 
 interface Props {
@@ -22,26 +22,37 @@ const { remarkPluginFrontmatter } = await render(post);
 const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<article class="blogGridItem" style={{ '--main-color': themeColor }}>
+<article class="blogGridItem" style={{ "--main-color": themeColor }}>
   <div class="content">
-    <h3 class="title mb-2"><a href={`/${locale}/${slug}/`}>{title}</a></h3>
+    <h3 class="title mb-2"><a href={`/${locale}/blog/${slug}/`}>{title}</a></h3>
     <p class="description mb-3">{description}</p>
     <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
-      <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time>
-      <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
+      <time
+        class="flex items-center"
+        title={t("blog.pubDate")}
+        datetime={date.toISOString()}
+        ><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time
+      >
+      <span class="flex items-center" title={t("blog.readingTime")}
+        ><Clock class="size-4 mr-3" />{readingTime}
+        {t("blog.readingTime.read")}</span
+      >
     </div>
   </div>
   <div class="relative size-20">
-    {hero && ['img-blurred', 'img-main'].map(className => (
-      <Illustration
-        alt={heroAlt}
-        class={cn("img", className)}
-        src={hero}
-        width="320"
-        height="168"
-        aria-hidden={className === 'img-blurred'}
-      />
-    ))}
+    {
+      hero &&
+        ["img-blurred", "img-main"].map((className) => (
+          <Illustration
+            alt={heroAlt}
+            class={cn("img", className)}
+            src={hero}
+            width="320"
+            height="168"
+            aria-hidden={className === "img-blurred"}
+          />
+        ))
+    }
   </div>
 </article>
 
