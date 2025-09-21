@@ -1,4 +1,4 @@
-@variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant dark (&:is(.dark *));
 
 :root {
   --main-color: #3fa0fa;
@@ -18,7 +18,7 @@
   --main-container-width: 54rem;
 }
 
-[data-theme="dark"] {
+.dark {
   --background: oklch(from var(--main-color) 0.2 calc(c * 0.142) h);
   --foreground: oklch(from var(--main-color) 0.98 calc(c * 0.02) h);
   --muted: oklch(from var(--main-color) 0.88 calc(c * 0.16) h);

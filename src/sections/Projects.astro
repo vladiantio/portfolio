@@ -83,7 +83,7 @@ const t = useTranslations(locale);
 
   .project-item {
     --primary: oklch(from var(--main-color) 0.56 calc(c * 0.85) h);
-    [data-theme='dark'] & {
+    .dark & {
       --primary: oklch(from var(--main-color) 0.76 calc(c * 0.85) h);
     }
     @apply relative grid md:grid-cols-2 p-8 gap-6 md:gap-8 bg-primary/10 rounded-2xl;

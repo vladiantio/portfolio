@@ -10,7 +10,7 @@ const updateTheme = () => {
 	reloadTheme = true;
 	const theme = localStorage.theme ?? 'system';
 	const isDark = theme === 'dark' || (theme === 'system' && matchPrefersDark.matches);
-	html.dataset.theme = isDark ? 'dark' : 'light';
+	html.classList.toggle('dark', isDark);
 };
 updateTheme();
 

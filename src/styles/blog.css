@@ -94,7 +94,7 @@
     @apply text-(--shiki-light);
   }
 
-  [data-theme="dark"] & {
+  .dark & {
     pre[data-theme*=" "],
     pre[data-theme*=" "] span {
       @apply text-(--shiki-dark);
