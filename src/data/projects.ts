@@ -1,3 +1,4 @@
+import aforshow from '@/assets/projects/aforshow.jpg';
 import jsconfEs from '@/assets/projects/jsconf-es.jpg';
 import happyfoto from '@/assets/projects/happyfoto.jpg';
 import portalinversionista from '@/assets/projects/portalinversionista.jpg';
@@ -21,6 +22,21 @@ interface Project {
 }
 
 export default [
+  {
+    name: "Aforshow 2025 (@afor_digital)",
+    image: aforshow,
+    startDate: "2025-09-23",
+    endDate: "2025-09-23",
+    description: {
+      en: "A programming event made for developers by developers to give them the opportunity to give a talk.",
+      es: "Un evento de programación creado por desarrolladores para desarrolladores con el fin de darles la oportunidad de dar una charla.",
+    },
+    technologies: ['Astro', 'Tailwind CSS'],
+    url: "https://afor.show/",
+    urlCode: "https://github.com/Afordin/aforshow-2025",
+    urlContributions: "https://github.com/Afordin/aforshow-2025/commits/main/?author=vladiantio",
+    themeColor: "#fff",
+  },
   {
     name: "JSConf España 2025 (@midudev)",
     image: jsconfEs,
