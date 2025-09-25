@@ -3,7 +3,7 @@
 :root {
   --main-color: #3fa0fa;
 
-  --background: oklch(from var(--main-color) 0.98 calc(c * 0.12) h);
+  --background: oklch(from var(--main-color) 0.99 calc(c * 0.1) h);
   --foreground: oklch(from var(--main-color) 0.15 calc(c * 0.16) h);
   --muted: oklch(from var(--main-color) 0.62 calc(c * 0.16) h);
   --body: oklch(0 0 0);
