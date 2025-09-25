@@ -60,12 +60,14 @@ const { readingTime } = remarkPluginFrontmatter;
   @reference '@/styles/global.css';
 
   .blogGridItem {
+    --soft: oklch(from var(--main-color) 0.96 calc(c * 0.18) h);
     --primary: oklch(from var(--main-color) 0.56 calc(c * 0.85) h);
     .dark & {
+      --soft: oklch(from var(--main-color) 0.3 calc(c * 0.18) h);
       --primary: oklch(from var(--main-color) 0.76 calc(c * 0.85) h);
     }
 
-    @apply flex items-center p-4 gap-x-4 relative bg-primary/10 rounded-2xl;
+    @apply border flex items-center p-4 gap-x-4 relative bg-soft/50 rounded-2xl shadow-xs;
 
     .img {
       @apply shrink-0 rounded-xl size-full object-cover motion-safe:transition-all duration-300;
