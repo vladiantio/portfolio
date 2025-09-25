@@ -32,12 +32,12 @@
   }
 
   body::-webkit-scrollbar-thumb {
-    background-color: var(--primary);
+    @apply bg-primary/50;
     border-radius: 3px;
   }
 
   body::-webkit-scrollbar-thumb:hover {
-    background-color: var(--primary-hover);
+    @apply bg-primary;
   }
 
   @supports not selector(::-webkit-scrollbar) {
@@ -123,7 +123,7 @@
   }
 
   .skill-badge {
-    @apply flex items-center rounded-lg overflow-hidden bg-primary/10 text-sm;
+    @apply flex items-center rounded-lg overflow-hidden border bg-soft text-sm shadow-xs h-8;
 
     span {
       @apply mx-4;
