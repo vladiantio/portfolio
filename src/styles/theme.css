@@ -7,7 +7,7 @@
   --foreground: oklch(from var(--main-color) 0.15 calc(c * 0.16) h);
   --muted: oklch(from var(--main-color) 0.62 calc(c * 0.16) h);
   --body: oklch(0 0 0);
-  --soft: oklch(from var(--main-color) 0.92 calc(c * 0.16) h);
+  --soft: oklch(from var(--main-color) 0.96 calc(c * 0.18) h);
   --primary-dark: oklch(from var(--main-color) 0.76 calc(c * 0.85) h);
   --primary-dark-hover: oklch(from var(--main-color) 0.92 calc(c * 0.85) h);
   --primary-light: oklch(from var(--main-color) 0.56 calc(c * 0.85) h);
@@ -23,7 +23,7 @@
   --foreground: oklch(from var(--main-color) 0.98 calc(c * 0.02) h);
   --muted: oklch(from var(--main-color) 0.88 calc(c * 0.16) h);
   --body: oklch(1 0 0);
-  --soft: oklch(from var(--main-color) 0.3 calc(c * 0.16) h);
+  --soft: oklch(from var(--main-color) 0.3 calc(c * 0.18) h);
   --primary: var(--primary-dark);
   --primary-hover: var(--primary-dark-hover);
   color-scheme: dark;
