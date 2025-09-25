@@ -16,6 +16,7 @@ interface Work {
     es: string[];
   };
   skills: string[];
+  themeColor?: string;
 }
 
 export default [
@@ -36,6 +37,7 @@ export default [
       ],
     },
     skills: ["Laravel", "PHP", "MySQL", "React", "TypeScript", "Tailwind CSS"],
+    themeColor: "#88d4ff",
   },
   {
     name: "Farmacia Latinoamericana",
@@ -56,6 +58,7 @@ export default [
       ],
     },
     skills: ["Laravel", "PHP", "MySQL", "React", "TypeScript", "Tailwind CSS"],
+    themeColor: "#a6ff47",
   },
   {
     name: "Happy Foto",
@@ -77,6 +80,7 @@ export default [
       ],
     },
     skills: ["Vue", "TypeScript", "Tailwind CSS", "WordPress", "PHP"],
+    themeColor: "#00eac7",
   },
   {
     name: "Lecaros Group",
@@ -100,6 +104,7 @@ export default [
       ],
     },
     skills: [".NET", "Vue", "Angular", "jQuery", "Bootstrap", "Microsoft SQL Server", "Azure", "Python"],
+    themeColor: "#ff9611",
   },
   {
     name: "Gestión Tecnológica Empresarial SpA (G5)",
@@ -127,5 +132,6 @@ export default [
       ],
     },
     skills: [".NET", "Vue", "Angular", "jQuery", "Bootstrap", "Microsoft SQL Server", "Azure"],
+    themeColor: "#00a39e",
   }
 ] as Work[];
