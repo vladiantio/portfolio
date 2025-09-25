@@ -1,6 +1,5 @@
 import aforshow from "@/assets/projects/aforshow.jpg";
 import jsconfEs from "@/assets/projects/jsconf-es.jpg";
-import happyfoto from "@/assets/projects/happyfoto.jpg";
 import portalinversionista from "@/assets/projects/portalinversionista.jpg";
 
 interface Project {
@@ -11,6 +10,10 @@ interface Project {
   description: {
     en: string;
     es: string;
+  };
+  keyAccomplishments: {
+    en: string[];
+    es: string[];
   };
   technologies: string[];
   madeAt?: string;
@@ -23,13 +26,23 @@ interface Project {
 
 export default [
   {
-    name: "Aforshow 2025 (@afor_digital)",
+    name: "Aforshow (@afor_digital)",
     image: aforshow,
-    startDate: "2025-09-23",
+    startDate: "2025-09-18",
     endDate: "2025-09-23",
     description: {
       en: "A programming event made for developers by developers to give them the opportunity to give a talk.",
       es: "Un evento de programación creado por desarrolladores para desarrolladores con el fin de darles la oportunidad de dar una charla.",
+    },
+    keyAccomplishments: {
+      en: [
+        "Collaboration in GitHub",
+        "Improvements in performance and time zone representation",
+      ],
+      es: [
+        "Colaboración en GitHub",
+        "Mejoras de rendimiento y representación del horario"
+      ],
     },
     technologies: ["Astro", "Tailwind CSS"],
     url: "https://afor.show/",
@@ -38,32 +51,29 @@ export default [
     themeColor: "#fff",
   },
   {
-    name: "JSConf España 2025 (@midudev)",
+    name: "JSConf España (@midudev)",
     image: jsconfEs,
     startDate: "2024-12-29",
     endDate: "2024-12-30",
     description: {
-      en: "International JavaScript Conference to be held on March 1, 2025 at La Nave, Madrid, Spain.",
-      es: "Conferencia internacional de JavaScript que se celebrará el 1 de Marzo de 2025 en La Nave, Madrid, España.",
+      en: "International JavaScript Conference held on March 1, 2025 at La Nave, Madrid, Spain.",
+      es: "Conferencia internacional de JavaScript que se celebró el 1 de Marzo de 2025 en La Nave, Madrid, España.",
+    },
+    keyAccomplishments: {
+      en: [
+        "Collaboration in GitHub",
+        "Improvements in navigation and readability",
+      ],
+      es: [
+        "Colaboración en GitHub",
+        "Mejoras de navegación y legibilidad",
+      ],
     },
     technologies: ["Astro", "Tailwind CSS"],
     url: "https://jsconf.es/",
     urlCode: "https://github.com/midudev/jsconf.es",
     urlContributions: "https://github.com/midudev/jsconf.es/commits/main/?author=vladiantio",
     themeColor: "#f7df1d",
-  },
-  {
-    name: "Happy Foto",
-    image: happyfoto,
-    startDate: "2024-08-14",
-    endDate: "",
-    description: {
-      en: "Photo booking service located in Las Condes with delivery to Santiago and more regions of Chile.",
-      es: "Servicio de enmarcado de fotografías ubicado en Las Condes con envío a domicilio a Santiago y a más regiones de Chile.",
-    },
-    technologies: ["Vue", "WordPress"],
-    url: "https://happyfoto.cl/",
-    themeColor: "#00eac7",
   },
   {
     name: "Portal Inversionista",
@@ -73,6 +83,18 @@ export default [
     description: {
       en: "Property booking platform for investments in Chile. +1.000 registered customers.",
       es: "Plataforma para reservar propiedades de inversión en Chile. +1.000 clientes registrados.",
+    },
+    keyAccomplishments: {
+      en: [
+        "Redesigned landing page",
+        "SEO Optimization",
+        "Mobile adaptation",
+      ],
+      es: [
+        "Landing page rediseñada",
+        "Optimización del SEO",
+        "Adaptación para móviles",
+      ],
     },
     technologies: ["Angular", "Bootstrap", ".NET"],
     madeAt: "Lecaros Group",
