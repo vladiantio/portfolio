@@ -1,78 +1,89 @@
 ---
-import Globe from '@lucide/astro/icons/globe';
-import UserRoundPen from '@lucide/astro/icons/user-round-pen';
-import projects from '@/data/projects';
-import type { Locale } from '@/i18n/constants';
-import { translate, useTranslations } from '@/i18n/helpers';
-import ExternalLink from '@/components/ExternalLink.astro';
-import Illustration from '@/components/Illustration.astro';
-import SocialIcon from '@/components/SocialIcon.astro';
-import SkillIcon from '@/components/SkillIcon.astro';
-import { cn } from '@/utils/cn';
+import Globe from "@lucide/astro/icons/globe";
+import UserRoundPen from "@lucide/astro/icons/user-round-pen";
+import projects from "@/data/projects";
+import type { Locale } from "@/i18n/constants";
+import { translate, useTranslations } from "@/i18n/helpers";
+import ExternalLink from "@/components/ExternalLink.astro";
+import Illustration from "@/components/Illustration.astro";
+import SocialIcon from "@/components/SocialIcon.astro";
+import SkillIcon from "@/components/SkillIcon.astro";
+import { cn } from "@/utils/cn";
 
 const locale = Astro.currentLocale as Locale | undefined;
 const t = useTranslations(locale);
 ---
-{projects && projects.length > 0 && (
-  <section class="pt-24" id="projects">
-    <h2 class="flex items-center mb-8"><Globe class="text-primary drop-shadow-primary-xl mr-3" />{t('projects.featuredProjects')}</h2>
 
-    <div class="projects-grid">
-      {projects.map(item => (
-        <article class="project-item" style={{ '--main-color': item.themeColor }}>
-          <div class="image">
-            {['img-blurred', 'img-main'].map(className => (
-              <Illustration
-                alt={item.name}
-                class={cn("img", className)}
-                src={item.image}
-                aria-hidden={className === 'img-blurred'}
-                width="960"
-                height="540"
-              />
-            ))}
-          </div>
-          <div class="content">
-            <header>
-              <h3 class="title"><ExternalLink href={item.url}>{item.name}</ExternalLink></h3>
-              <div class="flex items-center -mx-3">
-                {item.urlCode && (
-                  <ExternalLink
-                    class="px-3 icon"
-                    href={item.urlCode}
-                    title={t('projects.viewCode')}
-                    aria-label={t('projects.viewCode')}
-                  >
-                    <SocialIcon name="github" class="size-6" />
-                  </ExternalLink>
-                )}
-                {item.urlContributions && (
-                  <ExternalLink
-                    class="px-3 icon"
-                    href={item.urlContributions}
-                    title={t('projects.viewMyContributions')}
-                    aria-label={t('projects.viewMyContributions')}
-                  >
-                    <UserRoundPen class="size-6" />
-                  </ExternalLink>
-                )}
-              </div>
-            </header>
-            <div class="flex flex-wrap items-center gap-3 mb-4">
-              {item.technologies.map(technology => (
-                <span class="skill-badge">
-                  <SkillIcon name={technology} />
-                  <span>{technology}</span>
-                </span>
+{
+  projects && projects.length > 0 && (
+    <section class="pt-24" id="projects">
+      <h2 class="flex items-center mb-8">
+        <Globe class="text-primary drop-shadow-primary-xl mr-3" />
+        {t("projects.featuredProjects")}
+      </h2>
+
+      <div class="projects-grid">
+        {projects.map((item) => (
+          <article
+            class="project-item"
+            style={{ "--main-color": item.themeColor }}
+          >
+            <div class="image">
+              {["img-blurred", "img-main"].map((className) => (
+                <Illustration
+                  alt={item.name}
+                  class={cn("img", className)}
+                  src={item.image}
+                  aria-hidden={className === "img-blurred"}
+                  width="960"
+                  height="540"
+                />
               ))}
             </div>
-            <p>{translate(item.description, locale)}</p>
-          </div>
-        </article>
-      ))}
-    </div>
-  </section>
-)}
+            <div class="content">
+              <header>
+                <h3 class="title">
+                  <ExternalLink href={item.url}>{item.name}</ExternalLink>
+                </h3>
+                <div class="flex items-center -mx-3">
+                  {item.urlCode && (
+                    <ExternalLink
+                      class="px-3 icon"
+                      href={item.urlCode}
+                      title={t("projects.viewCode")}
+                      aria-label={t("projects.viewCode")}
+                    >
+                      <SocialIcon name="github" class="size-6" />
+                    </ExternalLink>
+                  )}
+                  {item.urlContributions && (
+                    <ExternalLink
+                      class="px-3 icon"
+                      href={item.urlContributions}
+                      title={t("projects.viewMyContributions")}
+                      aria-label={t("projects.viewMyContributions")}
+                    >
+                      <UserRoundPen class="size-6" />
+                    </ExternalLink>
+                  )}
+                </div>
+              </header>
+              <div class="flex flex-wrap items-center gap-3 mb-4">
+                {item.technologies.map((technology) => (
+                  <span class="skill-badge">
+                    <SkillIcon name={technology} />
+                    <span>{technology}</span>
+                  </span>
+                ))}
+              </div>
+              <p>{translate(item.description, locale)}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  )
+}
 
 <style>
   @reference '@/styles/global.css';
