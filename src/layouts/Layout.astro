@@ -1,17 +1,19 @@
 ---
-import GradientTop from '@/components/backgrounds/GradientTop.astro';
-import GradientBottom from '@/components/backgrounds/GradientBottom.astro';
-import BaseHead, { type Props as BaseHeadProps } from '@/components/BaseHead.astro';
-import Footer from '@/components/Footer.astro';
-import Main from '@/components/Main.astro';
-import Navbar from '@/components/Navbar.astro';
-import { DEFAULT_LOCALE } from '@/i18n/constants';
-import '@/styles/global.css';
-import Noise from '@/components/backgrounds/Noise.astro';
+import GradientTop from "@/components/backgrounds/GradientTop.astro";
+import GradientBottom from "@/components/backgrounds/GradientBottom.astro";
+import BaseHead, {
+  type Props as BaseHeadProps,
+} from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/components/Main.astro";
+import Navbar from "@/components/Navbar.astro";
+import { DEFAULT_LOCALE } from "@/i18n/constants";
+import "@/styles/global.css";
+import Noise from "@/components/backgrounds/Noise.astro";
 
 interface Props extends BaseHeadProps {
-	class?: string;
-};
+  class?: string;
+}
 
 const locale = Astro.currentLocale;
 const { class: className, ...head } = Astro.props;
@@ -20,19 +22,19 @@ const themeColorStyle = head.themeColor && `--main-color: ${head.themeColor}`;
 
 <!doctype html>
 <html lang={locale ?? DEFAULT_LOCALE} style={themeColorStyle}>
-	<head>
-		<slot name="before-head" />
-		<BaseHead {...head} />
-		<slot name="after-head" />
-	</head>
-	<body>
-		<GradientTop />
-		<Noise />
-		<div class="wrapper">
-			<Navbar />
-			<Main class={className}><slot /></Main>
-			<Footer />
-		</div>
-		<GradientBottom />
-	</body>
+  <head>
+    <slot name="before-head" />
+    <BaseHead {...head} />
+    <slot name="after-head" />
+  </head>
+  <body>
+    <GradientTop />
+    <Noise />
+    <div class="wrapper">
+      <Navbar />
+      <Main class={className}><slot /></Main>
+      <Footer />
+    </div>
+    <GradientBottom />
+  </body>
 </html>

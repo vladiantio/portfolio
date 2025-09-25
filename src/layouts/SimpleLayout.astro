@@ -1,7 +1,9 @@
 ---
-import BaseHead, { type Props as BaseHeadProps } from '@/components/BaseHead.astro';
-import { DEFAULT_LOCALE } from '@/i18n/constants';
-import '@/styles/global.css';
+import BaseHead, {
+  type Props as BaseHeadProps,
+} from "@/components/BaseHead.astro";
+import { DEFAULT_LOCALE } from "@/i18n/constants";
+import "@/styles/global.css";
 
 type Props = BaseHeadProps;
 
@@ -11,12 +13,12 @@ const head = Astro.props;
 
 <!doctype html>
 <html lang={locale ?? DEFAULT_LOCALE}>
-	<head>
-		<slot name="before-head" />
-		<BaseHead {...head} />
-		<slot name="after-head" />
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <slot name="before-head" />
+    <BaseHead {...head} />
+    <slot name="after-head" />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>

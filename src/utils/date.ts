@@ -33,3 +33,10 @@ export function formatMonth(date?: Date | number | string, locale: Locale = DEFA
 
   return Intl.DateTimeFormat(locale, { year: "numeric", month: "long" }).format(date);
 }
+
+export function formatShortMonth(date?: Date | number | string, locale: Locale = DEFAULT_LOCALE) {
+  if (!date) return '';
+  date = parseDate(date);
+
+  return Intl.DateTimeFormat(locale, { year: "numeric", month: "short" }).format(date);
+}

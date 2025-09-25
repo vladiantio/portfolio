@@ -16,6 +16,7 @@ interface Work {
     es: string[];
   };
   skills: string[];
+  themeColor?: string;
 }
 
 export default [
@@ -29,13 +30,14 @@ export default [
     endDate: "",
     highlights: {
       en: [
-        "Currently developing new features.",
+        "Currently developing a SaaS for the management of inspections and thermal reports.",
       ],
       es: [
         "Actualmente desarrollo un SaaS para la gestión de inspecciones e informes termográficos.",
       ],
     },
-    skills: ['Laravel', 'PHP', 'React', 'TypeScript', 'Tailwind CSS'],
+    skills: ["Laravel", "PHP", "MySQL", "React", "TypeScript", "Tailwind CSS"],
+    themeColor: "#88d4ff",
   },
   {
     name: "Farmacia Latinoamericana",
@@ -47,13 +49,16 @@ export default [
     endDate: "",
     highlights: {
       en: [
-        "Currently developing new features.",
+        "Currently developing a SaaS for the management of the pharmacy.",
+        "I implemented a system to import/export product prices list in Excel for different suppliers."
       ],
       es: [
         "Actualmente desarrollo un SaaS para la gestión de la farmacia.",
+        "Implementé un sistema para importar/exportar lista de precios de productos en Excel para distintos proveedores."
       ],
     },
-    skills: ['Laravel', 'PHP', 'React', 'TypeScript', 'Tailwind CSS'],
+    skills: ["Laravel", "PHP", "MySQL", "React", "TypeScript", "Tailwind CSS"],
+    themeColor: "#a6ff47",
   },
   {
     name: "Happy Foto",
@@ -63,18 +68,19 @@ export default [
     },
     url: "https://happyfoto.cl",
     startDate: "2024-08-01",
-    endDate: "",
+    endDate: "2025-05-01",
     highlights: {
       en: [
-        "Currently developing new features of the website built in WordPress.",
+        "Developed new features of the website built in WordPress.",
         "I improved user experience by optimizing image loading."
       ],
       es: [
-        "Actualmente desarrollo nuevas funcionalidades del sitio web hecho en WordPress.",
+        "Desarrollé nuevas funcionalidades del sitio web hecho en WordPress.",
         "Logré mejorar la experiencia de usuario en la carga de imágenes."
       ],
     },
-    skills: ['Vue', 'TypeScript', 'Tailwind CSS', 'WordPress', 'PHP'],
+    skills: ["Vue", "TypeScript", "Tailwind CSS", "WordPress", "PHP"],
+    themeColor: "#00eac7",
   },
   {
     name: "Lecaros Group",
@@ -97,7 +103,8 @@ export default [
         "Desarrollé e implementé un webscraping que obtiene propiedades disponibles de varias inmobiliarias."
       ],
     },
-    skills: ['.NET', 'Vue', 'Angular', 'jQuery', 'Bootstrap', 'Microsoft SQL Server', 'Azure', 'Azure DevOps', 'Python'],
+    skills: [".NET", "Vue", "Angular", "jQuery", "Bootstrap", "Microsoft SQL Server", "Azure", "Python"],
+    themeColor: "#ff9611",
   },
   {
     name: "Gestión Tecnológica Empresarial SpA (G5)",
@@ -124,6 +131,7 @@ export default [
         "Implementé **UPago** en el módulo de pagos de **Portal Arriendo**, y se han registrado **más de 6.000 pagos**."
       ],
     },
-    skills: ['.NET', 'Vue', 'Angular', 'jQuery', 'Bootstrap', 'Microsoft SQL Server', 'Azure', 'Azure DevOps'],
+    skills: [".NET", "Vue", "Angular", "jQuery", "Bootstrap", "Microsoft SQL Server", "Azure"],
+    themeColor: "#00a39e",
   }
 ] as Work[];

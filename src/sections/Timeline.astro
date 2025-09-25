@@ -1,55 +1,43 @@
 ---
 import BriefcaseBusiness from '@lucide/astro/icons/briefcase-business';
-import GraduationCap from '@lucide/astro/icons/graduation-cap';
 import work from '@/data/work';
-import education from '@/data/education';
 import ExternalLink from '@/components/ExternalLink.astro';
 import type { Locale } from '@/i18n/constants';
 import { translate, useTranslations } from '@/i18n/helpers';
-import { formatMonth } from '@/utils/date';
+import { formatShortMonth } from '@/utils/date';
 import { parseMD } from '@/utils/md';
 import SkillIcon from '@/components/SkillIcon.astro';
 
 const locale = Astro.currentLocale as Locale | undefined;
 const t = useTranslations(locale);
 ---
+
 <section class="pt-24" id="experience">
   <h2 class="flex items-center mb-8"><BriefcaseBusiness class="text-primary drop-shadow-primary-xl mr-3" />{t('portfolio.experience')}</h2>
   <ol class="timeline">
     {work.map(item => (
-      <li class="item">
-        <span class="period">{formatMonth(item.startDate, locale)} - {item.endDate.length > 0 ? formatMonth(item.endDate, locale) : t('portfolio.present')}</span>
+      <li class="item" style={{ "--main-color": item.themeColor }}>
+        <div class="absolute -top-7 inset-x-1 z-[2] overflow-x-auto p-2">
+          <div class="tags">
+            <span class="period">{formatShortMonth(item.startDate, locale)} - {item.endDate.length > 0 ? formatShortMonth(item.endDate, locale) : t('portfolio.present')}</span>
+            <div class="flex gap-x-2">
+              {item.skills.map(skill => (
+              <span class="skill-badge" title={skill}>
+                <SkillIcon name={skill} />
+              </span>
+              ))}
+            </div>
+          </div>
+        </div>
         <h3 class="title">
-          {translate(item.position, locale)}<span class="mx-3">·</span>{item.url ? <ExternalLink class="external" href={item.url}>{item.name}</ExternalLink> : item.name}
+          {translate(item.position, locale)}<span class="mx-3">·</span>{item.url ? <ExternalLink class="external whitespace-nowrap" href={item.url}>{item.name}</ExternalLink> : item.name}
         </h3>
         {item.summary && <p class="summary">{translate(item.summary, locale)}</p>}
         <ul class="highlights">
           {translate(item.highlights, locale)?.map(highlight => (
-            <li class="mb-3"><Fragment set:html={parseMD(highlight)} /></li>
+            <li><Fragment set:html={parseMD(highlight)} /></li>
           ))}
         </ul>
-        <div class="flex flex-wrap items-center gap-3">
-          {item.skills.map(skill => (
-            <span class="skill-badge">
-              <SkillIcon name={skill} />
-              <span>{skill}</span>
-            </span>
-          ))}
-        </div>
-      </li>
-    ))}
-  </ol>
-</section>
-
-<section class="pt-16">
-  <h2 class="flex items-center mb-8"><GraduationCap class="text-primary drop-shadow-primary-xl mr-3" />{t('portfolio.education')}</h2>
-  <ol class="timeline">
-    {education.map(item => (
-      <li class="item">
-        <span class="period">{formatMonth(item.startDate, locale)} - {item.endDate.length > 0 ? formatMonth(item.endDate, locale) : t('portfolio.present')}</span>
-        <h3 class="title">
-          {translate(item.area, locale)}<span class="mx-3">·</span>{item.url ? <ExternalLink class="external" href={item.url}>{item.institution}</ExternalLink> : item.institution}
-        </h3>
       </li>
     ))}
   </ol>
@@ -59,22 +47,28 @@ const t = useTranslations(locale);
   @reference '@/styles/global.css';
 
   .timeline {
-    @apply border-s-2 border-primary/25 ms-2.5;
+    @apply grid gap-8;
 
     .item {
-      @apply ms-6;
-
-      &:not(:last-child) {
-        @apply mb-12;
+      --soft: oklch(from var(--main-color) 0.96 calc(c * 0.18) h);
+      --primary: oklch(from var(--main-color) 0.56 calc(c * 0.85) h);
+      .dark & {
+        --soft: oklch(from var(--main-color) 0.3 calc(c * 0.18) h);
+        --primary: oklch(from var(--main-color) 0.76 calc(c * 0.85) h);
       }
+      @apply mt-3 p-8 relative bg-soft/50 rounded-2xl border shadow-xs;
+    }
+
+    .tags {
+      @apply flex items-center gap-x-4 min-w-max relative;
     }
 
     .period {
-      @apply px-4 py-2 -ml-10 shadow-neon-sm shadow-primary bg-background rounded-xl z-[1];
+      @apply sticky left-0 z-[1] px-3 h-8 place-content-center border bg-soft rounded-lg font-bold text-sm shadow-xs;
     }
 
     .title {
-      @apply mt-6 mb-4 font-semibold;
+      @apply mb-4 font-semibold text-pretty;
     }
 
     .summary {
@@ -82,7 +76,7 @@ const t = useTranslations(locale);
     }
 
     .highlights {
-      @apply list-disc ms-4 mb-6;
+      @apply list-disc ms-4 space-y-3;
     }
   }
 </style>

@@ -1,12 +1,12 @@
 ---
 import { render } from "astro:content";
-import Calendar from '@lucide/astro/icons/calendar';
-import Clock from '@lucide/astro/icons/clock';
-import type { Locale } from '@/i18n/constants';
-import { useTranslations } from '@/i18n/helpers';
-import type { PostEntry } from '@/types/Post';
-import { formatShortDate } from '@/utils/date';
-import Illustration from '../Illustration.astro';
+import Calendar from "@lucide/astro/icons/calendar";
+import Clock from "@lucide/astro/icons/clock";
+import type { Locale } from "@/i18n/constants";
+import { useTranslations } from "@/i18n/helpers";
+import type { PostEntry } from "@/types/Post";
+import { formatShortDate } from "@/utils/date";
+import Illustration from "../Illustration.astro";
 import { cn } from "@/utils/cn";
 
 interface Props {
@@ -22,26 +22,37 @@ const { remarkPluginFrontmatter } = await render(post);
 const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<article class="blogGridItem" style={{ '--main-color': themeColor }}>
+<article class="blogGridItem" style={{ "--main-color": themeColor }}>
   <div class="content">
-    <h3 class="title mb-2"><a href={`/${locale}/${slug}/`}>{title}</a></h3>
+    <h3 class="title mb-2"><a href={`/${locale}/blog/${slug}/`}>{title}</a></h3>
     <p class="description mb-3">{description}</p>
     <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
-      <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time>
-      <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
+      <time
+        class="flex items-center"
+        title={t("blog.pubDate")}
+        datetime={date.toISOString()}
+        ><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time
+      >
+      <span class="flex items-center" title={t("blog.readingTime")}
+        ><Clock class="size-4 mr-3" />{readingTime}
+        {t("blog.readingTime.read")}</span
+      >
     </div>
   </div>
   <div class="relative size-20">
-    {hero && ['img-blurred', 'img-main'].map(className => (
-      <Illustration
-        alt={heroAlt}
-        class={cn("img", className)}
-        src={hero}
-        width="320"
-        height="168"
-        aria-hidden={className === 'img-blurred'}
-      />
-    ))}
+    {
+      hero &&
+        ["img-blurred", "img-main"].map((className) => (
+          <Illustration
+            alt={heroAlt}
+            class={cn("img", className)}
+            src={hero}
+            width="320"
+            height="168"
+            aria-hidden={className === "img-blurred"}
+          />
+        ))
+    }
   </div>
 </article>
 
@@ -49,12 +60,14 @@ const { readingTime } = remarkPluginFrontmatter;
   @reference '@/styles/global.css';
 
   .blogGridItem {
+    --soft: oklch(from var(--main-color) 0.96 calc(c * 0.18) h);
     --primary: oklch(from var(--main-color) 0.56 calc(c * 0.85) h);
-    [data-theme='dark'] & {
+    .dark & {
+      --soft: oklch(from var(--main-color) 0.3 calc(c * 0.18) h);
       --primary: oklch(from var(--main-color) 0.76 calc(c * 0.85) h);
     }
 
-    @apply flex items-center p-4 gap-x-4 relative bg-primary/10 rounded-2xl;
+    @apply border flex items-center p-4 gap-x-4 relative bg-soft/50 rounded-2xl shadow-xs;
 
     .img {
       @apply shrink-0 rounded-xl size-full object-cover motion-safe:transition-all duration-300;
