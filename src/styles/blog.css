@@ -1,21 +1,50 @@
 @reference './global.css';
 
 .rich-text {
-  /* Headers */
-  h1 {
-    @apply text-2xl font-bold mt-12 mb-10;
+  h1, h2, h3, h4, h5, h6 {
+    @apply relative;
   }
 
-  h2 {
-    @apply text-xl font-bold mt-10 mb-8;
+  /* Headers */
+  h1, h2 {
+    @apply text-2xl text-primary font-bold mt-10 mb-8 scroll-mt-10;
   }
 
   h3 {
-    @apply text-xl font-semibold mt-10 mb-8;
+    @apply text-xl font-semibold mt-10 mb-8 scroll-mt-10;
   }
 
   h4 {
-    @apply text-lg font-medium mt-8 mb-6;
+    @apply text-lg font-medium mt-8 mb-6 scroll-mt-8;
+  }
+
+  a.link-heading {
+    display: none;
+  }
+
+  @media (pointer: fine) and (width >= 54rem) {
+    a.link-heading {
+      @apply absolute inset-y-0 left-0 flex items-center justify-center size-8 rounded-full [color:inherit];
+      @apply -translate-x-4/5 opacity-0 transition-[opacity,translate] will-change-transform delay-300;
+  
+      h1 > & > svg,
+      h2 > & > svg {
+        @apply size-6;
+      }
+  
+      h3 > & > svg {
+        @apply size-5;
+      }
+  
+      h4 > & > svg {
+        @apply size-4;
+      }
+  
+      &:focus-visible,
+      [id]:hover > & {
+        @apply -translate-x-full opacity-100 delay-[0ms];
+      }
+    }
   }
 
   /* Horizontal rules */
