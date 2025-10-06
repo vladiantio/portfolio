@@ -14,6 +14,7 @@
   --primary-light-hover: oklch(from var(--main-color) 0.4 calc(c * 0.85) h);
   --primary: var(--primary-light);
   --primary-hover: var(--primary-light-hover);
+  --border: oklch(0 0 0 / 15%);
 
   --main-container-width: 54rem;
 }
@@ -26,6 +27,7 @@
   --soft: oklch(from var(--main-color) 0.3 calc(c * 0.18) h);
   --primary: var(--primary-dark);
   --primary-hover: var(--primary-dark-hover);
+  --border: oklch(1 0 0 / 15%);
   color-scheme: dark;
 }
 
@@ -46,6 +48,7 @@
   --color-primary-hover: var(--primary-hover);
   --color-primary-dark: var(--primary-dark);
   --color-primary-light: var(--primary-light);
+  --color-border: var(--border);
 
   --drop-shadow-primary-xs: 0 0 1px
     color-mix(in oklab, var(--primary) 20%, transparent);
