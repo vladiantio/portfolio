@@ -17,12 +17,12 @@ const { post } = Astro.props;
 const locale = post.lang as Locale;
 const t = useTranslations(locale);
 const { slug } = post;
-const { title, description, date, hero, heroAlt, themeColor } = post.data;
+const { title, description, date, hero, heroAlt } = post.data;
 const { remarkPluginFrontmatter } = await render(post);
 const { readingTime } = remarkPluginFrontmatter;
 ---
 
-<article class="blogGridItem" style={{ "--main-color": themeColor }}>
+<article class="blogGridItem">
   <div class="content">
     <h3 class="title mb-2"><a href={`/${locale}/blog/${slug}/`}>{title}</a></h3>
     <p class="description mb-3">{description}</p>
@@ -60,13 +60,6 @@ const { readingTime } = remarkPluginFrontmatter;
   @reference '@/styles/global.css';
 
   .blogGridItem {
-    --soft: oklch(from var(--main-color) 0.96 calc(c * 0.18) h);
-    --primary: oklch(from var(--main-color) 0.56 calc(c * 0.85) h);
-    .dark & {
-      --soft: oklch(from var(--main-color) 0.3 calc(c * 0.18) h);
-      --primary: oklch(from var(--main-color) 0.76 calc(c * 0.85) h);
-    }
-
     @apply border flex items-center p-4 gap-x-4 relative bg-soft/50 rounded-2xl shadow-xs;
 
     .img {
