@@ -18,7 +18,7 @@ const { post } = Astro.props;
 const { next, previous } = post;
 const locale = post.lang as Locale;
 const t = useTranslations(locale);
-const { title, description, date, tags, hero, heroAlt, sources } = post.data;
+const { title, date, tags, hero, heroAlt, sources } = post.data;
 const { Content, remarkPluginFrontmatter } = await render(post);
 const { readingTime } = remarkPluginFrontmatter;
 
@@ -39,7 +39,6 @@ const heroImage = hero && (hero.format === 'svg' ? hero : await getImage({
     />
   )}
   <h1 class="title">{title}</h1>
-  <h2 class="description">{description}</h2>
   <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm mb-12">
     <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time>
     <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
