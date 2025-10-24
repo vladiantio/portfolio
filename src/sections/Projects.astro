@@ -25,10 +25,7 @@ const t = useTranslations(locale);
 
       <div class="projects-grid">
         {projects.map((item) => (
-          <article
-            class="project-item"
-            style={{ "--main-color": item.themeColor }}
-          >
+          <article class="project-item">
             <div class="image">
               {["img-blurred", "img-main"].map((className) => (
                 <Illustration
@@ -103,12 +100,6 @@ const t = useTranslations(locale);
   }
 
   .project-item {
-    --soft: oklch(from var(--main-color) 0.96 calc(c * 0.18) h);
-    --primary: oklch(from var(--main-color) 0.56 calc(c * 0.85) h);
-    .dark & {
-      --soft: oklch(from var(--main-color) 0.3 calc(c * 0.18) h);
-      --primary: oklch(from var(--main-color) 0.76 calc(c * 0.85) h);
-    }
     @apply mt-3 relative grid md:grid-cols-2 p-8 gap-6 md:gap-8 bg-soft/50 rounded-2xl border shadow-xs;
 
     a {

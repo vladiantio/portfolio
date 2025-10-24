@@ -21,7 +21,6 @@ interface Project {
   urlCode?: string;
   urlContributions?: string;
   hidden?: boolean;
-  themeColor?: string;
 }
 
 export default [
@@ -48,7 +47,6 @@ export default [
     url: "https://afor.show/",
     urlCode: "https://github.com/Afordin/aforshow-2025",
     urlContributions: "https://github.com/Afordin/aforshow-2025/commits/main/?author=vladiantio",
-    themeColor: "#fff",
   },
   {
     name: "JSConf España (@midudev)",
@@ -73,7 +71,6 @@ export default [
     url: "https://jsconf.es/",
     urlCode: "https://github.com/midudev/jsconf.es",
     urlContributions: "https://github.com/midudev/jsconf.es/commits/main/?author=vladiantio",
-    themeColor: "#f7df1d",
   },
   {
     name: "Portal Inversionista",
@@ -99,6 +96,5 @@ export default [
     technologies: ["Angular", "Bootstrap", ".NET"],
     madeAt: "Lecaros Group",
     url: "https://portalinversionista.com/",
-    themeColor: "#03a7e2",
   }
 ] as Project[];
