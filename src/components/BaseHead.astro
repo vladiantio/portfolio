@@ -1,4 +1,6 @@
 ---
+import { getImage } from "astro:assets";
+import favicon from "@/assets/favicon.svg";
 import basics from "@/data/basics";
 import Analytics from "./Analytics.astro";
 import ThemeLoader from "./ThemeLoader.astro";
@@ -8,7 +10,7 @@ import { translate } from "@/i18n/helpers";
 export interface Props {
 	title?: string | null;
 	description?: string | null;
-	type?: 'article' | 'website';
+	type?: "article" | "website";
 	image?: string | null;
 	publishedTime?: Date | null;
 	modifiedTime?: Date | null;
@@ -27,7 +29,9 @@ const {
 	noAnalytics,
 } = Astro.props;
 
-const metaImage = image || '/img/banner.png';
+const faviconSvg = await getImage({ src: favicon, format: "svg" });
+
+const metaImage = image || "/img/banner.png";
 
 const siteName = basics.shortname;
 const locale = (Astro.currentLocale ?? DEFAULT_LOCALE) as Locale;
@@ -48,14 +52,14 @@ const metaDescription = description ? description : translate(basics.seoDescript
 <meta name="description" content={metaDescription} />
 <meta name="author" content={basics.name} />
 <meta name="theme-color" content="#0e1720" />
-<link href="/favicon.svg" rel="icon" type="image/svg+xml" />
 <link href={`/${locale}/rss.xml`} rel="alternate" type="application/rss+xml" title="RSS" />
 <link href={Astro.url} rel="canonical" />
 <link href="/sitemap-index.xml" rel="sitemap" />
 <link href="https://mastodon.social/@vladiantio" rel="me" />
+<link href={faviconSvg.src} rel="icon" type="image/svg+xml" />
 
 {/* OpenGraph Tags */}
-<meta property="og:type" content={type ?? 'website'} />
+<meta property="og:type" content={type ?? "website"} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:image" content={new URL(metaImage, Astro.url)} />
 <meta property="og:site_name" content={siteName} />
