@@ -30,6 +30,7 @@
     "rehype-external-links": "3.0.0",
     "rehype-pretty-code": "0.14.1",
     "satori": "0.18.2",
+    "satori-html": "0.3.2",
     "sharp": "0.34.3",
     "sharp-ico": "0.1.5",
     "svg-sprite": "2.0.4",
