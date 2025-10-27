@@ -31,6 +31,7 @@
     "rehype-pretty-code": "0.14.1",
     "satori": "0.18.2",
     "sharp": "0.34.3",
+    "sharp-ico": "0.1.5",
     "svg-sprite": "2.0.4",
     "tailwind-merge": "3.3.1",
     "tailwindcss": "4.1.13"
