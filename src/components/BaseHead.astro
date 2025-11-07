@@ -1,5 +1,4 @@
 ---
-import { getImage } from "astro:assets";
 import favicon from "@/assets/favicon.svg";
 import basics from "@/data/basics";
 import Analytics from "./Analytics.astro";
@@ -29,8 +28,6 @@ const {
 	noAnalytics,
 } = Astro.props;
 
-const faviconSvg = await getImage({ src: favicon, format: "svg" });
-
 const metaImage = image || "/og-site.jpg";
 
 const siteName = basics.shortname;
@@ -56,7 +53,7 @@ const metaDescription = description ? description : translate(basics.seoDescript
 <link href={Astro.url} rel="canonical" />
 <link href="/sitemap-index.xml" rel="sitemap" />
 <link href="https://mastodon.social/@vladiantio" rel="me" />
-<link href={faviconSvg.src} rel="icon" type="image/svg+xml" />
+<link href={favicon.src} rel="icon" type="image/svg+xml" />
 
 {/* OpenGraph Tags */}
 <meta property="og:type" content={type ?? "website"} />
