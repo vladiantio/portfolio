@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config";
-import vercel from "@astrojs/vercel";
+import netlify from "@astrojs/netlify";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
@@ -54,7 +54,7 @@ const prettyCodeOptions = {
 
 // https://astro.build/config
 export default defineConfig({
-  adapter: vercel(),
+  adapter: netlify(),
   i18n: {
     defaultLocale: "en",
     locales: ["en", "es"],
