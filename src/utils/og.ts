@@ -1,8 +1,26 @@
 import { experimental_AstroContainer } from "astro/container"
 import fs from "fs/promises"
+import { decode } from "html-entities"
 import satori, { type Font } from "satori"
 import { html } from "satori-html"
 import sharp from "sharp"
+
+type VNode = ReturnType<typeof html>
+
+function unescapeHTML(node: VNode) {
+  const children = node?.props?.children
+  if (!children) {
+    return
+  } else if (Array.isArray(children)) {
+    for (const n of children) {
+      unescapeHTML(n)
+    }
+  } else if (typeof children === 'object') {
+    unescapeHTML(children)
+  } else if (typeof children === 'string') {
+    node.props.children = decode(children)
+  }
+}
 
 type AstroRenderParameters = Parameters<typeof experimental_AstroContainer.prototype.renderToString>
 
@@ -13,29 +31,31 @@ export const OG = async (...parameters: AstroRenderParameters) => {
       data: await fs.readFile(
         "./src/assets/og/fonts/Figtree-Regular.ttf"
       ),
-      weight: 400
+      weight: 400,
     },
     {
       name: "Figtree",
       data: await fs.readFile(
         "./src/assets/og/fonts/Figtree-Bold.ttf"
       ),
-      weight: 700
+      weight: 700,
     },
     {
       name: "Figtree",
       data: await fs.readFile(
         "./src/assets/og/fonts/Figtree-Black.ttf"
       ),
-      weight: 900
-    }
+      weight: 900,
+    },
   ]
   const container = await experimental_AstroContainer.create()
   const template = await container.renderToString(...parameters)
 
   return {
     async toSvg() {
-      return await satori(html(template), {
+      const node = html(template)
+      unescapeHTML(node)
+      return await satori(node, {
         width: 1080,
         height: 567,
         fonts,
