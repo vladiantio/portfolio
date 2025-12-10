@@ -16,7 +16,7 @@ const t = useTranslations(locale);
   <h2 class="flex items-center mb-8"><BriefcaseBusiness class="text-primary drop-shadow-primary-xl mr-3" />{t('portfolio.experience')}</h2>
   <ol class="timeline">
     {work.map(item => (
-      <li class="item" style={{ "--main-color": item.themeColor }}>
+      <li class="item">
         <div class="absolute -top-7 inset-x-1 z-[2] overflow-x-auto p-2">
           <div class="tags">
             <span class="period">{formatShortMonth(item.startDate, locale)} - {item.endDate.length > 0 ? formatShortMonth(item.endDate, locale) : t('portfolio.present')}</span>
@@ -50,12 +50,6 @@ const t = useTranslations(locale);
     @apply grid gap-8;
 
     .item {
-      --soft: oklch(from var(--main-color) 0.96 calc(c * 0.18) h);
-      --primary: oklch(from var(--main-color) 0.56 calc(c * 0.85) h);
-      .dark & {
-        --soft: oklch(from var(--main-color) 0.3 calc(c * 0.18) h);
-        --primary: oklch(from var(--main-color) 0.76 calc(c * 0.85) h);
-      }
       @apply mt-3 p-8 relative bg-soft/50 rounded-2xl border shadow-xs;
     }
 
