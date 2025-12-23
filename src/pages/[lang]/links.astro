@@ -3,20 +3,15 @@ import networks from '@/data/networks';
 import SimpleLayout from '@/layouts/SimpleLayout.astro';
 import ExternalLink from '@/components/ExternalLink.astro';
 import SocialIcon from '@/components/SocialIcon.astro';
-import GradientTop from '@/components/backgrounds/GradientTop.astro';
-import GradientBottom from '@/components/backgrounds/GradientBottom.astro';
 import Navbar from '@/components/Navbar.astro';
 import { localeParams } from '@/i18n/helpers';
 import Hero from '@/sections/Hero.astro';
 import Footer from '@/components/Footer.astro';
-import Noise from '@/components/backgrounds/Noise.astro';
 
 export const getStaticPaths = () => localeParams;
 ---
 
 <SimpleLayout title="Links" description="@vladiantio network links">
-  <GradientTop />
-  <Noise />
   <div class="wrapper">
     <Navbar />
     <main class="flex-1 px-5 my-8 place-content-center">
@@ -32,7 +27,6 @@ export const getStaticPaths = () => localeParams;
     </main>
     <Footer />
   </div>
-  <GradientBottom />
 </SimpleLayout>
 
 <style is:global>
