@@ -8,9 +8,9 @@
   --muted: oklch(from var(--main-color) 0.62 calc(c * 0.16) h);
   --body: oklch(0 0 0);
   --soft: oklch(from var(--main-color) 0.96 calc(c * 0.18) h);
-  --primary-dark: oklch(from var(--main-color) 0.76 calc(c * 0.85) h);
+  --primary-dark: oklch(from var(--main-color) 0.78 calc(c * 0.85) h);
   --primary-dark-hover: oklch(from var(--main-color) 0.92 calc(c * 0.85) h);
-  --primary-light: oklch(from var(--main-color) 0.56 calc(c * 0.85) h);
+  --primary-light: oklch(from var(--main-color) 0.54 calc(c * 0.85) h);
   --primary-light-hover: oklch(from var(--main-color) 0.4 calc(c * 0.85) h);
   --primary: var(--primary-light);
   --primary-hover: var(--primary-light-hover);
