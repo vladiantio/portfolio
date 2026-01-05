@@ -27,6 +27,7 @@
   --soft: oklch(from var(--main-color) 0.3 calc(c * 0.18) h);
   --primary: var(--primary-dark);
   --primary-hover: var(--primary-dark-hover);
+  --border: oklch(1 0 0);
   color-scheme: dark;
 }
 
