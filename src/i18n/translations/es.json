@@ -22,6 +22,7 @@
   "status.404.title": "Página no encontrada",
   "status.404.description": "No se encontró la página que buscabas.",
   "theme": "Tema",
+  "theme.select": "Seleccione el tema",
   "light": "Claro",
   "dark": "Oscuro",
   "system": "Sistema"

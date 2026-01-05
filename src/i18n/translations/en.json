@@ -22,6 +22,7 @@
   "status.404.title": "Page not found",
   "status.404.description": "The page you were looking for was not found.",
   "theme": "Theme",
+  "theme.select": "Select the theme",
   "light": "Light",
   "dark": "Dark",
   "system": "System"
