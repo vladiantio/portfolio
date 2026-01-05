@@ -1,7 +1,6 @@
 ---
 import Hamburger from "@/assets/hamburger.svg";
 import Logo from "@/assets/logo.svg";
-import basics from "@/data/basics";
 import LocaleSelector from "./LocaleSelector.astro";
 import type { Locale } from "@/i18n/constants";
 import { useTranslations } from "@/i18n/helpers";
@@ -13,19 +12,12 @@ const t = useTranslations(locale);
 
 const menu = [
   {
-    id: 'home',
-    href: `/${locale}/#`,
-    label: t('home')
+    href: `/${locale}/blog`,
+    label: "Blog",
   },
   {
-    id: 'projects',
-    href: `/${locale}/#projects`,
-    label: t('projects')
-  },
-  {
-    id: 'experience',
-    href: `/${locale}/#experience`,
-    label: t('portfolio.experience')
+    href: `/${locale}/portfolio`,
+    label: "Portfolio",
   },
 ];
 ---
@@ -33,28 +25,41 @@ const menu = [
 <nav class="navbar" id="mainNavbar">
   <div class="navbar-container">
     <div class="navbar-bar">
-      <a class="navbar-link-icon" href="/" title={'@' + basics.username}>
+      <a
+        aria-current={Astro.url.pathname === `/${locale}` ? "page" : "false"}
+        class="navbar-link-icon"
+        href={`/${locale}`}
+        title={t("home")}
+      >
         <Logo class="size-5" />
-        <span class="sr-only">@{basics.username}</span>
+        <span class="sr-only">{t("home")}</span>
       </a>
     </div>
     <div class="navbar-bar static" id="mainMenu" popover="auto">
-      {menu.map(item => (
-        <a class="navbar-link" data-id={item.id} href={item.href}>{item.label}</a>
-      ))}
+      {
+        menu.map((item) => (
+          <a
+            aria-current={Astro.url.pathname.startsWith(item.href) ? "page" : "false"}
+            class="navbar-link"
+            href={item.href}
+          >
+            {item.label}
+          </a>
+        ))
+      }
     </div>
     <div class="flex gap-x-4">
       <div class="navbar-bar">
+        <LocaleSelector />
         <a class="navbar-link-icon" href={`/${locale}/links`} title="Links">
           <LinkIcon class="size-5" />
           <span class="sr-only">Links</span>
         </a>
-        <LocaleSelector />
         <ThemeDropdown />
       </div>
       <div class="navbar-bar sm:!hidden">
         <button
-          aria-label={t('navbar.toggleMenu')}
+          aria-label={t("navbar.toggleMenu")}
           class="navbar-link-icon"
           popovertarget="mainMenu"
         >
@@ -66,48 +71,30 @@ const menu = [
 </nav>
 
 <script>
-  function initScrollHandler() {
-    const root = document.querySelector('main');
-    if (!root) return;
-
-    let sections: Map<Element, string> = new Map();
-    for (let element of root.children) {
-      if (element.id && element.tagName === "SECTION")
-        sections.set(element, `#${element.id}`);
+  let prevScrollY = window.scrollY;
+  const handleScroll = () => {
+    const navbar = document.getElementById("mainNavbar");
+    if (!navbar) return;
+    const hideClassList = "delay-300 -translate-y-full".split(" ");
+    const { offsetHeight } = navbar;
+    const { scrollY } = window;
+    const isActive = scrollY > offsetHeight;
+    const isScrollDown = scrollY > prevScrollY;
+    if (isActive && isScrollDown) {
+      navbar.classList.add(...hideClassList);
+    } else {
+      navbar.classList.remove(...hideClassList);
     }
+    prevScrollY = scrollY;
+  };
+  window.addEventListener("scroll", handleScroll);
 
-    let visibleElements = new Set<Element>();
-
-    const callback = (entries: IntersectionObserverEntry[]) => {
-      for (let entry of entries) {
-        if (entry.isIntersecting) {
-          visibleElements.add(entry.target);
-        } else {
-          visibleElements.delete(entry.target);
-        }
-      }
-
-      let firstVisibleSection = Array.from(sections.entries()).find(([element]) => visibleElements.has(element));
-      if (!firstVisibleSection) return;
-      document.querySelectorAll('#mainMenu [data-id]').forEach(el => {
-        el.classList.toggle('navbar-link-active', el.getAttribute('data-id') === firstVisibleSection[1].slice(1));
-      });
-    };
-
-    const observer = new IntersectionObserver(callback, {
-      rootMargin: "-24px 0px",
-    });
-
-    Array.from(sections.keys()).forEach((element) => observer.observe(element));
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('#mainMenu .navbar-link').forEach(el => {
-      el.addEventListener('click', () => {
-        document.getElementById('mainMenu')?.hidePopover();
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll<HTMLAnchorElement>("#mainMenu .navbar-link").forEach((el) => {
+      el.addEventListener("click", () => {
+        document.getElementById("mainMenu")?.hidePopover();
       });
     });
-    initScrollHandler();
   });
 </script>
 
@@ -116,6 +103,9 @@ const menu = [
 
   .navbar {
     @apply sticky top-0 inset-x-0 z-10 py-2 px-3 overflow-x-clip;
+    @media (prefers-reduced-motion: no-preference) {
+      transition: translate var(--default-transition-timing-function) 300ms;
+    }
   }
 
   .navbar-container {
@@ -123,25 +113,30 @@ const menu = [
   }
 
   .navbar-bar {
-    @apply flex items-center justify-center p-1 gap-0.5 rounded-full bg-background/75 backdrop-blur-xs border shadow-sm;
+    @apply flex items-center justify-center p-1 gap-1 border-2 rounded-full bg-background;
   }
 
   .navbar-link {
-    @apply font-semibold h-10 content-center px-5 rounded-full transition text-body hover:bg-body/5 hover:no-underline;
+    @apply font-semibold h-10 content-center px-5 rounded-full text-body hover:bg-primary/5 hover:no-underline;
+    &[aria-current="page"] {
+      @apply bg-primary text-background hover:bg-primary;
+    }
   }
 
   .navbar-link-icon {
-    @apply rounded-full p-2.5 text-body transition hover:bg-body/5;
-  }
-
-  .navbar-link-active {
-    @apply bg-primary/10 text-primary hover:bg-primary/10;
+    @apply rounded-full p-2.5 text-body hover:bg-primary/5;
+    &[aria-current="page"] {
+      @apply bg-primary text-background hover:bg-primary;
+    }
   }
 
   @media (width < 40rem) {
     #mainMenu {
       @apply fixed top-16 right-2.5 inset-auto z-10 items-stretch rounded-3xl flex-col;
-      @apply motion-safe:transition-all transition-discrete duration-300;
+      @media (prefers-reduced-motion: no-preference) {
+        transition: all var(--default-transition-timing-function) 300ms;
+        transition-behavior: allow-discrete;
+      }
       &:not(:popover-open) {
         display: none;
         translate: calc(100% + var(--spacing) * 16);
@@ -159,7 +154,9 @@ const menu = [
     fill: none;
     stroke: currentColor;
     stroke-width: 8;
-    @apply motion-safe:transition-[stroke-dasharray,stroke-dashoffset] duration-300;
+    @media (prefers-reduced-motion: no-preference) {
+      transition: stroke-dasharray, stroke-dashoffset var(--default-transition-timing-function) 300ms;
+    }
   }
   .line1 {
     stroke-dasharray: 60 207;
