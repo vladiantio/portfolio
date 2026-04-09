@@ -1,0 +1,12 @@
+---
+import type { Locale } from "@/i18n/constants";
+import { useTranslations } from "@/i18n/helpers";
+
+const locale = Astro.currentLocale as Locale | undefined;
+const t = useTranslations(locale);
+---
+
+<section class="pt-16">
+  <h2 class="flex items-center mb-8">{t("aboutMe")}</h2>
+  <p>Vivo en Chile.</p>
+</section>
