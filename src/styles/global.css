@@ -5,6 +5,10 @@
 @layer base {
   * {
     @apply decoration-2 underline-offset-2 border-border;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: color, background-color cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+    }
   }
 
   html {
@@ -123,14 +127,14 @@
   }
 
   .skill-badge {
-    @apply flex items-center rounded-lg overflow-hidden border bg-soft text-sm shadow-xs h-8;
+    @apply flex items-center rounded-lg overflow-hidden border bg-background text-sm h-8;
 
     span {
       @apply mx-4;
     }
 
     svg {
-      @apply rounded-lg size-8;
+      @apply rounded-lg size-6 mx-1;
     }
   }
 
@@ -139,6 +143,46 @@
     &:checked,
     &.checked {
       @apply bg-primary before:absolute before:inset-1 before:bg-white before:rounded-full before:shadow-xs before:shadow-black/30;
+    }
+  }
+
+  .liquid-glass {
+    background-blend-mode: luminosity;
+    position: relative;
+    box-shadow:
+      inset calc(-6px * var(--gravity-x, 0)) calc(6px * var(--gravity-y, 0)) 4px rgba(255, 255, 255, 0.25),
+      inset calc(6px * var(--gravity-x, 0)) calc(-6px * var(--gravity-y, 0)) 4px rgba(0, 0, 0, 0.25);
+      /* calc(-4px * var(--gravity-x, 0)) calc(4px * var(--gravity-y, 0)) 8px -2px rgba(0, 0, 0, 0.3); */
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-width: 1.5px;
+      border-color: #fff;
+      border-radius: inherit;
+      filter: blur(0.5px);
+      mask-image: radial-gradient(circle at calc(50% * (1 + var(--gravity-x, 0))) calc(50% * (1 - var(--gravity-y, 0))), #fff, #ffffff2b, #fff0);
+      pointer-events: none;
+      z-index: 1;
+    }
+  }
+
+  .liquid-glass-light {
+    background-blend-mode: luminosity;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-width: 1.5px;
+      border-color: #fff;
+      border-radius: inherit;
+      filter: blur(0.5px);
+      mask-image: radial-gradient(circle at calc(50% * (1 + var(--gravity-x, 0))) calc(50% * (1 - var(--gravity-y, 0))), #fff, #ffffff2b, #fff0);
+      pointer-events: none;
+      z-index: 1;
     }
   }
 }

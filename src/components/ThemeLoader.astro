@@ -1,26 +1,86 @@
 <script is:inline>
-(function(){
-let reloadTheme = false;
-const matchPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-const html = document.documentElement;
+  (function () {
+    let reloadTheme = false;
+    const matchPrefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+    const html = document.documentElement;
 
-const updateTheme = () => {
-	if (reloadTheme) matchPrefersDark.removeEventListener('change', updateTheme);
-	matchPrefersDark.addEventListener('change', updateTheme);
-	reloadTheme = true;
-	const theme = localStorage.theme ?? 'system';
-	const isDark = theme === 'dark' || (theme === 'system' && matchPrefersDark.matches);
-	html.classList.toggle('dark', isDark);
-};
-updateTheme();
+    const updateTheme = () => {
+      if (reloadTheme)
+        matchPrefersDark.removeEventListener("change", updateTheme);
+      matchPrefersDark.addEventListener("change", updateTheme);
+      reloadTheme = true;
+      const theme = localStorage.theme ?? "system";
+      const isDark =
+        theme === "dark" || (theme === "system" && matchPrefersDark.matches);
+      html.classList.toggle("dark", isDark);
+    };
+    updateTheme();
 
-if ('color' in localStorage && getComputedStyle(html).getPropertyValue('--main-color') === '') html.style.setProperty('--main-color', localStorage.color);
+    if (
+      "color" in localStorage &&
+      getComputedStyle(html).getPropertyValue("--main-color") === ""
+    )
+      html.style.setProperty("--main-color", localStorage.color);
 
-// close the dropdown by clicking out of the dropdown
-document.addEventListener('click', ({ target }) => {
-	const details = [...document.querySelectorAll('details.dropdown')];
-	if (!details.some(f => f.contains(target))) details.forEach(f => f.removeAttribute('open'));
-	else details.forEach(f => !f.contains(target) ? f.removeAttribute('open') : '');
-});
-})();
+    // close the dropdown by clicking out of the dropdown
+    document.addEventListener("click", ({ target }) => {
+      const details = [...document.querySelectorAll("details.dropdown")];
+      if (!details.some((f) => f.contains(target)))
+        details.forEach((f) => f.removeAttribute("open"));
+      else
+        details.forEach((f) =>
+          !f.contains(target) ? f.removeAttribute("open") : "",
+        );
+    });
+
+    let lastTimeUpdated = 0;
+
+    const roundDecimals = (number, decimals) => {
+      const base10 = 10 ** decimals;
+      return Math.round(number * base10) / base10;
+    };
+
+    function handleMotion(ev) {
+      if (!ev.acceleration || !ev.accelerationIncludingGravity) return true;
+      if (Date.now() - lastTimeUpdated < 100) return true;
+      lastTimeUpdated = Date.now();
+      const gravityX = roundDecimals(
+        Math.max(
+          Math.min(
+            (ev.accelerationIncludingGravity.x - ev.acceleration.x) / 9.8,
+            1,
+          ),
+          -1,
+        ),
+        5,
+      );
+      const gravityY = roundDecimals(
+        Math.max(
+          Math.min(
+            (ev.accelerationIncludingGravity.y - ev.acceleration.y) / 9.8,
+            1,
+          ),
+          -1,
+        ),
+        5,
+      );
+      if (window.outerWidth > window.outerHeight) {
+        html.style.setProperty("--gravity-x", `${-gravityY}`);
+        html.style.setProperty("--gravity-y", `${gravityX}`);
+      } else {
+        html.style.setProperty("--gravity-x", `${gravityX}`);
+        html.style.setProperty("--gravity-y", `${gravityY}`);
+      }
+    }
+
+    if (typeof DeviceMotionEvent.requestPermission === "function") {
+      DeviceMotionEvent.requestPermission().then((motionPermission) => {
+        if (motionPermission === "granted") {
+          window.addEventListener("devicemotion", handleMotion);
+        }
+      });
+    } else {
+      window.addEventListener("devicemotion", handleMotion);
+    }
+  })();
 </script>
