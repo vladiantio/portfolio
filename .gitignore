@@ -33,6 +33,7 @@ pnpm-debug.log*
 .vscode/
 !.vscode/extensions.json
 !.vscode/launch.json
+!.vscode/settings.json
 
 # zed setting folder
 .zed/
