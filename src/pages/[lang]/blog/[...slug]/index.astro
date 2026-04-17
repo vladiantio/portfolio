@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import SingleBlogItem from "@/components/blog/SingleBlogItem.astro";
 import { getAllBlogPosts } from "@/services/blog";
-import '@/styles/blog.css';
+import "@/styles/blog.css";
 import { getImage } from "astro:assets";
 
 export async function getStaticPaths() {
@@ -17,7 +17,8 @@ const { post } = Astro.props;
 
 const { title, description, date, update, hero, og, tags } = post.data;
 
-const ogImage = hero && (og ? og : await getImage({ src: hero, format: "jpg" }));
+const ogImage =
+  hero && (og ? og : await getImage({ src: hero, format: "jpg" }));
 ---
 
 <Layout

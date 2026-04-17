@@ -7,9 +7,9 @@ const ICON_DIR = "./src/assets/icons";
 
 export async function getStaticPaths() {
   return (await readdir(ICON_DIR, { withFileTypes: true }))
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => ({
-      params: { pack: dirent.name }
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => ({
+      params: { pack: dirent.name },
     }));
 }
 
@@ -20,11 +20,15 @@ export async function GET({ params }: APIContext) {
 
   for (const svg of await readdir(dir)) {
     const path = resolve(dir, svg);
-    spriter.add(path, svg, await readFile(path).then(file => file.toString()));
+    spriter.add(
+      path,
+      svg,
+      await readFile(path).then((file) => file.toString()),
+    );
   }
 
   const { result } = await spriter.compileAsync();
 
   const svg = result.symbol.sprite.contents;
   return new Response(svg, { headers: { "content-type": "image/svg+xml" } });
-};
+}

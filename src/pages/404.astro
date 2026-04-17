@@ -9,24 +9,31 @@ const baseUrl = import.meta.env.PROD ? Astro.site : "/";
 <SimpleLayout title="Page not found" noAnalytics>
   <Fragment slot="before-head">
     <noscript>
-      <meta http-equiv="refresh" content={`0;url=${baseUrl + DEFAULT_LOCALE}/404/`} />
+      <meta
+        http-equiv="refresh"
+        content={`0;url=${baseUrl + DEFAULT_LOCALE}/404/`}
+      />
     </noscript>
 
     <script is:inline define:vars={{ langs, defaultLocale: DEFAULT_LOCALE }}>
       const urlHasLang = langs.includes(location.pathname.split("/")[1]);
-      const localStorageHasLang = localStorage.selectedLang && langs.includes(localStorage.selectedLang);
-      const referrerHasLang = document.referrer && new URL(document.referrer).host == location.host && langs.includes(new URL(document.referrer).pathname.split("/")[1]);
+      const localStorageHasLang =
+        localStorage.selectedLang && langs.includes(localStorage.selectedLang);
+      const referrerHasLang =
+        document.referrer &&
+        new URL(document.referrer).host == location.host &&
+        langs.includes(new URL(document.referrer).pathname.split("/")[1]);
 
       if (urlHasLang) {
         localStorage.userAccessPath = location.pathname;
-        location.href = '/' + location.pathname.split("/")[1] + '/404/';
+        location.href = "/" + location.pathname.split("/")[1] + "/404/";
       } else if (localStorageHasLang) {
-        location.href = '/' + localStorage.selectedLang + location.pathname;
+        location.href = "/" + localStorage.selectedLang + location.pathname;
       } else if (referrerHasLang) {
         const referrerLang = new URL(document.referrer).pathname.split("/")[1];
-        location.href = '/' + referrerLang + location.pathname;
+        location.href = "/" + referrerLang + location.pathname;
       } else {
-        location.href = '/' + defaultLocale + location.pathname;
+        location.href = "/" + defaultLocale + location.pathname;
       }
     </script>
   </Fragment>
