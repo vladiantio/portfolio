@@ -1,1 +1,1 @@
-export { default as LinkPreview } from './LinkPreview.astro';
+export { default as LinkPreview } from "./LinkPreview.astro";
