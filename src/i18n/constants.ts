@@ -1,5 +1,5 @@
-import en from './translations/en.json';
-import es from './translations/es.json';
+import en from "./translations/en.json";
+import es from "./translations/es.json";
 
 /**
  * Default locale code
@@ -13,10 +13,10 @@ export const DEFAULT_LOCALE = "en";
  */
 export const LOCALES = {
   en: {
-    label: "English"
+    label: "English",
   },
   es: {
-    label: "Español"
+    label: "Español",
   },
 };
 

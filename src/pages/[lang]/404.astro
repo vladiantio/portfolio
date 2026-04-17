@@ -1,19 +1,16 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import MoveLeft from '@lucide/astro/icons/move-left';
-import type { Locale } from '@/i18n/constants';
-import { localeParams, useTranslations } from '@/i18n/helpers';
+import Layout from "@/layouts/Layout.astro";
+import MoveLeft from "@lucide/astro/icons/move-left";
+import type { Locale } from "@/i18n/constants";
+import { getLocaleParams, useTranslations } from "@/i18n/helpers";
 
 const locale = Astro.currentLocale as Locale | undefined;
 const t = useTranslations(locale);
 
-export const getStaticPaths = () => localeParams;
+export const getStaticPaths = getLocaleParams;
 ---
 
-<Layout
-  class="place-content-center"
-  title={t('status.404.title')}
->
+<Layout class="place-content-center" title={t("status.404.title")}>
   <Fragment slot="after-head">
     <script is:inline>
       if (localStorage.userAccessPath) {
@@ -24,7 +21,9 @@ export const getStaticPaths = () => localeParams;
   </Fragment>
 
   <span class="text-9xl font-light leading-tight">:(</span>
-  <h1 class="text-5xl font-light my-4">{t('status.404.description')}</h1>
+  <h1 class="text-5xl font-light my-4">{t("status.404.description")}</h1>
   <p class="my-4">Status: 404 Not Found</p>
-  <p class="my-8"><a href="/"><MoveLeft class="size-4 inline mr-2" />{t('backToHome')}</a></p>
+  <p class="my-8">
+    <a href="/"><MoveLeft class="size-4 inline mr-2" />{t("backToHome")}</a>
+  </p>
 </Layout>

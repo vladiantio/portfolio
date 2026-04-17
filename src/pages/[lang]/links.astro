@@ -4,11 +4,11 @@ import SimpleLayout from "@/layouts/SimpleLayout.astro";
 import ExternalLink from "@/components/ExternalLink.astro";
 import SocialIcon from "@/components/SocialIcon.astro";
 import Navbar from "@/components/Navbar.astro";
-import { localeParams } from "@/i18n/helpers";
+import { getLocaleParams } from "@/i18n/helpers";
 import Hero from "@/sections/Hero.astro";
 import Footer from "@/components/Footer.astro";
 
-export const getStaticPaths = () => localeParams;
+export const getStaticPaths = getLocaleParams;
 ---
 
 <SimpleLayout title="Links" description="@vladiantio network links">

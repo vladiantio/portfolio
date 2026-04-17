@@ -26,8 +26,17 @@ import { DEFAULT_LOCALE, type Locale } from "./constants";
  * const tDefault = useBaseTranslations(translations);
  * console.log(tDefault("welcome")); // Output: "Welcome to our website!"
  */
-export function useBaseTranslations(translations: { [key: string]: Record<string, string> }, lang?: Locale) {
-  return function t(key: keyof typeof translations[typeof DEFAULT_LOCALE]): string {
-    return translations[lang ?? DEFAULT_LOCALE][key] || translations[DEFAULT_LOCALE][key] || "";
+export function useBaseTranslations(
+  translations: { [key: string]: Record<string, string> },
+  lang?: Locale,
+) {
+  return function t(
+    key: keyof (typeof translations)[typeof DEFAULT_LOCALE],
+  ): string {
+    return (
+      translations[lang ?? DEFAULT_LOCALE][key] ||
+      translations[DEFAULT_LOCALE][key] ||
+      ""
+    );
   };
 }
