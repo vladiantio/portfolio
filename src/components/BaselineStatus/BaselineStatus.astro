@@ -1,25 +1,26 @@
 ---
-import BaselineIcon from './BaselineIcon.astro';
-import BrowserSupport from './BrowserSupport.astro';
-import { BASELINE_DEFS } from './constants';
-import { getBaselineDate, getDescriptionDate, getFeature } from './lib';
+import BaselineIcon from "./BaselineIcon.astro";
+import BrowserSupport from "./BrowserSupport.astro";
+import { BASELINE_DEFS } from "./constants";
+import { getBaselineDate, getDescriptionDate, getFeature } from "./lib";
 
 interface Props {
-	/**
-	 * ID of the feature from https://github.com/web-platform-dx/web-features/
-	 * e.g. `"anchor-positioning"`
-	 */
-	id: string;
+  /**
+   * ID of the feature from https://github.com/web-platform-dx/web-features/
+   * e.g. `"anchor-positioning"`
+   */
+  id: string;
 }
 
 const feature = await getFeature(Astro.props.id);
 
-const baseline = feature.baseline.status || 'no_data';
+const baseline = feature.baseline.status || "no_data";
 
 const title = BASELINE_DEFS[baseline].title;
 const baselineDate = getBaselineDate(feature);
 const description = getDescriptionDate(baseline, baselineDate);
-const year = baseline === 'newly' && baselineDate ? baselineDate.split(' ')[1]! : '';
+const year =
+  baseline === "newly" && baselineDate ? baselineDate.split(" ")[1]! : "";
 ---
 
 <div class={`baseline-status baseline-status--${baseline}`}>
@@ -30,17 +31,13 @@ const year = baseline === 'newly' && baselineDate ? baselineDate.split(' ')[1]! 
       <div class="summary-content">
         <div class="summary-label">
           {
-            !(baseline === 'limited' || baseline === 'no_data') && (
+            !(baseline === "limited" || baseline === "no_data") && (
               <strong>Baseline</strong>
             )
           }
           {title}
           {year}
-          {
-            baseline === 'newly' && (
-              <span class="badge">newly available</span>
-            )
-          }
+          {baseline === "newly" && <span class="badge">newly available</span>}
         </div>
         <div class="browsers">
           <BrowserSupport browser="chrome" {feature} />
@@ -58,7 +55,7 @@ const year = baseline === 'newly' && baselineDate ? baselineDate.split(' ')[1]! 
     </summary>
     <p class="description" set:html={description} />
     {
-      baseline !== 'no_data' && (
+      baseline !== "no_data" && (
         <p>
           <a
             href={`https://webstatus.dev/features/${feature.feature_id}`}

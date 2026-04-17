@@ -1,5 +1,5 @@
-import getReadingTime from 'reading-time';
-import { toString } from 'mdast-util-to-string';
+import getReadingTime from "reading-time";
+import { toString } from "mdast-util-to-string";
 
 export function remarkReadingTime() {
   return function (tree, { data }) {
@@ -10,6 +10,6 @@ export function remarkReadingTime() {
     const readingTime = getReadingTime(textOnPage);
 
     // Remove the " read" part by using replace
-    data.astro.frontmatter.readingTime = readingTime.text.replace(' read', '');
+    data.astro.frontmatter.readingTime = readingTime.text.replace(" read", "");
   };
 }

@@ -1,1 +1,1 @@
-export { default as BaselineStatus } from './BaselineStatus.astro';
+export { default as BaselineStatus } from "./BaselineStatus.astro";
