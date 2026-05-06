@@ -4,10 +4,12 @@
 
 @layer base {
   * {
-    @apply decoration-2 underline-offset-2 border-border;
+    @apply border-border decoration-2 underline-offset-2;
 
     @media (prefers-reduced-motion: no-preference) {
-      transition: color, background-color cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+      transition:
+        color,
+        background-color cubic-bezier(0.4, 0, 0.2, 1) 150ms;
     }
   }
 
@@ -127,22 +129,22 @@
   }
 
   .skill-badge {
-    @apply flex items-center rounded-lg overflow-hidden border bg-background text-sm h-8;
+    @apply bg-background flex h-8 items-center overflow-hidden rounded-lg border text-sm;
 
     span {
       @apply mx-4;
     }
 
     svg {
-      @apply rounded-lg size-6 mx-1;
+      @apply mx-1 size-6 rounded-lg;
     }
   }
 
   .radio {
-    @apply relative appearance-none rounded-full size-4 border bg-white dark:bg-black;
+    @apply relative size-4 appearance-none rounded-full border bg-white dark:bg-black;
     &:checked,
     &.checked {
-      @apply bg-primary before:absolute before:inset-1 before:bg-white before:rounded-full before:shadow-xs before:shadow-black/30;
+      @apply bg-primary before:absolute before:inset-1 before:rounded-full before:bg-white before:shadow-xs before:shadow-black/30;
     }
   }
 
@@ -150,19 +152,27 @@
     background-blend-mode: luminosity;
     position: relative;
     box-shadow:
-      inset calc(-6px * var(--gravity-x, 0)) calc(6px * var(--gravity-y, 0)) 4px rgba(255, 255, 255, 0.25),
-      inset calc(6px * var(--gravity-x, 0)) calc(-6px * var(--gravity-y, 0)) 4px rgba(0, 0, 0, 0.25);
-      /* calc(-4px * var(--gravity-x, 0)) calc(4px * var(--gravity-y, 0)) 8px -2px rgba(0, 0, 0, 0.3); */
+      inset calc(-6px * var(--gravity-x, 0)) calc(6px * var(--gravity-y, 0)) 4px
+        rgba(255, 255, 255, 0.25),
+      inset calc(6px * var(--gravity-x, 0)) calc(-6px * var(--gravity-y, 0)) 4px
+        rgba(0, 0, 0, 0.25);
+    /* calc(-4px * var(--gravity-x, 0)) calc(4px * var(--gravity-y, 0)) 8px -2px rgba(0, 0, 0, 0.3); */
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
       border-width: 1.5px;
       border-color: #fff;
       border-radius: inherit;
       filter: blur(0.5px);
-      mask-image: radial-gradient(circle at calc(50% * (1 + var(--gravity-x, 0))) calc(50% * (1 - var(--gravity-y, 0))), #fff, #ffffff2b, #fff0);
+      mask-image: radial-gradient(
+        circle at calc(50% * (1 + var(--gravity-x, 0)))
+          calc(50% * (1 - var(--gravity-y, 0))),
+        #fff,
+        #ffffff2b,
+        #fff0
+      );
       pointer-events: none;
       z-index: 1;
     }
@@ -173,14 +183,20 @@
     position: relative;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
       border-width: 1.5px;
       border-color: #fff;
       border-radius: inherit;
       filter: blur(0.5px);
-      mask-image: radial-gradient(circle at calc(50% * (1 + var(--gravity-x, 0))) calc(50% * (1 - var(--gravity-y, 0))), #fff, #ffffff2b, #fff0);
+      mask-image: radial-gradient(
+        circle at calc(50% * (1 + var(--gravity-x, 0)))
+          calc(50% * (1 - var(--gravity-y, 0))),
+        #fff,
+        #ffffff2b,
+        #fff0
+      );
       pointer-events: none;
       z-index: 1;
     }
@@ -188,7 +204,7 @@
 }
 
 @utility wrapper {
-  @apply flex flex-col max-w-(--main-container-width) min-h-dvh mx-auto;
+  @apply mx-auto flex min-h-dvh max-w-(--main-container-width) flex-col;
 }
 
 @utility external {

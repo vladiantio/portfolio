@@ -1,21 +1,27 @@
 @reference './global.css';
 
 .rich-text {
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply relative;
   }
 
   /* Headers */
-  h1, h2 {
-    @apply text-2xl text-primary font-bold mt-10 mb-8 scroll-mt-10;
+  h1,
+  h2 {
+    @apply text-primary mt-10 mb-8 scroll-mt-10 text-2xl font-bold;
   }
 
   h3 {
-    @apply text-xl font-semibold mt-10 mb-8 scroll-mt-10;
+    @apply mt-10 mb-8 scroll-mt-10 text-xl font-semibold;
   }
 
   h4 {
-    @apply text-lg font-medium mt-8 mb-6 scroll-mt-8;
+    @apply mt-8 mb-6 scroll-mt-8 text-lg font-medium;
   }
 
   a.link-heading {
@@ -24,22 +30,22 @@
 
   @media (pointer: fine) and (width >= 54rem) {
     a.link-heading {
-      @apply absolute inset-y-0 left-0 flex items-center justify-center size-8 rounded-full [color:inherit];
-      @apply -translate-x-4/5 opacity-0 transition-[opacity,translate] will-change-transform delay-300;
-  
+      @apply absolute inset-y-0 left-0 flex size-8 items-center justify-center rounded-full [color:inherit];
+      @apply -translate-x-4/5 opacity-0 transition-[opacity,translate] delay-300 will-change-transform;
+
       h1 > & > svg,
       h2 > & > svg {
         @apply size-6;
       }
-  
+
       h3 > & > svg {
         @apply size-5;
       }
-  
+
       h4 > & > svg {
         @apply size-4;
       }
-  
+
       &:focus-visible,
       [id]:hover > & {
         @apply -translate-x-full opacity-100 delay-[0ms];
@@ -62,60 +68,60 @@
   }
 
   blockquote {
-    @apply border-l-4 pl-4 py-2 mb-8;
+    @apply mb-8 border-l-4 py-2 pl-4;
   }
 
   ul {
-    @apply list-disc pl-4 mb-8;
+    @apply mb-8 list-disc pl-4;
   }
 
   ol {
-    @apply list-decimal pl-4 mb-8;
+    @apply mb-8 list-decimal pl-4;
   }
 
   li {
     @apply mb-2;
 
     & > ul {
-      @apply list-disc pl-4 mb-2;
+      @apply mb-2 list-disc pl-4;
     }
 
     & > ol {
-      @apply list-decimal pl-4 mb-2;
+      @apply mb-2 list-decimal pl-4;
     }
   }
 
   figure {
-    @apply bg-primary/10 border rounded-2xl shadow-sm flex flex-col items-start gap-y-2 mb-8 p-2;
+    @apply bg-primary/10 mb-8 flex flex-col items-start gap-y-2 rounded-2xl border p-2;
 
     figcaption {
-      @apply bg-background dark:bg-body/10 border rounded-lg shadow-xs text-sm px-4 py-1 text-center;
+      @apply bg-background dark:bg-body/10 rounded-lg border px-4 py-1 text-center text-sm shadow-xs;
     }
 
     pre {
-      @apply bg-background border rounded-lg px-4 py-3 whitespace-pre-wrap w-full;
+      @apply bg-background w-full rounded-lg border px-4 py-3 whitespace-pre-wrap;
     }
   }
 
   :not(pre) > code {
-    @apply rounded-lg bg-primary/10 px-1.5 py-0.5 whitespace-nowrap;
+    @apply bg-primary/10 rounded-lg px-1.5 py-0.5 whitespace-nowrap;
   }
 
   table {
-    @apply w-full border-collapse my-8;
+    @apply my-8 w-full border-collapse;
   }
 
   th {
-    @apply text-left py-2 px-4 font-semibold border-b;
+    @apply border-b px-4 py-2 text-left font-semibold;
   }
 
   td {
-    @apply py-2 px-4 border-b;
+    @apply border-b px-4 py-2;
   }
 
   /* Images */
   img {
-    @apply w-full rounded-3xl my-8 bg-white/40 dark:bg-black/40;
+    @apply my-8 w-full rounded-3xl bg-white/40 dark:bg-black/40;
   }
 
   pre[data-theme*=" "],
