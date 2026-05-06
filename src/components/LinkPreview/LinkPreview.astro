@@ -31,7 +31,7 @@ const domain = meta.url ? new URL(meta.url).hostname.replace("www.", "") : "";
   meta.title ? (
     <article
       class:list={[
-        "link-preview liquid-glass-light",
+        "link-preview",
         {
           "link-preview--has-video": !hideMedia && meta.video && meta.videoType,
           "link-preview--no-media":

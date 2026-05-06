@@ -39,7 +39,7 @@ const heroImage = hero && (hero.format === 'svg' ? hero : await getImage({
     />
   )}
   <h1 class="title">{title}</h1>
-  <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm mb-12">
+  <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm mb-12">
     <time class="flex items-center" title={t('blog.pubDate')} datetime={date.toISOString()}><Calendar class="size-4 mr-3" />{formatShortDate(date, locale)}</time>
     <span class="flex items-center" title={t('blog.readingTime')}><Clock class="size-4 mr-3" />{readingTime} {t('blog.readingTime.read')}</span>
     {tags.map(tag => <span class="flex items-center"><Tag class="size-4 mr-3" />{tag}</span>)}
@@ -92,9 +92,9 @@ const heroImage = hero && (hero.format === 'svg' ? hero : await getImage({
   @reference '@/styles/global.css';
 
   .hero-image {
-    @apply relative aspect-[120/63] w-full h-auto -mb-8;
+    @apply relative aspect-120/63 w-full h-auto -mb-8;
     &::before, &::after {
-      @apply absolute content-[''] -z-[1] inset-0 size-full;
+      @apply absolute content-[''] -z-1 inset-0 size-full;
       @apply [background-image:var(--hero-url)] bg-cover bg-center bg-no-repeat;
     }
     &::before {
@@ -107,6 +107,6 @@ const heroImage = hero && (hero.format === 'svg' ? hero : await getImage({
   }
 
   .title {
-    @apply text-4xl text-center text-primary my-8;
+    @apply text-4xl text-primary my-8;
   }
 </style>

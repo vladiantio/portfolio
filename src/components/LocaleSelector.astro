@@ -7,7 +7,7 @@ const locale = (Astro.currentLocale as Locale) ?? DEFAULT_LOCALE;
 const t = useTranslations(locale);
 ---
 
-<div class="flex bg-primary/10 rounded-full font-semibold text-sm">
+<div class="bg-primary/10 flex rounded-full text-sm font-semibold">
   {
     Object.keys(LOCALES).map((lang) => (
       <button
@@ -15,7 +15,7 @@ const t = useTranslations(locale);
         aria-pressed={lang === locale}
         data-lang={lang}
         class={cn(
-          "btnChangeLocale rounded-full px-4 h-12 transition",
+          "btnChangeLocale h-12 rounded-full px-4 transition",
           lang === locale && "bg-primary text-background",
         )}
         title={LOCALES[lang as Locale].label}
