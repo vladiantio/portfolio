@@ -8,6 +8,6 @@ export default [
     },
     studyType: "university",
     startDate: "2016-03-01",
-    endDate: "2019-12-01"
-  }
+    endDate: "2019-12-01",
+  },
 ];
