@@ -45,14 +45,14 @@
     "tailwindcss": "4.3.0"
   },
   "devDependencies": {
-    "@shikijs/colorized-brackets": "4.0.2",
+    "@shikijs/colorized-brackets": "4.1.0",
     "@types/svg-sprite": "0.0.39",
-    "@typescript-eslint/parser": "8.58.2",
-    "eslint": "10.2.0",
+    "@typescript-eslint/parser": "8.60.0",
+    "eslint": "10.4.0",
     "eslint-plugin-astro": "1.7.0",
     "prettier": "3.8.3",
     "prettier-plugin-astro": "0.14.1",
-    "prettier-plugin-tailwindcss": "0.7.2"
+    "prettier-plugin-tailwindcss": "0.8.0"
   },
   "packageManager": "pnpm@11.3.0"
 }
