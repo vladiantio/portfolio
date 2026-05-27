@@ -32,9 +32,6 @@ importers:
       '@fontsource-variable/inconsolata':
         specifier: 5.2.8
         version: 5.2.8
-      '@fontsource-variable/newsreader':
-        specifier: 5.2.10
-        version: 5.2.10
       '@lucide/astro':
         specifier: 1.16.0
         version: 1.16.0(astro@6.3.7(@netlify/blobs@10.7.8)(@types/node@24.12.2)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.50.1)(yaml@2.8.1))
@@ -580,9 +577,6 @@ packages:
 
   '@fontsource-variable/inconsolata@5.2.8':
     resolution: {integrity: sha512-IXXYUznF45QyPG05Q7NgsVFa4i1HnVyqbfEGLlHidZRElO0T3PCq6y+Vlz9nT4rnqsLqAkdi4wjhsoJey6pYTg==}
-
-  '@fontsource-variable/newsreader@5.2.10':
-    resolution: {integrity: sha512-MdI2iRwrqWpMOU/2aV2BgfZ4dJNlj/XlYaY8Zb7t87mWqHskYW0XiUANkt1cyOCiEfW2VQ0bQ5vZgGPp6B2B4w==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -5167,8 +5161,6 @@ snapshots:
   '@fontsource-variable/figtree@5.2.10': {}
 
   '@fontsource-variable/inconsolata@5.2.8': {}
-
-  '@fontsource-variable/newsreader@5.2.10': {}
 
   '@humanfs/core@0.19.1': {}
 

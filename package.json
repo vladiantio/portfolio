@@ -21,7 +21,6 @@
     "@astrojs/sitemap": "3.7.2",
     "@fontsource-variable/figtree": "5.2.10",
     "@fontsource-variable/inconsolata": "5.2.8",
-    "@fontsource-variable/newsreader": "5.2.10",
     "@lucide/astro": "1.16.0",
     "@parse5/tools": "0.7.0",
     "@tailwindcss/vite": "4.3.0",
