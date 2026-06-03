@@ -1,5 +1,4 @@
 ---
-import favicon from "@/assets/favicon.svg";
 import basics from "@/data/basics";
 import Analytics from "./Analytics.astro";
 import ThemeLoader from "./ThemeLoader.astro";
@@ -65,7 +64,8 @@ const metaDescription = description
 <link href={Astro.url} rel="canonical" />
 <link href="/sitemap-index.xml" rel="sitemap" />
 <link href="https://mastodon.social/@vladiantio" rel="me" />
-<link href={favicon.src} rel="icon" type="image/svg+xml" />
+<link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+<link href="/favicon.ico" rel="icon" />
 
 {/* OpenGraph Tags */}
 <meta property="og:type" content={type ?? "website"} />
