@@ -284,7 +284,8 @@ const year =
     }
 
     .caret svg {
-      transition: rotate 0.3s;
+      transition-property: rotate;
+      transition-duration: 300ms;
     }
     details[open] .caret svg {
       rotate: 180deg;
