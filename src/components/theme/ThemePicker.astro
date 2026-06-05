@@ -42,8 +42,8 @@ const iconTheme = {
   fieldset {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    font-size: calc(0.75 * var(--text-base));
-    line-height: var(--text-xs--line-height);
+    font-size: calc(0.75 * var(--text-base)); /* text-xs */
+    line-height: calc(1 / 0.75); /* text-xs */
     font-weight: 500;
   }
 
@@ -56,10 +56,7 @@ const iconTheme = {
     gap: calc(var(--spacing) * 1);
     border-radius: var(--radius-lg);
     padding: calc(var(--spacing) * 2);
-    transition:
-      background-color,
-      color var(--default-transition-timing-function)
-        var(--default-transition-duration);
+    transition-property: background-color, color;
 
     &:hover {
       background-color: color-mix(in oklab, var(--primary) 10%, transparent);
