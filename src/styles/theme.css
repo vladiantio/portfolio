@@ -1,36 +1,39 @@
-@custom-variant dark (&:is(.dark *));
-
 :root {
   --gravity-x: 0;
   --gravity-y: 0;
   --main-color: #3fa0fa;
 
-  --background: oklch(from var(--main-color) 0.98 calc(c * 0.16) h);
-  --foreground: oklch(from var(--main-color) 0.15 calc(c * 0.1) h);
-  --muted: oklch(from var(--main-color) 0.62 calc(c * 0.16) h);
-  --body: oklch(0 0 0);
-  --soft: oklch(from var(--main-color) 0.96 calc(c * 0.18) h);
+  --background: light-dark(
+    oklch(from var(--main-color) 0.98 calc(c * 0.16) h),
+    oklch(from var(--main-color) 0.34 calc(c * 0.45) h)
+  );
+  --foreground: light-dark(
+    oklch(from var(--main-color) 0.15 calc(c * 0.1) h),
+    oklch(from var(--main-color) 0.98 calc(c * 0.04) h)
+  );
+  --muted: light-dark(
+    oklch(from var(--main-color) 0.62 calc(c * 0.16) h),
+    oklch(from var(--main-color) 0.88 calc(c * 0.16) h)
+  );
+  --body: light-dark(oklch(0 0 0), oklch(1 0 0));
+  --soft: light-dark(
+    oklch(from var(--main-color) 0.96 calc(c * 0.18) h),
+    oklch(from var(--main-color) 0.36 calc(c * 0.24) h)
+  );
   --primary-dark: oklch(from var(--main-color) 0.78 calc(c * 0.85) h);
-  --primary-dark-hover: oklch(from var(--main-color) 0.92 calc(c * 0.85) h);
   --primary-light: oklch(from var(--main-color) 0.54 calc(c * 0.85) h);
+  --primary: light-dark(var(--primary-light), var(--primary-dark));
+  --primary-dark-hover: oklch(from var(--main-color) 0.92 calc(c * 0.85) h);
   --primary-light-hover: oklch(from var(--main-color) 0.4 calc(c * 0.85) h);
-  --primary: var(--primary-light);
-  --primary-hover: var(--primary-light-hover);
-  --border: oklch(0 0 0 / 0.15);
+  --primary-hover: light-dark(
+    var(--primary-light-hover),
+    var(--primary-dark-hover)
+  );
+  --border: light-dark(oklch(0 0 0 / 0.15), oklch(1 0 0 / 0.15));
 
   --main-container-width: 54rem;
-}
 
-.dark {
-  --background: oklch(from var(--main-color) 0.34 calc(c * 0.45) h);
-  --foreground: oklch(from var(--main-color) 0.98 calc(c * 0.04) h);
-  --muted: oklch(from var(--main-color) 0.88 calc(c * 0.16) h);
-  --body: oklch(1 0 0);
-  --soft: oklch(from var(--main-color) 0.36 calc(c * 0.24) h);
-  --primary: var(--primary-dark);
-  --primary-hover: var(--primary-dark-hover);
-  --border: oklch(1 0 0 / 0.15);
-  color-scheme: dark;
+  color-scheme: light dark;
 }
 
 @theme inline {
