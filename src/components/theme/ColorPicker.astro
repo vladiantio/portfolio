@@ -40,51 +40,89 @@ const t = useBaseTranslations(translations, locale);
 const colorValues = COLORS.map((c) => c.value);
 ---
 
-<div class="flex gap-3 m-2">
+<div>
+  <input
+    type="color"
+    class="radio bg-color-wheel"
+    title={t("otherColor")}
+    id="otherColor"
+    role="radio"
+    aria-checked="false"
+  />
   {
     COLORS.map((color) => (
       <button
         type="button"
-        class="radio size-4.5 md:size-4"
+        class="radio"
         title={t(color.name)}
         style={{
           "background-color": color.value,
         }}
         name="colorOption"
         value={color.value}
+        role="radio"
+        aria-checked="false"
       >
         <span class="sr-only">{t(color.name)}</span>
       </button>
     ))
   }
-  <label
-    for="otherColor"
-    class="radio bg-color-wheel size-4.5 md:size-4"
-    role="button"
-    title={t("otherColor")}
-  >
-    <span class="sr-only">{t("otherColor")}</span>
-  </label>
-  <input type="color" class="sr-only bottom-0 left-0" id="otherColor" />
 </div>
+
+<style>
+  div {
+    display: flex;
+    gap: calc(var(--spacing) * 3);
+    margin: calc(var(--spacing) * 2);
+  }
+
+  .radio {
+    width: calc(var(--spacing) * 4.5);
+    height: calc(var(--spacing) * 4.5);
+
+    /* md: */
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 4);
+      height: calc(var(--spacing) * 4);
+    }
+  }
+
+  #otherColor {
+    appearance: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    &::-webkit-color-swatch {
+      border: none;
+      opacity: 0;
+    }
+
+    &::-moz-color-swatch {
+      border: none;
+      opacity: 0;
+    }
+  }
+</style>
 
 <script is:inline define:vars={{ colorValues }}>
   const getColor = () =>
     getComputedStyle(document.documentElement).getPropertyValue("--main-color");
 
-  const updateCheck = (currentColor) => {
-    document
-      .querySelectorAll('#themeDropdown [name="colorOption"]')
-      .forEach((el) => {
-        el.classList.toggle("checked", el.value == currentColor);
-      });
+  const updateColorCheck = (currentColor) => {
+    document.getElementsByName("colorOption").forEach((el) => {
+      el.setAttribute("aria-checked", el.value == currentColor);
+    });
     document.getElementById("otherColor").value = currentColor;
   };
 
   const checkOtherColor = (checked) => {
-    document
-      .querySelector('#themeDropdown label[for="otherColor"]')
-      ?.classList.toggle("checked", checked);
+    document.getElementById("otherColor").setAttribute("aria-checked", checked);
   };
 
   const changeColor = (value) => {
@@ -95,18 +133,14 @@ const colorValues = COLORS.map((c) => c.value);
   document.addEventListener("DOMContentLoaded", () => {
     const currentColor = getColor();
     let isOtherColor = !colorValues.some((color) => color == currentColor);
-    document
-      .querySelector(
-        `#themeDropdown [name="colorOption"][value="${currentColor}"]`,
-      )
-      ?.classList.add("checked");
     checkOtherColor(isOtherColor);
 
     document.getElementsByName("colorOption").forEach((el) => {
-      el.addEventListener("click", (ev) => {
-        const color = ev.target.value;
+      el.setAttribute("aria-checked", el.value == currentColor);
+      el.addEventListener("click", () => {
+        const color = el.value;
         changeColor(color);
-        updateCheck(color);
+        updateColorCheck(color);
         if (isOtherColor) {
           checkOtherColor(false);
           isOtherColor = false;
@@ -114,11 +148,11 @@ const colorValues = COLORS.map((c) => c.value);
       });
     });
 
-    document.getElementById("otherColor").addEventListener("change", (ev) => {
+    document.getElementById("otherColor").addEventListener("input", (ev) => {
       const color = ev.target.value;
       changeColor(color);
       if (!isOtherColor) {
-        updateCheck(color);
+        updateColorCheck(color);
         checkOtherColor(true);
         isOtherColor = true;
       }

@@ -1,0 +1,102 @@
+---
+import Sun from "@lucide/astro/icons/sun";
+import Moon from "@lucide/astro/icons/moon";
+import SunMoon from "@lucide/astro/icons/sun-moon";
+
+import { DEFAULT_LOCALE, type Locale } from "@/i18n/constants";
+import { useTranslations } from "@/i18n/helpers";
+const locale = (Astro.currentLocale as Locale) ?? DEFAULT_LOCALE;
+const t = useTranslations(locale);
+
+const THEMES = ["light", "dark", "system"] as const;
+
+const iconTheme = {
+  light: Sun,
+  dark: Moon,
+  system: SunMoon,
+};
+---
+
+<fieldset>
+  <legend class="sr-only">{t("theme.select")}</legend>
+  {
+    THEMES.map((theme) => {
+      const Icon = iconTheme[theme];
+      return (
+        <button
+          type="button"
+          name="themeOption"
+          value={theme}
+          role="radio"
+          aria-checked="false"
+        >
+          <Icon size={24} />
+          {t(theme)}
+        </button>
+      );
+    })
+  }
+</fieldset>
+
+<style>
+  fieldset {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    font-size: calc(0.75 * var(--text-base));
+    line-height: var(--text-xs--line-height);
+    font-weight: 500;
+  }
+
+  button[name="themeOption"] {
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--spacing) * 1);
+    border-radius: var(--radius-lg);
+    padding: calc(var(--spacing) * 2);
+    transition:
+      background-color,
+      color var(--default-transition-timing-function)
+        var(--default-transition-duration);
+
+    &:hover {
+      background-color: color-mix(in oklab, var(--primary) 10%, transparent);
+    }
+
+    &[aria-checked="true"] {
+      background-color: var(--primary);
+      color: var(--background);
+    }
+  }
+</style>
+
+<script is:inline>
+  const switchTheme = (theme) => {
+    localStorage.setItem("theme", theme);
+    document.documentElement.style.colorScheme =
+      theme === "system" ? "light dark" : theme;
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.classList.toggle("light", theme === "light");
+  };
+
+  const updateThemeCheck = (currentTheme) => {
+    document.getElementsByName("themeOption").forEach((el) => {
+      el.setAttribute("aria-checked", el.value == currentTheme);
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const currentTheme = localStorage.theme ?? "system";
+
+    document.getElementsByName("themeOption").forEach((el) => {
+      el.setAttribute("aria-checked", el.value == currentTheme);
+      el.addEventListener("click", () => {
+        const activeTheme = el.value;
+        switchTheme(activeTheme);
+        updateThemeCheck(activeTheme);
+      });
+    });
+  });
+</script>

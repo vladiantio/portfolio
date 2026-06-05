@@ -1,21 +1,13 @@
 ---
 import Sun from "@lucide/astro/icons/sun";
 import Moon from "@lucide/astro/icons/moon";
-import SunMoon from "@lucide/astro/icons/sun-moon";
+import ThemePicker from "./ThemePicker.astro";
 import ColorPicker from "./ColorPicker.astro";
 
 import { DEFAULT_LOCALE, type Locale } from "@/i18n/constants";
 import { useTranslations } from "@/i18n/helpers";
 const locale = (Astro.currentLocale as Locale) ?? DEFAULT_LOCALE;
 const t = useTranslations(locale);
-
-const THEMES = ["light", "dark", "system"] as const;
-
-const iconTheme = {
-  light: Sun,
-  dark: Moon,
-  system: SunMoon,
-};
 ---
 
 <details id="themeDropdown" class="dropdown dropdown-end">
@@ -23,65 +15,70 @@ const iconTheme = {
     tabindex="0"
     role="button"
     title={t("theme")}
-    class="inline-flex select-none navbar-link-icon"
+    class="navbar-link-icon theme-options"
   >
-    <Sun
-      class="size-5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
-    />
-    <Moon
-      class="absolute size-5 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
-    />
+    <Sun data-icon="light" />
+    <Moon data-icon="dark" />
   </summary>
-  <div tabindex="0" class="dropdown-content z-10 -me-2 mt-4">
-    <div
-      class="flex flex-col gap-1 border bg-background rounded-xl p-2 liquid-glass"
-    >
-      <fieldset class="grid grid-cols-3 text-xs font-medium">
-        <legend class="sr-only">{t("theme.select")}</legend>
-        {
-          THEMES.map((theme) => {
-            const Icon = iconTheme[theme];
-            return (
-              <label class="flex flex-col gap-1 items-center justify-center rounded-lg p-2 transition hover:bg-primary/10 hover:text-primary has-checked:bg-primary has-checked:text-background cursor-pointer">
-                <Icon class="size-6" />
-                {t(theme)}
-                <input
-                  type="radio"
-                  name="themeOption"
-                  value={theme}
-                  class="sr-only"
-                />
-              </label>
-            );
-          })
-        }
-      </fieldset>
+  <div class="dropdown-content">
+    <div class="content">
+      <ThemePicker />
       <ColorPicker />
     </div>
   </div>
 </details>
 
-<script is:inline>
-  const switchTheme = (theme) => {
-    localStorage.setItem("theme", theme);
-    const isDark =
-      theme === "dark" ||
-      (theme === "system" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-    document.documentElement.classList.toggle("dark", isDark);
-  };
+<style>
+  .theme-options {
+    display: inline-flex;
+    -webkit-user-select: none;
+    user-select: none;
 
-  const currentTheme = localStorage.theme ?? "system";
-  document
-    .querySelector(
-      `#themeDropdown [name="themeOption"][value="${currentTheme}"]`,
-    )
-    ?.setAttribute("checked", "");
+    [data-icon] {
+      transition-property: scale, rotate;
+      transition-timing-function: var(--default-transition-timing-function);
+      transition-duration: var(--default-transition-duration);
+    }
+    [data-icon="light"] {
+      &:not(:is(.light *)) {
+        @media (prefers-color-scheme: dark) {
+          scale: 0;
+          rotate: -90deg;
+        }
+      }
+      &:is(.dark *) {
+        scale: 0;
+        rotate: -90deg;
+      }
+    }
+    [data-icon="dark"] {
+      position: absolute;
+      &:not(:is(.dark *)) {
+        @media (prefers-color-scheme: light) {
+          scale: 0;
+          rotate: -90deg;
+        }
+      }
+      &:is(.light *) {
+        scale: 0;
+        rotate: -90deg;
+      }
+    }
+  }
 
-  document.getElementsByName("themeOption").forEach((el) => {
-    el.addEventListener("change", (ev) => {
-      const activeTheme = ev.target.value;
-      switchTheme(activeTheme);
-    });
-  });
-</script>
+  .dropdown-content {
+    z-index: 10;
+    margin-right: calc(var(--spacing) * -2);
+    margin-top: calc(var(--spacing) * 4);
+  }
+
+  .content {
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 1);
+    border-radius: var(--radius-xl);
+    border-width: 1px;
+    padding: calc(var(--spacing) * 2);
+  }
+</style>
