@@ -206,13 +206,6 @@
 
   pre[data-theme*=" "],
   pre[data-theme*=" "] span {
-    color: var(--shiki-light);
-  }
-
-  .dark & {
-    pre[data-theme*=" "],
-    pre[data-theme*=" "] span {
-      color: var(--shiki-dark);
-    }
+    color: light-dark(var(--shiki-light), var(--shiki-dark));
   }
 }
